@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Database Example";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Products</h1>
+    @* Display table of columns: id, name, price, and series *@
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Series</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                    <td>@product.Series</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

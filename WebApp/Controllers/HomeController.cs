@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 
+using Npgsql;
+
 namespace WebApp.Controllers;
 
 public class HomeController : Controller
@@ -29,6 +31,12 @@ public class HomeController : Controller
         return View();
     }
 
+    // Added IActionResult for database table
+    public IActionResult DatabaseExample()
+    {
+        return View();
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
@@ -46,4 +54,10 @@ public class HomeController : Controller
             return RedirectToAction("Login", "Home");
         }
     }
+
+    // Added IActionResult for database table
+    // [HttpGet]
+    // public IActionResult DatabaseExample() {
+
+    // }
 }
