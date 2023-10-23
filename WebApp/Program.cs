@@ -6,12 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Add PostgreSQL database context to the container.
-// var url_base = Environment.GetEnvironmentVariable("JDBC_URL_BASE") ?? "";
-// var connection_string = "csce315331_07r_db";
-// var username = "csce331_970_griffinbeaudreau";
-// var password = "password";
-var connString = "Host=csce-315-db.engr.tamu.edu;Port=5432;Username=csce331_970_griffinbeaudreau;Password=password;Database=csce315331_07r_db;";
+var username = Environment.GetEnvironmentVariable("PSQL_USERNAME");
+var password = Environment.GetEnvironmentVariable("PSQL_PASSWORD");
+var connString = $"Host=csce-315-db.engr.tamu.edu;Port=5432;Username={username};Password={password};Database=csce315331_07r_db;";
 
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(connString);
 var dataSource = dataSourceBuilder.Build();
@@ -21,8 +18,14 @@ var conn = await dataSource.OpenConnectionAsync();
 // Retrieve all rows from the products table
 await using (var cmd = new NpgsqlCommand("SELECT * FROM products", conn))
 await using (var reader = await cmd.ExecuteReaderAsync())
-    while (await reader.ReadAsync())
-        Console.WriteLine(reader.GetString(0));
+    while (await reader.ReadAsync()) {
+        // int product_id = reader.GetInt32(0);
+        string product_name = reader.GetString(1);
+        // double product_price = reader.GetDouble(2);
+        // string product_series = reader.GetString(3);
+
+        Console.WriteLine(product_name);
+    }
 
 
 var app = builder.Build();
