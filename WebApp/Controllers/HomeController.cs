@@ -3,16 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 
 using Npgsql;
+using WebApp.Data;
 
 namespace WebApp.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly UnitOfWork uok;
 
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
+        uok = new UnitOfWork("csce315331_07r_db");
     }
 
     public IActionResult Index()
@@ -31,10 +34,12 @@ public class HomeController : Controller
         return View();
     }
 
-    // Added IActionResult for database table
     public IActionResult DatabaseExample()
     {
-        return View();
+        // Get all products from the database
+        List<Product> products = uok.GetAll<Product>().ToList();
+        
+        return View(products);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -54,10 +59,5 @@ public class HomeController : Controller
             return RedirectToAction("Login", "Home");
         }
     }
-
-    // Added IActionResult for database table
-    // [HttpGet]
-    // public IActionResult DatabaseExample() {
-
-    // }
+    
 }
