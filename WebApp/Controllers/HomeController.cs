@@ -15,7 +15,7 @@ public class HomeController : Controller
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
-        //uok = new UnitOfWork("csce315331_07r_db");
+        uok = new UnitOfWork("csce315331_07r_db");
     }
 
     public IActionResult Index()
@@ -37,10 +37,9 @@ public class HomeController : Controller
     public IActionResult DatabaseExample()
     {
         // Get all products from the database
-        //List<Product> products = uok.GetAll<Product>().ToList();
+        List<Product> products = uok.GetAll<Product>().ToList();
         
-        //return View(products);
-        return null;
+        return View(products);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
