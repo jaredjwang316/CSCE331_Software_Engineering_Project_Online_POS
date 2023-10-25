@@ -18,6 +18,6 @@ static class Config {
             throw new ArgumentException("PSQL_PASSWORD environment variable cannot be null or empty.");
         }
 
-        CONNECTION_STRING = $"Host=csce-315-db.engr.tamu.edu;Port=5432;Username={USERNAME};Password={PASSWORD};Database=csce315331_07r_db;";
+        CONNECTION_STRING = Environment.GetEnvironmentVariable("PSQL_CONNECTION_STRING");
     }
 }
