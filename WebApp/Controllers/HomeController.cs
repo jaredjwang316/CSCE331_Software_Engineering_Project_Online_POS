@@ -16,8 +16,8 @@ public class HomeController : Controller
     {
         _logger = logger;
 
-        Console.WriteLine("Username: " + Environment.GetEnvironmentVariable("DB_USERNAME"));
-        Console.WriteLine("Password: " + Environment.GetEnvironmentVariable("DB_PASSWORD"));
+        Console.WriteLine("Username: " + Environment.GetEnvironmentVariable("PSQL_USERNAME"));
+        Console.WriteLine("Password: " + Environment.GetEnvironmentVariable("PSQL_PASSWORD"));
         uok = new UnitOfWork("csce315331_07r_db");
     }
 
