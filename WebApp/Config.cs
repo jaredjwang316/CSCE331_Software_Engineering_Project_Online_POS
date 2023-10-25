@@ -18,6 +18,6 @@ static class Config {
         //     throw new ArgumentException("PSQL_PASSWORD environment variable cannot be null or empty.");
         // }
 
-        CONNECTION_STRING = Environment.GetEnvironmentVariable("PSQL_CONNECTION_STRING");
+        CONNECTION_STRING = Environment.GetEnvironmentVariable("POSTGRESQLCONNSTR_PSQL_CONNECTION_STRING");
     }
 }
