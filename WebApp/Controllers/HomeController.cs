@@ -15,6 +15,9 @@ public class HomeController : Controller
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
+
+        Console.WriteLine("Username: " + Environment.GetEnvironmentVariable("DB_USERNAME"));
+        Console.WriteLine("Password: " + Environment.GetEnvironmentVariable("DB_PASSWORD"));
         uok = new UnitOfWork("csce315331_07r_db");
     }
 
