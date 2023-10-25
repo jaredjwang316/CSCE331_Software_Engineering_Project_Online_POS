@@ -15,6 +15,12 @@ public class HomeController : Controller
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
+
+        Console.WriteLine("Creating UnitOfWork");
+        // Connection string
+        Console.WriteLine(Config.CONNECTION_STRING);
+
+
         uok = new UnitOfWork("csce315331_07r_db");
     }
 
