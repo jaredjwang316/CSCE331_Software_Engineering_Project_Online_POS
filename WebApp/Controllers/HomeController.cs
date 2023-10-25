@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 
@@ -16,8 +16,10 @@ public class HomeController : Controller
     {
         _logger = logger;
 
-        Console.WriteLine("Username: " + Environment.GetEnvironmentVariable("PSQL_USERNAME"));
-        Console.WriteLine("Password: " + Environment.GetEnvironmentVariable("PSQL_PASSWORD"));
+        Console.WriteLine("Creating UnitOfWork");
+        // Connection string
+        Console.WriteLine(Config.CONNECTION_STRING);
+
         uok = new UnitOfWork("csce315331_07r_db");
     }
 
