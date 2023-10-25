@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 
@@ -19,7 +19,6 @@ public class HomeController : Controller
         Console.WriteLine("Creating UnitOfWork");
         // Connection string
         Console.WriteLine(Config.CONNECTION_STRING);
-
 
         uok = new UnitOfWork("csce315331_07r_db");
     }
