@@ -42,8 +42,8 @@ public class HomeController : Controller
     public IActionResult DatabaseExample()
     {
         // Get all products from the database
-        UnitOfWork uok = new UnitOfWork("csce315331_07r_db");
         Console.WriteLine("Connection String: " + Config.CONNECTION_STRING);
+        UnitOfWork uok = new UnitOfWork("csce315331_07r_db");
         List<Product> products = uok.GetAll<Product>().ToList();
         
         return View(products);
