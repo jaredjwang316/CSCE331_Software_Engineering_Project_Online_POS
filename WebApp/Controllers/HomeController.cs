@@ -43,6 +43,7 @@ public class HomeController : Controller
     {
         // Get all products from the database
         UnitOfWork uok = new UnitOfWork("csce315331_07r_db");
+        Console.WriteLine("Connection String: " + Config.CONNECTION_STRING);
         List<Product> products = uok.GetAll<Product>().ToList();
         
         return View(products);
