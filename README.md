@@ -15,7 +15,7 @@
 ### Environment Variables
 | Variable                 | Example Value                                                                                           |
 |--------------------------|---------------------------------------------------------------------------------------------------------|
-| POSTGRESQLCONNSTR_AWS_DB | Host=csce-315-db.engr.tamu.edu;Port=5432;Username=username;Password=password;Database=csce315331_07r_db |
+| POSTGRESQLCONNSTR_AWS_DB | Host=host;Port=5432;Username=username;Password=password;Database=db |
 
 
 ## Resources
