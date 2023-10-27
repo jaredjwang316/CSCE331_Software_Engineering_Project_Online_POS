@@ -15,7 +15,7 @@
 ### Environment Variables
 | Variable                 | Example Value                                                                                           |
 |--------------------------|---------------------------------------------------------------------------------------------------------|
-| POSTGRESQLCONNSTR_AWS_DB | Host=host;Port=5432;Username=username;Password=password;Database=db |
+| POSTGRESQLCONNSTR_AWS_DB | Host=?;Port=5432;Username=?;Password=?;Database=? |
 
 
 ## Resources
