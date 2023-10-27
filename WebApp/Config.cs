@@ -5,19 +5,11 @@
 namespace WebApp;
 
 static class Config {
-    // public static readonly string? USERNAME = Environment.GetEnvironmentVariable("PSQL_USERNAME");
-    // public static readonly string? PASSWORD = Environment.GetEnvironmentVariable("PSQL_PASSWORD");
-    public static readonly string? CONNECTION_STRING;
+    public static readonly string CONNECTION_STRING;
+    public static readonly string AWS_DB_NAME = "csce315331_07r_db";
 
     static Config() {
-        // if (string.IsNullOrEmpty(USERNAME)) {
-        //     throw new ArgumentException("PSQL_USERNAME environment variable cannot be null or empty.");
-        // }
-
-        // if (string.IsNullOrEmpty(PASSWORD)) {
-        //     throw new ArgumentException("PSQL_PASSWORD environment variable cannot be null or empty.");
-        // }
-
-        CONNECTION_STRING = Environment.GetEnvironmentVariable("POSTGRESQLCONNSTR_PSQL_CONNECTION_STRING");
+        CONNECTION_STRING = Environment.GetEnvironmentVariable("POSTGRESQLCONNSTR_AWS_DB")
+            ?? throw new ArgumentException("POSTGRESQLCONNSTR_AWS_DB environment variable cannot be null or empty.");
     }
 }

@@ -2,7 +2,7 @@
 
 */
 
-using System.ComponentModel;
+using System.Numerics;
 using Npgsql;
 using WebApp.Models;
 
@@ -10,10 +10,9 @@ namespace WebApp.Data;
 
 public class UnitOfWork {
     private readonly ConnectionHandler connectionHandler;
-    private readonly EntityServices entityServices;
     private readonly CommandHandler commandHandler;
-
     private readonly DaoContainer daoContainer;
+    private readonly EntityServices entityServices;
 
 
     public UnitOfWork(string databaseName) {
@@ -21,10 +20,12 @@ public class UnitOfWork {
         commandHandler = new CommandHandler(connectionHandler.GetConnection()!);
         daoContainer = new DaoContainer(commandHandler);
         entityServices = new EntityServices(daoContainer);
+
+        WorkPool.AddUnitOfWork(this);
     }
 
     // use entity service to abstract the CRUD operations
-    
+
     public void Add<T>(T t) where T : class {
         entityServices.Add(t);
     }
@@ -44,25 +45,77 @@ public class UnitOfWork {
     public IEnumerable<T> GetAll<T>() where T : class {
         return entityServices.GetAll<T>();
     }
+
+
+    // Use connection handler to close the connection to the database
+
+    public void CloseConnection() {
+        connectionHandler.CloseConnection();
+    }
+}
+
+static class WorkPool {
+    public static readonly List<UnitOfWork> pool_available = new();
+    public static readonly List<UnitOfWork> pool_in_use = new();
+
+    public static void AddUnitOfWork(UnitOfWork unitOfWorkInstance) {
+        pool_available.Add(unitOfWorkInstance);
+    }
+    
+    public static void RemoveUnitOfWork(UnitOfWork unitOfWorkInstance) {
+        pool_available.Remove(unitOfWorkInstance);
+    }
+
+    public static UnitOfWork ReserveUnitOfWork() {
+        if (pool_available.Count == 0) {
+            UnitOfWork unitOfWork = new(Config.AWS_DB_NAME);
+            pool_available.Remove(unitOfWork);
+            pool_in_use.Add(unitOfWork);
+            return unitOfWork;
+        } else {
+            UnitOfWork unitOfWork = pool_available[0];
+            pool_available.RemoveAt(0);
+            pool_in_use.Add(unitOfWork);
+            return unitOfWork;
+        }
+    }
+
+    public static void ReleaseUnitOfWork(UnitOfWork unitOfWorkInstance) {
+        pool_in_use.Remove(unitOfWorkInstance);
+        pool_available.Add(unitOfWorkInstance);
+    }
+
+    public static void CloseAllConnections() {
+        int count = 1;
+        foreach (UnitOfWork unitOfWork in pool_available) {
+            unitOfWork.CloseConnection();
+            Console.WriteLine($"Closing available connection {count++}");
+        }
+        count = 1;
+        foreach (UnitOfWork unitOfWork in pool_in_use) {
+            unitOfWork.CloseConnection();
+            Console.WriteLine($"Closing in use connection {count++}");
+        }
+    }
 }
 
 public class DaoContainer {
-        public EmployeeDao EmployeeDao { get; }
-        public IngredientDao IngredientDao { get; }
-        public InventoryDao InventoryDao { get; }
-        public OrderDao OrderDao { get; }
-        public ProductDao ProductDao { get; }
-        public ProductIngredientsDao ProductIngredientsDao { get; }
+    public EmployeeDao EmployeeDao { get; }
+    public IngredientDao IngredientDao { get; }
+    public InventoryDao InventoryDao { get; }
+    public OrderDao OrderDao { get; }
+    public ProductDao ProductDao { get; }
+    public ProductIngredientsDao ProductIngredientsDao { get; }
 
-        public DaoContainer(CommandHandler commandHandler) {
-            EmployeeDao = new EmployeeDao(commandHandler);
-            IngredientDao = new IngredientDao(commandHandler);
-            InventoryDao = new InventoryDao(commandHandler);
-            OrderDao = new OrderDao(commandHandler);
-            ProductDao = new ProductDao(commandHandler);
-            ProductIngredientsDao = new ProductIngredientsDao(commandHandler);
-        }
+    public DaoContainer(CommandHandler commandHandler) {
+        EmployeeDao = new EmployeeDao(commandHandler);
+        IngredientDao = new IngredientDao(commandHandler);
+        InventoryDao = new InventoryDao(commandHandler);
+        OrderDao = new OrderDao(commandHandler);
+        ProductDao = new ProductDao(commandHandler);
+        ProductIngredientsDao = new ProductIngredientsDao(commandHandler);
     }
+}
 
 
 

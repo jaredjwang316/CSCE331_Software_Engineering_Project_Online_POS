@@ -10,17 +10,10 @@ namespace WebApp.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    // private readonly UnitOfWork uok;
 
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
-
-        // Console.WriteLine("Creating UnitOfWork");
-        // // Connection string
-        // Console.WriteLine(Config.CONNECTION_STRING);
-
-        // uok = new UnitOfWork("csce315331_07r_db");
     }
 
     public IActionResult Index()
@@ -40,11 +33,10 @@ public class HomeController : Controller
     }
 
     public IActionResult DatabaseExample()
-    {
-        // Get all products from the database
-        Console.WriteLine("Connection String: " + Config.CONNECTION_STRING);
-        UnitOfWork uok = new UnitOfWork("csce315331_07r_db");
+    {   
+        UnitOfWork uok = WorkPool.ReserveUnitOfWork();
         List<Product> products = uok.GetAll<Product>().ToList();
+        WorkPool.ReleaseUnitOfWork(uok);
         
         return View(products);
     }
