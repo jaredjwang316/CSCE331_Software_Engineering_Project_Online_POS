@@ -2,7 +2,6 @@
 
 */
 
-using System.Numerics;
 using Npgsql;
 using WebApp.Models;
 
@@ -20,8 +19,6 @@ public class UnitOfWork {
         commandHandler = new CommandHandler(connectionHandler.GetConnection()!);
         daoContainer = new DaoContainer(commandHandler);
         entityServices = new EntityServices(daoContainer);
-
-        WorkPool.AddUnitOfWork(this);
     }
 
     // use entity service to abstract the CRUD operations
@@ -51,51 +48,6 @@ public class UnitOfWork {
 
     public void CloseConnection() {
         connectionHandler.CloseConnection();
-    }
-}
-
-static class WorkPool {
-    public static readonly List<UnitOfWork> pool_available = new();
-    public static readonly List<UnitOfWork> pool_in_use = new();
-
-    public static void AddUnitOfWork(UnitOfWork unitOfWorkInstance) {
-        pool_available.Add(unitOfWorkInstance);
-    }
-    
-    public static void RemoveUnitOfWork(UnitOfWork unitOfWorkInstance) {
-        pool_available.Remove(unitOfWorkInstance);
-    }
-
-    public static UnitOfWork ReserveUnitOfWork() {
-        if (pool_available.Count == 0) {
-            UnitOfWork unitOfWork = new(Config.AWS_DB_NAME);
-            pool_available.Remove(unitOfWork);
-            pool_in_use.Add(unitOfWork);
-            return unitOfWork;
-        } else {
-            UnitOfWork unitOfWork = pool_available[0];
-            pool_available.RemoveAt(0);
-            pool_in_use.Add(unitOfWork);
-            return unitOfWork;
-        }
-    }
-
-    public static void ReleaseUnitOfWork(UnitOfWork unitOfWorkInstance) {
-        pool_in_use.Remove(unitOfWorkInstance);
-        pool_available.Add(unitOfWorkInstance);
-    }
-
-    public static void CloseAllConnections() {
-        int count = 1;
-        foreach (UnitOfWork unitOfWork in pool_available) {
-            unitOfWork.CloseConnection();
-            Console.WriteLine($"Closing available connection {count++}");
-        }
-        count = 1;
-        foreach (UnitOfWork unitOfWork in pool_in_use) {
-            unitOfWork.CloseConnection();
-            Console.WriteLine($"Closing in use connection {count++}");
-        }
     }
 }
 

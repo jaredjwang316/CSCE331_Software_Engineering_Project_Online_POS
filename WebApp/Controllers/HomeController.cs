@@ -4,6 +4,7 @@ using WebApp.Models;
 
 using Npgsql;
 using WebApp.Data;
+using System.Reflection.Metadata.Ecma335;
 
 namespace WebApp.Controllers;
 
@@ -34,9 +35,9 @@ public class HomeController : Controller
 
     public IActionResult DatabaseExample()
     {   
-        UnitOfWork uok = WorkPool.ReserveUnitOfWork();
+        UnitOfWork uok = new(Config.AWS_DB_NAME);
         List<Product> products = uok.GetAll<Product>().ToList();
-        WorkPool.ReleaseUnitOfWork(uok);
+        uok.CloseConnection();
         
         return View(products);
     }
