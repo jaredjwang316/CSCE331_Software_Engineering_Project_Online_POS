@@ -5,10 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 #if DEBUG
 builder.WebHost.UseUrls("https://localhost:5001");
-Console.WriteLine("DEBUG MODE");
 #else
 builder.WebHost.UseUrls("https://07r-webapp.azurewebsites.net/");
-Console.WriteLine("RELEASE MODE");
 #endif
 
 builder.Services.AddAuthentication(options =>
