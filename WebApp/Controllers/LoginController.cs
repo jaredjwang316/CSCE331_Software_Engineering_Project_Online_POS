@@ -21,14 +21,12 @@ public class LoginController : Controller
     [AllowAnonymous]
     public IActionResult Login(string returnUrl = "https://localhost:5001")
     {
-        Console.WriteLine("LoginController.Login() called.");
         return Challenge(new AuthenticationProperties { RedirectUri = returnUrl }, "Google");
     }
     #else
     [AllowAnonymous]
     public IActionResult Login(string returnUrl = "https://07r-webapp.azurewebsites.net/")
     {
-        Console.WriteLine("LoginController.Login() called.");
         return Challenge(new AuthenticationProperties { RedirectUri = returnUrl }, "Google");
     }
     #endif
