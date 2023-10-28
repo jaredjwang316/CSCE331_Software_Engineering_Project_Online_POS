@@ -31,20 +31,22 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav">
-                        @* <li class="nav-item">
-                            @if (User.Identity.IsAuthenticated) {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Log out</a>
-                            }
-                            else {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Log in</a>
-                            }
-                        </li> *@
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Log in (not implemented)</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Cart</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Manager" asp-action="Index">Manager</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cashier" asp-action="Index">Cashier</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Customer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="MenuBoard" asp-action="Index">Menu Board</a>
+                        </li>
+
                     </ul>
                 </div>
             </div>
