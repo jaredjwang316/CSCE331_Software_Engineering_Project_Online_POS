@@ -27,14 +27,14 @@ public class HomeController : Controller
         return View();
     }
 
-    // public IActionResult DatabaseExample()
-    // {   
-    //     UnitOfWork uok = new(Config.AWS_DB_NAME);
-    //     List<Product> products = uok.GetAll<Product>().ToList();
-    //     uok.CloseConnection();
+    public IActionResult DatabaseExample()
+    {   
+        UnitOfWork uok = new(Config.AWS_DB_NAME);
+        List<Product> products = uok.GetAll<Product>().ToList();
+        uok.CloseConnection();
         
-    //     return View(products);
-    // }
+        return View(products);
+    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
