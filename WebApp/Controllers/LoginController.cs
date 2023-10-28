@@ -19,7 +19,7 @@ public class LoginController : Controller
 
     #if DEBUG
     [AllowAnonymous]
-    public IActionResult Login(string returnUrl = "https://localhost:5001")
+    public IActionResult Login(string returnUrl = "https://localhost:5001/")
     {
         return Challenge(new AuthenticationProperties { RedirectUri = returnUrl }, "Google");
     }

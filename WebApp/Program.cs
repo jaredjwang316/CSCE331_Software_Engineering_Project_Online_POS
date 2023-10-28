@@ -4,7 +4,7 @@ using WebApp;
 var builder = WebApplication.CreateBuilder(args);
 
 #if DEBUG
-builder.WebHost.UseUrls("https://localhost:5001");
+builder.WebHost.UseUrls("https://localhost:5001/");
 #else
 builder.WebHost.UseUrls("https://07r-webapp.azurewebsites.net/");
 #endif
