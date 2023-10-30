@@ -2,39 +2,44 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-public class WeatherService
+class WeatherService
 {
-    private readonly string apiKey;
-    private readonly HttpClient httpClient;
+    private const string ApiKey = "1bac0154ece77068beb2a7b0772a710a"; // Jared's API key
+    private const string BaseUrl = "https://home.openweathermap.org";
 
-    public WeatherService(string apiKey)
+    public async Task GetWeatherDataAsync(string city)
     {
-        this.apiKey = apiKey;
-        this.httpClient = new HttpClient();
-    }
-
-    public async Task<string> GetWeatherAsync(string city)
-    {
-        string apiUrl = "https://openweathermap.org/";
-        
-        try
+        using (var client = new HttpClient())
         {
-            HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
+            try
+            {
+                // Build the URL with the required parameters
+                string url = $"{BaseUrl}?q={city}&appid={ApiKey}";
 
-            if (response.IsSuccessStatusCode)
-            {
-                string json = await response.Content.ReadAsStringAsync();
-                // You can parse the JSON response here and extract the weather data.
-                return json;
+                // Send the HTTP GET request
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the JSON response
+                    string json = await response.Content.ReadAsStringAsync();
+                    WeatherData weatherData = Newtonsoft.Json.JsonConvert.DeserializeObject<WeatherData>(json);
+
+                    // Display the weather data
+                    Console.WriteLine($"Weather in {city}:");
+                    Console.WriteLine($"Temperature: {weatherData.Main.Temperature}°C");
+                    Console.WriteLine($"Humidity: {weatherData.Main.Humidity}%");
+                    Console.WriteLine($"Description: {weatherData.Weather[0].Description}");
+                }
+                else
+                {
+                    Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                throw new Exception("Failed to fetch weather data.");
+                Console.WriteLine($"Exception: {ex.Message}");
             }
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Weather API request failed: {ex.Message}");
         }
     }
 }
