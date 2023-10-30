@@ -43,3 +43,37 @@ class WeatherService
         }
     }
 }
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        // Sample Test Cases
+        await RunSampleTestCases();
+
+        // Additional application logic can go here...
+    }
+
+    static async Task RunSampleTestCases()
+    {
+        WeatherService weatherService = new WeatherService();
+
+        // Sample Test Case 1: Successful Weather Retrieval
+        await weatherService.GetWeatherDataAsync("New York");
+
+        // Sample Test Case 2: Invalid City Name
+        await weatherService.GetWeatherDataAsync("InvalidCityName");
+
+        // Sample Test Case 3: Invalid API Key
+        weatherService.SetApiKey("INVALID_API_KEY");
+        await weatherService.GetWeatherDataAsync("New York");
+
+        // Sample Test Case 4: Network Connectivity (You can disable network for this)
+        // ...
+
+        // Sample Test Case 5: Exception Handling
+        // Modify the code to force an exception (e.g., provide an invalid URL)
+        weatherService.SetApiUrl("invalid/url");
+        await weatherService.GetWeatherDataAsync("New York");
+    }
+}
