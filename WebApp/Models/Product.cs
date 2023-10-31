@@ -14,6 +14,10 @@ public class Product {
     public string Name { get; set; }
     public double Price { get; set; }
     public string Series { get; set; }
+    public string ImgUrl { get; set; }
+    public bool Hidden { get; set; }
+    public bool IsOption { get; set; }
+    public bool IsMain { get; set; }
 
     /// <summary>
     /// Constructor for the Product class.
@@ -22,10 +26,18 @@ public class Product {
     /// <param name="name"></param>
     /// <param name="price"></param>
     /// <param name="series"></param>
-    public Product(int id, string name, double price, string series) {
+    /// <param name="imgUrl"></param>
+    /// <param name="hidden"></param>
+    /// <param name="isOption"></param>
+    /// <param name="isMain"></param>
+    public Product(int id, string name, double price, string series, string imgUrl, bool hidden, bool isOption, bool isMain) {
         Id = id;
         Name = name;
         Price = price;
         Series = series;
+        ImgUrl = imgUrl;
+        Hidden = hidden;
+        IsOption = isOption;
+        IsMain = isMain;
     }
 }

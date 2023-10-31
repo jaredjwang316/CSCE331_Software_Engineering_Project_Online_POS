@@ -84,6 +84,9 @@
         background-color: #ffffff;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+        transition-delay: 0.1s;
+        will-change: transform;
     }
     .series-link img {
         height: 12rem;
@@ -97,6 +100,10 @@
         margin-inline-start: 0px;
         margin-inline-end: 0px;
         margin-left: 2.3rem;
+    }
+    .series-link:hover {
+        transform: scale(1.02);
+        transition-delay: 0s;
     }
     
 </style>
@@ -140,19 +147,18 @@ else {
 <div class="text-center series-container">
     @{
         UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
-        List<string> unique_series = uok.GetUniqueSeries().ToList();
-
-            List<string> exclude = new() { "ice", "size", "extra", "toppings", "sweetness" };
+        List<SeriesInfo> unique_series = uok.GetAll<SeriesInfo>().ToList();
+        List<string> drink_categories = uok.GetUniqueSeries().ToList();
         
-        foreach (string series in unique_series)
+        foreach (SeriesInfo series_info in unique_series)
         {
-            if (exclude.Contains(series.ToLower()))
-                continue;
+            if (drink_categories.Contains(series_info.Name)) {
+                <button class="series-link">
+                    <img src="@series_info.ImgUrl" />
+                    <p>@series_info.Name</p>
+                </button>
+            }
             
-            <button class="series-link">
-                <img src="https://gongchadev3.s3.us-east-2.amazonaws.com/Y1jC4M_5_image/jpeg">
-                <p>@series</p>
-            </button>
         }
 
         uok.CloseConnection();
