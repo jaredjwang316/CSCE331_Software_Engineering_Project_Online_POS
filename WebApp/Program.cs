@@ -5,12 +5,15 @@ using WebApp;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
+string returnUrl = "https://07r-webapp.azurewebsites.net/";
+builder.WebHost.UseUrls("https://07r-webapp.azurewebsites.net/");
+builder.Services.AddSingleton(returnUrl);
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSingleton(Config.returnUrl);
-builder.WebHost.UseUrls(Config.returnUrl);
-
+Console.WriteLine("Client ID: " + configuration["GOOGLE_PROVIDER_AUTHENTICATION_CLIENT_ID"]);
+Console.WriteLine("Client Secret: " + configuration["GOOGLE_PROVIDER_AUTHENTICATION_SECRET"]);
 
 // Set up Google Authentication scheme.
 builder.Services.AddAuthentication(options => {
