@@ -21,7 +21,7 @@ public class ProductDao : IDao<Product> {
         var reader = commandHandler.ExecuteReader(query);
 
         if (reader == null) {
-            return new Product(-1, "null", -1, "null");
+            return new Product(-1, "null", -1, "null", "null", false, false, false);
         }
 
         reader.Read();
@@ -29,7 +29,11 @@ public class ProductDao : IDao<Product> {
             reader.GetInt32(0),
             reader.GetString(1),
             reader.GetDouble(2), 
-            reader.GetString(3)
+            reader.GetString(3),
+            reader.GetString(4),
+            reader.GetBoolean(5),
+            reader.GetBoolean(6),
+            reader.GetBoolean(7)
         );
 
         reader.Close();
@@ -47,7 +51,11 @@ public class ProductDao : IDao<Product> {
                 reader.GetInt32(0),
                 reader.GetString(1),
                 reader.GetDouble(2), 
-                reader.GetString(3)
+                reader.GetString(3),
+                reader.GetString(4),
+                reader.GetBoolean(5),
+                reader.GetBoolean(6),
+                reader.GetBoolean(7)
             ));
         }
 
@@ -57,8 +65,15 @@ public class ProductDao : IDao<Product> {
 
     public void Add(Product t) {
         string sattement = (
-            $"INSERT INTO products (name, price, series) " +
-            $"VALUES ('{t.Name}', {t.Price}, '{t.Series}')"
+            $"INSERT INTO products (name, price, series, img_url, hidden, is_option, is_main) " +
+            $"VALUES (" +
+                $"'{t.Name}', " +
+                $"{t.Price}, " +
+                $"'{t.Series}', " +
+                $"'{t.ImgUrl}', " +
+                $"{t.Hidden}, " +
+                $"{t.IsOption})" +
+                $"{t.IsMain}"
         );
         commandHandler.ExecuteNonQuery(sattement);
     }
@@ -69,6 +84,10 @@ public class ProductDao : IDao<Product> {
             $"name = '{newT.Name}', " +
             $"price = {newT.Price}, " +
             $"series = '{newT.Series}' " +
+            $"img_url = '{newT.ImgUrl}' " +
+            $"hidden = {newT.Hidden} " +
+            $"is_option = {newT.IsOption} " +
+            $"is_main = {newT.IsMain} " +
             $"WHERE id = {t.Id}"
         );
         commandHandler.ExecuteNonQuery(statement);
@@ -94,7 +113,11 @@ public class ProductDao : IDao<Product> {
                 reader.GetInt32(0),
                 reader.GetString(1),
                 reader.GetDouble(2), 
-                reader.GetString(3)
+                reader.GetString(3),
+                reader.GetString(4),
+                reader.GetBoolean(5),
+                reader.GetBoolean(6),
+                reader.GetBoolean(7)
             ));
         }
 
@@ -102,8 +125,14 @@ public class ProductDao : IDao<Product> {
         return products;
     }
 
-    public IEnumerable<string> GetUniqueSeries() {
-        string query = $"SELECT DISTINCT series FROM products";
+    public IEnumerable<string> GetUniqueSeries(bool includeDrinks = true, bool includeHidden = false, bool includeIsOption = false) {
+        
+        string query = $"SELECT DISTINCT series FROM products WHERE " +
+            $"is_main = {includeDrinks} AND " +
+            $"hidden = {includeHidden} AND " +
+            $"is_option = {includeIsOption}";
+
+
         var reader = commandHandler.ExecuteReader(query);
 
         List<string> series = new();

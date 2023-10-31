@@ -55,8 +55,13 @@ public class UnitOfWork {
     public IEnumerable<Product> GetProductsBySeries(string series) {
         return daoContainer.ProductDao.GetProductsBySeries(series);
     }
-    public IEnumerable<string> GetUniqueSeries() {
-        return daoContainer.ProductDao.GetUniqueSeries();
+
+    public IEnumerable<string> GetUniqueSeries(
+        bool includeDrinks = true,
+        bool includeHidden = false,
+        bool includeIsOption = false
+    ) {
+        return daoContainer.ProductDao.GetUniqueSeries(includeDrinks, includeHidden, includeIsOption);
     }
 }
 
@@ -67,6 +72,7 @@ public class DaoContainer {
     public OrderDao OrderDao { get; }
     public ProductDao ProductDao { get; }
     public ProductIngredientsDao ProductIngredientsDao { get; }
+    public SeriesInfoDao SeriesInfoDao { get; }
 
     public DaoContainer(CommandHandler commandHandler) {
         EmployeeDao = new EmployeeDao(commandHandler);
@@ -75,6 +81,7 @@ public class DaoContainer {
         OrderDao = new OrderDao(commandHandler);
         ProductDao = new ProductDao(commandHandler);
         ProductIngredientsDao = new ProductIngredientsDao(commandHandler);
+        SeriesInfoDao = new SeriesInfoDao(commandHandler);
     }
 }
 
@@ -174,6 +181,8 @@ public class EntityServices {
             return daoContainer.ProductDao as IDao<T> ?? throw new InvalidCastException();
         } else if (typeof(T) == typeof(ProductIngredients)) {
             return daoContainer.ProductIngredientsDao as IDao<T> ?? throw new InvalidCastException();
+        } else if (typeof(T) == typeof(SeriesInfo)) {
+            return daoContainer.SeriesInfoDao as IDao<T> ?? throw new InvalidCastException();
         } else {
             throw new InvalidCastException();
         }
