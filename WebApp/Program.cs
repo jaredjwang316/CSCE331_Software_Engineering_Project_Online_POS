@@ -5,15 +5,12 @@ using WebApp;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
-string returnUrl = "https://07r-webapp.azurewebsites.net/";
-builder.WebHost.UseUrls("https://07r-webapp.azurewebsites.net/");
-builder.Services.AddSingleton(returnUrl);
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-Console.WriteLine("Client ID: " + configuration["GOOGLE_PROVIDER_AUTHENTICATION_CLIENT_ID"]);
-Console.WriteLine("Client Secret: " + configuration["GOOGLE_PROVIDER_AUTHENTICATION_SECRET"]);
+builder.Services.AddSingleton(Config.returnUrl);
+builder.WebHost.UseUrls(Config.returnUrl);
+
 
 // Set up Google Authentication scheme.
 builder.Services.AddAuthentication(options => {
@@ -24,9 +21,9 @@ builder.Services.AddAuthentication(options => {
 .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
 {
     options.ClientId = configuration["GOOGLE_PROVIDER_AUTHENTICATION_CLIENT_ID"]
-        ?? throw new ArgumentException("Google client id environment variable cannot be null or empty.");
+        ?? throw new ArgumentException("GOOGLE_PROVIDER_AUTHENTICATION_CLIENT_ID environment variable cannot be null or empty.");
     options.ClientSecret = configuration["GOOGLE_PROVIDER_AUTHENTICATION_SECRET"]
-        ?? throw new ArgumentException("Google client secret environment variable cannot be null or empty.");
+        ?? throw new ArgumentException("GOOGLE_PROVIDER_AUTHENTICATION_SECRET environment variable cannot be null or empty.");
 });
 
 var app = builder.Build();
