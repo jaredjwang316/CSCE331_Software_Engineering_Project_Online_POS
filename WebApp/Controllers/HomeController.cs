@@ -19,6 +19,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        var preferredLanguage = GetPreferredLanguage();
+        ViewData["PreferredLanguage"] = preferredLanguage;
         return View();
     }
 
@@ -34,6 +36,12 @@ public class HomeController : Controller
         uok.CloseConnection();
         
         return View(products);
+    }
+
+    public string GetPreferredLanguage()
+    {
+        var preferredLanguage = HttpContext.Request.Headers["Accept-Language"].ToString().Split(',')[0];
+        return preferredLanguage;
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
