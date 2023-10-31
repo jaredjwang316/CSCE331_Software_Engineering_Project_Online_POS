@@ -43,11 +43,20 @@ public class UnitOfWork {
         return entityServices.GetAll<T>();
     }
 
-
     // Use connection handler to close the connection to the database
-
     public void CloseConnection() {
         connectionHandler.CloseConnection();
+    }
+
+    //====================================================================================================
+    // Custom Queries for the database
+    //====================================================================================================
+
+    public IEnumerable<Product> GetProductsBySeries(string series) {
+        return daoContainer.ProductDao.GetProductsBySeries(series);
+    }
+    public IEnumerable<string> GetUniqueSeries() {
+        return daoContainer.ProductDao.GetUniqueSeries();
     }
 }
 

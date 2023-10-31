@@ -1,7 +1,160 @@
+@* 
+    File: Customer.cshtml
+    Author: Griffin Beaudreau
+    Date: October 31, 2023
+    Description: This is the customer page for the GongCha website.
+        It's similar to the cashier page in functionality, with the
+        significant difference being information displayed to the user.
+*@
+
+@using WebApp.Data
+
 @{
     ViewData["Title"] = "Customer Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Customer Page</h1>
+@* Styles *@
+<style>
+    body {
+        background-color: #E7E7E7;
+    }
+
+    img {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    }
+
+    .category-link {
+        flex: 1;
+        padding: 10px;
+        margin: 5px;
+        color: #000000;
+        background-color: #ffffff;
+        border-radius: 5px;
+        border-width: 0;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        text-decoration: none;
+        margin-bottom: 10px;
+        font-family: Lusitana;
+        font-size: 1.2rem;
+    }
+    .category-link.active {
+        color: #C30E2F;
+    }
+    .category-link:hover:not(.active) {
+        color: #000000;
+    }
+    .category-link:active {
+        color: #C30E2F;
+    }
+
+    .series-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin: 0 20px;
+    }
+    @@media screen and (max-width: 1000px) {
+        .series-container {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+    @@media screen and (max-width: 600px) {
+        .series-container {
+            grid-template-columns: 1fr;
+        }
+    }
+    .series-link {
+        display: flex;
+        @* justify-content: space-between; *@
+        align-items: center;
+        border-width: 0;
+        padding: 10px;
+        margin: 5px;
+        text-decoration: none;
+        color: #000000;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    .series-link img {
+        height: 12rem;
+    }
+    .series-link p {
+        font-family: Lusitana;
+        font-size: 1.5em;
+        display: block;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        margin-left: 2.3rem;
+    }
+    
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".category-link").click(function () {
+            $(".category-link").removeClass("active");
+            $(this).addClass("active");
+            
+            var activeCategory = $(this).text();
+
+            if (activeCategory === 'Categories')
+                $(".series-link").show();
+            else
+                $(".series-link").hide();
+        });
+    });
+</script>
+
+@if (User.Identity!.IsAuthenticated) {
+    <div class="text-center">
+        <h1 class="display-4">Welcome, @User.Identity.Name!.Split(" ")[0]!</h1>
+    </div>
+}
+else {
+    <div class="text-center">
+        <h1 class="display-4">Welcome!</h1>
+    </div>
+}
+
+<!-- Category bar -->
+<div class="text-center" style="display: flex; justify-content: space-around;">
+    <button class="category-link active">Categories</button>
+    <button href="#" class="category-link">Best Sellers</button>
+    <button href="#" class="category-link">Favorites</button>
+</div>
+
+<!-- Series grid -->
+<div class="text-center series-container">
+    @{
+        UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
+        List<string> unique_series = uok.GetUniqueSeries().ToList();
+
+            List<string> exclude = new() { "ice", "size", "extra", "toppings", "sweetness" };
+        
+        foreach (string series in unique_series)
+        {
+            if (exclude.Contains(series.ToLower()))
+                continue;
+            
+            <button class="series-link">
+                <img src="https://gongchadev3.s3.us-east-2.amazonaws.com/Y1jC4M_5_image/jpeg">
+                <p>@series</p>
+            </button>
+        }
+
+        uok.CloseConnection();
+    }
 </div>

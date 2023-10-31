@@ -78,4 +78,41 @@ public class ProductDao : IDao<Product> {
         string statement = $"DELETE FROM products WHERE id = {t.Id}";
         commandHandler.ExecuteNonQuery(statement);
     }
+
+    //====================================================================================================
+    // Custom Queries for the database
+    //====================================================================================================
+
+    public IEnumerable<Product> GetProductsBySeries(string series) {
+        string query = $"SELECT * FROM products WHERE series = {series}";
+        var reader = commandHandler.ExecuteReader(query);
+
+        List<Product> products = new();
+
+        while (reader?.Read() == true) {
+            products.Add(new Product(
+                reader.GetInt32(0),
+                reader.GetString(1),
+                reader.GetDouble(2), 
+                reader.GetString(3)
+            ));
+        }
+
+        reader?.Close();
+        return products;
+    }
+
+    public IEnumerable<string> GetUniqueSeries() {
+        string query = $"SELECT DISTINCT series FROM products";
+        var reader = commandHandler.ExecuteReader(query);
+
+        List<string> series = new();
+
+        while (reader?.Read() == true) {
+            series.Add(reader.GetString(0));
+        }
+
+        reader?.Close();
+        return series;
+    }
 }
