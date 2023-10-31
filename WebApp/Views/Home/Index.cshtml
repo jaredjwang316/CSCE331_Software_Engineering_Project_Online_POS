@@ -7,13 +7,19 @@
 <div class="text-center">
     @if (User!.Identity!.IsAuthenticated)
     {
-        <h1 class="display-4">Welcome, @User.Identity.Name!</h1>
-        <p>Your email: @User.FindFirstValue(ClaimTypes.Email)</p>
-        <p>Your preferred language: @ViewData["PreferredLanguage"]</p>
+        <h1 class="display-4" style="font-family: Lusitana;">Welcome, @User.Identity.Name!</h1>
+        <p style="font-family: Lusitana; font-size: 20px;">Your email: @User.FindFirstValue(ClaimTypes.Email)</p>
+        <p style="font-family: Lusitana; font-size: 20px;">Your preferred language: @ViewData["PreferredLanguage"]</p>
     }
     else
     {
         <h1 class="display-4">Welcome, stranger!</h1>
     }
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+@* 
+<div class="text-center" style="display: flex; justify-content: space-around;">
+    <a href="#" style="flex: 1; border: 1px solid; padding: 10px; margin: 5px; text-decoration: none; color: #000000">Best Sellers</a>
+    <a href="#" style="flex: 1; border: 1px solid; padding: 10px; margin: 5px; text-decoration: none; color: #000000">Featured</a>
+    <a href="#" style="flex: 1; border: 1px solid; padding: 10px; margin: 5px; text-decoration: none; color: #000000">Favorites</a>
+</div> *@

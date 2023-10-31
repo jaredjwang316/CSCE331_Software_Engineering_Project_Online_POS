@@ -11,7 +11,6 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton(Config.returnUrl);
 builder.WebHost.UseUrls(Config.returnUrl);
 
-
 // Set up Google Authentication scheme.
 builder.Services.AddAuthentication(options => {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
