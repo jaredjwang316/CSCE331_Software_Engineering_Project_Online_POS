@@ -23,7 +23,7 @@ static class Config {
         #if DEBUG
         returnUrl = "https://localhost:5001";
         #else
-        returnUrl = "https://07r-webapp.azurewebsites.net";
+        returnUrl = "https://07r-webapp.azurewebsites.net/";
         #endif
     }
 }
