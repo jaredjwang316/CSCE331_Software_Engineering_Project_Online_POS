@@ -171,10 +171,14 @@ public class ProductDao : IDao<Product> {
         reader?.Close();
 
         List<Product> products = new();
-        List<Product> allProducts = (List<Product>) GetAll();
+        // List<Product> allProducts = (List<Product>) GetAll();
         
         foreach (int id in product_id) {
-            products.Add(allProducts.Find(product => product.Id == id)!);
+            // products.Add(allProducts.Find(product => product.Id == id)!);
+            Product product = Get(id);
+            if (product.Id != -1) {
+                products.Add(product); // TODO: Fix this after adding image urls to the database
+            }
         }
 
         return products;
