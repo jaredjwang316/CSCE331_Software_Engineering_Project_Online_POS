@@ -105,6 +105,9 @@
         transform: scale(1.02);
         transition-delay: 0s;
     }
+    .series-link:not(.category) {
+        display: none;
+    }
     
 </style>
 
@@ -117,10 +120,22 @@
             
             var activeCategory = $(this).text();
 
-            if (activeCategory === 'Categories')
-                $(".series-link").show();
-            else
-                $(".series-link").hide();
+            if (activeCategory === 'Categories') {
+                $(".series-link.category").show();
+            }
+            else {
+                $(".series-link.category").hide();
+            }
+
+            if (activeCategory === 'Best Sellers') {
+                $(".series-link.best-seller").show();
+                $(".series-link.best-seller").css("display", "flex");
+            }
+            else {
+                $(".series-link.best-seller").hide();
+                $(".series-link.best-seller").css("display", "none");
+            }
+                
         });
     });
 </script>
@@ -153,12 +168,20 @@ else {
         foreach (SeriesInfo series_info in unique_series)
         {
             if (drink_categories.Contains(series_info.Name)) {
-                <button class="series-link">
+                <button class="series-link category">
                     <img src="@series_info.ImgUrl" />
                     <p>@series_info.Name</p>
                 </button>
             }
-            
+        }
+
+        List<Product> best_selling = uok.GetBestSellingProducts(10).ToList();
+        foreach (Product product in best_selling)
+        {
+            <button class="series-link best-seller">
+                <img src="@product.ImgUrl" />
+                <p>@product.Name</p>
+            </button>
         }
 
         uok.CloseConnection();
