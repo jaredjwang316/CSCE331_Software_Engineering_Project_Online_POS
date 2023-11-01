@@ -17,10 +17,11 @@ public class ProductDao : IDao<Product> {
     }
 
     public Product Get(int id) {
-        var query = $"SELECT * FROM products WHERE id = {id}";
+        var query = $"SELECT * FROM products WHERE id IN ({id})";
         var reader = commandHandler.ExecuteReader(query);
 
-        if (reader == null) {
+        if (reader == null || !reader.HasRows) {
+            reader?.Close();
             return new Product(-1, "null", -1, "null", "null", false, false, false);
         }
 
@@ -65,7 +66,7 @@ public class ProductDao : IDao<Product> {
 
     public void Add(Product t) {
         string sattement = (
-            $"INSERT INTO products (name, price, series, img_url, hidden, is_option, is_main) " +
+            $"INSERT INTO products (name, price, series, img_url, hidden, is_option, is_drink) " +
             $"VALUES (" +
                 $"'{t.Name}', " +
                 $"{t.Price}, " +
@@ -73,7 +74,7 @@ public class ProductDao : IDao<Product> {
                 $"'{t.ImgUrl}', " +
                 $"{t.Hidden}, " +
                 $"{t.IsOption})" +
-                $"{t.IsMain}"
+                $"{t.IsDrink}"
         );
         commandHandler.ExecuteNonQuery(sattement);
     }
@@ -87,7 +88,7 @@ public class ProductDao : IDao<Product> {
             $"img_url = '{newT.ImgUrl}' " +
             $"hidden = {newT.Hidden} " +
             $"is_option = {newT.IsOption} " +
-            $"is_main = {newT.IsMain} " +
+            $"is_drink = {newT.IsDrink} " +
             $"WHERE id = {t.Id}"
         );
         commandHandler.ExecuteNonQuery(statement);
@@ -128,7 +129,7 @@ public class ProductDao : IDao<Product> {
     public IEnumerable<string> GetUniqueSeries(bool includeDrinks = true, bool includeHidden = false, bool includeIsOption = false) {
         
         string query = $"SELECT DISTINCT series FROM products WHERE " +
-            $"is_main = {includeDrinks} AND " +
+            $"is_drink = {includeDrinks} AND " +
             $"hidden = {includeHidden} AND " +
             $"is_option = {includeIsOption}";
 
@@ -143,5 +144,39 @@ public class ProductDao : IDao<Product> {
 
         reader?.Close();
         return series;
+    }
+
+    public IEnumerable<Product> GetBestSellingProducts(int limit = 5) {
+        string query = 
+            $"SELECT item_id, COUNT(item_id) AS item_count " +
+            $"FROM ( " +
+                $"SELECT unnest(item_ids) AS item_id " +
+                $"FROM orders_final " +
+            $") AS item_counts " +
+            $"WHERE item_id NOT IN (" +
+                $"SELECT id FROM products WHERE is_drink = false" +
+            $") " +
+            $"GROUP BY item_id " +
+            $"ORDER BY item_count DESC " +
+            $"LIMIT {limit}";
+
+        var reader = commandHandler.ExecuteReader(query);
+
+        List<int> product_id = new();
+
+        while (reader?.Read() == true) {
+            product_id.Add(reader.GetInt32(0));
+        }
+
+        reader?.Close();
+
+        List<Product> products = new();
+        List<Product> allProducts = (List<Product>) GetAll();
+        
+        foreach (int id in product_id) {
+            products.Add(allProducts.Find(product => product.Id == id)!);
+        }
+
+        return products;
     }
 }

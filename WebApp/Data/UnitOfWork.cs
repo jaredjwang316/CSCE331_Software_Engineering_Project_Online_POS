@@ -63,6 +63,10 @@ public class UnitOfWork {
     ) {
         return daoContainer.ProductDao.GetUniqueSeries(includeDrinks, includeHidden, includeIsOption);
     }
+
+    public IEnumerable<Product> GetBestSellingProducts(int limit) {
+        return daoContainer.ProductDao.GetBestSellingProducts(limit);
+    }
 }
 
 public class DaoContainer {
