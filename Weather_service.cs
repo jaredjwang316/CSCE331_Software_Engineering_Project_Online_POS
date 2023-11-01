@@ -1,6 +1,6 @@
 using System;
-using System.Net.Http;
-using System.Threading.Tasks;
+using System.Net.Http;  //make HTTP requests
+using System.Threading.Tasks;   //handle asynchronous tasks
 
 class WeatherService
 {
