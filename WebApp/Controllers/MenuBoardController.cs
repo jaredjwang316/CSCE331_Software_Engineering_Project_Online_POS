@@ -21,12 +21,12 @@ public class MenuBoardController : Controller
         // Instantiate the UnitOfWork with the desired configuration
         UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
         {
-            // Retrieve products and ingredients from the database
+            // Retrieve products and product ingredients from the database
             var products = uok.GetAll<Product>().ToList();
-            var ingredients = uok.GetAll<Ingredient>().ToList();
+            var prodIngredients = uok.GetAll<ProductIngredients>().ToList();
 
-            // Pass both products and ingredients to the view
-            return View((products, ingredients));
+            // Pass both products and product ingredients to the view
+            return View((products, prodIngredients));
         }
     }
 
