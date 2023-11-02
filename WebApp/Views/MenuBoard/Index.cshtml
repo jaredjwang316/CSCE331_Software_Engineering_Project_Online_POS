@@ -1,20 +1,67 @@
+
+
 @{
     ViewData["Title"] = "Menu Board Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Menu Board Page</h1>
-    <ul class="menu">
-        <li><a href="#">Milk Foam</a></li>
-            <ul> <!-- Nested list for Milk Foam items -->
-                <li><a href="#">Green Tea</a></li>
-                <li><a href="#">Black Tea</a></li>
-                <li><a href="#">Oolong Tea</a></li>
-                <li><a href="#">Earl Grey Tea</a></li>
-                <li><a href="#">WINTERMELON</a></li>
-                <li><a href="#">DIRTY BROWN SUGAR MILK TEA</a></li>
-            </ul>
-        <li><a href="#">Milk Tea</a></li>
-        <li><a href="#">Creative Mixes</a></li>
-    </ul>
 </div>
+
+@model (List<Product>, List<Ingredient>)
+
+@if (Model.Item1 != null && Model.Item1.Count > 0)
+{
+    <h2>Products</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Series</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Item1)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                    <td>@product.Series</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No products found.</p>
+}
+
+@if (Model.Item2 != null && Model.Item2.Count > 0)
+{
+    <h2>Ingredients</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ingredient ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ingredient in Model.Item2)
+            {
+                <tr>
+                    <td>@ingredient.Id</td>
+                    <td>@ingredient.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No ingredients found.</p>
+}
