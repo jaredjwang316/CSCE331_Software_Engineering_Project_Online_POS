@@ -8,7 +8,7 @@
     <h1 class="display-4">Menu Board Page</h1>
 </div>
 
-@model (List<Product>, List<Ingredient>)
+@model (List<Product>, List<ProductIngredients>)
 
 @if (Model.Item1 != null && Model.Item1.Count > 0)
 {
@@ -42,20 +42,20 @@ else
 
 @if (Model.Item2 != null && Model.Item2.Count > 0)
 {
-    <h2>Ingredients</h2>
+    <h2>Product Ingredients</h2>
     <table class="table">
         <thead>
             <tr>
-                <th>Ingredient ID</th>
+                <th>Product Ingredient ID</th>
                 <th>Name</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var ingredient in Model.Item2)
+            @foreach (var pingredient in Model.Item2)
             {
                 <tr>
-                    <td>@ingredient.Id</td>
-                    <td>@ingredient.Name</td>
+                    <td>@pingredient.ProductId</td>
+                    <td>@pingredient.IngredientIds</td>
                 </tr>
             }
         </tbody>
