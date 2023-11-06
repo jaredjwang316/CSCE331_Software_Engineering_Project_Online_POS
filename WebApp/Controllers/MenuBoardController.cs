@@ -27,4 +27,44 @@ public class MenuBoardController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
+    public IActionResult ShowCategories()
+    {
+        // Instantiate the UnitOfWork with the desired configuration
+        UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
+    
+        // Retrieve unique categories from the database
+        var categories = uok.GetUniqueSeries().ToList();
+    
+        // Generate HTML for category buttons
+        string html = "";
+        foreach (var category in categories)
+        {
+            html += $"<button class=\"menu-item category-btn\" id=\"{category}\">{category}</button>";
+        }
+    
+        uok.CloseConnection();
+
+        return Content(html);
+    }
+
+    public IActionResult ShowProducts()
+    {
+        // Instantiate the UnitOfWork with the desired configuration
+        UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
+    
+        // Retrieve products from the database
+        var products = uok.GetAll<Product>().ToList();
+    
+        // Generate HTML for product buttons
+        string html = "";
+        foreach (var product in products)
+        {
+            html += $"<button class=\"menu-item product-btn\" id=\"{product.Id}\">{product.Name}</button>";
+        }
+    
+        uok.CloseConnection();
+
+        return Content(html);
+    }
 }
