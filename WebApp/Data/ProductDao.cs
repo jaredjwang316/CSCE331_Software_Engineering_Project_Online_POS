@@ -104,7 +104,7 @@ public class ProductDao : IDao<Product> {
     //====================================================================================================
 
     public IEnumerable<Product> GetProductsBySeries(string series) {
-        string query = $"SELECT * FROM products WHERE series = {series}";
+        string query = $"SELECT * FROM products WHERE series = '{series}'";
         var reader = commandHandler.ExecuteReader(query);
 
         List<Product> products = new();
