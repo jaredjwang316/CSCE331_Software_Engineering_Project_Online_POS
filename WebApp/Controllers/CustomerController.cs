@@ -132,7 +132,7 @@ public class CustomerController : Controller
         string cartKey = "o7rGongChaCart";
 
         string? cartJson = HttpContext.Session.GetString(cartKey);
-        Cart? cart;
+        Cart? cart = null;
 
         if (cartJson == null) {
             cart = new Cart();
