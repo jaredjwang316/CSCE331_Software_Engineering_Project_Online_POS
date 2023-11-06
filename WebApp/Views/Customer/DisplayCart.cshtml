@@ -1,0 +1,23 @@
+@* Display cart  *@
+
+@using WebApp.Data
+@model Cart
+
+@{
+    ViewBag.Title = "Cart";
+}
+
+<h2>Cart</h2>
+<button class="clear-cart-btn">Clear Cart</button>
+
+<div>
+    @* Display names and names of options *@
+    @foreach (CartItem item in Model.GetItems()) {
+        <div>
+            <h3>@item.GetProduct().Name</h3>
+            @foreach (Product customization in item.GetCustomizations()) {
+                <p> - @customization.Name</p>
+            }
+        </div>
+    }
+</div>

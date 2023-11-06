@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Customer.css" asp-append-version="true" />
+    <script src="~/js/customer.js"></script>
+    <script src="~/js/customer-loading-screen.js"></script>
     <script src="~/js/cart.js"></script>
 </head>
 <body>
@@ -26,31 +29,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="DatabaseExample">Database</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark">Quick Access - </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Manager" asp-action="Index">Manager</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cashier" asp-action="Index">Cashier</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Customer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="MenuBoard" asp-action="Index">Menu Board</a>
-                        </li>
-                    </ul>
+                    <ul></ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="DisplayCart">Cart</a>
@@ -72,15 +51,32 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            @if (User.Identity!.IsAuthenticated) {
+                <div class="text-center">
+                    <h1 class="display-4">Welcome, @User.Identity.Name!.Split(" ")[0]!</h1>
+                </div>
+            }
+            else {
+                <div class="text-center">
+                    <h1 class="display-4">Welcome!</h1>
+                </div>
+            }
+
+            <!-- Category bar -->
+            <div class="text-center" style="display: flex; justify-content: space-around;">
+                <button id="ShowCategories" class="category-btn active" data-to="item-container">Categories</button>
+                <button id="ShowBestSellers" class="category-btn" data-to="item-container">Best Sellers</button>
+                <button id="ShowFavorites" class="category-btn" data-to="item-container">Favorites</button>
+            </div>
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @* <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - Gong Cha - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer> *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
