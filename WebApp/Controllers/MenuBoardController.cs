@@ -36,43 +36,31 @@ public class MenuBoardController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
-    public IActionResult ShowCategories()
+    public IActionResult getProducts()
     {
-        // Instantiate the UnitOfWork with the desired configuration
+        string html = "<div class=\"customization-menu\">";    
         UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
-    
-        // Retrieve unique categories from the database
-        var categories = uok.GetUniqueSeries().ToList();
-    
-        // Generate HTML for category buttons
-        string html = "";
-        foreach (var category in categories)
         {
-            html += $"<button class=\"menu-item category-btn\" id=\"{category}\">{category}</button>";
-        }
-    
-        uok.CloseConnection();
+            // Retrieve products and product ingredients from the database
+            var products = uok.GetAll<Product>().ToList();
+            var prodIngredients = uok.GetAll<ProductIngredients>().ToList();
+            List<string> theDrinks = uok.GetUniqueSeries(true, false, false).ToList(); //gets the series that belong to drinks
 
-        return Content(html);
+            foreach (var drink in theDrinks)
+            {
+                foreach (var product in products)
+                {
+                    if (product.Series == drink)    //check if current product belongs to that series
+                    {
+                        html += "<button class=\"customization-btn product\" id=\"" + product.Id + "\" data-to=\"customization-container\">" +
+                            "<p>" + product.Name + "</p>" +
+                        "</button>" ;                      
+                    }
+                }
+            }
+            html += "</div";
+        }        
+        return Content(html);   //return the string html
     }
-
-    public IActionResult ShowProducts()
-    {
-        // Instantiate the UnitOfWork with the desired configuration
-        UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
     
-        // Retrieve products from the database
-        var products = uok.GetAll<Product>().ToList();
-    
-        // Generate HTML for product buttons
-        string html = "";
-        foreach (var product in products)
-        {
-            html += $"<button class=\"menu-item product-btn\" id=\"{product.Id}\">{product.Name}</button>";
-        }
-    
-        uok.CloseConnection();
-
-        return Content(html);
-    }
 }

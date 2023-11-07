@@ -8,6 +8,7 @@
     <h1 class="display-4">Menu Board Page</h1>
 </div>
 
+<script src="~/js/menu.js"></script>
 @model (List<Product>, List<ProductIngredients>)
 
 @if (Model.Item1 != null && Model.Item1.Count > 0)
@@ -63,5 +64,5 @@ else
 }
 else
 {
-    <p>No ingredients found.</p>
+    <p>No products ingredients found.</p>
 }
