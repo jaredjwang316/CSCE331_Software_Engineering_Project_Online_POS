@@ -1,3 +1,9 @@
+/*  
+    File: CustomerController.cs
+    Author: Griffin Beaudreau
+    Date: November 5, 2023
+*/
+
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
