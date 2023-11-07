@@ -1,5 +1,7 @@
 /*
-
+    File: Cart.cs
+    Author: Griffin Beaudreau
+    Date: November 5, 2023
 */
 
 using WebApp.Models;
