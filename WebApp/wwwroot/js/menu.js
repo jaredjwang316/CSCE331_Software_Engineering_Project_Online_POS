@@ -1,67 +1,22 @@
-var menu_path = [];
+// menu.js
 
-document.addEventListener("DOMContentLoaded", function () {
+$(document).ready(function () {
     // Load default data
-    loadData($(".category-btn.active").attr("id"), $(".category-btn.active").attr("data-to"));
-    menu_path = [$(".category-btn.active").attr("id") + "/" + $(".category-btn.active").attr("data-to")];
+    loadProducts();
 
-    // Load data when category button is clicked
-    $(".category-btn").click(function () {
-        if ($(this).hasClass("active")) return;
-        $(".category-btn").removeClass("active");
-        $(this).addClass("active");
+    // Function to load products
+    function loadProducts() {
+        // Make an AJAX GET request to the getProducts action
+        $.get('/MenuBoard/getProducts', function (data) {
+            // Assuming there is an element with a class 'product-container'
+            // Replace the content of this element with the data received from the action
+            $('.product-container').html(data);
+        });
+    }
 
-        menu_path = [$(this).attr("id") + "/" + $(this).attr("data-to")];
-        loadData($(this).attr("id"), $(this).attr("data-to"));
-    });
-
-    // Back button
-    $(document).on('click', '.back-btn', function () {
-        $(".item-container").html("");
-        if (menu_path.length === 1) return;
-
-        var action = menu_path[menu_path.length - 2];
-        menu_path.pop();
-
-        var _action = action.split("/")[0];
-        var args = action.split("/")[1];
-        var element = action.split("/")[2];
-
-        loadData(_action, args, element);
-    });
-
-    // Customization buttons
-    $(document).on('click', '.customization-btn', function () {
-        $(this).toggleClass("active");
+    // Attach a click event handler to an element with the class 'load-products'
+    $('.load-products').click(function () {
+        // Call the loadProducts function when this element is clicked
+        loadProducts();
     });
 });
-
-function loadData(action, args, element) {
-    var timeout = setTimeout(function () {
-        document.dispatchEvent(new Event("DisplayLoadingScreen"));
-    }, 10);
-
-    console.log(element);
-
-    $.ajax({
-        url: "/MenuBoard/" + action,
-        type: "GET",
-        data: { arg: args },
-        success: function (data) {
-            $("." + element).html(data).hide().fadeIn(500);
-            clearTimeout(timeout);
-            document.dispatchEvent(new Event("HideLoadingScreen"));
-        },
-        error: function () {
-            $("." + element).html("Error loading data").show();
-            clearTimeout(timeout);
-            document.dispatchEvent(new Event("HideLoadingScreen"));
-        }
-    });
-
-    if (menu_path.length > 1) {
-        $(".back-btn").show();
-    } else {
-        $(".back-btn").hide();
-    }
-}
