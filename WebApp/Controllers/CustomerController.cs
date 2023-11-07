@@ -22,6 +22,7 @@ public class CustomerController : Controller
 
     public IActionResult Index()
     {
+        HttpContext.Session.SetString("Init", "1");
         return View();
     }
 
@@ -156,8 +157,9 @@ public class CustomerController : Controller
 
         cart.AddItem(cartItem);
 
+        string cartKey = "o7rGongChaCart";
         string cartJson = JsonConvert.SerializeObject(cart);
-        HttpContext.Session.SetString("o7rGongChaCart", cartJson);
+        HttpContext.Session.SetString(cartKey, cartJson);
 
         unit.CloseConnection();
         return Ok();
