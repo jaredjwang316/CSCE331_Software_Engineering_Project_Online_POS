@@ -5,3 +5,127 @@
 <div class="text-center">
     <h1 class="display-4">Manager Page</h1>
 </div>
+
+@model (List<Product>, List<Inventory>, List<Ingredient>)
+@if (Model.Item1 != null && Model.Item1.Count > 0) {
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Series</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Item1) {
+                <tr>
+                    <td contenteditable="true">@product.Id</td>
+                    <td contenteditable="true">@product.Name</td>
+                    <td contenteditable="true">@product.Price</td>
+                    <td contenteditable="true">@product.Series</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else {
+    <p>No products found.</p>
+}
+<button id="saveButtonProd">Save</button>
+
+@if (Model.Item2 != null && Model.Item2.Count > 0) {
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ingredient ID</th>
+                <th>Name</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var inventory in Model.Item2) {
+                <tr>
+                    <td contenteditable="true">@inventory.Id</td>
+                    <td contenteditable="true">@inventory.IngredientId</td>
+                    <td contenteditable="true">
+                        @foreach (var ingredient in Model.Item3) {
+                            @if(ingredient.Id == inventory.IngredientId) {
+                                @ingredient.Name
+                            }
+                        }</td>
+                    <td contenteditable="true">@inventory.Quantity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else {
+    <p>No products found.</p>
+}
+<button id="saveButtonInv">Save</button>
+
+<script>
+    // Product Save Button Function
+    document.getElementById('saveButtonProd').addEventListener('click', function() {
+        console.log('Save button clicked');
+        var editedCells = document.querySelectorAll('td.edited');
+
+        var data = [];
+
+        editedCells.forEach(function(cell) {
+            data.push({
+                id: cell.parentElement.querySelector('td:first-child').innerText,
+                name: cell.parentElement.querySelector('td:nth-child(2)').innerText,
+                price: cell.parentElement.querySelector('td:nth-child(3)').innerText,
+                series: cell.parentElement.querySelector('td:nth-child(4)').innerText
+            });
+        });
+
+        @* Print to console.log *@
+        data.forEach(function(product) {
+            console.log(product.name);
+        });
+
+        // Reset the edited cells
+        editedCells.forEach(function(cell) {
+            cell.classList.remove('edited');
+        });
+    });
+    // Inventory Save Button Function
+    document.getElementById('saveButtonInv').addEventListener('click', function() {
+        console.log('Save button clicked');
+        var editedCells = document.querySelectorAll('td.edited');
+
+        var data = [];
+
+        editedCells.forEach(function(cell) {
+            data.push({
+                id: cell.parentElement.querySelector('td:first-child').innerText,
+                ing_id: cell.parentElement.querySelector('td:nth-child(2)').innerText,
+                name: cell.parentElement.querySelector('td:nth-child(3)').innerText,
+                quantity: cell.parentElement.querySelector('td:nth-child(4)').innerText,
+            });
+        });
+
+        @* Print to console.log *@
+        data.forEach(function(table) {
+            console.log(table.name + ": " + table.quantity);
+        });
+
+        // Reset the edited cells
+        editedCells.forEach(function(cell) {
+            cell.classList.remove('edited');
+        });
+    });
+
+
+    var editableCells = document.querySelectorAll('[contenteditable=true]');
+
+    // Check for changes in the editable cells
+    editableCells.forEach(function(cell) {
+        cell.addEventListener('input', function() {
+            console.log('Cell changed');
+            cell.classList.add('edited');
+        });
+    });
+</script> 
