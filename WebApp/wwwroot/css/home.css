@@ -19,25 +19,27 @@ body {
     margin-left: auto;
     position: relative;
     --widgets-spacing: 20px;
-}
-
-.elementor-column {
     position: relative;
     min-height: 1px;
     display: flex;
     width: 30%;
-    border: 2px solid;
     justify-content: center;
     box-sizing: border-box;
     color: black;
     align-items: center;
+    background-color: #C60734;
+    border-radius: 1rem;
 }
 
 .elementor-box-title {
     margin-bottom: 0px;
-    color: var(--e-global-color-9d396bf);
+    color: white;
     font-family: "Lusitana", Sans-serif;
     font-size: 30px;
     font-weight: 600;
     text-decoration: none;
+}
+
+.elementor-box-title:hover {
+    color: white;
 }
