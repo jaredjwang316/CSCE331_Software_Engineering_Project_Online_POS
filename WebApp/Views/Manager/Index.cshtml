@@ -6,6 +6,9 @@
     <h1 class="display-4">Manager Page</h1>
 </div>
 
+@using WebApp.Data
+@using WebApp.Models
+@using WebApp
 @model (List<Product>, List<Inventory>, List<Ingredient>)
 @if (Model.Item1 != null && Model.Item1.Count > 0) {
     <table class="table">
@@ -81,9 +84,32 @@
             });
         });
 
-        @* Print to console.log *@
-        data.forEach(function(product) {
-            console.log(product.name);
+        
+        /* EXAMPLE
+        $.ajax({
+            url: "/Customer/AddToCart",
+            type: "POST",
+            data: { productID: productID, customizationIDs: customizationIDs },
+            success: function (data) {
+                console.log(data);
+            },
+            error: function () {
+                console.log("Error adding to cart");
+            }
+        });
+        */
+        
+        $.ajax({
+            url: "/Manager/SaveProducts",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (response) {
+                console.log(response);
+            },
+            error: function () {
+                console.log("Error saving products");
+            }
         });
 
         // Reset the edited cells

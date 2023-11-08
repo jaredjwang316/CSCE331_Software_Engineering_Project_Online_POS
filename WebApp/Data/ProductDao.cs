@@ -84,10 +84,10 @@ public class ProductDao : IDao<Product> {
             $"UPDATE products SET " +
             $"name = '{newT.Name}', " +
             $"price = {newT.Price}, " +
-            $"series = '{newT.Series}' " +
-            $"img_url = '{newT.ImgUrl}' " +
-            $"hidden = {newT.Hidden} " +
-            $"is_option = {newT.IsOption} " +
+            $"series = '{newT.Series}', " +
+            $"img_url = '{newT.ImgUrl}', " +
+            $"hidden = {newT.Hidden}, " +
+            $"is_option = {newT.IsOption}, " +
             $"is_drink = {newT.IsDrink} " +
             $"WHERE id = {t.Id}"
         );
