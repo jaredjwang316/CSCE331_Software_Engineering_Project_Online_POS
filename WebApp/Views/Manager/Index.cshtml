@@ -6,7 +6,7 @@
     <h1 class="display-4">Manager Page</h1>
 </div>
 
-@model (List<Product>, List<Inventory>)
+@model (List<Product>, List<Inventory>, List<Ingredient>)
 
 @if (Model.Item1 != null && Model.Item1.Count > 0) {
     <table class="table">
@@ -43,11 +43,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var ingredient in Model.Item2) {
+            @foreach (var inventory in Model.Item2) {
                 <tr>
-                    <td contenteditable="true">@ingredient.IngredientId</td>
-                    <td contenteditable="true">@ingredient.Id</td>
-                    <td contenteditable="true">@ingredient.Quantity</td>
+                    <td contenteditable="true">@inventory.IngredientId</td>
+                    <td contenteditable="true">
+                        @foreach (var ingredient in Model.Item3) {
+                            @if(ingredient.Id == inventory.IngredientId) {
+                                @ingredient.Name
+                            }
+                        }</td>
+                    <td contenteditable="true">@inventory.Quantity</td>
                 </tr>
             }
         </tbody>

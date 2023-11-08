@@ -22,8 +22,9 @@ public class ManagerController : Controller
         UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
         {
             var products = uok.GetAll<Product>().ToList();
-            var ingredients = uok.GetAll<Inventory>().ToList();
-            return View((products, ingredients));
+            var inventory = uok.GetAll<Inventory>().ToList();
+            var ingredients = uok.GetAll<Ingredient>().ToList();
+            return View((products, inventory, ingredients));
         }
     }
 
