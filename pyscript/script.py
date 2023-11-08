@@ -9,7 +9,7 @@ response = requests.get(url)
 if response.status_code == 200:
     soup = BeautifulSoup(response.content, 'html.parser')
     items = soup.find_all('img', class_='gc-itemimage')
-    x = 0
+    x = 02
     output = ""
     for item in items:
         x += 1
