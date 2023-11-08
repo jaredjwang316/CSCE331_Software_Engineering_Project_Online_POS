@@ -10,7 +10,7 @@ if response.status_code == 200:
     soup = BeautifulSoup(response.content, 'html.parser')
     items = soup.find_all('img', class_='gc-itemimage')
     x = 0
-    output = ""
+    osutput = ""
     for item in items:
         x += 1
         name = item['alt']
