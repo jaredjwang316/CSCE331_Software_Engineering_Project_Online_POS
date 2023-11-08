@@ -19,7 +19,12 @@ public class ManagerController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
+        {
+            var products = uok.GetAll<Product>().ToList();
+            var ingredients = uok.GetAll<Inventory>().ToList();
+            return View((products, ingredients));
+        }
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
