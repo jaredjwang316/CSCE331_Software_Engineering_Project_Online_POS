@@ -1,4 +1,4 @@
-crum Meeting minutes from 2nd November:
+Scrum Meeting minutes from 2nd November:
 In this meeting, all five team members were present and discussed project progress, concerns, file structure, and Sprint 1 goals. Nihar provided insights into the Team Presentation project, emphasizing a structured approach. Jared reported on Project 3 and raised concerns about code structure. Mrinal discussed the importance of file organization, and Griffin highlighted progress with an automated deployment pipeline. Chris outlined tasks for Sprint 1. Concerns about code structure will be addressed in a separate meeting. A subcommittee will define the project's file structure, and the team set specific Sprint 1 goals to focus on.
 
 Scrum Meeting minutes from 3rd November:
