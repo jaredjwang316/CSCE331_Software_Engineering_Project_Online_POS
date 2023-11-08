@@ -1,7 +1,13 @@
-﻿@using System.Security.Claims;
+﻿@* 
+    File: Home/Index.cshtml
+    Author: Nihar Shah
+    Date: November 7, 2023
+*@
+
+@using System.Security.Claims;
 
 @{
-    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
 <div class="text-center">
@@ -13,9 +19,20 @@
     }
     else
     {
-        <h1 class="display-4">Welcome, stranger!</h1>
+        <h1 class="display-4">Bringing Bubble Tea to the United States!</h1>
     }
 </div>
+
+<section class="elementor-section">
+    <div class="elementor-container">
+        <a class="elementor-box-title" asp-area="" asp-controller="MenuBoard" asp-action="Index">
+            <figure class="elementor-image-box-img">
+            <img src="https://gongchausa.com/wp-content/uploads/2021/12/25-w.png">
+            </figure>
+            <h3>Menu</h3>
+        </a>
+    </div>
+</section>
 
 @* 
 <div class="text-center" style="display: flex; justify-content: space-around;">
