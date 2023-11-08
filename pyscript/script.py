@@ -19,6 +19,6 @@ if response.status_code == 200:
     output += str(x) + " items"
     with open("gongcha_items.txt", 'w', encoding='utf-8') as file:
         file.write(output)
-    print("Data written to output")
+    print("Data written to output file(gongcha_items.txt)")
 else:
     print("Failed to retrieve the website.")
