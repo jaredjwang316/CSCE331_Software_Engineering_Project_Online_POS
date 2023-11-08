@@ -65,6 +65,7 @@
 <button id="saveButtonInv">Save</button>
 
 <script>
+    // Product Save Button Function
     document.getElementById('saveButtonProd').addEventListener('click', function() {
         console.log('Save button clicked');
         var editedCells = document.querySelectorAll('td.edited');
@@ -90,6 +91,7 @@
             cell.classList.remove('edited');
         });
     });
+    // Inventory Save Button Function
     document.getElementById('saveButtonInv').addEventListener('click', function() {
         console.log('Save button clicked');
         var editedCells = document.querySelectorAll('td.edited');
