@@ -11,3 +11,33 @@ html {
 body {
     background-image: url('https://gongchausa.com/wp-content/uploads/2021/11/Our-Philosophy-Section-3-background.png');
 }
+
+.elementor-container {
+    max-width: 900px;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    --widgets-spacing: 20px;
+}
+
+.elementor-column {
+    position: relative;
+    min-height: 1px;
+    display: flex;
+    width: 30%;
+    border: 2px solid;
+    justify-content: center;
+    box-sizing: border-box;
+    color: black;
+    align-items: center;
+}
+
+.elementor-box-title {
+    margin-bottom: 0px;
+    color: var(--e-global-color-9d396bf);
+    font-family: "Lusitana", Sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    text-decoration: none;
+}
