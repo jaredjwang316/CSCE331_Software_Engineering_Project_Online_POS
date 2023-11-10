@@ -14,6 +14,7 @@ public class Employee {
     public string Name { get; set; }
     public string Password { get; set; }
     public bool IsManager { get; set; }
+    public string Email { get; set; }
 
     /// <summary>
     /// Constructor for the Employee class.
@@ -22,10 +23,12 @@ public class Employee {
     /// <param name="name"></param>
     /// <param name="password"></param>
     /// <param name="isManager"></param>
-    public Employee(int id, string name, string password, bool isManager) {
+    /// <param name="email"></param>
+    public Employee(int id, string name, string password, bool isManager, string email) {
         Id = id;
         Name = name;
         Password = password;
         IsManager = isManager;
+        Email = email;
     }
 }

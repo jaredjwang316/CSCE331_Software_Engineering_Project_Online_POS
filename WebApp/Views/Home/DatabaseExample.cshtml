@@ -13,10 +13,10 @@
         <tbody>
             @foreach (var product in Model) {
                 <tr>
-                    <td>@product.Id</td>
-                    <td>@product.Name</td>
-                    <td>@product.Price</td>
-                    <td>@product.Series</td>
+                    <td contenteditable="true">@product.Id</td>
+                    <td contenteditable="true">@product.Name</td>
+                    <td contenteditable="true">@product.Price</td>
+                    <td contenteditable="true">@product.Series</td>
                 </tr>
             }
         </tbody>

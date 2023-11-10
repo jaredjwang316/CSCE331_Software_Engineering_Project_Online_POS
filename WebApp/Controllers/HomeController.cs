@@ -1,10 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
-
-using Npgsql;
 using WebApp.Data;
-using System.Reflection.Metadata.Ecma335;
 
 namespace WebApp.Controllers;
 

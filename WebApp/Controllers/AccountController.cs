@@ -11,9 +11,12 @@ using WebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
+using WebApp.Data;
 
 namespace WebApp.Controllers;
 
+[AllowAnonymous]
 public class AccountController : Controller
 {
     private readonly ILogger<AccountController> _logger;
@@ -28,16 +31,64 @@ public class AccountController : Controller
         return View();
     }
 
-    [AllowAnonymous]
     public IActionResult Login(string provider = "Google")
     {
-        return Challenge(new AuthenticationProperties() { RedirectUri = Config.returnUrl }, provider);
+        // Redirect the user to the external provider
+        return Challenge(new AuthenticationProperties() { RedirectUri = Url.Action("LoginCallback") }, provider);
     }
 
-    [AllowAnonymous]
+    public async Task<IActionResult> LoginCallback()
+    {
+        UnitOfWork unit = new(Config.AWS_DB_NAME);
+
+
+        var result = await HttpContext.AuthenticateAsync();
+        if (result?.Succeeded != true)
+        {
+            return RedirectToAction("Login");
+        }
+
+        var identity = new ClaimsIdentity(result.Principal!.Identity);
+
+        Claim emailClaim = User.FindFirst(ClaimTypes.Email)!;
+        if (emailClaim == null) {
+            Console.WriteLine("No email claim found.");
+            return Redirect(Config.returnUrl);
+        }
+
+        string role = "Customer";
+        Employee? employee = unit.GetAll<Employee>().FirstOrDefault(e => e.Email == emailClaim.Value);
+        if (employee != null) {
+            role = employee.IsManager ? "Manager" : "Cashier";
+        }
+
+        identity.AddClaim(new Claim(ClaimTypes.Role, role));
+
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            new ClaimsPrincipal(identity),
+            new AuthenticationProperties() { RedirectUri = Config.returnUrl, IsPersistent = false }
+        );
+
+        unit.CloseConnection();
+        return Redirect(Config.returnUrl);
+    }
+
     public IActionResult Logout()
     {
         return SignOut(new AuthenticationProperties() { RedirectUri = Config.returnUrl }, CookieAuthenticationDefaults.AuthenticationScheme);
+    }
+
+    public IActionResult AccessDenied()
+    {
+        Claim? roleClaim = User.FindFirst(ClaimTypes.Role);
+        if (roleClaim != null) {
+            Console.WriteLine("Access denied for role: " + roleClaim.Value);
+        }
+        else {
+            Console.WriteLine("Access denied. No role claim found.");
+        }
+        return Redirect(Config.returnUrl);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
