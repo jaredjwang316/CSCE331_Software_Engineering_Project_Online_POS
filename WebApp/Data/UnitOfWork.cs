@@ -69,6 +69,10 @@ public class UnitOfWork {
     public IEnumerable<Product> GetBestSellingProducts(int limit) {
         return daoContainer.ProductDao.GetBestSellingProducts(limit);
     }
+
+    public SeriesInfo GetSeriesInfo(string name) {
+        return daoContainer.SeriesInfoDao.Get(name);
+    }
 }
 
 public class DaoContainer {

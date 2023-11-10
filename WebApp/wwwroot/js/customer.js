@@ -56,9 +56,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Customization buttons
     $(document).on('click', '.customization-btn', function() {
-        $(this).toggleClass("active");
-
-        
+        is_multiselect = $(this).attr("multiselect");
+        series = $(this).attr("series");
+        if (is_multiselect == "True") {
+            $(this).toggleClass("active");
+        } else {
+            // $(".customization-btn").removeClass("active");
+            // $(this).toggleClass("active");
+            // remove active class from all buttons in the series
+            $(".customization-btn[series='" + series + "']").removeClass("active");
+            $(this).toggleClass("active");
+        }
     });
 });
 

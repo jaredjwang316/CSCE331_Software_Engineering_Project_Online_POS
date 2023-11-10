@@ -6,8 +6,9 @@
 
 document.addEventListener("DOMContentLoaded", function() {
     $(document).on('click', '.clear-cart-btn', function() {
+        console.log("Clearing cart")
         $.ajax({
-            url: "/Customer/ClearCart",
+            url: "/Cart/Clear",
             method: "POST",
             success: function(data) {
                     location.reload();
@@ -28,11 +29,11 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         $.ajax({
-            url: "/Customer/AddToCart",
+            url: "/Cart/AddItem",
             type: "POST",
-            data: { productID: productID, customizationIDs: customizationIDs },
+            data: { product_id: productID, customization_ids: customizationIDs, quantity: 1 },
             success: function (data) {
-                console.log(data);
+                console.log("Added to cart");
             },
             error: function () {
                 console.log("Error adding to cart");

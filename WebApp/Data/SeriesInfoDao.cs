@@ -19,6 +19,26 @@ public class SeriesInfoDao : IDao<SeriesInfo> {
         throw new NotSupportedException();
     }
 
+    public SeriesInfo Get(string name) {
+        name = char.ToUpper(name[0]) + name[1..].ToLower();
+        var query = $"SELECT * FROM series_info WHERE name = '{name}'";
+        var reader = commandHandler.ExecuteReader(query);
+
+        if (reader == null) {
+            return new SeriesInfo("", "", false);
+        }
+
+        reader.Read();
+        SeriesInfo seriesInfo = new(
+            reader.GetString(0),
+            reader.GetString(1),
+            reader.GetBoolean(2)
+        );
+
+        reader?.Close();
+        return seriesInfo;
+    }
+
     public IEnumerable<SeriesInfo> GetAll() {
         var query = "SELECT * FROM series_info";
         var reader = commandHandler.ExecuteReader(query);
@@ -28,7 +48,8 @@ public class SeriesInfoDao : IDao<SeriesInfo> {
         while (reader?.Read() == true) {
             seriesInfo.Add(new SeriesInfo(
                 reader.GetString(0),
-                reader.GetString(1)
+                reader.GetString(1),
+                reader.GetBoolean(2)
             ));
         }
 
@@ -38,15 +59,19 @@ public class SeriesInfoDao : IDao<SeriesInfo> {
 
     public void Add(SeriesInfo t) {
         string sattement = (
-            $"INSERT INTO series_info (name, series_image_url) " +
-            $"VALUES ({t.Name}, {t.ImgUrl})"
+            $"INSERT INTO series_info (name, series_image_url, multi_selectable) " +
+            $"VALUES ({t.Name}, {t.ImgUrl}, {t.MultiSelectable})"
         );
         commandHandler.ExecuteNonQuery(sattement);
     }
 
     public void Update(SeriesInfo t, SeriesInfo newT) {
         string statement = (
-            $"DELETE FROM series_info WHERE name = {t.Name}"
+            $"UPDATE series_info SET " +
+            $"name = {newT.Name}, " +
+            $"series_image_url = {newT.ImgUrl}, " +
+            $"multi_selectable = {newT.MultiSelectable} " +
+            $"WHERE name = {t.Name}"
         );
         
         commandHandler.ExecuteNonQuery(statement);

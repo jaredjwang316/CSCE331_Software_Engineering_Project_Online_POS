@@ -1,0 +1,137 @@
+@* 
+
+*@
+
+
+@using WebApp.Data
+@using WebApp.Models.Cart
+
+<style>
+    body {
+        background-image: url("https://order.gongchausa.com/static/media/backgrounds.12ca03b5bb94af521d4f.png");
+        background-repeat: repeat-y;
+        background-size: contain;
+        background-color: #E7E7E7;
+    }
+    img {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+    }
+    .cart-container {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+        margin: 0 20px;
+        border-radius: 10px;
+        background-color: white;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    }
+    .product {
+        @* display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 10px; *@
+        display: flex;
+        border-bottom: 1px solid #E7E7E7;
+        margin-left: 50px;
+        margin-right: 50px;
+        margin-top: 10px;
+    }
+    .image-container {
+        margin-right: 60px;
+    }
+    .image-container img {
+        height: 7rem;
+    }
+    .item-info {
+        margin-top: 15px;
+    }
+    .item-name h3 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 0;
+        font-family: Lusitana;
+    }
+    .option {
+        margin-top: -15px;
+    }
+    .option p {
+        font-size: 1rem;
+        padding-top: 0;
+        font-family: Lusitana;
+    }
+</style>
+
+<button class="clear-cart-btn">Clear</button>
+<div class="cart-container">
+
+        @{
+            UnitOfWork unit = new(Config.AWS_DB_NAME);
+            @* List<string> series = unit.GetUniqueSeries().ToList(); *@
+        }
+
+        @foreach (Item item in Cart.Items) {
+            <div class="product">
+                @if(!User.IsInRole("Admin") && !User.IsInRole("Cashier")) {
+                    <div class="image-container">
+                        <img src="@item.Product.ImgUrl" />
+                    </div>
+                }
+                <div class="item-info">
+                    <div class="item-name">
+                        <h3>@item.Product.Name</h3>
+                    </div>
+                    @* <div class="item-cost">
+                        <p>@item.Price().ToString("C")</p>
+                    </div> *@
+                    @* <div class="item-quantity">
+                        <p>@item.Quantity</p>
+                    </div> *@
+                    <div class="item-options">
+                        @foreach (var option in item.Options) {
+                            @if (option.Series == "Size") {
+                                <p class="item-option-size">@option.Name</p>
+                            }
+                        }
+                        <div class="option"><p>
+                        @{
+                            string? prevSeries = null;
+                            bool isFirstOptionInSeries = true;
+                            var optionsText = new System.Text.StringBuilder();
+                        }
+                        @foreach(var option in item.Options) {
+                            string currSeries = option.Series;
+
+                            if (prevSeries != null && currSeries != prevSeries) {
+                                // insert '|'
+                                optionsText.Append(" | ");
+                                isFirstOptionInSeries = true;
+                            } else if (!isFirstOptionInSeries) {
+                                // insert ',' if not first option in series
+                                optionsText.Append(", ");
+                            }
+
+                            prevSeries = currSeries;
+                            optionsText.Append(option.Name);
+                            isFirstOptionInSeries = false;
+                        }
+                        @optionsText.ToString()
+                        </p></div>
+                    </div>
+                    <!--item-options-->
+                </div>
+                <!--item-info-->
+            </div>
+            <!--product-->
+        }
+</div>
