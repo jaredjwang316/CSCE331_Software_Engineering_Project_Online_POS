@@ -10,6 +10,7 @@ html {
 
 body {
     background-image: url('https://gongchausa.com/wp-content/uploads/2021/11/Our-Philosophy-Section-3-background.png');
+    background-repeat: no-repeat;
 }
 
 .display-4 {
