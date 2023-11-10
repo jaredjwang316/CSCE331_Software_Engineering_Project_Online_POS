@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp.Controllers;
 
-[Authorize(Roles = "Cashier,Manager")]
+[Authorize(Roles = "Cashier, Manager")]
 public class CashierController : Controller
 {
     private readonly ILogger<CashierController> _logger;

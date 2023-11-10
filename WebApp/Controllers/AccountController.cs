@@ -31,13 +31,12 @@ public class AccountController : Controller
         return View();
     }
 
-    public IActionResult Login(string provider = "Google")
+    public IActionResult Login(string provider = "Google", string returnUrl = null)
     {
-        // Redirect the user to the external provider
-        return Challenge(new AuthenticationProperties() { RedirectUri = Url.Action("LoginCallback") }, provider);
+        return Challenge(new AuthenticationProperties() { RedirectUri = Url.Action("LoginCallback", new { returnUrl }) }, provider);
     }
 
-    public async Task<IActionResult> LoginCallback()
+    public async Task<IActionResult> LoginCallback(string returnUrl = null)
     {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
 
@@ -45,10 +44,11 @@ public class AccountController : Controller
         var result = await HttpContext.AuthenticateAsync();
         if (result?.Succeeded != true)
         {
+            Console.WriteLine("Authentication failed.");
             return RedirectToAction("Login");
         }
 
-        var identity = new ClaimsIdentity(result.Principal!.Identity);
+        var identity = new ClaimsIdentity(result.Principal!.Claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
         Claim emailClaim = User.FindFirst(ClaimTypes.Email)!;
         if (emailClaim == null) {
@@ -71,6 +71,11 @@ public class AccountController : Controller
         );
 
         unit.CloseConnection();
+
+        if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl)) {
+            return Redirect(returnUrl);
+        }
+        
         return Redirect(Config.returnUrl);
     }
 
