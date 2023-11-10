@@ -15,9 +15,12 @@ builder.WebHost.UseUrls(Config.returnUrl);
 // Set up Google Authentication scheme.
 builder.Services.AddAuthentication(options => {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 })
-.AddCookie()
+.AddCookie(options => {
+    options.ReturnUrlParameter = "returnUrl";
+})
 .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
 {
     options.ClientId = configuration["GOOGLE_PROVIDER_AUTHENTICATION_CLIENT_ID"]

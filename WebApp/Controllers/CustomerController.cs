@@ -7,12 +7,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
-
-using Npgsql;
 using WebApp.Data;
-using System.Reflection.Metadata.Ecma335;
-using System.Collections.Specialized;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace WebApp.Controllers;
@@ -171,10 +166,6 @@ public class CustomerController : Controller
         return Ok();
     }
 
-
-
-
-    
     public IActionResult DisplayCart() {
         Cart cart = GetCurrentCart();
 

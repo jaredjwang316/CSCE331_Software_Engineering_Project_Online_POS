@@ -20,7 +20,7 @@ public class EmployeeDao : IDao<Employee> {
         var reader = commandHandler.ExecuteReader(query);
 
         if (reader == null) {
-            return new Employee(-1, "null", "null", false);
+            return new Employee(-1, "null", "null", false, "null");
         }
 
         reader.Read();
@@ -28,7 +28,8 @@ public class EmployeeDao : IDao<Employee> {
             reader.GetInt32(0),
             reader.GetString(1),
             reader.GetString(2), 
-            reader.GetBoolean(3)
+            reader.GetBoolean(3),
+            reader.GetString(4)
         );
 
         reader.Close();
@@ -46,7 +47,8 @@ public class EmployeeDao : IDao<Employee> {
                 reader.GetInt32(0),
                 reader.GetString(1),
                 reader.GetString(2), 
-                reader.GetBoolean(3)
+                reader.GetBoolean(3),
+                reader.GetString(4)
             ));
         }
 
@@ -56,8 +58,8 @@ public class EmployeeDao : IDao<Employee> {
 
     public void Add(Employee t) {
         string sattement = (
-            $"INSERT INTO employees (name, password, isManager) " +
-            $"VALUES ('{t.Name}', '{t.Password}', {t.IsManager})"
+            $"INSERT INTO employees (name, password, isManager, email) " +
+            $"VALUES ('{t.Name}', '{t.Password}', {t.IsManager}, '{t.Email}')"
         );
         commandHandler.ExecuteNonQuery(sattement);
     }
@@ -67,7 +69,8 @@ public class EmployeeDao : IDao<Employee> {
             $"UPDATE employees SET " +
             $"name = '{newT.Name}', " +
             $"password = '{newT.Password}', " +
-            $"isManager = {newT.IsManager} " +
+            $"isManager = {newT.IsManager}, " +
+            $"email = '{newT.Email}' " +
             $"WHERE id = {t.Id}"
         );
         
