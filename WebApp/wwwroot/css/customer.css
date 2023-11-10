@@ -5,7 +5,17 @@
 */
 
 body {
-    background-color: #E7E7E7;
+    background-image: url('https://gongchausa.com/wp-content/uploads/2021/11/Our-Philosophy-Section-3-background.png');
+    background-repeat: no-repeat;
+}
+
+.city-background-container img {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: -1;
+    
+    
 }
 
 img {
