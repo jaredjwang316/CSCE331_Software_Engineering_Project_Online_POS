@@ -31,9 +31,12 @@ public class MenuBoardController : Controller
             search = search.ToLower();  //we need case-insensitive search
             products = products.Where(p => p.Name.ToLower().Contains(search)).ToList(); //filter out product list based on searched term
         }   
+        
+        // Get unique product categories
+        var productCategories = products.Select(p => p.Series).Distinct().ToList();
 
-        // Pass both products and product ingredients to the view
-        return View((products, prodIngredients));
+        // Pass both products and product categories to the view
+        return View((products, prodIngredients, productCategories));
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -42,32 +45,39 @@ public class MenuBoardController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
-    public IActionResult getProducts()
+public IActionResult getProducts()
+{
+    string html = "<div class=\"customization-menu\">";    
+    UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
     {
-        string html = "<div class=\"customization-menu\">";    
-        UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
-        {
-            // Retrieve products and product ingredients from the database
-            var products = uok.GetAll<Product>().ToList();
-            var prodIngredients = uok.GetAll<ProductIngredients>().ToList();
-            List<string> theDrinks = uok.GetUniqueSeries(true, false, false).ToList(); //gets the series that belong to drinks
+        // Retrieve products and product ingredients from the database
+        var products = uok.GetAll<Product>().ToList();
+        var prodIngredients = uok.GetAll<ProductIngredients>().ToList();
+        List<string> theProducts = uok.GetUniqueSeries(true, true, true).ToList(); 
 
-            foreach (var drink in theDrinks)
+        foreach (var p in theProducts)
+        {
+            html += "<div class=\"product-category\">";
+            html += "<button class=\"customization-btn category\" data-category=\"" + p + "\">" + p + "</button>";
+
+            html += "<div class=\"product-list\">";
+            foreach (var product in products)
             {
-                foreach (var product in products)
+                if (product.Series == p)    //check if current product belongs to that series
                 {
-                    if (product.Series == drink)    //check if current product belongs to that series
-                    {
-                        html += "<button class=\"customization-btn product\" id=\"" + product.Id + "\" data-to=\"customization-container\">" +
-                            "<p>" + product.Name + "</p>" +
-                        "</button>" ;                      
-                    }
+                    html += "<button class=\"customization-btn product\" id=\"" + product.Id + "\" data-to=\"customization-container\">" +
+                        "<p>" + product.Name + "</p>" +
+                        "<p>ID: " + product.Id + "</p>" +
+                    "</button>";
                 }
             }
-            html += "</div";
-        }        
-        return Content(html);   //return the string html
-    }
+            html += "</div>"; // Close product-list div
+            html += "</div>"; // Close product-category div
+        }
+        html += "</div>"; // Close customization-menu div
+    }        
+    return Content(html);   //return the string html
+}
 
     public IActionResult ProductDetail(int id)
     {

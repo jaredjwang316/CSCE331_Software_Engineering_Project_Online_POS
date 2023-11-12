@@ -9,7 +9,7 @@
 </div>
 
 <script src="~/js/menu.js"></script>
-@model (List<Product>, List<ProductIngredients>)
+@model (List<Product> products, List<ProductIngredients> prodIngredients, List<string> productCategories)
 
 <div class="row">
     <div class="col-md-6">
@@ -39,7 +39,7 @@
         <tbody>
             @foreach (var product in Model.Item1)
             {
-                <tr>
+                <tr class="product-row" data-category="@product.Series">
                     <td>@product.Id</td>
                     <td>
                         <a href="@Url.Action("ProductDetail", "MenuBoard", new { id = product.Id })">@product.Name</a>
@@ -81,3 +81,34 @@ else
 {
     <p>No products ingredients found.</p>
 }
+
+@if (Model.productCategories != null && Model.productCategories.Count > 0)
+{
+    <h2>Product Categories</h2>
+    <div class="category-buttons">
+        @foreach (var category in Model.productCategories)
+        {
+            <button class="btn btn-primary category-button" data-category="@category">@category</button>
+        }
+    </div>
+}
+
+<!-- JavaScript to handle category filtering -->
+<script>
+$(document).ready(function () {
+    // Initially, show all products
+    $('.product-row').show();
+    $('.product-category .product-list').hide(); // Hide product lists initially
+
+    $('.category-button').click(function () {
+        var selectedCategory = $(this).data('category');
+        $('.product-category .product-list').hide(); // Hide all product lists
+        $('.product-category button[data-category="' + selectedCategory + '"]').next().show(); // Show product list of the selected category
+    });
+
+    $('.product-button').click(function () {
+        var productId = $(this).attr('id');
+        // Implement code to display product details for the selected product (e.g., open a modal).
+    });
+});
+</script>
