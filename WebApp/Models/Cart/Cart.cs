@@ -20,7 +20,7 @@ public class Cart {
         foreach (Item i in Items) {
             if (i.Product.Id == item.Product.Id) {
                 bool match = true;
-                if (item.Options.Count == 0) {
+                if (item.Options.Count == 0 && i.Options.Count == 0) {
                     i.Quantity += item.Quantity;
                     return;
                 }
