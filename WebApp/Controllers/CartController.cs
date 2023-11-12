@@ -126,20 +126,26 @@ public class CartController : Controller
     }
 
     public Cart GetCartFromSession() {
-         if (HttpContext.Session.GetString("Cart") == null) {
+        if (HttpContext.Session.GetString("Cart") == null) {
             var newCart = new Cart();
             var serializedCart = JsonConvert.SerializeObject(newCart);
 
-            Console.WriteLine("Serialized cart: " + serializedCart);
+            Console.WriteLine("No cart - Serialized cart: " + serializedCart);
 
             HttpContext.Session.SetString("Cart", serializedCart);
         } else {
             Console.WriteLine("Cart already exists.");
+
+            var cartJson = HttpContext.Session.GetString("Cart");
+            Console.WriteLine("Cart JSON: " + cartJson);
+
+            return JsonConvert.DeserializeObject<Cart>(cartJson)!;
         }
-        var cartJson = HttpContext.Session.GetString("Cart");
-        Console.WriteLine("Cart JSON: " + cartJson);
-        return cartJson == null ? new() : JsonConvert.DeserializeObject<Cart>(cartJson)!;
-    }
+
+    // Return the deserialized cart
+    return JsonConvert.DeserializeObject<Cart>(HttpContext.Session.GetString("Cart"))!;
+}
+
 
     public void SetCartInSession(Cart cart) {
         HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
