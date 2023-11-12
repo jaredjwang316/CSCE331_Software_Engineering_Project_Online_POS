@@ -1,7 +1,8 @@
 /*
-    File: customer-loading-screen.js
+    File: loading-screen.js
     Author: Griffin Beaudreau
-    Date: November 5th, 2023
+    Date: November 12, 2023
+    Purpose: Display a loading screen while data is being loaded
 */
 
 document.addEventListener("DOMContentLoaded", function () {

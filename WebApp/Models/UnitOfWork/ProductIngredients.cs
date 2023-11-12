@@ -4,7 +4,7 @@
     Date: October 23, 2023
 */
 
-namespace WebApp.Models;
+namespace WebApp.Models.UnitOfWork;
 
 /// <summary>
 /// This class is used to represent a row in the ProductIngredients table.

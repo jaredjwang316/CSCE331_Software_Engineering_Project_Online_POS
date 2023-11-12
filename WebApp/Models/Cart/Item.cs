@@ -8,6 +8,7 @@
 */
 
 using WebApp.Data;
+using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Models.Cart;
 public class Item {

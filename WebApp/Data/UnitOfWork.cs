@@ -5,7 +5,7 @@
 */
 
 using Npgsql;
-using WebApp.Models;
+using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Data;
 

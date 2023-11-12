@@ -5,10 +5,7 @@
     Description: Interface for the DAO classes.
 */
 
-using System;
-
 namespace WebApp.Data;
-
 public interface IDao<T> {
 
     T Get(int id);

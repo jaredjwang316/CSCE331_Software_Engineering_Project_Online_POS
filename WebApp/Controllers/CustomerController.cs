@@ -1,134 +1,75 @@
-/*  
+/*
     File: CustomerController.cs
     Author: Griffin Beaudreau
-    Date: November 5, 2023
+    Date: November 12, 2023
+    Purpose: This file contains the CustomerController class, which is used to handle
+        requests from the customer view.
 */
 
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using WebApp.Models;
+using WebApp.Models.UnitOfWork;
+using WebApp.Models.ViewModels;
 using WebApp.Data;
-using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace WebApp.Controllers;
+public class CustomerController : Controller {
+    private readonly UnitOfWork unit;
+    private readonly IMemoryCache cache;
 
-public class CustomerController : Controller
-{
-    private readonly ILogger<CustomerController> _logger;
-
-    public CustomerController(ILogger<CustomerController> logger)
-    {
-        _logger = logger;
+    public CustomerController(UnitOfWork unit, IMemoryCache cache) {
+        this.unit = unit;
+        this.cache = cache;
     }
 
-    public IActionResult Index()
-    {
-        HttpContext.Session.SetString("Init", "1");
+    public IActionResult Index() {
         return View();
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    public IActionResult LoadCategories() {
+        List<SeriesInfo> model = cache.GetOrCreate("Categories", entry => {
+            entry.SlidingExpiration = TimeSpan.FromMinutes(5);
+            return unit.GetAll<SeriesInfo>()
+            .Where(series => !series.IsHidden && series.IsProduct)
+            .ToList();
+        })!;
+        
+        return PartialView("_CategoriesPartial", model);
     }
 
-    public IActionResult ShowCategories() {
-        UnitOfWork unit = new(Config.AWS_DB_NAME);
-        List<SeriesInfo> unique_series = unit.GetAll<SeriesInfo>().ToList();
-        List<string> drink_categories = unit.GetUniqueSeries(true, false, false).ToList();
+    public IActionResult LoadBestSellers() {
+        List<Product> model = cache.GetOrCreate("BestSellers", entry => {
+            entry.SlidingExpiration = TimeSpan.FromMinutes(5);
+            return unit.GetBestSellingProducts(10).ToList();
+        })!;
 
-        string html = "";
-        foreach (SeriesInfo series_info in unique_series) {
-            if (drink_categories.Contains(series_info.Name)) {
-                html += 
-                    "<button class=\"menu-item series-btn\" id=\"" + series_info.Name + "\" data-to=\"item-container\">" +
-                        "<img src=\"" + series_info.ImgUrl + "\" />" +
-                        "<p>" + series_info.Name + "</p>" +
-                    "</button>"
-                ;
-            }
-        }
-
-        unit.CloseConnection();
-        return Content(html);
+        return PartialView("_ProductsPartial", model);
     }
 
-    public IActionResult ShowBestSellers() {
-        UnitOfWork unit = new(Config.AWS_DB_NAME);
-        List<Product> best_selling = unit.GetBestSellingProducts(10).ToList();
-
-        // Generate HTML for each series
-        string html = "";
-        foreach (Product product in best_selling) {
-            html += 
-                "<button class=\"menu-item product-btn best-seller\" id=\"" + product.Id + "\" data-to=\"customization-container\">" +
-                    "<img src=\"" + product.ImgUrl + "\" />" +
-                    "<p>" + product.Name + "</p>" +
-                "</button>"
-            ;
-        }
-
-        unit.CloseConnection();
-        return Content(html);
-    }
-
-    public IActionResult ShowFavorites() {
+    public IActionResult LoadFavorites() {
+        // Use _ProductsPartial when favorites are implemented
         return Content("Not Implemented");
     }
 
-    public IActionResult ShowProductsBySeries(string arg) {
-        UnitOfWork unit = new(Config.AWS_DB_NAME);
-        List<Product> products = unit.GetProductsBySeries(arg).ToList();
-
-        // Generate HTML for each series
-        string html = "";
-        foreach (Product product in products) {
-            html += 
-                "<button class=\"menu-item product-btn product\" id=\"" + product.Id + "\" data-to=\"customization-container\">" +
-                    "<img src=\"" + product.ImgUrl + "\" />" +
-                    "<p>" + product.Name + "</p>" +
-                "</button>"
-            ;
-        }
-
-        unit.CloseConnection();
-        return Content(html);
+    public IActionResult LoadProductsBySeries(string arg) {
+        List<Product> model = unit.GetProductsBySeries(arg).ToList();
+        return PartialView("_ProductsPartial", model);
     }
 
-    public IActionResult ShowCustomization(string arg) {
-        UnitOfWork unit = new(Config.AWS_DB_NAME);
-        List<string> customizations = unit.GetUniqueSeries(false, false, true).ToList();
-        List<SeriesInfo> series_info = unit.GetAll<SeriesInfo>().ToList();
-        List<Product> products = unit.GetAll<Product>().ToList();
-
-        int product_id = Int32.Parse(arg);
-        Product selected_product = unit.Get<Product>(product_id);
-
-        //Generate HTML for each series
-        string html = "<div class=\"customization-menu\">";
-        html += "<div class=\"customization-img-container\"><img src=\"" + selected_product.ImgUrl + "\" />" + selected_product.Name + "</div>";
-
-        foreach (string customization in customizations) {
-            html += "<div class=\"customization-title\" id=\"" + customization + "\">" + customization + "</div>";
-            html += "<div class=\"customization-btn-container\">";
-            foreach (Product product in products) {
-                if (product.Series == customization) {
-                    bool multiselect = series_info.Where(x => x.Name == customization).First().MultiSelectable;
-                    html += 
-                        "<button class=\"customization-btn product\" id=\"" + product.Id + "\" data-to=\"customization-container\" series=" + product.Series + " multiselect=" + multiselect + ">" +
-                            "<p>" + product.Name + "</p>" +
-                        "</button>"
-                    ;
-                }
-            }
-            html += "</div>";
-        }
-
-        html += "<button class=\"add-to-cart-btn\" id=\"" + selected_product.Id + "\">Add to Cart</button>";
-        html += "</div>";
-
-        unit.CloseConnection();
-        return Content(html);
+    public IActionResult LoadCustomizations(string arg) {
+        Product selectedProduct = unit.Get<Product>(int.Parse(arg));
+        List<SeriesInfo> seriesInformation = unit.GetAll<SeriesInfo>()
+            .Where(series => !series.IsHidden && series.IsCustomization)
+            .ToList();
+        List<Product> products = unit.GetAll<Product>()
+            .Where(product => seriesInformation.Any(series => series.Name == product.Series))
+            .ToList();
+        CustomizationViewModel model = new() {
+            SelectedProduct = selectedProduct,      // The selected product
+            SeriesInformation = seriesInformation,  // Information about each customization series
+            Products = products                     // All products that are customizations
+        };
+        
+        return PartialView("_CustomizationsPartial", model);
     }
 }

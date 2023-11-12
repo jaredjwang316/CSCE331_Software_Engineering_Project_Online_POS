@@ -7,6 +7,8 @@
         that the user has added to their cart.
 */
 
+using WebApp.Models.UnitOfWork;
+
 namespace WebApp.Models.Cart;
 public class Cart {
     public List<Item> Items { get; set; } = new List<Item>();

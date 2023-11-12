@@ -4,10 +4,9 @@
     Date: October 23, 2023
 */
 
-using WebApp.Models;
+using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Data;
-
 public class EmployeeDao : IDao<Employee> {
     private readonly CommandHandler commandHandler;
 

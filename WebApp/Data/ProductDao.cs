@@ -5,7 +5,7 @@
     Description: DAO class for the Product model.
 */
 
-using WebApp.Models;
+using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Data;
 
