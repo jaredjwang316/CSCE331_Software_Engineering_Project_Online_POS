@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using WebApp;
+using WebApp.Data;
+using WebApp.Models.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -8,9 +10,12 @@ var configuration = builder.Configuration;
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
+builder.Services.AddMemoryCache();
 
 builder.Services.AddSingleton(Config.returnUrl);
 builder.WebHost.UseUrls(Config.returnUrl);
+
+builder.Services.AddScoped<UnitOfWork>(_ => new(Config.AWS_DB_NAME));
 
 // Set up Google Authentication scheme.
 builder.Services.AddAuthentication(options => {

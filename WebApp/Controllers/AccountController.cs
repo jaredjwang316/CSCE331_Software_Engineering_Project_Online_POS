@@ -7,7 +7,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
-
+using WebApp.Models.UnitOfWork;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -31,12 +31,12 @@ public class AccountController : Controller
         return View();
     }
 
-    public IActionResult Login(string provider = "Google", string returnUrl = null)
+    public IActionResult Login(string provider = "Google", string returnUrl = "/")
     {
         return Challenge(new AuthenticationProperties() { RedirectUri = Url.Action("LoginCallback", new { returnUrl }) }, provider);
     }
 
-    public async Task<IActionResult> LoginCallback(string returnUrl = null)
+    public async Task<IActionResult> LoginCallback(string returnUrl)
     {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
 

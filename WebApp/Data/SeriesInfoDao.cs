@@ -4,7 +4,7 @@
     Date: October 31, 2023
 */
 
-using WebApp.Models;
+using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Data;
 
@@ -25,14 +25,17 @@ public class SeriesInfoDao : IDao<SeriesInfo> {
         var reader = commandHandler.ExecuteReader(query);
 
         if (reader == null) {
-            return new SeriesInfo("", "", false);
+            return new SeriesInfo("", "", false, false, false, false);
         }
 
         reader.Read();
         SeriesInfo seriesInfo = new(
             reader.GetString(0),
             reader.GetString(1),
-            reader.GetBoolean(2)
+            reader.GetBoolean(2),
+            reader.GetBoolean(3),
+            reader.GetBoolean(4),
+            reader.GetBoolean(5)
         );
 
         reader?.Close();
@@ -49,7 +52,10 @@ public class SeriesInfoDao : IDao<SeriesInfo> {
             seriesInfo.Add(new SeriesInfo(
                 reader.GetString(0),
                 reader.GetString(1),
-                reader.GetBoolean(2)
+                reader.GetBoolean(2),
+                reader.GetBoolean(3),
+                reader.GetBoolean(4),
+                reader.GetBoolean(5)
             ));
         }
 
@@ -59,8 +65,8 @@ public class SeriesInfoDao : IDao<SeriesInfo> {
 
     public void Add(SeriesInfo t) {
         string sattement = (
-            $"INSERT INTO series_info (name, series_image_url, multi_selectable) " +
-            $"VALUES ({t.Name}, {t.ImgUrl}, {t.MultiSelectable})"
+            $"INSERT INTO series_info (name, series_image_url, multi_selectable, is_product, is_customization, is_hidden) " +
+            $"VALUES ({t.Name}, {t.ImgUrl}, {t.MultiSelectable}, {t.IsProduct}, {t.IsCustomization}, {t.IsHidden})"
         );
         commandHandler.ExecuteNonQuery(sattement);
     }
@@ -70,7 +76,10 @@ public class SeriesInfoDao : IDao<SeriesInfo> {
             $"UPDATE series_info SET " +
             $"name = {newT.Name}, " +
             $"series_image_url = {newT.ImgUrl}, " +
-            $"multi_selectable = {newT.MultiSelectable} " +
+            $"multi_selectable = {newT.MultiSelectable}, " +
+            $"is_product = {newT.IsProduct}, " +
+            $"is_customization = {newT.IsCustomization}, " +
+            $"is_hidden = {newT.IsHidden} " +
             $"WHERE name = {t.Name}"
         );
         

@@ -7,7 +7,6 @@
 using Npgsql;
 
 namespace WebApp.Data;
-
 public class CommandHandler {
     private readonly NpgsqlConnection? connection;
 

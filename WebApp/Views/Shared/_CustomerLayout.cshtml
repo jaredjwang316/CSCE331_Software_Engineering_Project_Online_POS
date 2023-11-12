@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Customer.css" asp-append-version="true" />
     <script src="~/js/customer.js"></script>
-    <script src="~/js/customer-loading-screen.js"></script>
+    <script src="~/js/loading-screen.js"></script>
     <script src="~/js/cart.js"></script>
 </head>
 <body>
@@ -57,7 +57,7 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @if (User.Identity!.IsAuthenticated) {
+            @* @if (User.Identity!.IsAuthenticated) {
                 <div class="text-center">
                     <h1 class="display-4">Welcome, @User.Identity.Name!.Split(" ")[0]!</h1>
                 </div>
@@ -66,13 +66,15 @@
                 <div class="text-center">
                     <h1 class="display-4">Welcome!</h1>
                 </div>
-            }
+            } *@
+
+            <h2>Menu</h2>
 
             <!-- Category bar -->
             <div class="text-center" style="display: flex; justify-content: space-around;">
-                <button id="ShowCategories" class="category-btn active" data-to="item-container">Categories</button>
-                <button id="ShowBestSellers" class="category-btn" data-to="item-container">Best Sellers</button>
-                <button id="ShowFavorites" class="category-btn" data-to="item-container">Favorites</button>
+                <button endpoint="LoadCategories" class="category-btn active">Categories</button>
+                <button endpoint="LoadBestSellers" class="category-btn">Best Sellers</button>
+                <button endpoint="LoadFavorites" class="category-btn">Favorites</button>
             </div>
             @RenderBody()
         </main>

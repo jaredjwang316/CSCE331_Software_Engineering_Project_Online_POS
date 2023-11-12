@@ -1,0 +1,9 @@
+@using WebApp.Models.UnitOfWork
+@model List<Product>
+
+@foreach (var product in Model) {
+    <button class="menu-item product-btn" id="@product.Id" endpoint="LoadCustomizations">
+        <img src="@product.ImgUrl" />
+        <p>@product.Name</p>
+    </button>
+}

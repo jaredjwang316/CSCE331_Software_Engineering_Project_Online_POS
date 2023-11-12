@@ -1,99 +1,111 @@
 /*
-    File: customer-category-btn.js
+    File: customer.js
     Author: Griffin Beaudreau
-    Date: November 5th, 2023
+    Date: November 12, 2023
+    Purpose: Basic functionality for the customer page.
+        Mainly used for loading data from the AWS database when
+        a button is clicked.
 */
 
-var customer_path = [];
+// Path for back button
+var path = [];
 
+document.addEventListener('DOMContentLoaded', (event) => {
+    loadData($(".category-btn.active").attr("endpoint"));
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Load default data
-    loadData($(".category-btn.active").attr("id"), null, $(".category-btn.active").attr("data-to"));
-    // loadData("ShowCustomization", 2, "customization-container");
-    customer_path = [$(".category-btn.active").attr("id") + "/null/" + $(".category-btn.active").attr("data-to")];
-
-    // Load data when category button is clicked
+    // Click event for category buttons
     $(".category-btn").click(function () {
         if ($(this).hasClass("active")) return;
         $(".category-btn").removeClass("active");
         $(this).addClass("active");
-
-        customer_path = [$(this).attr("id") + "/null/" + $(this).attr("data-to")];
-        loadData($(this).attr("id"), null, $(this).attr("data-to"));
+    
+        loadData($(this).attr("endpoint"));
     });
 
-    // Load data when series button is clicked
+    // Click event for series buttons
     $(document).on('click', '.series-btn', function() {
         $(".customization-container").html("");
         var seriesName = $(this).attr("id");
-        customer_path.push("ShowProductsBySeries/" + seriesName + "/" + $(this).attr("data-to"));
-        loadData("ShowProductsBySeries", seriesName, $(this).attr("data-to"));
+        loadData($(this).attr("endpoint"), seriesName);
     });
 
-    // Load data when product button is clicked
+    // Click event for product buttons
     $(document).on('click', '.product-btn', function() {
         $(".item-container").html("");
         var productID = $(this).attr("id");
-        customer_path.push("ShowCustomization/" + productID + "/" + $(this).attr("data-to"));
-        loadData("ShowCustomization", productID, $(this).attr("data-to"));
+        loadData($(this).attr("endpoint"), productID, "customization-menu");
     });
 
-    // Back button
-    $(document).on('click', '.back-btn', function() {
-        $(".customization-container").html("");
-        if (customer_path.length == 1) return;
-
-        var action = customer_path[customer_path.length - 2];
-        customer_path.pop();
-
-        var _action = action.split("/")[0];
-        var args = action.split("/")[1];
-        var element = action.split("/")[2];
-
-        loadData(_action, args, element);
-    });
-
-    // Customization buttons
+    // Click event for customization buttons
     $(document).on('click', '.customization-btn', function() {
-        is_multiselect = $(this).attr("multiselect");
-        series = $(this).attr("series");
-        if (is_multiselect == "True") {
+        if ($(this).attr("multiselect")) {
             $(this).toggleClass("active");
         } else {
-            // $(".customization-btn").removeClass("active");
-            // $(this).toggleClass("active");
-            // remove active class from all buttons in the series
-            $(".customization-btn[series='" + series + "']").removeClass("active");
+            $(".customization-btn[series='" + $(this).attr("series") + "']").removeClass("active");
             $(this).toggleClass("active");
         }
     });
+
+    // Click event for back button
+    $(document).on('click', '.back-btn', function() {
+        var split_path = path[path.length-2].split("/");
+        path.pop();
+        path.pop();
+        var endpoint = split_path[0];
+        var argument = split_path[1];
+        var element = split_path[2];
+        
+        loadData(endpoint, argument, element);
+    });
 });
 
-function loadData(action, args, element) {
+
+/*
+    Function: loadData
+    Author: Griffin Beaudreau
+    Date: November 12, 2023
+    Purpose: Loads data from a specified endpoint and displays it to an element.
+        While the data is loading, a loading screen is displayed.
+*/
+function loadData(endpoint, argument = null, element = "data-container") {
+    path.push(endpoint + "/" + argument + "/" + element);
     var timeout = setTimeout(function () {
         document.dispatchEvent(new Event("DisplayLoadingScreen"));
     }, 10);
-    
+
     $.ajax({
-        url: "/Customer/" + action,
+        url: "/Customer/" + endpoint,
         type: "GET",
-        data: { arg: args },
+        data: { arg: argument },
         success: function (data) {
+            clearData();
             $("." + element).html(data).hide().fadeIn(500);
             clearTimeout(timeout);
             document.dispatchEvent(new Event("HideLoadingScreen"));
         },
         error: function () {
+            clearData();
             $("." + element).html("Error loading data").show();
             clearTimeout(timeout);
             document.dispatchEvent(new Event("HideLoadingScreen"));
         }
     });
 
-    if (customer_path.length > 1) {
+    if (path.length > 1) {
         $(".back-btn").show();
-    } else {
+    }
+    else {
         $(".back-btn").hide();
     }
+}
+
+/*
+    Function: clearData
+    Author: Griffin Beaudreau
+    Date: November 12, 2023
+    Purpose: Clears all data from the data-container and customization-menu elements.
+*/
+function clearData() {
+    $(".data-container").html("");
+    $(".customization-menu").html("");
 }
