@@ -9,22 +9,42 @@
 
 namespace WebApp.Models.Cart;
 public class Cart {
-    public static List<Item> Items { get; set; } = new List<Item>();
+    public List<Item> Items { get; set; } = new List<Item>();
 
-    public static void AddItem(Item item) {
+    // Constructor
+    public Cart() { }
+
+    public void AddItem(Item item) {
         foreach (Item i in Items) {
-            if (i.Product.Id == item.Product.Id && i.Options == item.Options) {
-                i.Quantity += item.Quantity;
-                return;
+            if (i.Product.Id == item.Product.Id) {
+                bool match = true;
+                if (item.Options.Count == 0) {
+                    i.Quantity += item.Quantity;
+                    return;
+                }
+                foreach (Product option in i.Options) {
+                    if (!item.Options.Any(o => o.Name == option.Name)) {
+                        match = false;
+                        break;
+                    }
+                }
+                if (match) {
+                    i.Quantity += item.Quantity;
+                    return;
+                }
             }
         }
-
         Items.Add(item);
     }
-    public static void RemoveItem(Item item) { Items.Remove(item); }
-    public static void Clear() { Items.Clear(); }
+    public void RemoveItem(Item item) { Items.Remove(item); }
+    public void RemoveItem(int index) {
+        if (index < Items.Count) {
+            Items.RemoveAt(index);
+        }
+    }
+    public void Clear() { Items.Clear(); }
 
-    public static double TotalCost() {
+    public double TotalCost() {
         double total = 0;
         foreach (Item item in Items) {
             total += item.Price();

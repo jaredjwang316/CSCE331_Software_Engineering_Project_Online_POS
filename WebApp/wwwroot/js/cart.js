@@ -43,4 +43,22 @@ document.addEventListener("DOMContentLoaded", function() {
         // Go back to the index page
         location.reload();
     });
+
+    // Remove from cart button
+    $(document).on('click', '.remove-item-btn', function() {
+        console.log("Removing from cart");
+        var productId = $(this).attr("id");
+
+        $.ajax({
+            url: "/Cart/RemoveItem",
+            type: "POST",
+            data: { product_id: productId },
+            error: function () {
+                console.log("Error removing from cart");
+            }
+        });
+
+        // Go back to the index page
+        location.reload();
+    });
 });

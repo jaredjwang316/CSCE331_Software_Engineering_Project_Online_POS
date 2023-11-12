@@ -22,12 +22,13 @@ public class CartController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        Cart cart = GetCartFromSession();
+        return View(cart);
     }
 
     public IActionResult Clear() {
         Cart cart = GetCartFromSession();
-        Cart.Clear();
+        cart.Clear();
         SetCartInSession(cart);
         return Ok();
     }
@@ -56,9 +57,48 @@ public class CartController : Controller
         }
         Item item = new(item_product, item_options, quantity);
         Cart cart = GetCartFromSession();
-        Cart.AddItem(item);
+        cart.AddItem(item);
         SetCartInSession(cart);
 
+        return Ok();
+    }
+
+    public IActionResult RemoveItem(int index) {
+        Cart cart = GetCartFromSession();
+        cart.RemoveItem(index);
+        SetCartInSession(cart);
+        return Ok();
+    }
+
+    // $(document).on('click', '.edit-count-btn', function() {
+    //     var id = $(this).attr("id");
+    //     var isIncrement = $(this).text() == "+";
+
+    //     $.ajax({
+    //         url: "/Cart/EditCount",
+    //         type: "POST",
+    //         data: { id: id, isIncrement: isIncrement },
+    //         error: function () {
+    //             console.log("Error editing count");
+    //         }
+    //     });
+
+    //     location.reload();
+    // });
+
+    public IActionResult EditCount(int index, bool isIncrement) {
+        Cart cart = GetCartFromSession();
+        if (cart.Items[index].Quantity == 1 && !isIncrement) {
+            cart.RemoveItem(index);
+            SetCartInSession(cart);
+            return Ok();
+        }
+        if (isIncrement) {
+            cart.Items[index].Quantity++;
+        } else {
+            cart.Items[index].Quantity--;
+        }
+        SetCartInSession(cart);
         return Ok();
     }
 

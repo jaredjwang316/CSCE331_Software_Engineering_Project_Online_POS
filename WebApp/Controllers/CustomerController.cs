@@ -99,6 +99,7 @@ public class CustomerController : Controller
     public IActionResult ShowCustomization(string arg) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         List<string> customizations = unit.GetUniqueSeries(false, false, true).ToList();
+        List<SeriesInfo> series_info = unit.GetAll<SeriesInfo>().ToList();
         List<Product> products = unit.GetAll<Product>().ToList();
 
         int product_id = Int32.Parse(arg);
@@ -113,7 +114,7 @@ public class CustomerController : Controller
             html += "<div class=\"customization-btn-container\">";
             foreach (Product product in products) {
                 if (product.Series == customization) {
-                    bool multiselect = unit.GetSeriesInfo(product.Series).MultiSelectable;
+                    bool multiselect = series_info.Where(x => x.Name == customization).First().MultiSelectable;
                     html += 
                         "<button class=\"customization-btn product\" id=\"" + product.Id + "\" data-to=\"customization-container\" series=" + product.Series + " multiselect=" + multiselect + ">" +
                             "<p>" + product.Name + "</p>" +

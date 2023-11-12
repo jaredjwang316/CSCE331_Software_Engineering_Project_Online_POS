@@ -74,8 +74,6 @@ function loadData(action, args, element) {
     var timeout = setTimeout(function () {
         document.dispatchEvent(new Event("DisplayLoadingScreen"));
     }, 10);
-
-    console.log(element);
     
     $.ajax({
         url: "/Customer/" + action,

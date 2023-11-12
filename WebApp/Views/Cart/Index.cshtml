@@ -5,6 +5,7 @@
 
 @using WebApp.Data
 @using WebApp.Models.Cart
+@model Cart
 
 <style>
     body {
@@ -35,17 +36,16 @@
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     }
     .product {
-        @* display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        border: 1px solid black;
-        border-radius: 5px;
-        padding: 10px; *@
         display: flex;
         border-bottom: 1px solid #E7E7E7;
+        padding-bottom: 10px;
         margin-left: 50px;
         margin-right: 50px;
         margin-top: 10px;
+    }
+    .product:last-child {
+        border-bottom: none;
+        margin-bottom: 10px;
     }
     .image-container {
         margin-right: 60px;
@@ -70,35 +70,131 @@
         padding-top: 0;
         font-family: Lusitana;
     }
+    .remove-item-btn {
+        background-color: rgb(170, 0, 0);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 1.3rem;
+        height: 1.3rem;
+        font-size: 0.7rem;
+        font-weight: bold;
+        margin-top: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1.5rem;
+    }
+
+    @* Edit Styles *@
+    .edit-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: auto;
+        margin-bottom: -30px;
+    }
+    .edit-count {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    .count {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: bold;
+        font-family: Lusitana;
+    }
+    .edit-count-btn {
+        background-color: rgb(170, 0, 0);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 1.3rem;
+        height: 1.3rem;
+        font-size: 0.7rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .edit-options-btn {
+        background-color: rgb(170, 0, 0);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        width: 4rem;
+        font-size: 0.7rem;
+        font-weight: bold;
+    }
+    .cost {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 0rem;
+        font-family: Lusitana;
+        margin-bottom: 2rem;
+    }
 </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).on('click', '.remove-item-btn', function() {
+        var index = $(this).attr("id");
+
+        $.ajax({
+            url: "/Cart/RemoveItem",
+            type: "POST",
+            data: { index: index },
+            error: function () {
+                console.log("Error removing from cart");
+            }
+        });
+
+        location.reload();
+    });
+
+    $(document).on('click', '.edit-count-btn', function() {
+        var index = $(this).attr("id");
+        var isIncrement = $(this).text() == "+";
+
+        $.ajax({
+            url: "/Cart/EditCount",
+            type: "POST",
+            data: { index: index, isIncrement: isIncrement },
+            error: function () {
+                console.log("Error editing count");
+            }
+        });
+
+        location.reload();
+    });
+</script>
 
 <button class="clear-cart-btn">Clear</button>
 <div class="cart-container">
 
         @{
             UnitOfWork unit = new(Config.AWS_DB_NAME);
-            @* List<string> series = unit.GetUniqueSeries().ToList(); *@
         }
 
-        @foreach (Item item in Cart.Items) {
+        @foreach (var item in Model.Items.Select((value, index) => new { value, index }))  {
             <div class="product">
+                @* Id = index of item *@
+                <button class="remove-item-btn" id="@item.index">X</button>
                 @if(!User.IsInRole("Admin") && !User.IsInRole("Cashier")) {
                     <div class="image-container">
-                        <img src="@item.Product.ImgUrl" />
+                        <img src="@item.value.Product.ImgUrl" />
                     </div>
                 }
                 <div class="item-info">
                     <div class="item-name">
-                        <h3>@item.Product.Name</h3>
+                        <h3>@item.value.Product.Name</h3>
                     </div>
-                    @* <div class="item-cost">
-                        <p>@item.Price().ToString("C")</p>
-                    </div> *@
-                    @* <div class="item-quantity">
-                        <p>@item.Quantity</p>
-                    </div> *@
                     <div class="item-options">
-                        @foreach (var option in item.Options) {
+                        @foreach (var option in item.value.Options) {
                             @if (option.Series == "Size") {
                                 <p class="item-option-size">@option.Name</p>
                             }
@@ -109,9 +205,9 @@
                             bool isFirstOptionInSeries = true;
                             var optionsText = new System.Text.StringBuilder();
                         }
-                        @foreach(var option in item.Options) {
+                        @foreach(var option in item.value.Options) {
                             string currSeries = option.Series;
-
+                            if (currSeries == "Size") continue;
                             if (prevSeries != null && currSeries != prevSeries) {
                                 // insert '|'
                                 optionsText.Append(" | ");
@@ -131,6 +227,15 @@
                     <!--item-options-->
                 </div>
                 <!--item-info-->
+                <div class="edit-container">
+                    <div class="edit-count">
+                        <button class="edit-count-btn" id="@item.index">-</button>
+                        <p class="count">@item.value.Quantity</p>
+                        <button class="edit-count-btn" id="@item.index">+</button>
+                    </div>
+                    <button class="edit-options-btn">Edit</button>
+                    <p class="cost">@item.value.Price().ToString("C")</p>
+                </div>
             </div>
             <!--product-->
         }
