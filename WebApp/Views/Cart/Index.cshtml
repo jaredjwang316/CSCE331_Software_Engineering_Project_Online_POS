@@ -190,40 +190,6 @@
     }
 </style>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).on('click', '.remove-item-btn', function() {
-        var index = $(this).attr("id");
-
-        $.ajax({
-            url: "/Cart/RemoveItem",
-            type: "POST",
-            data: { index: index },
-            error: function () {
-                console.log("Error removing from cart");
-            }
-        });
-
-        location.reload();
-    });
-
-    $(document).on('click', '.edit-count-btn', function() {
-        var index = $(this).attr("id");
-        var isIncrement = $(this).text() == "+";
-
-        $.ajax({
-            url: "/Cart/EditCount",
-            type: "POST",
-            data: { index: index, isIncrement: isIncrement },
-            error: function () {
-                console.log("Error editing count");
-            }
-        });
-
-        location.reload();
-    });
-</script>
-
 <button class="clear-cart-btn">Clear</button>
 
 <div class=content-container>

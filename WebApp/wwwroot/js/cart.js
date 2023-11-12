@@ -46,19 +46,33 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Remove from cart button
     $(document).on('click', '.remove-item-btn', function() {
-        console.log("Removing from cart");
-        var productId = $(this).attr("id");
+        var index = $(this).attr("id");
 
         $.ajax({
             url: "/Cart/RemoveItem",
             type: "POST",
-            data: { product_id: productId },
+            data: { index: index },
             error: function () {
                 console.log("Error removing from cart");
             }
         });
 
-        // Go back to the index page
+        location.reload();
+    });
+
+    $(document).on('click', '.edit-count-btn', function() {
+        var index = $(this).attr("id");
+        var isIncrement = $(this).text() == "+";
+
+        $.ajax({
+            url: "/Cart/EditCount",
+            type: "POST",
+            data: { index: index, isIncrement: isIncrement },
+            error: function () {
+                console.log("Error editing count");
+            }
+        });
+
         location.reload();
     });
 });
