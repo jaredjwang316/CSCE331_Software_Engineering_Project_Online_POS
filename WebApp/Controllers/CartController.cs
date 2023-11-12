@@ -70,22 +70,6 @@ public class CartController : Controller
         return Ok();
     }
 
-    // $(document).on('click', '.edit-count-btn', function() {
-    //     var id = $(this).attr("id");
-    //     var isIncrement = $(this).text() == "+";
-
-    //     $.ajax({
-    //         url: "/Cart/EditCount",
-    //         type: "POST",
-    //         data: { id: id, isIncrement: isIncrement },
-    //         error: function () {
-    //             console.log("Error editing count");
-    //         }
-    //     });
-
-    //     location.reload();
-    // });
-
     public IActionResult EditCount(int index, bool isIncrement) {
         Cart cart = GetCartFromSession();
         if (cart.Items[index].Quantity == 1 && !isIncrement) {
@@ -100,6 +84,82 @@ public class CartController : Controller
         }
         SetCartInSession(cart);
         return Ok();
+    }
+
+    // EXAMPLE FROM CUSTOMER PAGE
+    // public IActionResult ShowCustomization(string arg) {
+    //     UnitOfWork unit = new(Config.AWS_DB_NAME);
+    //     List<string> customizations = unit.GetUniqueSeries(false, false, true).ToList();
+    //     List<SeriesInfo> series_info = unit.GetAll<SeriesInfo>().ToList();
+    //     List<Product> products = unit.GetAll<Product>().ToList();
+
+    //     int product_id = Int32.Parse(arg);
+    //     Product selected_product = unit.Get<Product>(product_id);
+
+    //     //Generate HTML for each series
+    //     string html = "<div class=\"customization-menu\">";
+    //     html += "<div class=\"customization-img-container\"><img src=\"" + selected_product.ImgUrl + "\" />" + selected_product.Name + "</div>";
+
+    //     foreach (string customization in customizations) {
+    //         html += "<div class=\"customization-title\" id=\"" + customization + "\">" + customization + "</div>";
+    //         html += "<div class=\"customization-btn-container\">";
+    //         foreach (Product product in products) {
+    //             if (product.Series == customization) {
+    //                 bool multiselect = series_info.Where(x => x.Name == customization).First().MultiSelectable;
+    //                 html += 
+    //                     "<button class=\"customization-btn product\" id=\"" + product.Id + "\" data-to=\"customization-container\" series=" + product.Series + " multiselect=" + multiselect + ">" +
+    //                         "<p>" + product.Name + "</p>" +
+    //                     "</button>"
+    //                 ;
+    //             }
+    //         }
+    //         html += "</div>";
+    //     }
+
+    //     html += "<button class=\"add-to-cart-btn\" id=\"" + selected_product.Id + "\">Add to Cart</button>";
+    //     html += "</div>";
+
+    //     unit.CloseConnection();
+    //     return Content(html);
+    // }
+
+
+    public IActionResult EditOptions(int index) {
+        Cart cart = GetCartFromSession();
+
+        UnitOfWork unit = new(Config.AWS_DB_NAME);
+        List<string> customizations = unit.GetUniqueSeries(false, false, true).ToList();
+        List<SeriesInfo> series_info = unit.GetAll<SeriesInfo>().ToList();
+        List<Product> products = unit.GetAll<Product>().ToList();
+
+        Product selected_product = cart.Items[index].Product;
+        List<Product> selected_options = cart.Items[index].Options.ToList();
+
+        //Generate HTML for each series
+        string html = "<div class=\"customization-menu\">";
+        html += "<div class=\"customization-img-container\"><img src=\"" + selected_product.ImgUrl + "\" />" + selected_product.Name + "</div>";
+
+        foreach (string customization in customizations) {
+            html += "<div class=\"customization-title\" id=\"" + customization + "\">" + customization + "</div>";
+            html += "<div class=\"customization-btn-container\">";
+            foreach (Product product in products) {
+                if (product.Series == customization) {
+                    bool multiselect = series_info.Where(x => x.Name == customization).First().MultiSelectable;
+                    html += 
+                        "<button class=\"customization-btn product\" id=\"" + product.Id + "\" data-to=\"customization-container\" series=" + product.Series + " multiselect=" + multiselect + ">" +
+                            "<p>" + product.Name + "</p>" +
+                        "</button>"
+                    ;
+                }
+            }
+            html += "</div>";
+        }
+
+        html += "<button class=\"add-to-cart-btn\" id=\"" + selected_product.Id + "\">Add to Cart</button>";
+        html += "</div>";
+
+        unit.CloseConnection();
+        return Content(html);
     }
 
     public Cart GetCartFromSession() {

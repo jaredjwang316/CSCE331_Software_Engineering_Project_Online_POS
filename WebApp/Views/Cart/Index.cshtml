@@ -26,7 +26,13 @@
         -moz-user-drag: none;
         -o-user-drag: none;
     }
+    .content-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
     .cart-container {
+        flex: 1;
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         gap: 10px;
@@ -34,6 +40,7 @@
         border-radius: 10px;
         background-color: white;
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+        width: 55%;
     }
     .product {
         display: flex;
@@ -137,6 +144,50 @@
         font-family: Lusitana;
         margin-bottom: 2rem;
     }
+
+    .checkout-container {
+        display: flex;
+        justify-content: flex-end;
+        @* margin-left: 40px; *@
+        width: 40%;
+    }
+    .checkout {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 40%;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        height: 90px;
+    }
+    .subtotal {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .subtotal p {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 0;
+        font-family: Lusitana;
+    }
+    .checkout-btn {
+        background-color: rgb(170, 0, 0);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        width: 50%;
+        font-size: 1rem;
+        font-weight: bold;
+        margin-bottom: 0;
+        font-family: Lusitana;
+        margin-left: auto;
+        margin-right: auto;
+    }
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -174,69 +225,83 @@
 </script>
 
 <button class="clear-cart-btn">Clear</button>
-<div class="cart-container">
 
-        @{
-            UnitOfWork unit = new(Config.AWS_DB_NAME);
-        }
+<div class=content-container>
+    <div class="cart-container">
 
-        @foreach (var item in Model.Items.Select((value, index) => new { value, index }))  {
-            <div class="product">
-                @* Id = index of item *@
-                <button class="remove-item-btn" id="@item.index">X</button>
-                @if(!User.IsInRole("Admin") && !User.IsInRole("Cashier")) {
-                    <div class="image-container">
-                        <img src="@item.value.Product.ImgUrl" />
-                    </div>
-                }
-                <div class="item-info">
-                    <div class="item-name">
-                        <h3>@item.value.Product.Name</h3>
-                    </div>
-                    <div class="item-options">
-                        @foreach (var option in item.value.Options) {
-                            @if (option.Series == "Size") {
-                                <p class="item-option-size">@option.Name</p>
+            @{
+                UnitOfWork unit = new(Config.AWS_DB_NAME);
+            }
+
+            @foreach (var item in Model.Items.Select((value, index) => new { value, index }))  {
+                <div class="product">
+                    @* Id = index of item *@
+                    <button class="remove-item-btn" id="@item.index">X</button>
+                    @if(!User.IsInRole("Admin") && !User.IsInRole("Cashier")) {
+                        <div class="image-container">
+                            <img src="@item.value.Product.ImgUrl" />
+                        </div>
+                    }
+                    <div class="item-info">
+                        <div class="item-name">
+                            <h3>@item.value.Product.Name</h3>
+                        </div>
+                        <div class="item-options">
+                            @foreach (var option in item.value.Options) {
+                                @if (option.Series == "Size") {
+                                    <p class="item-option-size">@option.Name</p>
+                                }
                             }
-                        }
-                        <div class="option"><p>
-                        @{
-                            string? prevSeries = null;
-                            bool isFirstOptionInSeries = true;
-                            var optionsText = new System.Text.StringBuilder();
-                        }
-                        @foreach(var option in item.value.Options) {
-                            string currSeries = option.Series;
-                            if (currSeries == "Size") continue;
-                            if (prevSeries != null && currSeries != prevSeries) {
-                                // insert '|'
-                                optionsText.Append(" | ");
-                                isFirstOptionInSeries = true;
-                            } else if (!isFirstOptionInSeries) {
-                                // insert ',' if not first option in series
-                                optionsText.Append(", ");
+                            <div class="option"><p>
+                            @{
+                                string? prevSeries = null;
+                                bool isFirstOptionInSeries = true;
+                                var optionsText = new System.Text.StringBuilder();
                             }
+                            @foreach(var option in item.value.Options) {
+                                string currSeries = option.Series;
+                                if (currSeries == "Size") continue;
+                                if (prevSeries != null && currSeries != prevSeries) {
+                                    // insert '|'
+                                    optionsText.Append(" | ");
+                                    isFirstOptionInSeries = true;
+                                } else if (!isFirstOptionInSeries) {
+                                    // insert ',' if not first option in series
+                                    optionsText.Append(", ");
+                                }
 
-                            prevSeries = currSeries;
-                            optionsText.Append(option.Name);
-                            isFirstOptionInSeries = false;
-                        }
-                        @optionsText.ToString()
-                        </p></div>
+                                prevSeries = currSeries;
+                                optionsText.Append(option.Name);
+                                isFirstOptionInSeries = false;
+                            }
+                            @optionsText.ToString()
+                            </p></div>
+                        </div>
+                        <!--item-options-->
                     </div>
-                    <!--item-options-->
-                </div>
-                <!--item-info-->
-                <div class="edit-container">
-                    <div class="edit-count">
-                        <button class="edit-count-btn" id="@item.index">-</button>
-                        <p class="count">@item.value.Quantity</p>
-                        <button class="edit-count-btn" id="@item.index">+</button>
+                    <!--item-info-->
+                    <div class="edit-container">
+                        <div class="edit-count">
+                            <button class="edit-count-btn" id="@item.index">-</button>
+                            <p class="count">@item.value.Quantity</p>
+                            <button class="edit-count-btn" id="@item.index">+</button>
+                        </div>
+                        <button class="edit-options-btn" id="@item.index">Edit</button>
+                        <p class="cost">@item.value.Price().ToString("C")</p>
                     </div>
-                    <button class="edit-options-btn">Edit</button>
-                    <p class="cost">@item.value.Price().ToString("C")</p>
                 </div>
+                <!--product-->
+            }
+    </div>
+
+    <div class="checkout-container">
+        <div class="checkout">
+            <div class="subtotal">
+                <p>Total</p>
+                <p>@Model.TotalCost().ToString("C")</p>
             </div>
-            <!--product-->
-        }
+            <button class="checkout-btn">Checkout</button>
+        </div>
+    </div>
 </div>
+
