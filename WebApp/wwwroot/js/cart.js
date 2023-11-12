@@ -6,8 +6,9 @@
 
 document.addEventListener("DOMContentLoaded", function() {
     $(document).on('click', '.clear-cart-btn', function() {
+        console.log("Clearing cart")
         $.ajax({
-            url: "/Customer/ClearCart",
+            url: "/Cart/Clear",
             method: "POST",
             success: function(data) {
                     location.reload();
@@ -28,11 +29,11 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         $.ajax({
-            url: "/Customer/AddToCart",
+            url: "/Cart/AddItem",
             type: "POST",
-            data: { productID: productID, customizationIDs: customizationIDs },
+            data: { product_id: productID, customization_ids: customizationIDs, quantity: 1 },
             success: function (data) {
-                console.log(data);
+                console.log("Added to cart");
             },
             error: function () {
                 console.log("Error adding to cart");
@@ -40,6 +41,38 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         // Go back to the index page
+        location.reload();
+    });
+
+    // Remove from cart button
+    $(document).on('click', '.remove-item-btn', function() {
+        var index = $(this).attr("id");
+
+        $.ajax({
+            url: "/Cart/RemoveItem",
+            type: "POST",
+            data: { index: index },
+            error: function () {
+                console.log("Error removing from cart");
+            }
+        });
+
+        location.reload();
+    });
+
+    $(document).on('click', '.edit-count-btn', function() {
+        var index = $(this).attr("id");
+        var isIncrement = $(this).text() == "+";
+
+        $.ajax({
+            url: "/Cart/EditCount",
+            type: "POST",
+            data: { index: index, isIncrement: isIncrement },
+            error: function () {
+                console.log("Error editing count");
+            }
+        });
+
         location.reload();
     });
 });

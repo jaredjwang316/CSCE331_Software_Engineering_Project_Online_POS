@@ -99,6 +99,7 @@ public class CustomerController : Controller
     public IActionResult ShowCustomization(string arg) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         List<string> customizations = unit.GetUniqueSeries(false, false, true).ToList();
+        List<SeriesInfo> series_info = unit.GetAll<SeriesInfo>().ToList();
         List<Product> products = unit.GetAll<Product>().ToList();
 
         int product_id = Int32.Parse(arg);
@@ -113,8 +114,9 @@ public class CustomerController : Controller
             html += "<div class=\"customization-btn-container\">";
             foreach (Product product in products) {
                 if (product.Series == customization) {
+                    bool multiselect = series_info.Where(x => x.Name == customization).First().MultiSelectable;
                     html += 
-                        "<button class=\"customization-btn product\" id=\"" + product.Id + "\" data-to=\"customization-container\">" +
+                        "<button class=\"customization-btn product\" id=\"" + product.Id + "\" data-to=\"customization-container\" series=" + product.Series + " multiselect=" + multiselect + ">" +
                             "<p>" + product.Name + "</p>" +
                         "</button>"
                     ;
@@ -128,58 +130,5 @@ public class CustomerController : Controller
 
         unit.CloseConnection();
         return Content(html);
-    }
-
-    public Cart GetCurrentCart() {
-        string cartKey = "o7rGongChaCart";
-
-        string? cartJson = HttpContext.Session.GetString(cartKey);
-        Cart? cart = null;
-
-        if (cartJson == null) {
-            cart = new Cart();
-            cartJson = JsonConvert.SerializeObject(cart);
-            HttpContext.Session.SetString(cartKey, cartJson);
-        } else {
-            cart = JsonConvert.DeserializeObject<Cart>(cartJson);
-        }
-
-        return cart!;
-    }
-
-    public IActionResult AddToCart(int productID, List<int> customizationIDs) {
-        Cart cart = GetCurrentCart();
-
-        UnitOfWork unit = new(Config.AWS_DB_NAME);
-        Product product = unit.Get<Product>(productID);
-        List<Product> customizations = unit.GetAll<Product>().Where(p => customizationIDs.Contains(p.Id)).ToList();
-
-        CartItem cartItem = new(product, customizations);
-
-        cart.AddItem(cartItem);
-
-        string cartKey = "o7rGongChaCart";
-        string cartJson = JsonConvert.SerializeObject(cart);
-        HttpContext.Session.SetString(cartKey, cartJson);
-
-        unit.CloseConnection();
-        return Ok();
-    }
-
-    public IActionResult DisplayCart() {
-        Cart cart = GetCurrentCart();
-
-        return View(cart);
-    }
-
-    [HttpPost]
-    public IActionResult ClearCart() {
-        Cart cart = GetCurrentCart();
-        cart.Clear();
-
-        string cartJson = JsonConvert.SerializeObject(cart);
-        HttpContext.Session.SetString("o7rGongChaCart", cartJson);
-
-        return Ok();
     }
 }
