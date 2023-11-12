@@ -22,10 +22,6 @@ public class CartController : Controller
 
     public IActionResult Index()
     {
-        while (HttpContext.Session.GetString("Cart") == null) {
-            HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(new Cart()));
-        }
-        
         Cart cart = GetCartFromSession();
         return View(cart);
     }
@@ -34,6 +30,7 @@ public class CartController : Controller
         Cart cart = GetCartFromSession();
         cart.Clear();
         SetCartInSession(cart);
+        HttpContext.Session.Clear();
         return Ok();
     }
 
@@ -129,7 +126,18 @@ public class CartController : Controller
     }
 
     public Cart GetCartFromSession() {
+         if (HttpContext.Session.GetString("Cart") == null) {
+            var newCart = new Cart();
+            var serializedCart = JsonConvert.SerializeObject(newCart);
+
+            Console.WriteLine("Serialized cart: " + serializedCart);
+
+            HttpContext.Session.SetString("Cart", serializedCart);
+        } else {
+            Console.WriteLine("Cart already exists.");
+        }
         var cartJson = HttpContext.Session.GetString("Cart");
+        Console.WriteLine("Cart JSON: " + cartJson);
         return cartJson == null ? new() : JsonConvert.DeserializeObject<Cart>(cartJson)!;
     }
 
