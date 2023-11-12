@@ -7,6 +7,9 @@
     <img src="@Model.SelectedProduct!.ImgUrl" />
     <p>@Model.SelectedProduct!.Name</p> <!-- Product name (May remove p tag) -->
 </div>
+@{
+    Model.SeriesInformation!.Reverse();
+}
 @foreach(SeriesInfo seriesInfo in Model.SeriesInformation!) {
     <div class="customization-title" id="@seriesInfo.Name">
         @seriesInfo.Name
