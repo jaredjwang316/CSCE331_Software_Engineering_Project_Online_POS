@@ -68,5 +68,21 @@ public class MenuBoardController : Controller
         }        
         return Content(html);   //return the string html
     }
-    
+
+    public IActionResult ProductDetail(int id)
+    {
+        // Assuming you have a data repository or database context, fetch the product details by ID
+        UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
+        var product = uok.Get<Product>(id); // Fetch the product by its unique ID
+
+        if (product == null)
+        {
+            // If the product with the specified ID doesn't exist, you can return a not found response or redirect to an error page
+            return NotFound();
+        }
+
+        // Pass the product details to the view for rendering
+        return View("ProductDetail", product);
+    }
+
 }

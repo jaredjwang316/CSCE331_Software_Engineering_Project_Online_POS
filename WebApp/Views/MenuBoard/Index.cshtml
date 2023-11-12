@@ -41,7 +41,9 @@
             {
                 <tr>
                     <td>@product.Id</td>
-                    <td>@product.Name</td>
+                    <td>
+                        <a href="@Url.Action("ProductDetail", "MenuBoard", new { id = product.Id })">@product.Name</a>
+                    </td>
                     <td>@product.Price</td>
                     <td>@product.Series</td>
                 </tr>
