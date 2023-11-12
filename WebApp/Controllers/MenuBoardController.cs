@@ -16,18 +16,24 @@ public class MenuBoardController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(string search)
     {
         // Instantiate the UnitOfWork with the desired configuration
         UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
-        {
-            // Retrieve products and product ingredients from the database
-            var products = uok.GetAll<Product>().ToList();
-            var prodIngredients = uok.GetAll<ProductIngredients>().ToList();
 
-            // Pass both products and product ingredients to the view
-            return View((products, prodIngredients));
-        }
+        // Retrieve products and product ingredients from the database
+        var products = uok.GetAll<Product>().ToList();
+        var prodIngredients = uok.GetAll<ProductIngredients>().ToList();
+
+        // Filter products based on the search term
+        if (!string.IsNullOrEmpty(search))  //if search string is not null nor empty
+        {
+            search = search.ToLower();  //we need case-insensitive search
+            products = products.Where(p => p.Name.ToLower().Contains(search)).ToList(); //filter out product list based on searched term
+        }   
+
+        // Pass both products and product ingredients to the view
+        return View((products, prodIngredients));
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
