@@ -34,14 +34,13 @@ document.addEventListener("DOMContentLoaded", function() {
             data: { product_id: productID, customization_ids: customizationIDs, quantity: 1 },
             success: function (data) {
                 console.log("Added to cart");
+                location.reload();
             },
             error: function () {
-                console.log("Error adding to cart");
+                console.log("Error adding to cart. Retrying...");
+                $(".add-to-cart-btn").trigger("click");
             }
         });
-
-        // Go back to the index page
-        location.reload();
     });
 
     // Remove from cart button
