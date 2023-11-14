@@ -9,6 +9,7 @@
 </div>
 @{
     Model.SeriesInformation!.Reverse();
+    List<string> seriesNames = new List<string>();
 }
 @foreach(SeriesInfo seriesInfo in Model.SeriesInformation!) {
     <div class="customization-title" id="@seriesInfo.Name">
@@ -16,10 +17,17 @@
     </div>
     <div class="customization-btn-container">
         @foreach(Product product in Model.Products!) {
-            if (product.Series == seriesInfo.Name) {
-                <button class="customization-btn product" id="@product.Id" series="@product.Series" multiselect="@seriesInfo.MultiSelectable">
-                    <p>@product.Name</p>
-                </button>
+            if (product.Series == seriesInfo.Name) {     
+                if (seriesNames.Contains(product.Series) || seriesInfo.Name != "Size") {
+                    <button class="customization-btn product" id="@product.Id" series="@product.Series" multiselect="@seriesInfo.MultiSelectable">
+                        <p>@product.Name</p>
+                    </button>
+                } else {
+                    <button class="customization-btn product active" id="@product.Id" series="@product.Series" multiselect="@seriesInfo.MultiSelectable">
+                        <p>@product.Name</p>
+                    </button>
+                    seriesNames.Add(product.Series);
+                }
             }
         }
     </div>
