@@ -58,8 +58,14 @@ public class CartController : Controller
         }
         Item item = new(item_product, item_options, quantity);
         Cart cart = GetCartFromSession();
+        int initialSize = cart.Items.Count;
         cart.AddItem(item);
         SetCartInSession(cart);
+        Cart cart1 = GetCartFromSession();
+
+        if (cart1.Items.Count == initialSize) {
+            return BadRequest();
+        }
 
         return Ok();
     }
