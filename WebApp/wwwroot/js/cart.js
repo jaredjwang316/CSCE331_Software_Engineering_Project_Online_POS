@@ -74,4 +74,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         location.reload();
     });
+
+    $(document).on('click', '.edit-options-btn', function() {
+        alert("Not implemented yet!");
+    });
+
+    $(document).on('click', '.checkout-btn', function() {
+        alert("Not implemented yet!");
+    });
 });
