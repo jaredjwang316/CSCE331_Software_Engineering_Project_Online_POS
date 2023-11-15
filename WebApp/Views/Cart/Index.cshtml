@@ -202,7 +202,7 @@
             @foreach (var item in Model.Items.Select((value, index) => new { value, index }))  {
                 <div class="product">
                     @* Id = index of item *@
-                    <button class="remove-item-btn" id="@item.index">X</button>
+                    <button class="remove-item-btn" id="@item.index" title="Remove the item from the cart">X</button>
                     @if(!User.IsInRole("Admin") && !User.IsInRole("Cashier")) {
                         <div class="image-container">
                             <img src="@item.value.Product.ImgUrl" />
@@ -248,11 +248,11 @@
                     <!--item-info-->
                     <div class="edit-container">
                         <div class="edit-count">
-                            <button class="edit-count-btn" id="@item.index">-</button>
+                            <button class="edit-count-btn" id="@item.index" title="Decrease quantity">-</button>
                             <p class="count">@item.value.Quantity</p>
-                            <button class="edit-count-btn" id="@item.index">+</button>
+                            <button class="edit-count-btn" id="@item.index" title="Increase quantity">+</button>
                         </div>
-                        <button class="edit-options-btn" id="@item.index">Edit</button>
+                        <button class="edit-options-btn" id="@item.index" title="Edit item customizations">Edit</button>
                         <p class="cost">@item.value.Price().ToString("C")</p>
                     </div>
                 </div>
@@ -270,4 +270,3 @@
         </div>
     </div>
 </div>
-
