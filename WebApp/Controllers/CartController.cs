@@ -52,18 +52,25 @@ public class CartController : Controller
                 }
             }
         }
-
+    
         if (item_product == null) {
             return BadRequest();
         }
         Item item = new(item_product, item_options, quantity);
         Cart cart = GetCartFromSession();
-        int initialSize = cart.Items.Count;
+        int initialSize = 0;
+        foreach (Item i in cart.Items) {
+            initialSize += i.Quantity;
+        }
         cart.AddItem(item);
         SetCartInSession(cart);
         Cart cart1 = GetCartFromSession();
+        int finalSize = 0;
+        foreach (Item i in cart1.Items) {
+            finalSize += i.Quantity;
+        }
 
-        if (cart1.Items.Count == initialSize) {
+        if (finalSize == initialSize) {
             return BadRequest();
         }
 

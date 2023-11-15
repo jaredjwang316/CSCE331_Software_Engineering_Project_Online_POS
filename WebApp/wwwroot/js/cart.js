@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
             data: { product_id: productID, customization_ids: customizationIDs, quantity: 1 },
             success: function (data) {
                 console.log("Added to cart");
-                location.reload();
+                $(".cart-msg").fadeIn(500);
             },
             error: function () {
                 console.log("Error adding to cart. Retrying...");
