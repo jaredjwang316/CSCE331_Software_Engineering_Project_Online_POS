@@ -57,6 +57,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
         
         loadData(endpoint, argument, element);
     });
+
+    // Click event for cart-msg buttons
+    $(document).on('click', '.cart-msg-btn', function() {
+        if ($(this).text() == "View Cart") {
+            window.location.href = "/Cart";
+        } else {
+            $(".cart-msg").fadeOut(500);
+            location.reload();
+        }
+    });
 });
 
 

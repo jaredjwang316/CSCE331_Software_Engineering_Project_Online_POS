@@ -17,25 +17,25 @@ public class Cart {
     public Cart() { }
 
     public void AddItem(Item item) {
+        // Check if item is already in cart with same options.
         foreach (Item i in Items) {
             if (i.Product.Id == item.Product.Id) {
-                bool match = true;
-                if (item.Options.Count == 0 && i.Options.Count == 0) {
-                    i.Quantity += item.Quantity;
-                    return;
-                }
-                foreach (Product option in i.Options) {
-                    if (!item.Options.Any(o => o.Name == option.Name)) {
-                        match = false;
-                        break;
+                if (i.Options.Count == item.Options.Count) {
+                    bool same = true;
+                    for (int j = 0; j < i.Options.Count; j++) {
+                        if (i.Options[j].Id != item.Options[j].Id) {
+                            same = false;
+                            break;
+                        }
                     }
-                }
-                if (match) {
-                    i.Quantity += item.Quantity;
-                    return;
+                    if (same) {
+                        i.Quantity += item.Quantity;
+                        return;
+                    }
                 }
             }
         }
+
         Items.Add(item);
     }
     public void RemoveItem(Item item) { Items.Remove(item); }
