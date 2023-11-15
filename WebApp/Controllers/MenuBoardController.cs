@@ -22,7 +22,7 @@ public class MenuBoardController : Controller
         UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
 
         // Retrieve products and product ingredients from the database
-        var products = uok.GetAll<Product>().ToList();
+        var products = uok.GetAll<Product>().OrderBy(p => p.Id).ToList(); // Sort products by ID
         var prodIngredients = uok.GetAll<ProductIngredients>().ToList();
 
         // Filter products based on the search term
