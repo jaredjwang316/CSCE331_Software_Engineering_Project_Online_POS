@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if ($(this).hasClass("active")) return;
         $(".category-btn").removeClass("active");
         $(this).addClass("active");
+
+        path = [];
     
         loadData($(this).attr("endpoint"));
     });

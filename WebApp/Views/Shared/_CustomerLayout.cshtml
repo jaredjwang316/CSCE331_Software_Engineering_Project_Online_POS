@@ -57,19 +57,8 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @* @if (User.Identity!.IsAuthenticated) {
-                <div class="text-center">
-                    <h1 class="display-4">Welcome, @User.Identity.Name!.Split(" ")[0]!</h1>
-                </div>
-            }
-            else {
-                <div class="text-center">
-                    <h1 class="display-4">Welcome!</h1>
-                </div>
-            } *@
-
             <h2>Menu</h2>
-
+            
             <!-- Category bar -->
             <div class="text-center" style="display: flex; justify-content: space-around;">
                 <button endpoint="LoadCategories" class="category-btn active">Categories</button>
