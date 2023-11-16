@@ -22,7 +22,7 @@ public class MenuBoardController : Controller
         UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
 
         // Retrieve products and product ingredients from the database
-        var products = uok.GetAll<Product>().OrderBy(p => p.Id).ToList(); // Sort products by ID
+        var products = uok.GetAll<Product>().ToList().OrderBy(p => p.Series).ThenBy(p => p.Name).ToList();
         var prodIngredients = uok.GetAll<ProductIngredients>().ToList();
 
         // Filter products based on the search term
@@ -35,6 +35,16 @@ public class MenuBoardController : Controller
         // Get unique product categories
         var productCategories = products.Select(p => p.Series).Distinct().ToList();
 
+        Dictionary<string, List<Product>> categoryProducts = new Dictionary<string, List<Product>>();
+    
+        foreach (var category in productCategories)
+        {
+            var categoryProductsList = products.Where(p => p.Series == category).ToList();
+            categoryProducts.Add(category, categoryProductsList);
+        }
+    
+        ViewBag.CategoryProducts = categoryProducts;
+
         // Pass both products and product categories to the view
         return View((products, prodIngredients, productCategories));
     }
@@ -45,39 +55,48 @@ public class MenuBoardController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
-public IActionResult getProducts()
-{
-    string html = "<div class=\"customization-menu\">";    
-    UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
+    public IActionResult getProducts()
     {
-        // Retrieve products and product ingredients from the database
-        var products = uok.GetAll<Product>().ToList();
-        var prodIngredients = uok.GetAll<ProductIngredients>().ToList();
-        List<string> theProducts = uok.GetUniqueSeries(true, true, true).ToList(); 
-
-        foreach (var p in theProducts)
+        string html = "<div class=\"customization-menu\">";    
+        UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
         {
-            html += "<div class=\"product-category\">";
-            html += "<button class=\"customization-btn category\" data-category=\"" + p + "\">" + p + "</button>";
+            // Retrieve products and product ingredients from the database
+            var products = uok.GetAll<Product>().ToList();
+            var prodIngredients = uok.GetAll<ProductIngredients>().ToList();
+            List<string> theProducts = uok.GetUniqueSeries(true, true, true).ToList(); 
 
-            html += "<div class=\"product-list\">";
-            foreach (var product in products)
+            foreach (var p in theProducts)
             {
-                if (product.Series == p)    //check if current product belongs to that series
+                html += "<div class=\"product-category\">";
+                html += "<button class=\"customization-btn category\" data-category=\"" + p + "\">" + p + "</button>";
+
+                html += "<div class=\"product-list\">";
+                foreach (var product in products)
                 {
-                    html += "<button class=\"customization-btn product\" id=\"" + product.Id + "\" data-to=\"customization-container\">" +
+                    if (product.Series == p)    //check if current product belongs to that series
+                    {
+                        html += "<button class=\"customization-btn product\" id=\"" + product.Id + "\" data-to=\"customization-container\">" +
                         "<p>" + product.Name + "</p>" +
                         "<p>ID: " + product.Id + "</p>" +
-                    "</button>";
+                        "</button>";
+                    }
                 }
+                html += "</div>"; // Close product-list div
+                html += "</div>"; // Close product-category div
             }
-            html += "</div>"; // Close product-list div
-            html += "</div>"; // Close product-category div
-        }
-        html += "</div>"; // Close customization-menu div
-    }        
-    return Content(html);   //return the string html
-}
+            html += "</div>"; // Close customization-menu div
+        }        
+        return Content(html);   //return the string html
+    }
+
+    public IActionResult GetProductsByCategory(string category)
+    {
+        UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
+        var products = uok.GetAll<Product>().Where(p => p.Series == category).ToList(); 
+        var productNames = products.Select(p => p.Name).ToList();
+
+        return PartialView("_ProductNamesPartial", productNames);
+    }
 
     public IActionResult ProductDetail(int id)
     {

@@ -93,22 +93,5 @@ else
     </div>
 }
 
-<!-- JavaScript to handle category filtering -->
-<script>
-$(document).ready(function () {
-    // Initially, show all products
-    $('.product-row').show();
-    $('.product-category .product-list').hide(); // Hide product lists initially
 
-    $('.category-button').click(function () {
-        var selectedCategory = $(this).data('category');
-        $('.product-category .product-list').hide(); // Hide all product lists
-        $('.product-category button[data-category="' + selectedCategory + '"]').next().show(); // Show product list of the selected category
-    });
 
-    $('.product-button').click(function () {
-        var productId = $(this).attr('id');
-        // Implement code to display product details for the selected product (e.g., open a modal).
-    });
-});
-</script>
