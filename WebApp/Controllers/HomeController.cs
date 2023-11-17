@@ -4,6 +4,9 @@ using WebApp.Models.UnitOfWork;
 using WebApp.Models;
 using WebApp.Data;
 
+using Google.Cloud.Translation.V2;
+using System.Text.Json;
+
 namespace WebApp.Controllers;
 
 public class HomeController : Controller
@@ -15,7 +18,7 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
         var preferredLanguage = GetPreferredLanguage();
         ViewData["PreferredLanguage"] = preferredLanguage;

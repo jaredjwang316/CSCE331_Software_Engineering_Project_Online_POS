@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Click event for cart-msg buttons
     $(document).on('click', '.cart-msg-btn', function() {
-        if ($(this).text() == "View Cart") {
+        if ($(this).attr("action") == "View Cart") {
             window.location.href = "/Cart";
         } else {
             $(".cart-msg").fadeOut(500);
