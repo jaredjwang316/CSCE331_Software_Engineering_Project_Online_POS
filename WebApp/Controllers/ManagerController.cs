@@ -28,6 +28,18 @@ public class ManagerController : Controller
         }
     }
 
+    public IActionResult ShowManager() {
+        return Content("Not Implemented");
+    }
+
+    public IActionResult ShowProducts() {
+        return Content("Not Implemented");
+    }
+
+     public IActionResult ShowInventory() {
+        return Content("Not Implemented");
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

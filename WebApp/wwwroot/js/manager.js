@@ -4,14 +4,13 @@
     Date: November 5th, 2023
 */
 
-var customer_path = [];
+var manager_path = [];
 
 
 document.addEventListener("DOMContentLoaded", function () {
     // Load default data
     loadData($(".category-btn.active").attr("id"), null, $(".category-btn.active").attr("data-to"));
-    // loadData("ShowCustomization", 2, "customization-container");
-    customer_path = [$(".category-btn.active").attr("id") + "/null/" + $(".category-btn.active").attr("data-to")];
+    manager_path = [$(".category-btn.active").attr("id") + "/null/" + $(".category-btn.active").attr("data-to")];
 
     // Load data when category button is clicked
     $(".category-btn").click(function () {
@@ -19,7 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
         $(".category-btn").removeClass("active");
         $(this).addClass("active");
 
-        customer_path = [$(this).attr("id") + "/null/" + $(this).attr("data-to")];
+        manager_path = [$(this).attr("id") + "/null/" + $(this).attr("data-to")];
+        console.log(manager_path);
         loadData($(this).attr("id"), null, $(this).attr("data-to"));
     });
 });
@@ -46,10 +46,4 @@ function loadData(action, args, element) {
             document.dispatchEvent(new Event("HideLoadingScreen"));
         }
     });
-
-    if (customer_path.length > 1) {
-        $(".back-btn").show();
-    } else {
-        $(".back-btn").hide();
-    }
 }
