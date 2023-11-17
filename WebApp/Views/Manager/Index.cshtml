@@ -1,10 +1,44 @@
 @{
     ViewData["Title"] = "Manager Page";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>@ViewData["Title"] - WebApp</title>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Manager.css" asp-append-version="true" />
+@* <script src="~/js/customer.js"></script>
+<script src="~/js/customer-loading-screen.js"></script>
+<script src="~/js/cart.js"></script> *@
+</head>
+<body>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @if (User.Identity!.IsAuthenticated) {
+                <div class="text-center">
+                    <h1 class="display-4">Welcome, @User.Identity.Name!.Split(" ")[0]!</h1>
+                </div>
+            }
+            else {
+                <div class="text-center">
+                    <h1 class="display-4">Welcome!</h1>
+                </div>
+            }
 
-<div class="text-center">
-    <h1 class="display-4">Manager Page</h1>
-</div>
+            <!-- Category bar -->
+            <div class="text-center" style="display: flex; justify-content: space-around;">
+                <button id="ShowManager" class="category-btn active" data-to="item-container">Manager</button>
+                <button id="ShowProducts" class="category-btn" data-to="item-container">Products</button>
+                <button id="ShowInventory" class="category-btn" data-to="item-container">Inventory</button>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
 
 @using WebApp.Data
 @using WebApp.Models
