@@ -6,6 +6,9 @@
     <h1 class="display-4">Manager Page</h1>
 </div>
 
+@using WebApp.Data
+@using WebApp.Models
+@using WebApp
 @model (List<Product>, List<Inventory>, List<Ingredient>)
 @if (Model.Item1 != null && Model.Item1.Count > 0) {
     <table class="table">
@@ -81,9 +84,32 @@
             });
         });
 
-        @* Print to console.log *@
-        data.forEach(function(product) {
-            console.log(product.name);
+        
+        /* EXAMPLE
+        $.ajax({
+            url: "/Customer/AddToCart",
+            type: "POST",
+            data: { productID: productID, customizationIDs: customizationIDs },
+            success: function (data) {
+                console.log(data);
+            },
+            error: function () {
+                console.log("Error adding to cart");
+            }
+        });
+        */
+        
+        $.ajax({
+            url: "/Manager/SaveProducts",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (response) {
+                console.log(response);
+            },
+            error: function () {
+                console.log("Error saving products");
+            }
         });
 
         // Reset the edited cells
@@ -101,22 +127,32 @@
         editedCells.forEach(function(cell) {
             data.push({
                 id: cell.parentElement.querySelector('td:first-child').innerText,
-                ing_id: cell.parentElement.querySelector('td:nth-child(2)').innerText,
-                name: cell.parentElement.querySelector('td:nth-child(3)').innerText,
+                ingredientid: cell.parentElement.querySelector('td:nth-child(2)').innerText,
                 quantity: cell.parentElement.querySelector('td:nth-child(4)').innerText,
+                filllevel: 100
             });
         });
 
-        @* Print to console.log *@
-        data.forEach(function(table) {
-            console.log(table.name + ": " + table.quantity);
-        });
 
         // Reset the edited cells
         editedCells.forEach(function(cell) {
             cell.classList.remove('edited');
         });
+
+        $.ajax({
+            url: "/Manager/SaveInventory",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (response) {
+                console.log(response);
+            },
+            error: function () {
+                console.log("Error saving inventory");
+            }
+        });
     });
+
 
 
     var editableCells = document.querySelectorAll('[contenteditable=true]');
