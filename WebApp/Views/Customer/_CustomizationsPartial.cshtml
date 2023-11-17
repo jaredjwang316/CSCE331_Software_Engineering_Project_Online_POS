@@ -3,9 +3,14 @@
 @using WebApp.Data
 @model CustomizationViewModel
 
+@using WebApp.APIs.GoogleTranslate
+@{
+    var translator = new GoogleTranslate();
+}
+
 <div class="customization-img-container">
     <img src="@Model.SelectedProduct!.ImgUrl" />
-    <p>@Model.SelectedProduct!.Name</p> <!-- Product name (May remove p tag) -->
+    <p>@await translator.TranslateText(Model.SelectedProduct!.Name)</p> <!-- Product name (May remove p tag) -->
 </div>
 @{
     Model.SeriesInformation!.Reverse();
@@ -13,18 +18,18 @@
 }
 @foreach(SeriesInfo seriesInfo in Model.SeriesInformation!) {
     <div class="customization-title" id="@seriesInfo.Name">
-        @seriesInfo.Name
+        @await translator.TranslateText(seriesInfo.Name)
     </div>
     <div class="customization-btn-container">
         @foreach(Product product in Model.Products!) {
             if (product.Series == seriesInfo.Name) {     
                 if (seriesNames.Contains(product.Series) || seriesInfo.Name != "Size") {
                     <button class="customization-btn product" id="@product.Id" series="@product.Series" multiselect="@seriesInfo.MultiSelectable">
-                        <p>@product.Name</p>
+                        <p>@await translator.TranslateText(product.Name)</p>
                     </button>
                 } else {
                     <button class="customization-btn product active" id="@product.Id" series="@product.Series" multiselect="@seriesInfo.MultiSelectable">
-                        <p>@product.Name</p>
+                        <p>@await translator.TranslateText(product.Name)</p>
                     </button>
                     seriesNames.Add(product.Series);
                 }
@@ -32,4 +37,4 @@
         }
     </div>
 }
-<button class="add-to-cart-btn" id="@Model.SelectedProduct!.Id">Add to Cart</button>
+<button class="add-to-cart-btn" id="@Model.SelectedProduct!.Id">@await translator.TranslateText("Add to Cart")</button>

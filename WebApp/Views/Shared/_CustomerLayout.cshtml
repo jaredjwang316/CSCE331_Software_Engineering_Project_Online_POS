@@ -4,8 +4,13 @@
     Date: November 5th, 2023
 *@
 
+@using WebApp.APIs.GoogleTranslate
+@{
+    var translator = new GoogleTranslate();
+}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang=@translator.GetPreferredLanguage()>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,16 +43,16 @@
                     <ul></ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">@await translator.TranslateText("Cart")</a>
                         </li>
                         <li class="nav-item">
                             @if (User.Identity!.IsAuthenticated)
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">@await translator.TranslateText("Log out")</a>
                             }
                             else
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">@await translator.TranslateText("Log in")</a>
                             }
                         </li>
                     </ul>
@@ -57,13 +62,13 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            <h2>Menu</h2>
+            <h2>@await translator.TranslateText("Menu")</h2>
             
             <!-- Category bar -->
             <div class="text-center" style="display: flex; justify-content: space-around;">
-                <button endpoint="LoadCategories" class="category-btn active">Categories</button>
-                <button endpoint="LoadBestSellers" class="category-btn">Best Sellers</button>
-                <button endpoint="LoadFavorites" class="category-btn">Favorites</button>
+                <button endpoint="LoadCategories" class="category-btn active">@await translator.TranslateText("Categories")</button>
+                <button endpoint="LoadBestSellers" class="category-btn">@await translator.TranslateText("Best Sellers")</button>
+                <button endpoint="LoadFavorites" class="category-btn">@await translator.TranslateText("Favorites")</button>
             </div>
             @RenderBody()
         </main>

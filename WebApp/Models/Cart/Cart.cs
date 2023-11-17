@@ -12,6 +12,7 @@ using WebApp.Models.UnitOfWork;
 namespace WebApp.Models.Cart;
 public class Cart {
     public List<Item> Items { get; set; } = new List<Item>();
+    public double Total => TotalCost();
 
     // Constructor
     public Cart() { }
