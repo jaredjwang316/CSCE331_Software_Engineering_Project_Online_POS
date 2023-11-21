@@ -59,6 +59,20 @@ public class OrderDao : IDao<Order> {
     }
 
     public void Add(Order t) {
+        foreach (int id in t.ItemIds) {
+             string q = (
+                 $"WITH ProductIngredientsCTE AS ( " +
+                 $"SELECT unnest(ingredient_ids) AS ingredient_id " +
+                 $"FROM product_ingredients " +
+                 $"WHERE product_id = {id} ) " +
+        
+                 $"UPDATE inventory " +
+                 $"SET quantity = quantity - 1 " +
+                 $"WHERE ingredient_id IN (SELECT ingredient_id FROM ProductIngredientsCTE); "
+             );
+             commandHandler.ExecuteNonQuery(q);
+        }
+        
         string sattement = (
             $"INSERT INTO orders_final (employee_id, customer_name, order_date, total_order, item_ids) " +
             $"VALUES ({t.EmployeeId}, '{t.CustomerName}', '{t.OrderDate}', {t.TotalPrice}, ARRAY[{string.Join(",", t.ItemIds)}])"
