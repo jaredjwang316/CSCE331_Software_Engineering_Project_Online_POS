@@ -37,7 +37,7 @@ public class InventoryDao : IDao<Inventory> {
     }
 
     public IEnumerable<Inventory> GetAll() {
-        var query = "SELECT * FROM inventory";
+        var query = "SELECT * FROM inventory ORDER BY id";
         var reader = commandHandler.ExecuteReader(query);
 
         List<Inventory> inventory = new();
