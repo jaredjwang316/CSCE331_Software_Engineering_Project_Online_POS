@@ -1,17 +1,51 @@
 @{
     ViewData["Title"] = "Manager Page";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>@ViewData["Title"] - WebApp</title>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Manager.css" asp-append-version="true" />
+<script src="~/js/manager.js"></script>
+<script src="~/js/customer-loading-screen.js"></script>
 
-<div class="text-center">
-    <h1 class="display-4">Manager Page</h1>
-</div>
+</head>
+<body>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @if (User.Identity!.IsAuthenticated) {
+                <div class="text-center">
+                    <h1 class="display-4">Welcome, @User.Identity.Name!.Split(" ")[0]!</h1>
+                </div>
+            }
+            else {
+                <div class="text-center">
+                    <h1 class="display-4">Welcome!</h1>
+                </div>
+            }
+
+            <!-- Category bar -->
+            <div class="text-center" style="display: flex; justify-content: space-around;">
+                <button id="ShowManager" class="category-btn active" data-to="item-container">Manager</button>
+                <button id="ShowProducts" class="category-btn" data-to="item-container">Products</button>
+                <button id="ShowInventory" class="category-btn" data-to="item-container">Inventory</button>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
 
 @using WebApp.Data
 @using WebApp.Models.UnitOfWork
 @using WebApp
 @model (List<Product>, List<Inventory>, List<Ingredient>)
 @if (Model.Item1 != null && Model.Item1.Count > 0) {
-    <table class="table">
+    <table id="prod-table" class="table" style="display:none">
         <thead>
             <tr>
                 <th>Product ID</th>
@@ -34,10 +68,10 @@
 } else {
     <p>No products found.</p>
 }
-<button id="saveButtonProd">Save</button>
+<button id="saveButtonProd" class="save-button" style="display:none">Save</button>
 
 @if (Model.Item2 != null && Model.Item2.Count > 0) {
-    <table class="table">
+    <table id="inv-table" class="table" style="display:none">
         <thead>
             <tr>
                 <th>ID</th>
@@ -65,8 +99,11 @@
 } else {
     <p>No products found.</p>
 }
-<button id="saveButtonInv">Save</button>
+<button id="saveButtonInv" class="save-button" style="display:none">Save</button>
+<h2 id="saveSuccess" style="display:none">Save Successful</h2>
+<h2 id="saveFail" style="display:none">Save Fail</h2>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
     // Product Save Button Function
     document.getElementById('saveButtonProd').addEventListener('click', function() {
@@ -105,9 +142,17 @@
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function (response) {
+                document.getElementById("saveSuccess").style.display = 'inline';
+                setTimeout(function() {
+                    $('#saveSuccess').fadeOut('fast');
+                }, 5000);
                 console.log(response);
             },
             error: function () {
+                document.getElementById("saveFail").style.display = 'inline';
+                setTimeout(function() {
+                    $('#saveFail').fadeOut('fast');
+                }, 5000);
                 console.log("Error saving products");
             }
         });
@@ -127,22 +172,40 @@
         editedCells.forEach(function(cell) {
             data.push({
                 id: cell.parentElement.querySelector('td:first-child').innerText,
-                ing_id: cell.parentElement.querySelector('td:nth-child(2)').innerText,
-                name: cell.parentElement.querySelector('td:nth-child(3)').innerText,
+                ingredientid: cell.parentElement.querySelector('td:nth-child(2)').innerText,
                 quantity: cell.parentElement.querySelector('td:nth-child(4)').innerText,
+                filllevel: 100
             });
         });
 
-        @* Print to console.log *@
-        data.forEach(function(table) {
-            console.log(table.name + ": " + table.quantity);
-        });
 
         // Reset the edited cells
         editedCells.forEach(function(cell) {
             cell.classList.remove('edited');
         });
+
+        $.ajax({
+            url: "/Manager/SaveInventory",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (response) {
+                document.getElementById("saveSuccess").style.display = 'inline';
+                setTimeout(function() {
+                    $('#saveSuccess').fadeOut('fast');
+                }, 5000);
+                console.log(response);
+            },
+            error: function () {
+                document.getElementById("saveFail").style.display = 'inline';
+                setTimeout(function() {
+                    $('#saveFail').fadeOut('fast');
+                }, 5000);
+                console.log("Error saving inventory");
+            }
+        });
     });
+
 
 
     var editableCells = document.querySelectorAll('[contenteditable=true]');
