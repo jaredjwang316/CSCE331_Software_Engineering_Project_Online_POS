@@ -100,7 +100,10 @@
     <p>No products found.</p>
 }
 <button id="saveButtonInv" class="save-button" style="display:none">Save</button>
+<h2 id="saveSuccess" style="display:none">Save Successful</h2>
+<h2 id="saveFail" style="display:none">Save Fail</h2>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
     // Product Save Button Function
     document.getElementById('saveButtonProd').addEventListener('click', function() {
@@ -139,9 +142,17 @@
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function (response) {
+                document.getElementById("saveSuccess").style.display = 'inline';
+                setTimeout(function() {
+                    $('#saveSuccess').fadeOut('fast');
+                }, 5000);
                 console.log(response);
             },
             error: function () {
+                document.getElementById("saveFail").style.display = 'inline';
+                setTimeout(function() {
+                    $('#saveFail').fadeOut('fast');
+                }, 5000);
                 console.log("Error saving products");
             }
         });
@@ -179,9 +190,17 @@
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function (response) {
+                document.getElementById("saveSuccess").style.display = 'inline';
+                setTimeout(function() {
+                    $('#saveSuccess').fadeOut('fast');
+                }, 5000);
                 console.log(response);
             },
             error: function () {
+                document.getElementById("saveFail").style.display = 'inline';
+                setTimeout(function() {
+                    $('#saveFail').fadeOut('fast');
+                }, 5000);
                 console.log("Error saving inventory");
             }
         });
