@@ -7,8 +7,23 @@
 <div class="text-center">
     <h1 class="display-4">Menu Board Page</h1>
 </div>
+
+<script src="~/js/menu.js"></script>
 @using WebApp.Models.UnitOfWork
-@model (List<Product>, List<ProductIngredients>)
+@model (List<Product> products, List<ProductIngredients> prodIngredients, List<string> productCategories)
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="get" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search" placeholder="Search products">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 @if (Model.Item1 != null && Model.Item1.Count > 0)
 {
@@ -25,9 +40,11 @@
         <tbody>
             @foreach (var product in Model.Item1)
             {
-                <tr>
+                <tr class="product-row" data-category="@product.Series">
                     <td>@product.Id</td>
-                    <td>@product.Name</td>
+                    <td>
+                        <a href="@Url.Action("ProductDetail", "MenuBoard", new { id = product.Id })">@product.Name</a>
+                    </td>
                     <td>@product.Price</td>
                     <td>@product.Series</td>
                 </tr>
@@ -63,5 +80,16 @@ else
 }
 else
 {
-    <p>No ingredients found.</p>
+    <p>No products ingredients found.</p>
+}
+
+@if (Model.productCategories != null && Model.productCategories.Count > 0)
+{
+    <h2>Product Categories</h2>
+    <div class="category-buttons">
+        @foreach (var category in Model.productCategories)
+        {
+            <button class="btn btn-primary category-button" data-category="@category">@category</button>
+        }
+    </div>
 }
