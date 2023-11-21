@@ -19,6 +19,8 @@ public class ManagerController : Controller
 
     public IActionResult Index()
     {
+        HttpContext.Session.SetString("Init", "1");
+      //  return View();
         UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
         {
             var products = uok.GetAll<Product>().ToList();

@@ -14,13 +14,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Load data when category button is clicked
     $(".category-btn").click(function () {
-        if ($(this).hasClass("active")) return;
-        $(".category-btn").removeClass("active");
-        $(this).addClass("active");
+         if ($(this).hasClass("active")) return;
+         $(".category-btn").removeClass("active");
+         $(this).addClass("active");
 
-        manager_path = [$(this).attr("id") + "/null/" + $(this).attr("data-to")];
-        console.log(manager_path);
-        loadData($(this).attr("id"), null, $(this).attr("data-to"));
+        // manager_path = [$(this).attr("id") + "/null/" + $(this).attr("data-to")];
+        // console.log(manager_path);
+        // loadData($(this).attr("id"), null, $(this).attr("data-to"));
+        if ($(this).attr("id") == "ShowManager") {
+            document.getElementById('prod-table').style.display = 'none';
+            document.getElementById('saveButtonProd').style.display = 'none';
+            document.getElementById('inv-table').style.display = 'none';
+            document.getElementById('saveButtonInv').style.display = 'none';
+            return;
+        }
+        else if ($(this).attr("id") == "ShowProducts") {
+            document.getElementById('prod-table').style.display = 'inline-block';
+            document.getElementById('saveButtonProd').style.display = 'inline-block';
+            document.getElementById('inv-table').style.display = 'none';
+            document.getElementById('saveButtonInv').style.display = 'none';
+        }
+        else if ($(this).attr("id") == "ShowInventory") {
+            document.getElementById('inv-table').style.display = 'inline-block';
+            document.getElementById('saveButtonInv').style.display = 'inline-block';
+            document.getElementById('prod-table').style.display = 'none';
+            document.getElementById('saveButtonProd').style.display = 'none';
+        }
     });
 });
 
