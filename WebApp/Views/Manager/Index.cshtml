@@ -45,7 +45,7 @@
 @using WebApp
 @model (List<Product>, List<Inventory>, List<Ingredient>)
 @if (Model.Item1 != null && Model.Item1.Count > 0) {
-    <table id="prod-table" class="table" style="display:none;">
+    <table id="prod-table" class="table" style="display:none">
         <thead>
             <tr>
                 <th>Product ID</th>
@@ -68,10 +68,10 @@
 } else {
     <p>No products found.</p>
 }
-<button id="saveButtonProd" class="save-button" style="display:none;">Save</button>
+<button id="saveButtonProd" class="save-button" style="display:none">Save</button>
 
 @if (Model.Item2 != null && Model.Item2.Count > 0) {
-    <table id="inv-table" class="table" style="display:none;">
+    <table id="inv-table" class="table" style="display:none">
         <thead>
             <tr>
                 <th>ID</th>
@@ -99,7 +99,7 @@
 } else {
     <p>No products found.</p>
 }
-<button id="saveButtonInv" class="save-button" style="display:none;">Save</button>
+<button id="saveButtonInv" class="save-button" style="display:none">Save</button>
 
 <script>
     // Product Save Button Function
