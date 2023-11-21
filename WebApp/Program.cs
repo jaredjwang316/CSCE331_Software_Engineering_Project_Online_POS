@@ -1,23 +1,40 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using WebApp;
+using WebApp.Data;
+using WebApp.Models.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession(
+    options => {
+        options.IdleTimeout = TimeSpan.FromMinutes(30);
+        options.Cookie.HttpOnly = true;
+        options.Cookie.IsEssential = true;
+        options.Cookie.SameSite = SameSiteMode.None;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    }
+);
+builder.Services.AddMemoryCache();
 
 builder.Services.AddSingleton(Config.returnUrl);
 builder.WebHost.UseUrls(Config.returnUrl);
 
+builder.Services.AddScoped<UnitOfWork>(_ => new(Config.AWS_DB_NAME));
+
 // Set up Google Authentication scheme.
 builder.Services.AddAuthentication(options => {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 })
-.AddCookie()
+.AddCookie(options => {
+    options.ReturnUrlParameter = "returnUrl";
+})
 .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
 {
     options.ClientId = configuration["GOOGLE_PROVIDER_AUTHENTICATION_CLIENT_ID"]

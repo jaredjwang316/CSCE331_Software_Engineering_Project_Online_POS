@@ -4,7 +4,7 @@
     Date: October 23, 2023
 */
 
-using WebApp.Models;
+using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Data;
 

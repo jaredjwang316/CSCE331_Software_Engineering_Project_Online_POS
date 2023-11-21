@@ -4,7 +4,7 @@
     Date: October 23, 2023
 */
 
-using WebApp.Models;
+using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Data;
 
@@ -59,15 +59,10 @@ public class ProductIngredientsDao : IDao<ProductIngredients> {
     }
 
     public void Update(ProductIngredients t, ProductIngredients newT) {
-        string statement = (
-            $"DELETE FROM product_ingredients WHERE product_id = {t.ProductId}"
-        );
-        
-        commandHandler.ExecuteNonQuery(statement);
-
         string sattement = (
-            $"INSERT INTO product_ingredients (product_id, ingredient_ids) " +
-            $"VALUES ({newT.ProductId}, ARRAY[{string.Join(",", newT.IngredientIds)}])"
+            $"UPDATE product_ingredients SET " +
+            $"ingredient_ids = ARRAY[{string.Join(",", newT.IngredientIds)}] " +
+            $"WHERE product_id = {t.ProductId}"
         );
         commandHandler.ExecuteNonQuery(sattement);
     }

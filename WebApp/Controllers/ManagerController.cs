@@ -1,13 +1,13 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Models.UnitOfWork;
 using WebApp.Models;
-
-using Npgsql;
 using WebApp.Data;
-using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp.Controllers;
 
+[Authorize(Roles = "Manager")]
 public class ManagerController : Controller
 {
     private readonly ILogger<ManagerController> _logger;
@@ -48,6 +48,7 @@ public class ManagerController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+
     // fetch('/Manager/SaveProducts', {
     //         method: 'POST',
     //         headers: {
@@ -75,6 +76,7 @@ public class ManagerController : Controller
 
         return Ok();
     }
+
 
     public IActionResult SaveInventory([FromBody]List<Inventory> data) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);

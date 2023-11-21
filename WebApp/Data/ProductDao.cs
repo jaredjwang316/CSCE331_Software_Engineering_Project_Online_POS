@@ -5,7 +5,7 @@
     Description: DAO class for the Product model.
 */
 
-using WebApp.Models;
+using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Data;
 
@@ -42,7 +42,7 @@ public class ProductDao : IDao<Product> {
     }
 
     public IEnumerable<Product> GetAll() {
-        var query = "SELECT * FROM products";
+        var query = "SELECT * FROM products ORDER BY series, name";
         var reader = commandHandler.ExecuteReader(query);
 
         List<Product> products = new();
@@ -84,10 +84,10 @@ public class ProductDao : IDao<Product> {
             $"UPDATE products SET " +
             $"name = '{newT.Name}', " +
             $"price = {newT.Price}, " +
-            $"series = '{newT.Series}' " +
-            $"img_url = '{newT.ImgUrl}' " +
-            $"hidden = {newT.Hidden} " +
-            $"is_option = {newT.IsOption} " +
+            $"series = '{newT.Series}', " +
+            $"img_url = '{newT.ImgUrl}', " +
+            $"hidden = {newT.Hidden}, " +
+            $"is_option = {newT.IsOption}, " +
             $"is_drink = {newT.IsDrink} " +
             $"WHERE id = {t.Id}"
         );
@@ -104,7 +104,7 @@ public class ProductDao : IDao<Product> {
     //====================================================================================================
 
     public IEnumerable<Product> GetProductsBySeries(string series) {
-        string query = $"SELECT * FROM products WHERE series = '{series}'";
+        string query = $"SELECT * FROM products WHERE series = '{series}' ORDER BY name";
         var reader = commandHandler.ExecuteReader(query);
 
         List<Product> products = new();
@@ -131,8 +131,8 @@ public class ProductDao : IDao<Product> {
         string query = $"SELECT DISTINCT series FROM products WHERE " +
             $"is_drink = {includeDrinks} AND " +
             $"hidden = {includeHidden} AND " +
-            $"is_option = {includeIsOption}";
-
+            $"is_option = {includeIsOption}" +
+            $"ORDER BY series";
 
         var reader = commandHandler.ExecuteReader(query);
 

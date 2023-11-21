@@ -5,7 +5,17 @@
 */
 
 body {
-    background-color: #E7E7E7;
+    background-image: url('https://gongchausa.com/wp-content/uploads/2021/11/Our-Philosophy-Section-3-background.png');
+    background-repeat: no-repeat;
+}
+
+.city-background-container img {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: -1;
+    
+    
 }
 
 img {
@@ -29,7 +39,7 @@ img {
     background-color: #ffffff;
     border-radius: 5px;
     border-width: 0;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     text-decoration: none;
     margin-bottom: 10px;
     font-family: Lusitana;
@@ -46,19 +56,19 @@ img {
     color: #000000;
 }
 
-.item-container {
+.data-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     margin: 0 20px;
 }
 @media screen and (max-width: 1000px) {
-    .item-container {
+    .data-container {
         grid-template-columns: repeat(1, 1fr);
     }
 }
 @media screen and (max-width: 600px) {
-    .item-container {
+    .data-container {
         grid-template-columns: 1fr;
     }
 }
@@ -98,7 +108,7 @@ img {
 .spinner-border {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 48.7%;
 }
 
 .back-btn {
@@ -114,28 +124,6 @@ img {
     border: none;
     background-color: transparent;
 }
-
-/*
-string html = "<div class=\"customization-menu\">";
-        html += "<div class=\"customization-img-container\"><img src=\"" + selected_product.ImgUrl + "\" />" + selected_product.Name + "</div>";
-
-        foreach (string customization in customizations) {
-            html += "<div class=\"customization-title\" id=\"" + customization + "\">" + customization + "</div>";
-            html += "<div class=\"customization-btn-container\">";
-            foreach (Product product in products) {
-                if (product.Series == customization) {
-                    html += 
-                        "<button class=\"customization-btn product\" id=\"" + product.Id + "\" data-to=\"customization-container\">" +
-                            "<p>" + product.Name + "</p>" +
-                        "</button>"
-                    ;
-                }
-            }
-            html += "</div>";
-        }
-
-        html += "</div>";
-*/
 
 .customization-img-container img {
     height: 10rem;
@@ -213,10 +201,6 @@ string html = "<div class=\"customization-menu\">";
     color: #ffffff;   
 
 }
-
-/* .customization-btn-container:last-child {
-    margin-bottom: 20px;
-} */
 
 .add-to-cart-btn {
     display: flex;

@@ -1,0 +1,54 @@
+@using WebApp.Models.Cart
+@model List<Item>
+
+<div class="products-container">
+    @foreach (var item in Model.Select((value, index) => new { value, index})) {
+        <div class="product">
+            <button class="remove-product-btn" item-index="@item.index" title="Remove item">X</button>
+            <div class="img-container">
+                <img src="@item.value.Product.ImgUrl"/>
+            </div>
+
+            <!--Product Info-->
+            <div class="product-info-container">
+                <div class="product-name">
+                    <h3>@item.value.Product.Name</h3>
+                </div>
+                <!--Product Options-->
+                <div class="product-options-container">
+                    <p class="product-option-size">@item.value.Options.FirstOrDefault(o => o.Series == "Size")?.Name</p>
+                    <div class="product-option-customizations">
+                        <p>
+                            @{
+                                string? prevSeries = null;
+                                var optionsText = new System.Text.StringBuilder();
+
+                                foreach (var option in item.value.Options.Where(o => o.Series != "Size")) {
+                                    if (prevSeries != null && option.Series != prevSeries) {
+                                        optionsText.Append(" | ");
+                                    } else if (!string.IsNullOrEmpty(prevSeries)) {
+                                        optionsText.Append(", ");
+                                    }
+
+                                    optionsText.Append(option.Name);
+                                    prevSeries = option.Series;
+                                }
+                            }
+                            @optionsText.ToString()
+                        </p>
+                    </div>
+                    
+                    <div class="edit-product-container">
+                        <div class="edit-product-count">
+                            <button class="edit-product-count-btn" item-index="@item.index" title="Decrease quantity">-</button>
+                            <p class="product-count">@item.value.Quantity</p>
+                            <button class="edit-product-count-btn" item-index="@item.index" title="Increase quantity">+</button>
+                        </div>
+                        <button class="edit-product-options-btn" item-index="@item.index" title="Edit item customizations">Edit</button>
+                        <p class="product-cost">@item.value.Price().ToString("C")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

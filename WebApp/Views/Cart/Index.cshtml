@@ -1,0 +1,11 @@
+@using WebApp.Models.Cart
+@model Cart
+
+<div class="cart-container">
+    <!-- Load product partial view -->
+    @await Html.PartialAsync("_ProductPartial", Model.Items)
+
+    <!-- Load checkout partial view -->
+    @await Html.PartialAsync("_CheckoutPartial", Model.TotalCost().ToString("C"))
+</div>
+

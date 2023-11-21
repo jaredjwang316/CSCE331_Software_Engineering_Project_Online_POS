@@ -1,10 +1,11 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Models.UnitOfWork;
 using WebApp.Models;
-
-using Npgsql;
 using WebApp.Data;
-using System.Reflection.Metadata.Ecma335;
+
+using Google.Cloud.Translation.V2;
+using System.Text.Json;
 
 namespace WebApp.Controllers;
 
@@ -17,7 +18,7 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
         var preferredLanguage = GetPreferredLanguage();
         ViewData["PreferredLanguage"] = preferredLanguage;
@@ -27,15 +28,6 @@ public class HomeController : Controller
     public IActionResult Privacy()
     {
         return View();
-    }
-
-    public IActionResult DatabaseExample()
-    {   
-        UnitOfWork uok = new(Config.AWS_DB_NAME);
-        List<Product> products = uok.GetAll<Product>().ToList();
-        uok.CloseConnection();
-        
-        return View(products);
     }
 
     public string GetPreferredLanguage()

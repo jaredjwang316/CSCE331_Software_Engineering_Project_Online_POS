@@ -1,25 +1,37 @@
-﻿@using System.Security.Claims;
+﻿@* 
+    File: Home/Index.cshtml
+    Author: Nihar Shah
+    Date: November 7, 2023
+*@
+
+@using System.Security.Claims;
+@using WebApp.APIs.GoogleTranslate;
 
 @{
-    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    var translator = new GoogleTranslate();
 }
 
 <div class="text-center">
-    @if (User!.Identity!.IsAuthenticated)
+    @* @if (User!.Identity!.IsAuthenticated)
     {
         <h1 class="display-4" style="font-family: Lusitana;">Welcome, @User.Identity.Name!</h1>
         <p style="font-family: Lusitana; font-size: 20px;">Your email: @User.FindFirstValue(ClaimTypes.Email)</p>
         <p style="font-family: Lusitana; font-size: 20px;">Your preferred language: @ViewData["PreferredLanguage"]</p>
-    }
-    else
-    {
-        <h1 class="display-4">Welcome, stranger!</h1>
-    }
+    } *@
+    @{
+        string text = "Bringing Bubble Tea to the United States!";
+        <h1 class="display-4">@await translator.TranslateText(text)</h1>
+    } 
 </div>
 
-@* 
-<div class="text-center" style="display: flex; justify-content: space-around;">
-    <a href="#" style="flex: 1; border: 1px solid; padding: 10px; margin: 5px; text-decoration: none; color: #000000">Best Sellers</a>
-    <a href="#" style="flex: 1; border: 1px solid; padding: 10px; margin: 5px; text-decoration: none; color: #000000">Featured</a>
-    <a href="#" style="flex: 1; border: 1px solid; padding: 10px; margin: 5px; text-decoration: none; color: #000000">Favorites</a>
-</div> *@
+<section class="elementor-section">
+    <div class="elementor-container">
+        <a class="elementor-box-title" asp-area="" asp-controller="MenuBoard" asp-action="Index">
+            <figure class="elementor-image-box-img">
+            <img src="https://gongchausa.com/wp-content/uploads/2021/12/25-w.png">
+            </figure>
+            <h3>@await translator.TranslateText("Menu")</h3>
+        </a>
+    </div>
+</section>

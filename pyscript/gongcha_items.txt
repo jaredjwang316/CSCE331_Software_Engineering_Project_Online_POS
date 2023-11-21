@@ -1,0 +1,148 @@
+Name: Green Tea
+Src: https://gongchausa.com/wp-content/uploads/2021/12/奶蓋綠茶-Milk-Foam-Green-Tea-web.png
+
+Name: Black Tea
+Src: https://gongchausa.com/wp-content/uploads/2022/01/Milk-Foam-Black-Tea.png
+
+Name: Oolong Tea
+Src: https://gongchausa.com/wp-content/uploads/2022/01/Milk-Foam-Oolong-Tea.png
+
+Name: Earl Grey Tea
+Src: https://gongchausa.com/wp-content/uploads/2022/01/Milk-Foam-Earl-Grey-Tea.png
+
+Name: WINTERMELON
+Src: https://gongchausa.com/wp-content/uploads/2021/12/奶蓋冬瓜-Milk-Foam-Wintermelon-web.png
+
+Name: DIRTY BROWN SUGAR MILK TEA
+Src: https://gongchausa.com/wp-content/uploads/2021/12/Dirty-Brown-Sugar-Milk-web.png
+
+Name: Creme Brulee Brown Sugar Milk Tea
+Src: https://gongchausa.com/wp-content/uploads/2022/01/Creme-Brulee-Brown-Sugar-Milk-Tea.png
+
+Name: Creme Brulee Strawberry Latte
+Src: https://gongchausa.com/wp-content/uploads/2022/01/Creme-Brulee-Strawberry-Latte.png
+
+Name: MILK TEA
+Src: https://gongchausa.com/wp-content/uploads/2021/12/奶茶-Milk-Tea-web.png
+
+Name: PEARL MILK TEA
+Src: https://gongchausa.com/wp-content/uploads/2021/12/珍珠奶茶-Pearl-Milk-Tea-web.png
+
+Name: CARAMEL MILK TEA
+Src: https://gongchausa.com/wp-content/uploads/2021/12/焦糖奶茶-Caramel-Milk-Tea-web.png
+
+Name: BROWN SUGAR MILK TEA
+Src: https://gongchausa.com/wp-content/uploads/2021/12/黑糖奶茶-Brown-Sugar-Milk-Tea-web.png
+
+Name: WINTERMELON MILK TEA
+Src: https://gongchausa.com/wp-content/uploads/2021/12/奶茶-Milk-Tea-web.png
+
+Name: STRAWBERRY MILK TEA
+Src: https://gongchausa.com/wp-content/uploads/2022/01/Strawberry-Milk-Tea.png
+
+Name: EARL GREY MILK TEA WITH 3J’S
+Src: https://gongchausa.com/wp-content/uploads/2021/12/格雷奶茶三兄弟-Earl-Grey-Milk-Tea-with-3Js-web.png
+
+Name: PASSIONFRUIT YOGURT
+Src: https://gongchausa.com/wp-content/uploads/2021/12/百香果優格冰沙-Passionfruit-Yogurt-Slush-web.png
+
+Name: LYCHEE
+Src: https://gongchausa.com/wp-content/uploads/2021/12/Lychee-Slush-web.png
+
+Name: MANGO MILK
+Src: https://gongchausa.com/wp-content/uploads/2021/12/芒果冰沙-Mango-Smoothie-web.png
+
+Name: STRAWBERRY MILK
+Src: https://gongchausa.com/wp-content/uploads/2021/12/Strawberry-Milk-Slush-web.png
+
+Name: TARO MILK
+Src: https://gongchausa.com/wp-content/uploads/2021/12/Taro-Slush-web.png
+
+Name: MATCHA MILK
+Src: https://gongchausa.com/wp-content/uploads/2021/12/抹茶鮮奶冰沙-Matcha-Milk-Slush-web.png
+
+Name: CARAMEL CHOCOLATE
+Src: https://gongchausa.com/wp-content/uploads/2021/12/焦糖巧克力冰沙-Caramel-Chocolate-Slush-web.png
+
+Name: Peach Slush
+Src: https://gongchausa.com/wp-content/uploads/2022/07/Peach-Slush.png
+
+Name: GREEN TEA
+Src: https://gongchausa.com/wp-content/uploads/2021/12/草莓綠茶-Strawberry-Green-Tea-w.png
+
+Name: HIBISCUS GREEN TEA
+Src: https://gongchausa.com/wp-content/uploads/2021/12/洛神綠茶-Hibiscus-Green-Tea-w.png
+
+Name: HONEY GREEN TEA
+Src: https://gongchausa.com/wp-content/uploads/2021/12/蜂蜜綠茶-Honey-Green-Tea-web.png
+
+Name: LYCHEE OOLONG
+Src: https://gongchausa.com/wp-content/uploads/2021/12/荔枝烏龍-Lychee-Oolong-Tea-w.png
+
+Name: LEMON AI-YU WHITE PEARL
+Src: https://gongchausa.com/wp-content/uploads/2021/12/寒天愛玉-Lemon-Ai-Yu-with-White-Pearl-w.png
+
+Name: LEMON WINTERMELON BASIL SEEDS
+Src: https://gongchausa.com/wp-content/uploads/2021/12/檸檬冬瓜小紫蘇-Lemon-Wintermelon-with-Basil-Seeds-w.png
+
+Name: TARO
+Src: https://gongchausa.com/wp-content/uploads/2021/12/芋頭特調-Taro-Milk-Drink-w.png
+
+Name: CARAMEL CHOCOLATE
+Src: https://gongchausa.com/wp-content/uploads/2021/12/Caramel-Chocolate-w.png
+
+Name: YOGURT DRINK
+Src: https://gongchausa.com/wp-content/uploads/2022/01/Lemon-Yogurt.png
+
+Name: Tea Latte
+Src: https://gongchausa.com/wp-content/uploads/2021/12/格雷茶拿鐵-Earl-Grey-Tea-Latte-H-w.png
+
+Name: CHAI TEA Latte
+Src: https://gongchausa.com/wp-content/uploads/2021/12/印度茶那堤-Chai-Tea-Latte-H-w.png
+
+Name: Matcha tea latte
+Src: https://gongchausa.com/wp-content/uploads/2022/01/Matcha-Tea-Latte-2.png
+
+Name: Thai tea latte
+Src: https://gongchausa.com/wp-content/uploads/2021/12/Thai-Tea-Latte-w.png
+
+Name: Strawberry Matcha Latte
+Src: https://gongchausa.com/wp-content/uploads/2022/01/Strawberry-Matcha-Latte-1.png
+
+Name: MILK COFFEE
+Src: https://gongchausa.com/wp-content/uploads/2021/12/手工咖啡-Milk-Coffee-w.png
+
+Name: COFFEE MILK TEA
+Src: https://gongchausa.com/wp-content/uploads/2021/12/鴛鴦奶茶-Coffe-Milk-Tea-w.png
+
+Name: MILK FOAM BLACK COFFEE
+Src: https://gongchausa.com/wp-content/uploads/2021/12/奶蓋黑咖啡-Milk-Foam-Black-Coffee-w.png
+
+Name: MILK FOAM
+Src: https://gongchausa.com/wp-content/uploads/2021/12/草莓奶蓋Strawberry-Milk-Foam-w.png
+
+Name: WHITE PEARL
+Src: https://gongchausa.com/wp-content/uploads/2021/12/白晶球-Kanten-Jelly-White-Pearl-w.png
+
+Name: PEARL
+Src: https://gongchausa.com/wp-content/uploads/2021/12/珍珠-Pearl-w.png
+
+Name: COCONUT JELLY
+Src: https://gongchausa.com/wp-content/uploads/2021/12/椰果-Coconut-Jelly-w.png
+
+Name: PUDDING
+Src: https://gongchausa.com/wp-content/uploads/2021/12/布丁凍-Pudding-Jelly-w.png
+
+Name: HERBAL JELLY
+Src: https://gongchausa.com/wp-content/uploads/2021/12/仙草凍-Grass-Jelly-Herbal-Jelly-w.png
+
+Name: AI-YU JELLY
+Src: https://gongchausa.com/wp-content/uploads/2021/12/愛玉-Ai-Yu-Jelly-w.png
+
+Name: BASIL SEEDS
+Src: https://gongchausa.com/wp-content/uploads/2021/12/小紫蘇-Basil-Seeds-w.png
+
+Name: OREO CRUMBS
+Src: https://gongchausa.com/wp-content/uploads/2021/12/Oreo-w.png
+
+49 items

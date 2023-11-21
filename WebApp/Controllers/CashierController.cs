@@ -1,13 +1,12 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Models.UnitOfWork;
 using WebApp.Models;
-
-using Npgsql;
-using WebApp.Data;
-using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp.Controllers;
 
+[Authorize(Roles = "Cashier, Manager")]
 public class CashierController : Controller
 {
     private readonly ILogger<CashierController> _logger;
