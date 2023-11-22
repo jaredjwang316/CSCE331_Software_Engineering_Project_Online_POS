@@ -110,11 +110,10 @@ public class CartController : Controller
     }
 
     public IActionResult RemoveItem(int index) {
-        // Cart cart = GetCartFromSession();
-        // cart.RemoveItem(index);
-        // SetCartInSession(cart);
-        // return Ok();
-        throw new NotImplementedException();
+        Cart cart = GetCartFromSession();
+        cart.RemoveItem(index);
+        SetCartInSession(cart);
+        return Ok();
     }
 
     public IActionResult EditCount(int index, bool isIncrement) {
