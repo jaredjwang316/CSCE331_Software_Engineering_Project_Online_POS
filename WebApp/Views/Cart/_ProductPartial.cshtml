@@ -37,17 +37,20 @@
                             @optionsText.ToString()
                         </p>
                     </div>
-                    
-                    <div class="edit-product-container">
-                        <div class="edit-product-count">
-                            <button class="edit-product-count-btn" item-index="@item.index" title="Decrease quantity">-</button>
-                            <p class="product-count">@item.value.Quantity</p>
-                            <button class="edit-product-count-btn" item-index="@item.index" title="Increase quantity">+</button>
-                        </div>
-                        <button class="edit-product-options-btn" item-index="@item.index" title="Edit item customizations">Edit</button>
-                        <p class="product-cost">@item.value.Price().ToString("C")</p>
-                    </div>
                 </div>
+            </div>
+                    
+            <div class="edit-product-container">
+                <div class="edit-center-container">
+                    <div class="edit-product-count">
+                        <button class="edit-product-count-btn" item-index="@item.index" title="Decrease quantity">-</button>
+                        <p class="product-count">@item.value.Quantity</p>
+                        <button class="edit-product-count-btn" item-index="@item.index" title="Increase quantity">+</button>
+                    </div>
+                    <button class="edit-product-options-btn" item-index="@item.index" title="Edit item customizations">Edit</button>
+                    <p class="product-cost">@item.value.Price().ToString("C")</p>
+                    </div>
+                
             </div>
         </div>
     }

@@ -20,3 +20,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.spinner-border {
+  position: fixed;
+  top: 50%;
+  left: 48.7%;
+}

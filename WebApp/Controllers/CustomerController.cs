@@ -37,13 +37,6 @@ public class CustomerController : Controller {
         return PartialView("_CategoriesPartial", model);
     }
 
-    public IActionResult ClearCache() {
-        // Move to deticated admin controller
-        cache.Remove("Categories");
-        cache.Remove("BestSellers");
-        return Ok();
-    }
-
     public IActionResult LoadBestSellers() {
 
         var cachedData = cache.Get("BestSellers");

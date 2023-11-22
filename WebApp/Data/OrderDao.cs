@@ -59,25 +59,70 @@ public class OrderDao : IDao<Order> {
     }
 
     public void Add(Order t) {
-        foreach (int id in t.ItemIds) {
-             string q = (
-                 $"WITH ProductIngredientsCTE AS ( " +
-                 $"SELECT unnest(ingredient_ids) AS ingredient_id " +
-                 $"FROM product_ingredients " +
-                 $"WHERE product_id = {id} ) " +
+        // foreach (int id in t.ItemIds) {
+        //      string q = (
+        //          $"WITH ProductIngredientsCTE AS ( " +
+        //          $"SELECT unnest(ingredient_ids) AS ingredient_id " +
+        //          $"FROM product_ingredients " +
+        //          $"WHERE product_id = {id} ) " +
         
-                 $"UPDATE inventory " +
-                 $"SET quantity = quantity - 1 " +
-                 $"WHERE ingredient_id IN (SELECT ingredient_id FROM ProductIngredientsCTE); "
-             );
-             commandHandler.ExecuteNonQuery(q);
+        //          $"UPDATE inventory " +
+        //          $"SET quantity = quantity - 1 " +
+        //          $"WHERE ingredient_id IN (SELECT ingredient_id FROM ProductIngredientsCTE); "
+        //      );
+        //      commandHandler.ExecuteNonQuery(q);
+        // }
+
+        string ids = string.Join(",", t.ItemIds);
+        string updateIngredientsStatement = (
+            $"WITH ProductIngredientsCTE AS ( " +
+            $"SELECT unnest(ingredient_ids) AS ingredient_id " +
+            $"FROM product_ingredients " +
+            $"WHERE product_id IN ({ids}) ) " +
+        
+            $"UPDATE inventory " +
+            $"SET quantity = quantity - 1 " +
+            $"WHERE ingredient_id IN (SELECT ingredient_id FROM ProductIngredientsCTE); "
+        );
+        commandHandler.ExecuteNonQuery(updateIngredientsStatement);
+
+        // Also update options from inventory
+
+        // Get all products from products table where is_option is true and product_id is in t.ItemIds
+        string getOptionsQuery = (
+            $"SELECT * " +
+            $"FROM products " +
+            $"WHERE is_option = true AND id IN ({ids})"
+        );
+        var reader = commandHandler.ExecuteReader(getOptionsQuery);
+        List<Product> products = new();
+        while (reader?.Read() == true) {
+            products.Add(new Product(
+                reader.GetInt32(0),
+                reader.GetString(1),
+                reader.GetDouble(2), 
+                reader.GetString(3),
+                reader.GetString(4),
+                reader.GetBoolean(5),
+                reader.GetBoolean(6),
+                reader.GetBoolean(7)
+            ));
         }
+        reader?.Close();
+
+        // From inventory change quantity of options
+        string updateOptionsStatement = (
+            $"UPDATE inventory " +
+            $"SET quantity = quantity - 1 " +
+            $"WHERE LOWER(ingredient_name) IN ({string.Join(",", products.Select(p => $"'{p.Name.ToLower()}'"))})"
+        );
+        commandHandler.ExecuteNonQuery(updateOptionsStatement);
         
-        string sattement = (
+        string statement = (
             $"INSERT INTO orders_final (employee_id, customer_name, order_date, total_order, item_ids) " +
             $"VALUES ({t.EmployeeId}, '{t.CustomerName}', '{t.OrderDate}', {t.TotalPrice}, ARRAY[{string.Join(",", t.ItemIds)}])"
         );
-        commandHandler.ExecuteNonQuery(sattement);
+        commandHandler.ExecuteNonQuery(statement);
     }
 
     public void Update(Order t, Order newT) {

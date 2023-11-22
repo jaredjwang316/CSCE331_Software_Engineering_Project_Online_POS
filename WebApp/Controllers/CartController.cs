@@ -66,47 +66,6 @@ public class CartController : Controller
 
         if (final_size == initial_size) return BadRequest();
         return Ok();
-
-        // UnitOfWork unit = new(Config.AWS_DB_NAME);
-        // List<Product> products = unit.GetAll<Product>().ToList();
-
-        // Product? item_product = null;
-        // List<Product> item_options = new();
-        // foreach (Product product in products) {
-        //     if (product_id == product.Id) {
-        //         item_product = product;
-        //     }
-        //     foreach (int customization_id in customization_ids) {
-        //         if (customization_id == product.Id) {
-        //             item_options.Add(product);
-        //             customization_ids.Remove(customization_id);
-        //             break;
-        //         }
-        //     }
-        // }
-    
-        // if (item_product == null) {
-        //     return BadRequest();
-        // }
-        // Item item = new(item_product, item_options, quantity);
-        // Cart cart = GetCartFromSession();
-        // int initialSize = 0;
-        // foreach (Item i in cart.Items) {
-        //     initialSize += i.Quantity;
-        // }
-        // cart.AddItem(item);
-        // SetCartInSession(cart);
-        // Cart cart1 = GetCartFromSession();
-        // int finalSize = 0;
-        // foreach (Item i in cart1.Items) {
-        //     finalSize += i.Quantity;
-        // }
-
-        // if (finalSize == initialSize) {
-        //     return BadRequest();
-        // }
-
-        // return Ok();
     }
 
     public IActionResult RemoveItem(int index) {
@@ -131,24 +90,34 @@ public class CartController : Controller
         }
         SetCartInSession(cart);
         return Ok();
-        // throw new NotImplementedException();
     }
 
     public IActionResult EditOptions(int index) {
         throw new NotImplementedException();
     }
 
-    public IActionResult Checkout() {
+    public IActionResult Checkout(string name, string role, string email) {
         Cart cart = GetCartFromSession();
-        List<int> ids = new List<int>();
+
+        if (cart == null) return BadRequest();
+
+        List<int> ids = new();
         foreach (Item item in cart.Items) {
-            ids.Add(item.Product.Id);
-            foreach (Product product in item.Options) {
-                ids.Add(product.Id);
+            for (int i = 0; i < item.Quantity; i++) {
+                ids.Add(item.Product.Id);
+                foreach (Product product in item.Options) {
+                    ids.Add(product.Id);
+                }
             }
         }
-        Order order = new Order(50000000, 100, "Nihar", DateTime.Now, cart.TotalCost(), ids);
-        unit.Add<Order>(order);
+
+        int employee_id = 0;
+        if (role != "Customer") {
+            employee_id = unit.GetAll<Employee>().FirstOrDefault(e => e.Email == email)!.Id;
+        }
+
+        Order order = new(-1, employee_id, name, DateTime.Now, cart.TotalCost(), ids);
+        unit.Add(order);
 
         cart.Clear();
         SetCartInSession(cart);
