@@ -4,6 +4,7 @@ using WebApp.Models.UnitOfWork;
 using WebApp.Models;
 using WebApp.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace WebApp.Controllers;
 
@@ -11,10 +12,12 @@ namespace WebApp.Controllers;
 public class ManagerController : Controller
 {
     private readonly ILogger<ManagerController> _logger;
+    private readonly IMemoryCache cache;
 
-    public ManagerController(ILogger<ManagerController> logger)
+    public ManagerController(ILogger<ManagerController> logger, IMemoryCache cache)
     {
         _logger = logger;
+        this.cache = cache;
     }
 
     public IActionResult Index()
@@ -76,6 +79,8 @@ public class ManagerController : Controller
 
         unit.CloseConnection();
 
+        ClearCache();
+
         return Ok();
     }
 
@@ -89,6 +94,14 @@ public class ManagerController : Controller
 
         unit.CloseConnection();
 
+        ClearCache();
+
+        return Ok();
+    }
+
+    public IActionResult ClearCache() {
+        cache.Remove("Categories");
+        cache.Remove("BestSellers");
         return Ok();
     }
 }
