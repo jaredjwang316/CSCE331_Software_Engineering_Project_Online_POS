@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('saveButtonProd').style.display = 'block';
             document.getElementById('inv-table').style.display = 'none';
             document.getElementById('saveButtonInv').style.display = 'none';
+            document.getElementById('manager-msg').style.display = 'none';
         }
         else if ($(this).attr("id") == "ShowInventory") {
          //   document.getElementById('inv-table').style.width = '100%';
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('saveButtonInv').style.display = 'block';
             document.getElementById('prod-table').style.display = 'none';
             document.getElementById('saveButtonProd').style.display = 'none';
+            document.getElementById('manager-msg').style.display = 'none';
         }
     });
 });
