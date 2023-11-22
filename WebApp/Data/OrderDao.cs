@@ -110,13 +110,46 @@ public class OrderDao : IDao<Order> {
         }
         reader?.Close();
 
-        // From inventory change quantity of options
-        string updateOptionsStatement = (
+        // From inventory change quantity of options. Account for quantity in cart
+        // key value pair for id and quantity
+        Dictionary<string, int> productCounts = new();
+        foreach (int id in t.ItemIds) {
+            if (products.Any(p => p.Id == id)) {
+                string name = products.FirstOrDefault(p => p.Id == id).Name.ToLower();
+                if (productCounts.ContainsKey(name)) {
+                    productCounts[name]++;
+                } else {
+                    productCounts.Add(name, 1);
+                }
+            }
+        }
+
+        // reduce quantity by value in productCounts
+        var updateStatements = productCounts.Select(pc =>
             $"UPDATE inventory " +
-            $"SET quantity = quantity - 1 " +
-            $"WHERE LOWER(ingredient_name) IN ({string.Join(",", products.Select(p => $"'{p.Name.ToLower()}'"))})"
+            $"SET quantity = quantity - {pc.Value} " +
+            $"WHERE ingredient_name = '{pc.Key}'"
         );
+
+        string updateOptionsStatement = string.Join("; ", updateStatements);
         commandHandler.ExecuteNonQuery(updateOptionsStatement);
+
+
+        // var updateStatements = productCounts.Select(pc =>
+        //     $"UPDATE inventory " +
+        //     $"SET quantity = quantity - {pc.Value} " +
+        //     $"WHERE LOWER(ingredient_name) = '{pc.Key}'"
+        // );
+
+        // string updateOptionsStatement = string.Join("; ", updateStatements);
+        // commandHandler.ExecuteNonQuery(updateOptionsStatement);
+
+        // string updateOptionsStatement = (
+        //     $"UPDATE inventory " +
+        //     $"SET quantity = quantity - 1 " +
+        //     $"WHERE LOWER(ingredient_name) IN ({string.Join(",", products.Select(p => $"'{p.Name.ToLower()}'"))})"
+        // );
+        // commandHandler.ExecuteNonQuery(updateOptionsStatement);
         
         string statement = (
             $"INSERT INTO orders_final (employee_id, customer_name, order_date, total_order, item_ids) " +
