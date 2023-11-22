@@ -146,6 +146,27 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     $(document).on('click', '.checkout-btn', function() {
-        alert("Not implemented yet!");
+        MakeRequest("/Cart/GetCartFromSession", "GET", null, function(data) {
+            var cartItems = data.items;
+
+            var confirmCheckout = confirm("Process payment");
+
+            if (confirmCheckout) {
+                $.ajax({
+                    url: "/Cart/Checkout",
+                    type: "POST",
+                    data: { cartItems: cartItems },
+                    success: function (response) {
+                        console.log("Checkout successful");
+                        location.reload();
+                    },
+                    error: function () {
+                        console.log("Error during checkout");
+                    }
+                });
+            }
+        }, function() {
+            console.log("Error fetching cart data for checkout");
+        });
     });
 });

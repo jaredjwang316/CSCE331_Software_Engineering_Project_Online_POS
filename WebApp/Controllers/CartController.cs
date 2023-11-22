@@ -2,6 +2,7 @@
 
 */
 
+using System;
 using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
 using Microsoft.AspNetCore.Mvc;
@@ -136,6 +137,24 @@ public class CartController : Controller
 
     public IActionResult EditOptions(int index) {
         throw new NotImplementedException();
+    }
+
+    public IActionResult Checkout() {
+        Cart cart = GetCartFromSession();
+        List<int> ids = new List<int>();
+        foreach (Item item in cart.Items) {
+            ids.Add(item.Product.Id);
+            foreach (Product product in item.Options) {
+                ids.Add(product.Id);
+            }
+        }
+        Order order = new Order(50000000, 100, "Nihar", DateTime.Now, cart.TotalCost(), ids);
+        unit.Add<Order>(order);
+
+        cart.Clear();
+        SetCartInSession(cart);
+
+        return Ok();
     }
 
     public Cart GetCartFromSession() {
