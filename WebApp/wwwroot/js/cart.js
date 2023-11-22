@@ -115,6 +115,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 $(this).attr("item-index", item_index - 1);
             }
         });
+        $(".edit-product-count-btn").each(function() {
+            var item_index = parseInt($(this).attr("item-index"));
+            if (item_index > index) {
+                $(this).attr("item-index",  - 1);
+            }
+        });
 
         var total_cost = 0;
         cart.items.forEach(function(item) {
@@ -124,6 +130,11 @@ document.addEventListener("DOMContentLoaded", function() {
         // Update html cart total
         $(".subtotal-value").text("$" + (total_cost).toFixed(2));
     });
+
+    // 0
+    // 1
+    // 2
+    // 3-
 
     $(document).on('click', '.edit-product-count-btn', function() {
         var index = $(this).attr("item-index");
@@ -143,6 +154,12 @@ document.addEventListener("DOMContentLoaded", function() {
             cart.items.splice(index, 1);
 
             // update all html item indices after removed item
+            $(".remove-product-btn").each(function() {
+                var item_index = parseInt($(this).attr("item-index"));
+                if (item_index > index) {
+                    $(this).attr("item-index", item_index - 1);
+                }
+            });
             $(".edit-product-count-btn").each(function() {
                 var item_index = parseInt($(this).attr("item-index"));
                 if (item_index > index) {
