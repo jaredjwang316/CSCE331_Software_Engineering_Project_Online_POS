@@ -16,7 +16,7 @@ img {
     -moz-user-drag: none;
     -o-user-drag: none;
 }
-.content-container {
+.cart-container {
     display: flex;
     justify-content: space-between;
 }

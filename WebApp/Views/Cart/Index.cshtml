@@ -1,10 +1,191 @@
 @using WebApp.Models.Cart
 @model Cart
 
+<style>
+    body {
+        background-image: url("https://order.gongchausa.com/static/media/backgrounds.12ca03b5bb94af521d4f.png");
+        background-repeat: repeat-y;
+        background-size: contain;
+        background-color: #E7E7E7;
+    }
+    img {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+    }
+
+    .cart-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        border: 1px solid #000000;
+        border-radius: 0.5rem;
+        background-color: #ffffff;
+    }
+
+    @* ProductPartial *@
+    .products-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        border-right: 1px solid #000000;
+    }
+    .product {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        @* margin-bottom: 1rem; *@
+        border-bottom: 1px solid #000000;
+    }
+    .product:last-child {
+        border-bottom: none;
+    }
+        .remove-product-btn {
+            background-color: transparent;
+            border: none;
+            color: #ff0000;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+        .img-container {
+            width: 10rem;
+            height: 10rem;
+            margin-right: 1rem;
+        }
+            .img-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        .product-info-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 100%;
+        }
+            .product-name {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+                .product-name h3 {
+                    font-size: 1.5rem;
+                    font-weight: 400;
+                    margin: 0;
+                }
+            .product-options-container {
+            }
+            .edit-product-container {
+                @* display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                margin-top: 1rem; *@
+
+            }
+                .edit-product-count {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    width: 100%;
+                }
+                    .edit-product-count-btn {
+                        background-color: rgb(170, 0, 0);
+                        color: white;
+                        border: none;
+                        border-radius: 50%;
+                        width: 1.3rem;
+                        height: 1.3rem;
+                        font-size: 0.7rem;
+                        font-weight: bold;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .product-count {
+                        margin: 0;
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                        font-family: Lusitana;
+                        margin: 0 0.6rem;
+                    }
+                .edit-product-options-btn {
+                    background-color: rgb(170, 0, 0);
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    width: 4rem;
+                    font-size: 0.7rem;
+                    font-weight: bold;
+                    font-family: Lusitana;
+                }
+                .product-cost {
+                    margin: 0;
+                    font-size: 1.1rem;
+                    font-weight: bold;
+                    font-family: Lusitana;
+                }
+
+
+    @* CheckoutPartial *@
+    .checkout-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 50%;
+        padding: 1rem;
+    }
+        .subtotal {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+            .subtotal p {
+                margin: 0;
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+            .subtotal-value {
+                margin: 0;
+                font-size: 1.5rem;
+                font-weight: bold;
+                font-family: Lusitana;
+            }
+        .checkout-btn {
+            background-color: rgb(170, 0, 0);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: Lusitana;
+        }
+            
+</style>
+
 <div class="cart-container">
     <!-- Load product partial view -->
     @await Html.PartialAsync("_ProductPartial", Model.Items)
-
+   
     <!-- Load checkout partial view -->
     @await Html.PartialAsync("_CheckoutPartial", Model.TotalCost().ToString("C"))
 </div>
