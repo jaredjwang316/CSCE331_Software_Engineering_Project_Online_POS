@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // console.log(manager_path);
         // loadData($(this).attr("id"), null, $(this).attr("data-to"));
         if ($(this).attr("id") == "ShowManager") {
+            document.getElementById('manager-msg').style.display = 'block';
             document.getElementById('prod-table').style.display = 'none';
             document.getElementById('saveButtonProd').style.display = 'none';
             document.getElementById('inv-table').style.display = 'none';
