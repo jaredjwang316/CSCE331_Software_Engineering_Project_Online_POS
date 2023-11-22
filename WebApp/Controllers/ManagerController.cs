@@ -23,7 +23,9 @@ public class ManagerController : Controller
       //  return View();
         UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
         {
-            var products = uok.GetAll<Product>().ToList();
+            List<Product> products= uok.GetAll<Product>()
+                .Where(product => product.IsDrink && !product.Hidden && !product.IsOption)
+                .ToList();
             var inventory = uok.GetAll<Inventory>().ToList();
             var ingredients = uok.GetAll<Ingredient>().ToList();
             return View((products, inventory, ingredients));
