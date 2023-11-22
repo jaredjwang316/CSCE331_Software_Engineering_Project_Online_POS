@@ -19,6 +19,14 @@ function MakeRequest(url, method, data, successCallback, errorCallback) {
 class Cart {
     items = [Item];
     total = 0;
+
+    Length() {
+        var count = 0;
+        this.items.forEach(function(item) {
+            count += item.quantity;
+        });
+        return count;
+    }
 }
 class Item {
     product;
@@ -49,6 +57,7 @@ function GetCartError() {
 /* Main */
 document.addEventListener("DOMContentLoaded", function() {
     MakeRequest("/Cart/GetCartFromSession", "GET", null, GetCartSuccess, GetCartError);
+    document.dispatchEvent(new Event("HideLoadingScreen"));
 
     $(document).on('click', '.clear-cart-btn', function() {
         // console.log("Clearing cart")
@@ -131,11 +140,6 @@ document.addEventListener("DOMContentLoaded", function() {
         $(".subtotal-value").text("$" + (total_cost).toFixed(2));
     });
 
-    // 0
-    // 1
-    // 2
-    // 3-
-
     $(document).on('click', '.edit-product-count-btn', function() {
         var index = $(this).attr("item-index");
         var isIncrement = $(this).text() == "+";
@@ -192,27 +196,44 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     $(document).on('click', '.checkout-btn', function() {
-        MakeRequest("/Cart/GetCartFromSession", "GET", null, function(data) {
-            var cartItems = data.items;
+        // var confirmCheckout = confirm("Process payment");
+        // if (!confirmCheckout) return;
 
-            var confirmCheckout = confirm("Process payment");
+        if (cart.Length() == 0) {
+            return;
+        }
 
-            if (confirmCheckout) {
-                $.ajax({
-                    url: "/Cart/Checkout",
-                    type: "POST",
-                    data: { cartItems: cartItems },
-                    success: function (response) {
-                        console.log("Checkout successful");
-                        location.reload();
-                    },
-                    error: function () {
-                        console.log("Error during checkout");
-                    }
-                });
-            }
+        var timeout = setTimeout(function () {
+            document.dispatchEvent(new Event("DisplayLoadingScreen"));
+        }, 10);
+
+        var name = "";
+        var role = "";
+        var email = "";
+        MakeRequest("/Account/GetUserInfo", "GET", null, function(user_data) {
+            name = user_data.name;
+            role = user_data.role;
+            email = user_data.email;
+
+            $.ajax({
+                url: "/Cart/Checkout",
+                type: "POST",
+                data: {name: name, role: role, email: email},
+                success: function (response) {
+                    // Update cart and html
+                    cart.items = [];
+                    $(".product").remove();
+                    $(".subtotal-value").text("$0.00");
+                },
+                error: function () {
+                    console.log("Error during checkout");
+                }
+            });
         }, function() {
-            console.log("Error fetching cart data for checkout");
+            console.log("Error fetching user info");
         });
+
+        clearTimeout(timeout);
+        document.dispatchEvent(new Event("HideLoadingScreen"));
     });
 });

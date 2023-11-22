@@ -101,4 +101,32 @@ public class AccountController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
+    public string GetRole() {
+        Claim? roleClaim = User.FindFirst(ClaimTypes.Role);
+        if (roleClaim != null) {
+            return roleClaim.Value;
+        }
+        return "Customer";
+    }
+
+    public string GetName() {
+        Claim? nameClaim = User.FindFirst(ClaimTypes.Name);
+        if (nameClaim != null) {
+            return nameClaim.Value;
+        }
+        return "Guest";
+    }
+
+    public string GetEmail() {
+        Claim? emailClaim = User.FindFirst(ClaimTypes.Email);
+        if (emailClaim != null) {
+            return emailClaim.Value;
+        }
+        return "";
+    }
+
+    public IActionResult GetUserInfo() {
+        return Json(new { name = GetName(), role = GetRole(), email = GetEmail() });
+    }
 }
