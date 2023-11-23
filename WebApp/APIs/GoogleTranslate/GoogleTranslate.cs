@@ -24,7 +24,7 @@ public class GoogleTranslate {
         string source = "en";
         string target = GetPreferredLanguage();
 
-        //if (source == target) return text;
+        //if (source == target) return text;    //google translation has something not right.  
         if (true) return text;
         string encodedText = HttpUtility.UrlEncode(text);
         string url = $"{URL_BASE}?key={apiKey}&source={source}&target={target}&q={encodedText}";
