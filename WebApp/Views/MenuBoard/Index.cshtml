@@ -12,6 +12,14 @@
 @using WebApp.Models.UnitOfWork
 @model (List<Product> products, List<ProductIngredients> prodIngredients, List<string> productCategories)
 
+<head>
+    <meta charset="utf-8" />
+    <!-- Other meta tags, scripts, or stylesheets may be present here -->
+
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="~/css/styles.css" />
+</head>
+
 <div class="row">
     <div class="col-md-6">
         <form method="get" class="mb-3">
@@ -23,6 +31,25 @@
             </div>
         </form>
     </div>
+</div>
+
+<div class="menu-container">
+    <!-- Product categories -->
+    @foreach (var category in ViewBag.CategoryProducts)
+    {
+        <div class="product-category">
+            <button class="customization-btn category" data-category="@category.Key">@category.Key</button>
+            <div class="product-list">
+                @foreach (var product in category.Value)
+                {
+                    <button class="customization-btn product" id="@product.Id" data-to="customization-container">
+                        <p>@product.Name</p>
+                        <p>ID: @product.Id</p>
+                    </button>
+                }
+            </div>
+        </div>
+    }
 </div>
 
 @if (Model.Item1 != null && Model.Item1.Count > 0)

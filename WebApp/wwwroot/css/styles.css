@@ -1,0 +1,31 @@
+.menu-container {
+    /* Add styling to the menu container */
+    /* Example: Add padding and background color */
+    padding: 20px;
+    background-color: #f7f7f7;
+  }
+  
+  .product-category {
+    /* Example styling for product category */
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+  
+  .customization-btn {
+    /* Example styling for buttons */
+    /* Add your button styles here (e.g., background color, text color, padding, etc.) */
+    background-color: green;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .customization-btn:hover {
+    /* Example styling for button hover effect */
+    background-color: #2980b9;
+  }
