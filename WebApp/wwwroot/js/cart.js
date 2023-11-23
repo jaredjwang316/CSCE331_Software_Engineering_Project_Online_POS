@@ -59,31 +59,15 @@ document.addEventListener("DOMContentLoaded", function() {
     MakeRequest("/Cart/GetCartFromSession", "GET", null, GetCartSuccess, GetCartError);
     document.dispatchEvent(new Event("HideLoadingScreen"));
 
-    $(document).on('click', '.clear-cart-btn', function() {
-        // console.log("Clearing cart")
-        // $.ajax({
-        //     url: "/Cart/Clear",
-        //     method: "POST",
-        //     success: function(data) {
-        //             location.reload();
-        //     },
-        //     error: function() {
-        //         alert("Error clearing cart!");
-        //     }
-        // });
-
-        function OnSuccess (data) {
-            location.reload();
-        }
-        function OnError () {
-            alert("Error clearing cart!");
-        }
-
-        MakeRequest("/Cart/Clear", "POST", null, OnSuccess, OnError);
-    });
-
     // Add to cart button
     $(document).on('click', '.add-to-cart-btn', function() {
+        if ($(this).prop("disabled")) {
+            console.log("disabled...");
+            return;
+        } else {
+            console.log("not disabled...");
+        }
+        $(this).prop("disabled", true);
         var productID = $(this).attr("id");
         var customizationIDs = [];
 
@@ -195,6 +179,7 @@ document.addEventListener("DOMContentLoaded", function() {
         alert("Not implemented yet!");
     });
 
+    // Checkout button
     $(document).on('click', '.checkout-btn', function() {
         // var confirmCheckout = confirm("Process payment");
         // if (!confirmCheckout) return;
@@ -203,6 +188,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
+        $(this).prop("disabled", true);
         var timeout = setTimeout(function () {
             document.dispatchEvent(new Event("DisplayLoadingScreen"));
         }, 10);
@@ -224,16 +210,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     cart.items = [];
                     $(".product").remove();
                     $(".subtotal-value").text("$0.00");
+                    clearTimeout(timeout);
+                    document.dispatchEvent(new Event("HideLoadingScreen"));
+                    $(this).prop("disabled", false);
                 },
                 error: function () {
                     console.log("Error during checkout");
+                    clearTimeout(timeout);
+                    document.dispatchEvent(new Event("HideLoadingScreen"));
                 }
             });
         }, function() {
             console.log("Error fetching user info");
         });
-
-        clearTimeout(timeout);
-        document.dispatchEvent(new Event("HideLoadingScreen"));
     });
 });
