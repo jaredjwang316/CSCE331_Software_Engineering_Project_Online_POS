@@ -13,12 +13,6 @@
 }
 
 <div class="text-center">
-    @* @if (User!.Identity!.IsAuthenticated)
-    {
-        <h1 class="display-4" style="font-family: Lusitana;">Welcome, @User.Identity.Name!</h1>
-        <p style="font-family: Lusitana; font-size: 20px;">Your email: @User.FindFirstValue(ClaimTypes.Email)</p>
-        <p style="font-family: Lusitana; font-size: 20px;">Your preferred language: @ViewData["PreferredLanguage"]</p>
-    } *@
     @{
         string text = "Bringing Bubble Tea to the United States!";
         <h1 class="display-4">@await translator.TranslateText(text)</h1>
