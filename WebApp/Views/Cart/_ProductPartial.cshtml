@@ -1,10 +1,14 @@
 @using WebApp.Models.Cart
+@using WebApp.APIs.GoogleTranslate
+@{
+    var translator = new GoogleTranslate();
+}
 @model List<Item>
 
 <div class="products-container">
     @foreach (var item in Model.Select((value, index) => new { value, index})) {
         <div class="product">
-            <button class="remove-product-btn" item-index="@item.index" title="Remove item">X</button>
+            <button class="remove-product-btn" item-index="@item.index" title="@await translator.TranslateText("Remove item")">X</button>
             <div class="img-container">
                 <img src="@item.value.Product.ImgUrl"/>
             </div>
@@ -12,11 +16,11 @@
             <!--Product Info-->
             <div class="product-info-container">
                 <div class="product-name">
-                    <h3>@item.value.Product.Name</h3>
+                    <h3>@await translator.TranslateText(item.value.Product.Name)</h3>
                 </div>
                 <!--Product Options-->
                 <div class="product-options-container">
-                    <p class="product-option-size">@item.value.Options.FirstOrDefault(o => o.Series == "Size")?.Name</p>
+                    <p class="product-option-size">@await translator.TranslateText(item.value.Options.FirstOrDefault(o => o.Series == "Size")?.Name!)</p>
                     <div class="product-option-customizations">
                         <p>
                             @{
@@ -34,7 +38,7 @@
                                     prevSeries = option.Series;
                                 }
                             }
-                            @optionsText.ToString()
+                            @await translator.TranslateText(optionsText.ToString())
                         </p>
                     </div>
                 </div>
@@ -43,11 +47,11 @@
             <div class="edit-product-container">
                 <div class="edit-center-container">
                     <div class="edit-product-count">
-                        <button class="edit-product-count-btn" item-index="@item.index" title="Decrease quantity">-</button>
+                        <button class="edit-product-count-btn" item-index="@item.index" title="@await translator.TranslateText("Decrease quantity")">-</button>
                         <p class="product-count">@item.value.Quantity</p>
-                        <button class="edit-product-count-btn" item-index="@item.index" title="Increase quantity">+</button>
+                        <button class="edit-product-count-btn" item-index="@item.index" title="@await translator.TranslateText("Increase quantity")">+</button>
                     </div>
-                    <button class="edit-product-options-btn" item-index="@item.index" title="Edit item customizations">Edit</button>
+                    <button class="edit-product-options-btn" item-index="@item.index" title="@await translator.TranslateText("Edit item customizations")">@await translator.TranslateText("Edit")</button>
                     <p class="product-cost">@item.value.Price().ToString("C")</p>
                     </div>
                 

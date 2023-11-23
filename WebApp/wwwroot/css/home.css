@@ -28,16 +28,20 @@ body {
     margin-left: auto;
     position: relative;
     --widgets-spacing: 20px;
-    position: relative;
     min-height: 1px;
     display: flex;
-    width: 30%;
+    width: 100%;
     justify-content: center;
     box-sizing: border-box;
     color: black;
     align-items: center;
     background-color: #C60734;
     border-radius: 40px;
+}
+@media screen and (max-width: 768px) {
+    .elementor-container {
+        width: 100%;
+    }
 }
 
 .elementor-image-box-img img {

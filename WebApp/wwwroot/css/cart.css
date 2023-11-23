@@ -141,6 +141,32 @@ img {
                 font-weight: bold;
                 font-family: Lusitana;
             }
+        @media screen and (max-width: 768px) {
+            .edit-product-container {
+                margin-right: 2rem;
+            }
+            .edit-product-count-btn {
+                width: 2.25rem;
+                height: 1.5rem;
+                font-size: 1.2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 20%;
+            }
+            .edit-product-options-btn {
+                width: 120%;
+                height: 2rem;
+                font-size: 1.1rem;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            .product-cost {
+                font-size: 1.3rem;
+            }
+            
+
+        }
 
 
 /* @* CheckoutPartial *@ */
@@ -180,4 +206,9 @@ img {
         font-size: 1.5rem;
         font-weight: bold;
         font-family: Lusitana;
+    }
+    @media screen and (max-width: 768px) {
+        .checkout-container {
+            width: 100%;
+        }
     }

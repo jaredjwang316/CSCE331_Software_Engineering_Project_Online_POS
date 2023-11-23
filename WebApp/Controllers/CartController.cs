@@ -134,13 +134,12 @@ public class CartController : Controller
         } else {
             Console.WriteLine("Cart already exists.");
 
-            var cartJson = HttpContext.Session.GetString("Cart");
-
+            var cartJson = HttpContext.Session.GetString("Cart") ?? throw new Exception("Cart is null");
             return JsonConvert.DeserializeObject<Cart>(cartJson)!;
         }
 
         // Return the deserialized cart
-        return JsonConvert.DeserializeObject<Cart>(HttpContext.Session.GetString("Cart"))!;
+        return JsonConvert.DeserializeObject<Cart>(HttpContext.Session.GetString("Cart")!)!;
     }
 
 

@@ -1,10 +1,14 @@
 @using WebApp.Models.Cart
+@using WebApp.APIs.GoogleTranslate
+@{
+    var translator = new GoogleTranslate();
+}
 @model string
 
 <div class="checkout-container">
     <div class="subtotal">
-        <p>Total</p>
-        <p class="subtotal-value">@Model</p>
+        <p>@await translator.TranslateText("Total")</p>
+        <p class="subtotal-value">@await translator.TranslateText(Model)</p>
     </div>
-    <button class="checkout-btn">Checkout</button>
+    <button class="checkout-btn">@await translator.TranslateText("Checkout")</button>
 </div>

@@ -18,10 +18,8 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public async Task<IActionResult> Index()
+    public IActionResult Index()
     {
-        var preferredLanguage = GetPreferredLanguage();
-        ViewData["PreferredLanguage"] = preferredLanguage;
         return View();
     }
 
