@@ -92,10 +92,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Remove from cart button
     $(document).on('click', '.remove-product-btn', function() {
+        $(".checkout-btn").prop("disabled", true);
 
         var index = $(this).attr("item-index");
-        MakeRequest("/Cart/RemoveItem", "POST", { index: index }, null, function() {
+        MakeRequest("/Cart/RemoveItem", "POST", { index: index }, function() {
+            $(".checkout-btn").prop("disabled", false);
+        }, function() {
             console.log("Error removing from cart");
+            $(".checkout-btn").prop("disabled", false);
         });
 
         $(this).closest(".product").remove();
@@ -125,12 +129,16 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     $(document).on('click', '.edit-product-count-btn', function() {
+        $(".checkout-btn").prop("disabled", true);
         var index = $(this).attr("item-index");
         var isIncrement = $(this).text() == "+";
 
         // Update session cart object item count
-        MakeRequest("/Cart/EditCount", "POST", { index: index, isIncrement: isIncrement }, null, function() {
+        MakeRequest("/Cart/EditCount", "POST", { index: index, isIncrement: isIncrement }, function() {
+            $(".checkout-btn").prop("disabled", false);
+        }, function() {
             console.log("Error editing count");
+            $(".checkout-btn").prop("disabled", false);
         });
 
         // Update js cart object item count
