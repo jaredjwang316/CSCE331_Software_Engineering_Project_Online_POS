@@ -1,5 +1,5 @@
 /*
-    File: loading-screen.js
+    File: wwwroot/js/loading-screen.js
     Author: Griffin Beaudreau
     Date: November 12, 2023
     Purpose: Display a loading screen while data is being loaded

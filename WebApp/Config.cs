@@ -2,7 +2,7 @@
     File: Config.cs
     Author: Griffin Beaudreau
     Date: October 30, 2023
-    Description: This file contains the Config class, which is used to store
+    Purpose: This file contains the Config class, which is used to store
         general configuration information for the web app.
 */
 
@@ -15,7 +15,7 @@ static class Config {
     public static readonly string GOOGLE_TRANSLATE_API_KEY;
     public static readonly string CONNECTION_STRING;
     public static readonly string AWS_DB_NAME = "csce315331_07r_db";
-    public static string returnUrl; // This is the URI that the user will be redirected to after logging in.
+    public static string returnUrl;
 
     static Config() {
         GOOGLE_TRANSLATE_API_KEY = Environment.GetEnvironmentVariable("GOOGLE_TRANSLATE_API_KEY")

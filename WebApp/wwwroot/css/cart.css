@@ -1,3 +1,10 @@
+/*
+    File: wwwroot/css/cart.css
+    Author: Griffin Beaudreau
+    Date: November 24, 2023
+    Purpose: This file contains the CSS for the cart page.
+*/
+
 body {
     background-image: url("https://order.gongchausa.com/static/media/backgrounds.12ca03b5bb94af521d4f.png");
     background-repeat: repeat-y;
@@ -212,3 +219,39 @@ img {
             width: 100%;
         }
     }
+
+.login a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.cart div {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart a {
+    font-size: 1.2rem;
+}
+
+.cart-counter {
+    position: relative;
+    transform: translate(50%, -50%);
+    font-size: 0.8rem;
+}
+
+.cartlayout-back {
+    top: 0;
+    left: 0;
+    margin: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    font-size: 1.2rem;
+}

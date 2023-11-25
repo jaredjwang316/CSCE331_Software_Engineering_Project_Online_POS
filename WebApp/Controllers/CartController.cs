@@ -1,10 +1,10 @@
 /*
-
+    File: Controllers/CartController.cs
+    Author: Griffin Beaudreau
+    Date: November 24, 2023
 */
 
-using System;
 using System.Diagnostics;
-using System.Reflection.Metadata.Ecma335;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WebApp.Data;

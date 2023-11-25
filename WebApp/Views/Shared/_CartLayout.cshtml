@@ -1,10 +1,16 @@
-﻿@using WebApp.APIs.GoogleTranslate
+@* 
+    File: _CustomerLayout.cshtml
+    Author: Griffin Beaudreau
+    Date: November 5th, 2023
+*@
+
+@using WebApp.APIs.GoogleTranslate
 @{
     var translator = new GoogleTranslate();
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang=@translator.GetPreferredLanguage()>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,13 +18,15 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Customer.css" asp-append-version="true" />
+    <script src="~/js/customer.js" asp-append-version="true"></script>
     <script src="~/js/loading-screen.js" asp-append-version="true"></script>
     <script src="~/js/cart.js" asp-append-version="true"></script>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid"> <!--May change to container-->
+            <div class="container-fluid">
                 <!--Logo-->
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" asp-route-autoRedirect="false">
                     <img 
@@ -39,10 +47,9 @@
                         <!--Used to push other content to right-->
                         @{
                             bool isManager = User.IsInRole("Manager");
-                            bool isCashier = User.IsInRole("Cashier");
                         }
 
-                        @if (isManager || isCashier)
+                        @if (isManager)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark">Quick Access: </a>
@@ -50,26 +57,29 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" asp-route-autoRedirect="false">Home</a>
                             </li>
-                            if (isManager) {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Manager" asp-action="Index">Manager</a>
-                                </li>
-                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Manager" asp-action="Index">Manager</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Cashier" asp-action="Index">Cashier</a>
                             </li>
-                            if (isManager) {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Customer</a>
-                                </li>
-                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Customer</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="MenuBoard" asp-action="Index">Menu Board</a>
                             </li>
                         }
                     </ul>
                     <ul class="navbar-nav">
-                        <li class="nav-item">
+                        <li class="nav-item cart">
+                            <div>
+                                <span class="badge rounded-pill badge-notification bg-danger cart-counter" id="cart-counter">0</span>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">🛒</a>
+                            </div>
+                            
+                        </li>
+                        <li class="nav-item login">
                             @if (User.Identity!.IsAuthenticated)
                             {
                                 string name = User.Identity.Name ?? "";
@@ -91,12 +101,19 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            <form method="post" asp-controller="Customer" asp-action="Index">
+                <button class="cartlayout-back" type="submit">@await translator.TranslateText("Continue Shopping")</button>
+            </form>
             @RenderBody()
         </main>
     </div>
+
+    <div class="city-background-container">
+        <img src="~/img/city-background.png">
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-@await RenderSectionAsync("Scripts", required: false)
 </html>

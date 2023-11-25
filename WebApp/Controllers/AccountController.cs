@@ -1,5 +1,5 @@
 /*
-    File: AccountController.cs
+    File: Controllers/AccountController.cs
     Author: Griffin Beaudreau
     Date: November 5, 2023
 */
@@ -40,7 +40,6 @@ public class AccountController : Controller
     {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
 
-
         var result = await HttpContext.AuthenticateAsync();
         if (result?.Succeeded != true)
         {
@@ -72,16 +71,22 @@ public class AccountController : Controller
 
         unit.CloseConnection();
 
-        if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl)) {
+        bool isManagerOrCashier = role == "Manager" || role == "Cashier";
+        if (!isManagerOrCashier && !string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl)) {
             return Redirect(returnUrl);
         }
         
         return Redirect(Config.returnUrl);
     }
 
-    public IActionResult Logout()
+    public IActionResult Logout(string returnUrl)
     {
-        return SignOut(new AuthenticationProperties() { RedirectUri = Config.returnUrl }, CookieAuthenticationDefaults.AuthenticationScheme);
+        bool isManagerOrCashier = GetRole() == "Manager" || GetRole() == "Cashier";
+        returnUrl ??= Config.returnUrl;
+        if (isManagerOrCashier) {
+            returnUrl = Config.returnUrl;
+        }
+        return SignOut(new AuthenticationProperties() { RedirectUri = returnUrl }, CookieAuthenticationDefaults.AuthenticationScheme);
     }
 
     public IActionResult AccessDenied()

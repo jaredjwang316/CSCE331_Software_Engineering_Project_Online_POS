@@ -1,9 +1,9 @@
 /*
-    File: cart.js
+    File: wwwroot/js/cart.js
     Author: Griffin Beaudreau
     Date: November 5th, 2023
+    Purpose: Contains all javascript functions for the cart page.
 */
-
 
 function MakeRequest(url, method, data, successCallback, errorCallback) {
     $.ajax({
@@ -49,6 +49,7 @@ var cart = new Cart();  // Global cart object
 function GetCartSuccess(data) {
     cart.items = data.items.map(item => Object.assign(new Item, item));
     cart.total = data.total;
+    $(".cart-counter").text(cart.Length());
 }
 function GetCartError() {
     MakeRequest("/Cart/GetCartFromSession", "GET", null, GetCartSuccess, GetCartError);
@@ -92,10 +93,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Remove from cart button
     $(document).on('click', '.remove-product-btn', function() {
+        $(".checkout-btn").prop("disabled", true);
 
         var index = $(this).attr("item-index");
-        MakeRequest("/Cart/RemoveItem", "POST", { index: index }, null, function() {
+        MakeRequest("/Cart/RemoveItem", "POST", { index: index }, function() {
+            $(".checkout-btn").prop("disabled", false);
+        }, function() {
             console.log("Error removing from cart");
+            $(".checkout-btn").prop("disabled", false);
         });
 
         $(this).closest(".product").remove();
@@ -122,15 +127,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Update html cart total
         $(".subtotal-value").text("$" + (total_cost).toFixed(2));
+
+        // Update cart counter
+        $(".cart-counter").text(cart.Length());
     });
 
     $(document).on('click', '.edit-product-count-btn', function() {
+        $(".checkout-btn").prop("disabled", true);
         var index = $(this).attr("item-index");
         var isIncrement = $(this).text() == "+";
 
         // Update session cart object item count
-        MakeRequest("/Cart/EditCount", "POST", { index: index, isIncrement: isIncrement }, null, function() {
+        MakeRequest("/Cart/EditCount", "POST", { index: index, isIncrement: isIncrement }, function() {
+            $(".checkout-btn").prop("disabled", false);
+        }, function() {
             console.log("Error editing count");
+            $(".checkout-btn").prop("disabled", false);
         });
 
         // Update js cart object item count
@@ -173,6 +185,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Update html cart total
         $(".subtotal-value").text("$" + (total_cost).toFixed(2));
+
+        // Update cart counter
+        $(".cart-counter").text(cart.Length());
     });
 
     $(document).on('click', '.edit-options-btn', function() {
@@ -183,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function() {
     $(document).on('click', '.checkout-btn', function() {
         // var confirmCheckout = confirm("Process payment");
         // if (!confirmCheckout) return;
-
+        console.log(cart.Length());
         if (cart.Length() == 0) {
             return;
         }
@@ -213,6 +228,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     clearTimeout(timeout);
                     document.dispatchEvent(new Event("HideLoadingScreen"));
                     $(this).prop("disabled", false);
+                    $(".cart-counter").text(cart.Length());
                 },
                 error: function () {
                     console.log("Error during checkout");
