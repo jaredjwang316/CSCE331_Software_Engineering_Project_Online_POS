@@ -79,13 +79,15 @@
                             @if (User.Identity!.IsAuthenticated)
                             {
                                 string name = User.Identity.Name ?? "";
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">
+                                string currentUrl = Context.Request.Path;
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@currentUrl">
                                     @name | @await translator.TranslateText("Log out")
                                 </a>
                             }
                             else
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">@await translator.TranslateText("Log in")</a>
+                                string currentUrl = Context.Request.Path;
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@currentUrl">@await translator.TranslateText("Log in")</a>
                             }
                         </li>
                     </ul>
