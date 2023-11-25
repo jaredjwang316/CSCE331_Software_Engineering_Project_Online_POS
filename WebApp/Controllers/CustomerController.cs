@@ -11,18 +11,25 @@ using WebApp.Models.ViewModels;
 using WebApp.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using WebApp.Models.Cart;
 
 namespace WebApp.Controllers;
 public class CustomerController : Controller {
     private readonly UnitOfWork unit;
+    private readonly CartService cartService;
     private readonly IMemoryCache cache;
 
-    public CustomerController(UnitOfWork unit, IMemoryCache cache) {
+    public CustomerController(UnitOfWork unit, CartService cartService, IMemoryCache cache) {
         this.unit = unit;
+        this.cartService = cartService;
         this.cache = cache;
     }
 
     public IActionResult Index() {
+        Cart cart = cartService.GetCartFromSession();
+        int itemsInCart = cart!.Items.Sum(i => i.Quantity);
+        ViewBag.itemsInCart = itemsInCart;
+
         return View();
     }
 
