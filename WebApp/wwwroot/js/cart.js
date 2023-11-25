@@ -5,7 +5,6 @@
     Purpose: Contains all javascript functions for the cart page.
 */
 
-
 function MakeRequest(url, method, data, successCallback, errorCallback) {
     $.ajax({
         url: url,
@@ -50,6 +49,7 @@ var cart = new Cart();  // Global cart object
 function GetCartSuccess(data) {
     cart.items = data.items.map(item => Object.assign(new Item, item));
     cart.total = data.total;
+    $(".cart-counter").text(cart.Length());
 }
 function GetCartError() {
     MakeRequest("/Cart/GetCartFromSession", "GET", null, GetCartSuccess, GetCartError);
@@ -127,6 +127,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Update html cart total
         $(".subtotal-value").text("$" + (total_cost).toFixed(2));
+
+        // Update cart counter
+        $(".cart-counter").text(cart.Length());
     });
 
     $(document).on('click', '.edit-product-count-btn', function() {
@@ -182,6 +185,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Update html cart total
         $(".subtotal-value").text("$" + (total_cost).toFixed(2));
+
+        // Update cart counter
+        $(".cart-counter").text(cart.Length());
     });
 
     $(document).on('click', '.edit-options-btn', function() {
@@ -192,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function() {
     $(document).on('click', '.checkout-btn', function() {
         // var confirmCheckout = confirm("Process payment");
         // if (!confirmCheckout) return;
-
+        console.log(cart.Length());
         if (cart.Length() == 0) {
             return;
         }
@@ -222,6 +228,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     clearTimeout(timeout);
                     document.dispatchEvent(new Event("HideLoadingScreen"));
                     $(this).prop("disabled", false);
+                    $(".cart-counter").text(cart.Length());
                 },
                 error: function () {
                     console.log("Error during checkout");
