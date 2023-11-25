@@ -1,5 +1,5 @@
 /*
-    File: customer.js
+    File: wwwroot/js/customer.js
     Author: Griffin Beaudreau
     Date: November 12, 2023
     Purpose: Basic functionality for the customer page.

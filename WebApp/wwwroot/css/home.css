@@ -1,7 +1,7 @@
 /* 
     File: home.css
     Author: Nihar Shah
-    Date: November 7, 2023
+    Date: November 24, 2023
 */
 
 html {
@@ -19,56 +19,90 @@ body {
 
 .elementor-section {
     padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 }
 
 .elementor-container {
-    max-width: 300px;
     display: flex;
-    margin-right: auto;
-    margin-left: auto;
-    position: relative;
-    --widgets-spacing: 20px;
-    min-height: 1px;
-    display: flex;
-    width: 100%;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 10px;
     box-sizing: border-box;
     color: black;
-    align-items: center;
     background-color: #C60734;
     border-radius: 40px;
 }
-@media screen and (max-width: 768px) {
-    .elementor-container {
-        width: 100%;
-    }
+
+.elementor-box-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-decoration: none;
+    color: white;
+}
+.elementor-box-title:hover {
+    color: white;
 }
 
-.elementor-image-box-img img {
-    border-radius: 40px;
-    transition-duration: 0.3s;
-    height: 385px;
-    object-fit: cover;
-    max-width: 100%;
-    border: none;
-    transform: translateY(-1px);
+.elementor-container {
+    transition: all 0.3s ease-in-out;
 }
-
 .elementor-image-box-img img:hover{
     transform: translateY(-10px);
 }
 
-.elementor-box-title {
-    margin-bottom: 0px;
-    color: white;
-    font-family: "Lusitana", Sans-serif;
-    font-size: 30px;
-    font-weight: 600;
-    text-decoration: none;
-    justify-content: center;
-    text-align: center;
+.elementor-image-box-img {
+    width: 300px;
+    height: 370px;
+    margin: 20px;
+    border-radius: 40px;
+    transform: translateY(-23px);
 }
 
-.elementor-box-title:hover {
-    color: white;
+.elementor-image-box-img img {
+    width: 100%;
+    height: 108%;
+    object-fit: cover;
+    border-radius: 40px;
+    transition: all 0.3s ease-in-out;
+}
+
+.right, .left {
+    scale: 0.8;
+    justify-content: center;
+    margin: -20px;
+    border-radius: 40px;
+}
+
+@media screen and (max-width: 1000px) {
+    .elementor-section {
+        flex-direction: column;
+    }
+
+    .elementor-container {
+        margin: 20px 0;
+    }
+
+    .elementor-image-box-img img {
+        display: none;
+    }
+
+    .elementor-box-title {
+        height: 70px;
+    }
+
+    .right, .left, .center {
+        scale: 1;
+        margin: 10px;
+    }
+
+    .elementor-box-title h3 {
+        margin-bottom: 38px;
+    }
 }

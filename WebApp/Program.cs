@@ -1,13 +1,19 @@
+/*
+    File: Program.cs
+    Author: Griffin Beaudreau
+    Date: November 24, 2023
+    Purpose: This file is the entry point for the web app,
+        and sets up the web app's configuration.
+*/
+
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using WebApp;
 using WebApp.Data;
-using WebApp.Models.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession(
@@ -26,7 +32,6 @@ builder.WebHost.UseUrls(Config.returnUrl);
 
 builder.Services.AddScoped<UnitOfWork>(_ => new(Config.AWS_DB_NAME));
 
-// Set up Google Authentication scheme.
 builder.Services.AddAuthentication(options => {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;

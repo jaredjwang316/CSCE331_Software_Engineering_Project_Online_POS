@@ -1,7 +1,8 @@
 /*
-    File: cart.js
+    File: wwwroot/js/cart.js
     Author: Griffin Beaudreau
     Date: November 5th, 2023
+    Purpose: Contains all javascript functions for the cart page.
 */
 
 

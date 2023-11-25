@@ -1,5 +1,5 @@
 /*
-    File: GoogleTranslate.cs
+    File: APIs/GoogleTranslate/GoogleTranslate.cs
     Author: Griffin Beaudreau
     Date: November 17, 2023
 */
@@ -32,7 +32,7 @@ public class GoogleTranslate {
         using (HttpClient client = new()) {
             HttpResponseMessage response = await client.GetAsync(url);
             if (!response.IsSuccessStatusCode) {
-                throw new Exception($"Google Translate API returned status code {response.StatusCode}.");
+                return text;
             }
 
             string responseBody = await response.Content.ReadAsStringAsync();
@@ -40,7 +40,7 @@ public class GoogleTranslate {
             try {
                 json = JsonDocument.Parse(responseBody);
             } catch {
-                throw new Exception($"Google Translate API returned invalid JSON: {responseBody}");
+                return text;
             }
 
             string? translatedText;
@@ -51,7 +51,7 @@ public class GoogleTranslate {
                     .GetProperty("translatedText")
                     .GetString();
             } catch {
-                throw new Exception($"Google Translate API returned invalid JSON: {responseBody}");
+                translatedText = null;
             }
 
             return translatedText ?? text;

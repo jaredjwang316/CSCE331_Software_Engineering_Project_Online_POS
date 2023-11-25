@@ -1,7 +1,7 @@
 ﻿@* 
     File: Home/Index.cshtml
     Author: Nihar Shah
-    Date: November 7, 2023
+    Date: November 24, 2023
 *@
 
 @using System.Security.Claims;
@@ -20,12 +20,28 @@
 </div>
 
 <section class="elementor-section">
-    <div class="elementor-container">
+    <div class="elementor-container left">
         <a class="elementor-box-title" asp-area="" asp-controller="MenuBoard" asp-action="Index">
             <figure class="elementor-image-box-img">
             <img src="https://gongchausa.com/wp-content/uploads/2021/12/25-w.png">
             </figure>
             <h3>@await translator.TranslateText("Menu")</h3>
+        </a>
+    </div>
+    <div class="elementor-container center">
+        <a class="elementor-box-title" asp-area="" asp-controller="Customer" asp-action="Index">
+            <figure class="elementor-image-box-img">
+            <img src="https://gongchausa.com/wp-content/uploads/2021/12/Tea-17.png">
+            </figure>
+            <h3>@await translator.TranslateText("Order")</h3>
+        </a>
+    </div>
+    <div class="elementor-container right">
+        <a class="elementor-box-title" asp-area="" asp-controller="" asp-action="">
+            <figure class="elementor-image-box-img">
+            <img src="https://gongchausa.com/wp-content/uploads/2021/12/Tea-29-scaled.jpg">
+            </figure>
+            <h3>@await translator.TranslateText("WIP")</h3>
         </a>
     </div>
 </section>
