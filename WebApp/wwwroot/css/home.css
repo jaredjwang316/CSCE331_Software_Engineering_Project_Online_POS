@@ -79,6 +79,9 @@ body {
     margin: -20px;
     border-radius: 40px;
 }
+.right .elementor-image-box-img, .left .elementor-image-box-img {
+    width: 302px;
+}
 
 @media screen and (max-width: 1000px) {
     .elementor-section {
