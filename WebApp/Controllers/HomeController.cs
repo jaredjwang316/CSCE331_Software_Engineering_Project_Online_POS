@@ -18,8 +18,15 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(bool autoRedirect = true)
     {
+        if (autoRedirect && User.Identity!.IsAuthenticated && User.IsInRole("Cashier")) {
+            return RedirectToAction("Index", "Cashier");
+        }
+        if (autoRedirect && User.Identity!.IsAuthenticated && User.IsInRole("Manager")) {
+            return RedirectToAction("Index", "Manager");
+        }
+
         return View();
     }
 

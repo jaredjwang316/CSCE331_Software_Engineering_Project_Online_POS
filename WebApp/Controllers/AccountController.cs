@@ -40,7 +40,6 @@ public class AccountController : Controller
     {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
 
-
         var result = await HttpContext.AuthenticateAsync();
         if (result?.Succeeded != true)
         {

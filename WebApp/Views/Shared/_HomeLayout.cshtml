@@ -25,7 +25,7 @@
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div class="container-fluid">
                     <!--Logo-->
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" asp-route-autoRedirect="false">
                         <img 
                             src="https://gong-cha-usa.com/wp-content/uploads/Gong-cha-horizontal-logo-word-mark-400x81.png" 
                             alt="Gong Cha"
@@ -52,7 +52,7 @@
                                     <a class="nav-link text-dark">Quick Access: </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" asp-route-autoRedirect="false">Home</a>
                                 </li>
                                 if (isManager) {
                                     <li class="nav-item">
@@ -77,9 +77,8 @@
                                 @if (User.Identity!.IsAuthenticated)
                                 {
                                     string name = User.Identity.Name ?? "";
-                                    @*<p class="nav-link text-dark name">@name |</p> *@
                                     <a class="nav-link text-dark login-link" asp-area="" asp-controller="Account" asp-action="Logout">
-                                        @name @await translator.TranslateText(" | Log out")
+                                        @name | @await translator.TranslateText("Log out")
                                     </a>
                                 }
                                 else
