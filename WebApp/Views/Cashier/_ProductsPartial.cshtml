@@ -1,0 +1,14 @@
+@using WebApp.Models.UnitOfWork
+@model List<Product>
+
+@using WebApp.APIs.GoogleTranslate
+@{
+    var translator = new GoogleTranslate();
+}
+
+@foreach (var product in Model) {
+    <button class="menu-item product-btn" id="@product.Id" endpoint="LoadCustomizations">
+        <img src="@product.ImgUrl" />
+        <p>@await translator.TranslateText(product.Name)</p>
+    </button>
+}
