@@ -6,27 +6,32 @@
 
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using WebApp.Data;
 using WebApp.Models;
 using WebApp.Models.Cart;
 using WebApp.Models.UnitOfWork;
+using WebApp.Models.ViewModels;
 
 namespace WebApp.Controllers;
 public class CartController : Controller
 {
     private readonly ILogger<CartController> _logger;
     private readonly UnitOfWork unit;
+    private readonly CartService cartService;
 
-    public CartController(ILogger<CartController> logger, UnitOfWork unit)
+    public CartController(ILogger<CartController> logger, UnitOfWork unit, CartService cartService)
     {
         _logger = logger;
         this.unit = unit;
+        this.cartService = cartService;
     }
 
     public IActionResult Index()
     {
-        Cart cart = GetCartFromSession();
+        Cart cart = cartService.GetCartFromSession();
+        int itemsInCart = cart!.Items.Sum(i => i.Quantity);
+        ViewBag.itemsInCart = itemsInCart;
+
         return View(cart);
     }
 
@@ -56,11 +61,11 @@ public class CartController : Controller
         if (selected_product == null) return BadRequest();
 
         Item item = new(selected_product, selected_customizations, quantity);
-        Cart cart = GetCartFromSession();
+        Cart cart = cartService.GetCartFromSession();
         int initial_size = cart.Items.Sum(i => i.Quantity);
 
         cart.AddItem(item);
-        SetCartInSession(cart);
+        cartService.SetCartInSession(cart);
 
         int final_size = cart.Items.Sum(i => i.Quantity);
 
@@ -69,35 +74,48 @@ public class CartController : Controller
     }
 
     public IActionResult RemoveItem(int index) {
-        Cart cart = GetCartFromSession();
+        Cart cart = cartService.GetCartFromSession();
         cart.RemoveItem(index);
-        SetCartInSession(cart);
+        cartService.SetCartInSession(cart);
         return Ok();
     }
 
     public IActionResult EditCount(int index, bool isIncrement) {
-        Cart cart = GetCartFromSession();
+        Cart cart = cartService.GetCartFromSession();
         if (cart.Items[index].Quantity == 1 && !isIncrement) {
             cart.RemoveItem(index);
-            SetCartInSession(cart);
+            cartService.SetCartInSession(cart);
             return Ok();
         }
         if (isIncrement) {
             cart.Items[index].Quantity++;
         } else {
-            Console.WriteLine(index);
             cart.Items[index].Quantity--;
         }
-        SetCartInSession(cart);
+        cartService.SetCartInSession(cart);
         return Ok();
     }
 
     public IActionResult EditOptions(int index) {
-        throw new NotImplementedException();
+        List<SeriesInfo> seriesInformation = unit.GetAll<SeriesInfo>()
+            .Where(series => !series.IsHidden && series.IsCustomization)
+            .ToList();
+        List<Product> products = unit.GetAll<Product>()
+            .Where(product => seriesInformation.Any(series => series.Name == product.Series))
+            .ToList();
+
+        var model = new EditViewModel {
+            Cart = cartService.GetCartFromSession(),
+            Index = index,
+            SeriesInformation = seriesInformation,
+            Products = products
+        };
+
+        return PartialView("_EditItemPartial", model);
     }
 
     public IActionResult Checkout(string name, string role, string email) {
-        Cart cart = GetCartFromSession();
+        Cart cart = cartService.GetCartFromSession();
 
         if (cart == null) return BadRequest();
 
@@ -120,31 +138,17 @@ public class CartController : Controller
         unit.Add(order);
 
         cart.Clear();
-        SetCartInSession(cart);
+        cartService.SetCartInSession(cart);
 
         return Ok();
     }
 
     public Cart GetCartFromSession() {
-        if (HttpContext.Session.GetString("Cart") == null) {
-            var newCart = new Cart();
-            var serializedCart = JsonConvert.SerializeObject(newCart);
-
-            HttpContext.Session.SetString("Cart", serializedCart);
-        } else {
-            Console.WriteLine("Cart already exists.");
-
-            var cartJson = HttpContext.Session.GetString("Cart") ?? throw new Exception("Cart is null");
-            return JsonConvert.DeserializeObject<Cart>(cartJson)!;
-        }
-
-        // Return the deserialized cart
-        return JsonConvert.DeserializeObject<Cart>(HttpContext.Session.GetString("Cart")!)!;
+        return cartService.GetCartFromSession();
     }
 
-
     public void SetCartInSession(Cart cart) {
-        HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
+        cartService.SetCartInSession(cart);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -7,6 +7,9 @@ using WebApp.Data;
 using Google.Cloud.Translation.V2;
 using System.Text.Json;
 
+using WebApp.APIs.AzureMaps;
+using WebApp.Models.AzureMaps.Weather;
+
 namespace WebApp.Controllers;
 
 public class HomeController : Controller

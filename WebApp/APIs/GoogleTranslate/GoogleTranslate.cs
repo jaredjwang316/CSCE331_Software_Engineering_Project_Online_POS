@@ -29,33 +29,36 @@ public class GoogleTranslate {
         string encodedText = HttpUtility.UrlEncode(text);
         string url = $"{URL_BASE}?key={apiKey}&source={source}&target={target}&q={encodedText}";
 
-        using (HttpClient client = new()) {
-            HttpResponseMessage response = await client.GetAsync(url);
-            if (!response.IsSuccessStatusCode) {
-                return text;
-            }
-
-            string responseBody = await response.Content.ReadAsStringAsync();
-            JsonDocument json;
-            try {
-                json = JsonDocument.Parse(responseBody);
-            } catch {
-                return text;
-            }
-
-            string? translatedText;
-            try {
-                translatedText = json.RootElement
-                    .GetProperty("data")
-                    .GetProperty("translations")[0]
-                    .GetProperty("translatedText")
-                    .GetString();
-            } catch {
-                translatedText = null;
-            }
-
-            return translatedText ?? text;
+        using HttpClient client = new();
+        HttpResponseMessage response = await client.GetAsync(url);
+        if (!response.IsSuccessStatusCode)
+        {
+            return text;
         }
+
+        string responseBody = await response.Content.ReadAsStringAsync();
+        JsonDocument json;
+        try {
+            json = JsonDocument.Parse(responseBody);
+        }
+        catch {
+            return text;
+        }
+
+        string? translatedText;
+        try {
+            translatedText = json.RootElement
+                .GetProperty("data")
+                .GetProperty("translations")[0]
+                .GetProperty("translatedText")
+                .GetString();
+        }
+        catch
+        {
+            translatedText = null;
+        }
+
+        return translatedText ?? text;
     }
 
     public string GetPreferredLanguage() {

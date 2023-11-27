@@ -5,8 +5,11 @@
 *@
 
 @using WebApp.APIs.GoogleTranslate
+@using WebApp.APIs.AzureMaps
+@using WebApp.Models.AzureMaps.Weather
 @{
     var translator = new GoogleTranslate();
+    int itemsInCart = ViewBag.ItemsInCart;
 }
 
 <!DOCTYPE html>
@@ -71,35 +74,10 @@
                             </li>
                         }
                     </ul>
-                    <style>
-                        .login a {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            font-size: 1.2rem;
-                        }
-
-                        .cart div {
-                            position: relative;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                        }
-
-                        .cart a {
-                            font-size: 1.2rem;
-                        }
-
-                        .cart-counter {
-                            position: relative;
-                            transform: translate(50%, -50%);
-                            font-size: 0.8rem;
-                        }
-                    </style>
                     <ul class="navbar-nav">
                         <li class="nav-item cart">
                             <div>
-                                <span class="badge rounded-pill badge-notification bg-danger cart-counter" id="cart-counter">0</span>
+                                <span class="badge rounded-pill badge-notification bg-danger cart-counter" id="cart-counter">@itemsInCart</span>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">🛒</a>
                             </div>
                             
@@ -110,14 +88,29 @@
                                 string name = User.Identity.Name ?? "";
                                 string currentUrl = Context.Request.Path;
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@currentUrl">
-                                    @name | @await translator.TranslateText("Log out")
+                                    @name | @await translator.TranslateText("Log out") | 
                                 </a>
                             }
                             else
                             {
                                 string currentUrl = Context.Request.Path;
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@currentUrl">@await translator.TranslateText("Log in")</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@currentUrl">
+                                    @await translator.TranslateText("Log in") | 
+                                </a>
                             }
+                        </li>
+                        <li class="nav-item">
+                            @{
+                                var weather = new Weather();
+                                CurrentCondition? currentCondition = await weather.GetCurrentCondition();
+                                double? temperature = currentCondition?.Temperature;
+                                string temperatureString = temperature + "°F";
+
+                                int? iconCode = currentCondition?.IconCode;
+                                string path = weather.GetWeatherIconName(iconCode) + ".png";
+                            }
+                            <img id="weather-icon" src="~/img/WeatherIcons/@path"/>
+                            <p id="temperature">@temperatureString</p>
                         </li>
                     </ul>
                 </div>
