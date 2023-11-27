@@ -30,6 +30,11 @@ public class CustomerController : Controller {
         int itemsInCart = cart!.Items.Sum(i => i.Quantity);
         ViewBag.itemsInCart = itemsInCart;
 
+        // Get and test latitude and longitude cookies
+        string? latitude = Request.Cookies["latitude"];
+        string? longitude = Request.Cookies["longitude"];
+        Console.WriteLine($"Latitude: {latitude}, Longitude: {longitude}");
+
         return View();
     }
 

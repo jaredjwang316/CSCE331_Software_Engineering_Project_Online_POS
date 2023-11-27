@@ -132,17 +132,25 @@ document.addEventListener("DOMContentLoaded", function() {
         $(".cart-counter").text(cart.Length());
     });
 
+    var activeRequests = 0;
     $(document).on('click', '.edit-product-count-btn', function() {
         $(".checkout-btn").prop("disabled", true);
+        activeRequests++;
         var index = $(this).attr("item-index");
         var isIncrement = $(this).text() == "+";
 
         // Update session cart object item count
         MakeRequest("/Cart/EditCount", "POST", { index: index, isIncrement: isIncrement }, function() {
-            $(".checkout-btn").prop("disabled", false);
+            activeRequests--;
+            if (activeRequests == 0) {
+                $(".checkout-btn").prop("disabled", false);
+            }
         }, function() {
-            console.log("Error editing count");
-            $(".checkout-btn").prop("disabled", false);
+            console.log("Error editing cart item count");
+            activeRequests--;
+            if (activeRequests == 0) {
+                $(".checkout-btn").prop("disabled", false);
+            }
         });
 
         // Update js cart object item count

@@ -13,6 +13,7 @@ namespace WebApp;
 /// </summary>
 static class Config {
     public static readonly string GOOGLE_TRANSLATE_API_KEY;
+    public static readonly string AZURE_MAPS_API_KEY;
     public static readonly string CONNECTION_STRING;
     public static readonly string AWS_DB_NAME = "csce315331_07r_db";
     public static string returnUrl;
@@ -20,7 +21,10 @@ static class Config {
     static Config() {
         GOOGLE_TRANSLATE_API_KEY = Environment.GetEnvironmentVariable("GOOGLE_TRANSLATE_API_KEY")
             ?? throw new ArgumentException("GOOGLE_TRANSLATE_API_KEY environment variable cannot be null or empty.");
-            
+        
+        AZURE_MAPS_API_KEY = Environment.GetEnvironmentVariable("AZURE_MAPS_API_KEY")
+            ?? throw new ArgumentException("AZURE_MAPS_API_KEY environment variable cannot be null or empty.");
+
         CONNECTION_STRING = Environment.GetEnvironmentVariable("POSTGRESQLCONNSTR_AWS_DB")
             ?? throw new ArgumentException("POSTGRESQLCONNSTR_AWS_DB environment variable cannot be null or empty.");
 
