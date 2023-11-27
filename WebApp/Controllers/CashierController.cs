@@ -15,7 +15,7 @@ public class CashierController : Controller
 {
     private readonly ILogger<CashierController> _logger;
     private readonly UnitOfWork unit;
-    private readonly IMemoryCache cache;
+    private readonly IMemoryCache cache;s
 
     public CashierController(ILogger<CashierController> logger, UnitOfWork unit, IMemoryCache cache)
     {
