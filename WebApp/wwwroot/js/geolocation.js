@@ -29,33 +29,3 @@ function getCookie(name) {
     }
     return null;
 }
-
-// document.addEventListener("DOMContentLoaded", function() {
-//     var weather = getWeather();
-
-//     function getWeather() {
-//         console.log("Getting weather");
-//         var latitude = getCookie("latitude");
-//         var longitude = getCookie("longitude");
-//         var subscriptionKey = "tfRy4n7VajYe8wsQMttrAWDbJVkXyc1AI76MgZwUCPQ";
-//         var url = `https://atlas.microsoft.com/weather/currentConditions/json?api-version=1.0&subscription-key=${subscriptionKey}&query=${latitude},${longitude}`;
-//         var weather = null;
-//         $.ajax({
-//             url: url,
-//             method: "GET",
-//             async: false,
-//             success: function (data) {
-//                 weather = data;
-//                 let temperature = data.results[0].temperature;
-//                 let icon = data.results[0].iconCode;
-
-//                 console.log(temperature.value + "°" + temperature.unit);
-//                 console.log(icon);
-//             },
-//             error: function (data) {
-//                 console.log(data);
-//             }
-//         });
-//         return weather;
-//     }
-// });
