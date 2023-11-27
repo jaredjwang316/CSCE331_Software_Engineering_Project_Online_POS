@@ -1,1 +1,53 @@
-Not Implemented
+@{
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Cashier Page";
+}
+
+@using WebApp.APIs.GoogleTranslate
+@{
+    var translator = new GoogleTranslate();
+}
+
+<div class="content-container">
+    <button class="back-btn">@await translator.TranslateText("Back")</button>
+    <div class="data-container"></div>
+    <div class="customization-menu"></div>
+</div>
+
+
+<style>
+    .cart-msg {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .5);
+        z-index: 100;
+        /* Center */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .cart-msg-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+    }
+</style>
+<div class="cart-msg" style="display: none;">
+    <div class="cart-msg-container">
+        <div class="cart-msg-text">
+            <p>@await translator.TranslateText("Item added to cart")</p>
+        </div>
+        <div class="cart-msg-btns">
+            <button class="cart-msg-btn" action="View Cart">@await translator.TranslateText("View Cart")</button>
+            <button class="cart-msg-btn" action="Continue Shopping">@await translator.TranslateText("Continue Shopping")</button>
+        </div>
+    </div>
+</div>
