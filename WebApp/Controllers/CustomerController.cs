@@ -45,14 +45,6 @@ public class CustomerController : Controller {
     }
 
     public IActionResult LoadBestSellers() {
-
-        var cachedData = cache.Get("BestSellers");
-        if (cachedData != null) {
-            Console.WriteLine("Cache hit!");
-        } else {
-            Console.WriteLine("Cache miss!");
-        }
-
         List<Product> model = cache.GetOrCreate("BestSellers", entry => {
             entry.SlidingExpiration = TimeSpan.FromMinutes(5);
             return unit.GetBestSellingProducts(10).ToList();

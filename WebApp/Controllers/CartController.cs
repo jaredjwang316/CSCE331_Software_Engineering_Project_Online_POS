@@ -11,6 +11,7 @@ using WebApp.Data;
 using WebApp.Models;
 using WebApp.Models.Cart;
 using WebApp.Models.UnitOfWork;
+using WebApp.Models.ViewModels;
 
 namespace WebApp.Controllers;
 public class CartController : Controller
@@ -97,7 +98,21 @@ public class CartController : Controller
     }
 
     public IActionResult EditOptions(int index) {
-        throw new NotImplementedException();
+        List<SeriesInfo> seriesInformation = unit.GetAll<SeriesInfo>()
+            .Where(series => !series.IsHidden && series.IsCustomization)
+            .ToList();
+        List<Product> products = unit.GetAll<Product>()
+            .Where(product => seriesInformation.Any(series => series.Name == product.Series))
+            .ToList();
+
+        var model = new EditViewModel {
+            Cart = cartService.GetCartFromSession(),
+            Index = index,
+            SeriesInformation = seriesInformation,
+            Products = products
+        };
+
+        return PartialView("_EditItemPartial", model);
     }
 
     public IActionResult Checkout(string name, string role, string email) {
@@ -132,7 +147,6 @@ public class CartController : Controller
     public Cart GetCartFromSession() {
         return cartService.GetCartFromSession();
     }
-
 
     public void SetCartInSession(Cart cart) {
         cartService.SetCartInSession(cart);

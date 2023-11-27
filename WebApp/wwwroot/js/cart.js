@@ -190,9 +190,11 @@ document.addEventListener("DOMContentLoaded", function() {
         $(".cart-counter").text(cart.Length());
     });
 
-    $(document).on('click', '.edit-options-btn', function() {
-        alert("Not implemented yet!");
-    });
+    // $(document).on('click', '.edit-product-options-btn', function() {
+    //     // Use customer controller and navigate to customization page
+    //     var productID = $(this).attr("id");
+    //     var customizations = $(this).attr("customizations");
+    // });
 
     // Checkout button
     $(document).on('click', '.checkout-btn', function() {
