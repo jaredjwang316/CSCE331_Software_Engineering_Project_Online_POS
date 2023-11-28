@@ -73,6 +73,14 @@ img {
         grid-template-columns: 1fr;
     }
 }
+
+/* @foreach (var product in Model) {
+    <button class="menu-item product-btn" id="@product.Id" endpoint="LoadCustomizations">
+        <img src="@product.ImgUrl" />
+        <p>@await translator.TranslateText(product.Name)</p>
+        <p class="product-price">@product.Price.ToString("C")</p>
+    </button>
+} */
 .menu-item  {
     display: flex;
     align-items: center;
@@ -92,6 +100,7 @@ img {
     height: 12rem;
 }
 .menu-item p {
+    display: flex;
     font-family: Lusitana;
     font-size: 1.5em;
     display: block;
@@ -101,11 +110,15 @@ img {
     margin-inline-end: 0px;
     margin-left: 2.3rem;
 }
+.menu-item p.product-price {
+    font-size: 1.5rem;
+    margin-left: auto;
+    margin-right: 2.3rem;
+}
 .menu-item:hover {
     transform: scale(1.02);
     transition-delay: 0s;
 }
-
 .back-btn {
     color: #C30E2F;
     font-size: 1.8rem;

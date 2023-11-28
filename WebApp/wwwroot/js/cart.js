@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
         $(".edit-product-count-btn").each(function() {
             var item_index = parseInt($(this).attr("item-index"));
             if (item_index > index) {
-                $(this).attr("item-index",  - 1);
+                $(this).attr("item-index", item_index - 1);
             }
         });
 

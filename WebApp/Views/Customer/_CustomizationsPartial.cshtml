@@ -22,6 +22,7 @@
 @{
     Model.SeriesInformation!.Reverse();
     List<string> seriesNames = new List<string>();
+    double cost = 0;
 }
 @foreach(SeriesInfo seriesInfo in Model.SeriesInformation!) {
     <div class="customization-title" id="@seriesInfo.Name">
@@ -31,17 +32,24 @@
         @foreach(Product product in Model.Products!) {
             if (product.Series == seriesInfo.Name) {     
                 if (seriesNames.Contains(product.Series) || seriesInfo.Name != "Size") {
-                    <button class="customization-btn product" id="@product.Id" series="@product.Series" multiselect="@seriesInfo.MultiSelectable">
+                    <button class="customization-btn product" id="@product.Id" series="@product.Series" multiselect="@seriesInfo.MultiSelectable" cost="@product.Price">
                         <p>@await translator.TranslateText(product.Name)</p>
                     </button>
                 } else {
-                    <button class="customization-btn product active" id="@product.Id" series="@product.Series" multiselect="@seriesInfo.MultiSelectable">
+                    <button class="customization-btn product active" id="@product.Id" series="@product.Series" multiselect="@seriesInfo.MultiSelectable" cost="@product.Price">
                         <p>@await translator.TranslateText(product.Name)</p>
                     </button>
                     seriesNames.Add(product.Series);
+                    cost += product.Price;
                 }
             }
         }
     </div>
 }
+<p class="Total-Price">@await translator.TranslateText("Total Price")
+    @{
+        string totalPrice = (Model.SelectedProduct!.Price + cost).ToString("C");
+    }
+    <span class="price" id="total-price" drink-price="@Model.SelectedProduct!.Price">@totalPrice</span>
+</p>
 <button class="add-to-cart-btn" id="@Model.SelectedProduct!.Id">@await translator.TranslateText("Add to Cart")</button>
