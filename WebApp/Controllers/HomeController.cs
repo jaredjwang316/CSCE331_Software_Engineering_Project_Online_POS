@@ -9,6 +9,7 @@ using System.Text.Json;
 
 using WebApp.APIs.AzureMaps;
 using WebApp.Models.AzureMaps.Weather;
+using WebApp.APIs.GoogleTranslate;
 
 namespace WebApp.Controllers;
 
@@ -25,8 +26,7 @@ public class HomeController : Controller
     {
         if (autoRedirect && User.Identity!.IsAuthenticated && User.IsInRole("Cashier")) {
             return RedirectToAction("Index", "Cashier");
-        }
-        if (autoRedirect && User.Identity!.IsAuthenticated && User.IsInRole("Manager")) {
+        } else if (autoRedirect && User.Identity!.IsAuthenticated && User.IsInRole("Manager")) {
             return RedirectToAction("Index", "Manager");
         }
 
