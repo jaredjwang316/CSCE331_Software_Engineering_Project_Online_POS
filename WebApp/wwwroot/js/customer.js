@@ -46,6 +46,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
             $(".customization-btn[series='" + $(this).attr("series") + "']").removeClass("active");
             $(this).toggleClass("active");
         }
+
+        var cost = 0;
+        $(".customization-btn.active").each(function() {
+            cost += parseFloat($(this).attr("cost"));
+        });
+        var totalPrice = parseFloat($("#total-price").attr("drink-price")) + cost;
+        $("#total-price").html("$" + totalPrice.toFixed(2));
+        
     });
 
     // Click event for back button
