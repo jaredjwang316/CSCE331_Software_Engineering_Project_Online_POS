@@ -24,6 +24,10 @@ img {
     -o-user-drag: none;
 }
 
+.city-background-container img {
+    right: 0;
+}
+
 .cart-container {
     display: flex;
     flex-direction: row;

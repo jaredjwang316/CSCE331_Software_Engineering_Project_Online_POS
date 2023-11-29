@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models.UnitOfWork;
 using WebApp.Models;
+using WebApp.Models.Cart;
 using WebApp.Data;
 
 namespace WebApp.Controllers;
@@ -9,18 +10,26 @@ namespace WebApp.Controllers;
 public class MenuBoardController : Controller
 {
     private readonly ILogger<MenuBoardController> _logger;
-    public MenuBoardController(ILogger<MenuBoardController> logger)
+    private readonly CartService cartService;
+
+    public MenuBoardController(ILogger<MenuBoardController> logger, CartService cartService)
     {
         _logger = logger;
+        this.cartService = cartService;
     }
 
     public IActionResult Index(string search)
     {
+
+        Cart cart = cartService.GetCartFromSession();
+        int itemsInCart = cart!.Items.Sum(i => i.Quantity);
+        ViewBag.itemsInCart = itemsInCart;
+
         // Instantiate the UnitOfWork with the desired configuration
-        UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
+        UnitOfWork uok = new(Config.AWS_DB_NAME);
 
         // Retrieve products and product ingredients from the database
-        var products = uok.GetAll<Product>().ToList().OrderBy(p => p.Series).ThenBy(p => p.Name).ToList();
+        var products = uok.GetAll<Product>().ToList();
         var prodIngredients = uok.GetAll<ProductIngredients>().ToList();
 
         // Filter products based on the search term
@@ -61,7 +70,7 @@ public class MenuBoardController : Controller
             // Retrieve products and product ingredients from the database
             var products = uok.GetAll<Product>().ToList();
             // var prodIngredients = uok.GetAll<ProductIngredients>().ToList();
-            List<string> theProducts = uok.GetUniqueSeries(true, true, true).ToList(); 
+            List<string> theProducts = uok.GetUniqueSeries(true, false, false).ToList(); 
 
             foreach (var p in theProducts)
             {
