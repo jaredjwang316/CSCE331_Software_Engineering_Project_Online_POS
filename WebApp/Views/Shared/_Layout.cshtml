@@ -74,7 +74,13 @@
                     <ul class="navbar-nav">
                         <li class="nav-item cart">
                             <div>
-                                <span class="badge rounded-pill badge-notification bg-danger cart-counter" id="cart-counter">@itemsInCart</span>
+                                @{
+                                    if (itemsInCart <= 0) {
+                                        <span class="badge rounded-pill badge-notification bg-danger cart-counter" id="cart-counter" style="display: none;">@itemsInCart</span>
+                                    } else {
+                                        <span class="badge rounded-pill badge-notification bg-danger cart-counter" id="cart-counter">@itemsInCart</span>
+                                    }
+                                }
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">🛒</a>
                             </div>
                         </li>

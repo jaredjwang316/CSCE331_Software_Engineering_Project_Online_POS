@@ -5,68 +5,28 @@
     Purpose: Contains all javascript functions for the cart page.
 */
 
-function MakeRequest(url, method, data, successCallback, errorCallback) {
-    $.ajax({
-        url: url,
-        method: method,
-        data: data,
-        success: successCallback,
-        error: errorCallback
-    });
-}
+import { makeRequest } from './utils/request.js';
+import { Cart, Item } from './models/cartModel.js';
 
-/* Cart */
-class Cart {
-    items = [Item];
-    total = 0;
-
-    Length() {
-        var count = 0;
-        this.items.forEach(function(item) {
-            count += item.quantity;
-        });
-        return count;
-    }
-}
-class Item {
-    product;
-    options = [];
-    quantity = 0;
-    cost = 0;
-
-    // method to calculate cost
-    TotalPrice() {
-        var total = 0.0;
-        total += this.product.price;
-        this.options.forEach(function(option) {
-            total += option.price;
-        });
-        total *= this.quantity;
-        return total;
-    }
-}
 var cart = new Cart();  // Global cart object
 function GetCartSuccess(data) {
     cart.items = data.items.map(item => Object.assign(new Item, item));
-    cart.total = data.total;
-    $(".cart-counter").text(cart.Length());
+    let length = cart.Length();
+    $(".cart-counter").text(length);
 }
 function GetCartError() {
-    MakeRequest("/Cart/GetCartFromSession", "GET", null, GetCartSuccess, GetCartError);
+    makeRequest("/Cart/GetCartFromSession", "GET", null, GetCartSuccess, GetCartError);
 }
 
 /* Main */
 document.addEventListener("DOMContentLoaded", function() {
-    MakeRequest("/Cart/GetCartFromSession", "GET", null, GetCartSuccess, GetCartError);
+    makeRequest("/Cart/GetCartFromSession", "GET", null, GetCartSuccess, GetCartError);
     document.dispatchEvent(new Event("HideLoadingScreen"));
 
     // Add to cart button
     $(document).on('click', '.add-to-cart-btn', function() {
         if ($(this).prop("disabled")) {
-            console.log("disabled...");
             return;
-        } else {
-            console.log("not disabled...");
         }
         $(this).prop("disabled", true);
         var productID = $(this).attr("id");
@@ -76,19 +36,33 @@ document.addEventListener("DOMContentLoaded", function() {
             customizationIDs.push($(this).attr("id"));
         });
 
-        $.ajax({
-            url: "/Cart/AddItem",
-            type: "POST",
-            data: { product_id: productID, customization_ids: customizationIDs, quantity: 1 },
-            success: function (data) {
-                console.log("Added to cart");
-                $(".cart-msg").fadeIn(500);
-            },
-            error: function () {
-                console.log("Error adding to cart. Retrying...");
-                $(".add-to-cart-btn").trigger("click");
-            }
-        });
+        function AddToCartSuccess() {
+            $(".cart-msg").fadeIn(500);
+            $(this).prop("disabled", false);
+        }
+
+        function AddToCartError() {
+            console.log("Error adding to cart. Retrying...");
+        }
+
+        makeRequest("/Cart/AddItem", "POST", { product_id: productID, customization_ids: customizationIDs, quantity: 1 }, AddToCartSuccess, AddToCartError);
+
+        // $.ajax({
+        //     url: "/Cart/AddItem",
+        //     type: "POST",
+        //     data: { product_id: productID, customization_ids: customizationIDs, quantity: 1 },
+        //     success: function (data) {
+        //         console.log("Added to cart");
+        //         $(".cart-msg").fadeIn(500);
+        //     },
+        //     error: function () {
+        //         console.log("Error adding to cart. Retrying...");
+        //         $(".add-to-cart-btn").trigger("click");
+        //     }
+        // });
+
+        $(".cart-counter").show();
+        $(".cart-counter").text(cart.Length() + 1);
     });
 
     // Remove from cart button
@@ -96,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
         $(".checkout-btn").prop("disabled", true);
 
         var index = $(this).attr("item-index");
-        MakeRequest("/Cart/RemoveItem", "POST", { index: index }, function() {
+        makeRequest("/Cart/RemoveItem", "POST", { index: index }, function() {
             $(".checkout-btn").prop("disabled", false);
         }, function() {
             console.log("Error removing from cart");
@@ -125,6 +99,10 @@ document.addEventListener("DOMContentLoaded", function() {
             total_cost += item.TotalPrice();
         });
 
+        if (cart.Length() <= 0) {
+            $(".cart-counter").hide();
+        }
+        
         // Update html cart total
         $(".subtotal-value").text("$" + (total_cost).toFixed(2));
 
@@ -140,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var isIncrement = $(this).text() == "+";
 
         // Update session cart object item count
-        MakeRequest("/Cart/EditCount", "POST", { index: index, isIncrement: isIncrement }, function() {
+        makeRequest("/Cart/EditCount", "POST", { index: index, isIncrement: isIncrement }, function() {
             activeRequests--;
             if (activeRequests == 0) {
                 $(".checkout-btn").prop("disabled", false);
@@ -174,6 +152,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     $(this).attr("item-index", item_index - 1);
                 }
             });
+        }
+
+        if (cart.Length() <= 0) {
+            $(".cart-counter").hide();
         }
 
         var product_total_cost = 0;
@@ -221,7 +203,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var name = "";
         var role = "";
         var email = "";
-        MakeRequest("/Account/GetUserInfo", "GET", null, function(user_data) {
+        makeRequest("/Account/GetUserInfo", "GET", null, function(user_data) {
             name = user_data.name;
             role = user_data.role;
             email = user_data.email;

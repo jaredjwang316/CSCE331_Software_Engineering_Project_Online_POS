@@ -58,8 +58,8 @@
                         <p class="product-count">@item.value.Quantity</p>
                         <button class="edit-product-count-btn" item-index="@item.index" title="@await translator.TranslateText("Increase quantity")">+</button>
                     </div>
-                    @* <form method="post" asp-controller="Customer" 
-                        asp-action="" asp-route-index=@item.index>
+                    @* <form method="post" asp-controller="Cart" 
+                        asp-action="EditOptions" asp-route-index=@item.index>
                         <button class="edit-product-options-btn"
                             item-index="@item.index"
                             title="@await translator.TranslateText("Edit item customizations")"
@@ -67,7 +67,7 @@
                         @await translator.TranslateText("Edit")
                         </button>
                     </form> *@
-                    <button class="edit-product-options-btn" id="@item.value.Product.Id" endpoint="LoadCustomizations"
+                    <button class="edit-product-options-btn" id="@item.value.Product.Id" endpoint="EditOptions"
                         customizations="@item.value.Options">
                         @await translator.TranslateText("Edit")
                     </button>
