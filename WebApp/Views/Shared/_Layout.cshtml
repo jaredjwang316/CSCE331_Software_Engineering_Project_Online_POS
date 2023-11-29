@@ -3,6 +3,7 @@
 @using WebApp.Models.AzureMaps.Weather
 @{
     var translator = new GoogleTranslate();
+    int itemsInCart = ViewBag.ItemsInCart;
 }
 
 <!DOCTYPE html>
@@ -15,7 +16,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
     <script src="~/js/loading-screen.js" asp-append-version="true"></script>
-    <script src="~/js/cart.js" asp-append-version="true"></script>
+    <script src="~/js/geolocation.js" asp-append-version="true"></script>
 </head>
 <body>
     <header>
@@ -70,8 +71,14 @@
                             </li>
                         }
                     </ul>
-                    <ul class="navbar-nav login">
-                        <li class="nav-item">
+                    <ul class="navbar-nav">
+                        <li class="nav-item cart">
+                            <div>
+                                <span class="badge rounded-pill badge-notification bg-danger cart-counter" id="cart-counter">@itemsInCart</span>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">🛒</a>
+                            </div>
+                        </li>
+                        <li class="nav-item login">
                             @if (User.Identity!.IsAuthenticated)
                             {
                                 string name = User.Identity.Name ?? "";
@@ -106,6 +113,109 @@
             </div>
         </nav>
     </header>
+    <style>
+            .toggle-sidebar-btn {
+                position: absolute;
+                bottom: -26px;
+                right: 40px;
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border-top: 1px solid #fff;
+                border-radius: 0 0 10px 10px;
+                padding: 0px 10px;
+                z-index: 0;
+            }
+            .toggle-sidebar-btn:hover {
+                background-color: #ccc;
+            }
+
+            .sidebar {
+                position: fixed;
+                height: 100%;
+                margin-top: -16px;
+                background-color: #ffffff;
+                border: 2px solid #ccc;
+                border-top: none;
+                border-left: none;
+                z-index: 1000;
+            }
+            .sidebar-header {
+                padding: 10px;
+                text-align: center;
+                color: #000000;
+                margin: 0 30px;
+            }
+
+            .options {
+                margin-left: 30px;
+            }
+
+            .option option[selected] {
+                background-color: #ccc;
+            }
+
+            .sidebar-closed {
+                display: none;
+            }
+            .sidebar-open {
+                display: block;
+            }
+
+
+            .sidebar-image {
+                position: fixed;
+                z-index: 10000;
+                bottom: 0;
+                width: 60px;
+                height: 60px;
+                margin-bottom: 10px;
+                margin-left: 10px;
+            }
+            .sidebar-image img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
+            .sidebar-image img:hover {
+                cursor: pointer;
+            }
+        </style>
+        <div class="sidebar-image">
+            <img class="toggle-accessibility" src="~/img/accessibility1.png" alt="Accessibility"
+                onclick="toggleSidebar()"
+            />
+        </div>
+        <div class="sidebar sidebar-closed">
+            <div class="sidebar-header">
+                <h1>@await translator.TranslateText("Accessibility")</h1>
+            </div>
+            <div class="options">
+                <div class="option">
+                    <h2>@await translator.TranslateText("Language")</h2>
+                    <div class="option-content">
+                        <div class="option-content-item">
+                            <label for="language">@await translator.TranslateText("Language")</label>
+                            <select id="language">
+                                @{
+                                    var languages = translator.GetSupportedLanguages();
+                                    
+                                    foreach (var language in languages!) {
+                                        bool isSelected = language.Key == translator.CurrentLanguage;
+                                        if (isSelected) {
+                                            <option value="@language.Key" selected>@language.Value</option>
+                                        }
+                                        else {
+                                            <option value="@language.Key">@language.Value</option>
+                                        }
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -115,5 +225,6 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/js/accessibility.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </html>

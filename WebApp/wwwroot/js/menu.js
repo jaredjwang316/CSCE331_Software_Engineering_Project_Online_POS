@@ -1,6 +1,6 @@
 // menu.js
 
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function () {
     // Load default data
     loadProducts();
 
@@ -11,6 +11,7 @@ $(document).ready(function () {
             // Assuming there is an element with a class 'product-container'
             // Replace the content of this element with the data received from the action
             $('.product-container').html(data);
+            document.dispatchEvent(new Event("HideLoadingScreen"));
         });
     }
 

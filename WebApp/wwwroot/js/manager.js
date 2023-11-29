@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Load data when category button is clicked
     $(".category-btn").click(function () {
-         if ($(this).hasClass("active")) return;
-         $(".category-btn").removeClass("active");
-         $(this).addClass("active");
+        if ($(this).hasClass("active")) return;
+        $(".category-btn").removeClass("active");
+        $(this).addClass("active");
 
         // manager_path = [$(this).attr("id") + "/null/" + $(this).attr("data-to")];
         // console.log(manager_path);
@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('prod-table').style.display = 'none';
             document.getElementById('saveButtonProd').style.display = 'none';
         }
+
     });
 });
 
@@ -50,7 +51,7 @@ function loadData(action, args, element) {
         document.dispatchEvent(new Event("DisplayLoadingScreen"));
     }, 10);
 
-    console.log(element);
+    // console.log(element);
     
     $.ajax({
         url: "/Manager/" + action,

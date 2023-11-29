@@ -5,6 +5,7 @@ using WebApp.Models;
 using WebApp.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Memory;
+using WebApp.Models.Cart;
 
 namespace WebApp.Controllers;
 
@@ -13,15 +14,22 @@ public class ManagerController : Controller
 {
     private readonly ILogger<ManagerController> _logger;
     private readonly IMemoryCache cache;
+    private readonly CartService cartService;
 
-    public ManagerController(ILogger<ManagerController> logger, IMemoryCache cache)
+    public ManagerController(ILogger<ManagerController> logger,  CartService cartService, IMemoryCache cache)
     {
         _logger = logger;
         this.cache = cache;
+        this.cartService = cartService;
     }
 
     public IActionResult Index()
     {
+
+        Cart cart = cartService.GetCartFromSession();
+        int itemsInCart = cart!.Items.Sum(i => i.Quantity);
+        ViewBag.itemsInCart = itemsInCart;
+
         HttpContext.Session.SetString("Init", "1");
       //  return View();
         UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);

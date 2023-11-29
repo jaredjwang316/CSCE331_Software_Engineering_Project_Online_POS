@@ -5,15 +5,24 @@
     Purpose: This view is responsible for displaying the cart page.
 *@
 
+<link rel="stylesheet" href="~/css/cart.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/customer.css" asp-append-version="true" />
+<script src="~/js/cart.js" asp-append-version="true"></script>
+
 @using WebApp.Models.Cart
+@using WebApp.APIs.GoogleTranslate
 @model Cart
 
 @{
-    Layout = "~/Views/Shared/_CartLayout.cshtml";
+    @* Layout = "~/Views/Shared/_CartLayout.cshtml"; *@
+    var translator = new GoogleTranslate();
 }
 
 <link rel="stylesheet" href="~/css/cart.css" />
 
+<form method="post" asp-controller="Customer" asp-action="Index">
+    <button class="cartlayout-back" type="submit">@await translator.TranslateText("Continue Shopping")</button>
+</form>
 <div class="cart-container">
     <!-- Load product partial view -->
     @await Html.PartialAsync("_ProductPartial", Model.Items)
@@ -23,3 +32,7 @@
 </div>
 
 <div class="customization-menu"></div>
+
+<div class="city-background-container">
+    <img src="~/img/city-background.png">
+</div>

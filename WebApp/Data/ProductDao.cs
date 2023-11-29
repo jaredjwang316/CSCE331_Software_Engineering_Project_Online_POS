@@ -131,7 +131,7 @@ public class ProductDao : IDao<Product> {
         string query = $"SELECT DISTINCT series FROM products WHERE " +
             $"is_drink = {includeDrinks} AND " +
             $"hidden = {includeHidden} AND " +
-            $"is_option = {includeIsOption}" +
+            $"is_option = {includeIsOption} " +
             $"ORDER BY series";
 
         var reader = commandHandler.ExecuteReader(query);
