@@ -107,6 +107,11 @@ public class MenuBoardController : Controller
 
     public IActionResult ProductDetail(int id)
     {
+
+        Cart cart = cartService.GetCartFromSession();
+        int itemsInCart = cart!.Items.Sum(i => i.Quantity);
+        ViewBag.itemsInCart = itemsInCart;
+
         // Assuming you have a data repository or database context, fetch the product details by ID
         UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
         var product = uok.Get<Product>(id); // Fetch the product by its unique ID

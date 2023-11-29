@@ -111,7 +111,7 @@ public class CartController : Controller
             Products = products
         };
 
-        return PartialView("_EditItemPartial", model);
+        return PartialView("_EditPartial", model);
     }
 
     public IActionResult Checkout(string name, string role, string email) {
