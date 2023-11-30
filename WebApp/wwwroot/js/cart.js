@@ -28,6 +28,12 @@ function showCheckoutMessage() {
 function hideCheckoutMessage() {
     $(".checkout-message").attr("hidden", true);
 }
+function showCartCounter() {
+    $(".cart-counter").show();
+}
+function hideCartCounter() {
+    $(".cart-counter").hide();
+}
 
 var cart = new Cart();  // Global cart object
 function GetCartSuccess(data) {
@@ -39,10 +45,12 @@ function GetCartSuccess(data) {
         showCartContainer();
         hideEmptyCartMessage();
         hideCheckoutMessage();
+        showCartCounter();
     } else {
         hideCartContainer();
         showEmptyCartMessage();
         hideCheckoutMessage();
+        hideCartCounter();
     }
 }
 function GetCartError() {
@@ -134,6 +142,7 @@ document.addEventListener("DOMContentLoaded", function() {
             hideCartContainer();
             showEmptyCartMessage();
             hideCheckoutMessage();
+            hideCartCounter();
         }
         
         // Update html cart total
@@ -191,6 +200,7 @@ document.addEventListener("DOMContentLoaded", function() {
             hideCartContainer();
             showEmptyCartMessage();
             hideCheckoutMessage();
+            hideCartCounter();
         }
 
         var product_total_cost = 0;
