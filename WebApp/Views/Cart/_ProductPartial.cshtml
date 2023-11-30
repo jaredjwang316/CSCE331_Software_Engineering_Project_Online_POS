@@ -15,7 +15,7 @@
 <div class="products-container">
     @foreach (var item in Model.Select((value, index) => new { value, index})) {
         <div class="product">
-            <button class="remove-product-btn" item-index="@item.index" title="@await translator.TranslateText("Remove item")">X</button>
+            @* <button class="remove-product-btn" item-index="@item.index" title="@await translator.TranslateText("Remove item")">X</button> *@
             <div class="img-container">
                 <img src="@item.value.Product.ImgUrl"/>
             </div>
@@ -67,10 +67,10 @@
                         @await translator.TranslateText("Edit")
                         </button>
                     </form> *@
-                    <button class="edit-product-options-btn" id="@item.value.Product.Id" endpoint="EditOptions"
-                        customizations="@item.value.Options">
-                        @await translator.TranslateText("Edit")
+                    <button class="remove-product-btn" item-index="@item.index" title=@await translator.TranslateText("Remove item" )>
+                        @await translator.TranslateText("Remove")
                     </button>
+                    @* <button class="remove-product-btn" item-index="@item.index" title="@await translator.TranslateText("Remove item")">X</button> *@
                     
                     <p class="product-cost">@item.value.Price().ToString("C")</p>
                     </div>

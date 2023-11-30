@@ -35,15 +35,6 @@ public class CartController : Controller
         return View(cart);
     }
 
-    public IActionResult Clear() {
-        // Cart cart = GetCartFromSession();
-        // cart.Clear();
-        // SetCartInSession(cart);
-        // HttpContext.Session.Clear();
-        // return Ok();
-        throw new NotImplementedException();
-    }
-
     static Product? FindProduct(List<Product> products, int id) {
         return products.FirstOrDefault(p => p.Id == id);
     }

@@ -8,11 +8,42 @@
 import { makeRequest } from './utils/request.js';
 import { Cart, Item } from './models/cartModel.js';
 
+function showCartContainer() {
+    $(".cart-container").attr("hidden", false);
+    $(".cartlayout-back").attr("hidden", false);
+}
+function hideCartContainer() {
+    $(".cart-container").attr("hidden", true);
+    $(".cartlayout-back").attr("hidden", true);
+}
+function showEmptyCartMessage() {
+    $(".emptycart-message").attr("hidden", false);
+}
+function hideEmptyCartMessage() {
+    $(".emptycart-message").attr("hidden", true);
+}
+function showCheckoutMessage() {
+    $(".checkout-message").attr("hidden", false);
+}
+function hideCheckoutMessage() {
+    $(".checkout-message").attr("hidden", true);
+}
+
 var cart = new Cart();  // Global cart object
 function GetCartSuccess(data) {
     cart.items = data.items.map(item => Object.assign(new Item, item));
     let length = cart.Length();
     $(".cart-counter").text(length);
+
+    if (length > 0) {
+        showCartContainer();
+        hideEmptyCartMessage();
+        hideCheckoutMessage();
+    } else {
+        hideCartContainer();
+        showEmptyCartMessage();
+        hideCheckoutMessage();
+    }
 }
 function GetCartError() {
     makeRequest("/Cart/GetCartFromSession", "GET", null, GetCartSuccess, GetCartError);
@@ -100,7 +131,9 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         if (cart.Length() <= 0) {
-            $(".cart-counter").hide();
+            hideCartContainer();
+            showEmptyCartMessage();
+            hideCheckoutMessage();
         }
         
         // Update html cart total
@@ -155,7 +188,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         if (cart.Length() <= 0) {
-            $(".cart-counter").hide();
+            hideCartContainer();
+            showEmptyCartMessage();
+            hideCheckoutMessage();
         }
 
         var product_total_cost = 0;
@@ -221,6 +256,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     document.dispatchEvent(new Event("HideLoadingScreen"));
                     $(this).prop("disabled", false);
                     $(".cart-counter").text(cart.Length());
+                    hideCartContainer();
+                    hideEmptyCartMessage();
+                    showCheckoutMessage();
                 },
                 error: function () {
                     console.log("Error during checkout");
