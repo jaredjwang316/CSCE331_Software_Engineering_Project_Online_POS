@@ -44,22 +44,21 @@
         @* Language *@
         <div class="option">
             <label for="language">@await translator.TranslateText("Language")</label>
-                <select id="language">
-                    @{
-                        var languages = translator.GetSupportedLanguages();
-                        
-                        foreach (var language in languages!) {
-                            bool isSelected = language.Key == translator.CurrentLanguage;
-                            if (isSelected) {
-                                <option value="@language.Key" selected>@language.Value</option>
-                            }
-                            else {
-                                <option value="@language.Key">@language.Value</option>
-                            }
+            <select id="language">
+                @{
+                    var languages = translator.GetSupportedLanguages();
+                    
+                    foreach (var language in languages!) {
+                        bool isSelected = language.Key == translator.CurrentLanguage;
+                        if (isSelected) {
+                            <option value="@language.Key" selected>@language.Value</option>
+                        }
+                        else {
+                            <option value="@language.Key">@language.Value</option>
                         }
                     }
-                </select>
-            </div>
+                }
+            </select>
         </div>
     </div>
 </div>
