@@ -16,13 +16,11 @@ namespace WebApp.Controllers;
 public class CartController : Controller
 {
     private readonly ILogger<CartController> _logger;
-    private readonly UnitOfWork unit;
     private readonly CartService cartService;
 
-    public CartController(ILogger<CartController> logger, UnitOfWork unit, CartService cartService)
+    public CartController(ILogger<CartController> logger, CartService cartService)
     {
         _logger = logger;
-        this.unit = unit;
         this.cartService = cartService;
     }
 
@@ -44,7 +42,9 @@ public class CartController : Controller
     }
 
     public IActionResult AddItem(int product_id, List<int> customization_ids, int quantity) {
+        UnitOfWork unit = new();
         List<Product> products = unit.GetAll<Product>().ToList();
+        unit.CloseConnection();
 
         Product? selected_product = FindProduct(products, product_id);
         List<Product> selected_customizations = FindCustomizations(products, customization_ids);
@@ -88,12 +88,15 @@ public class CartController : Controller
     }
 
     public IActionResult EditOptions(int index) {
+        UnitOfWork unit = new();
         List<SeriesInfo> seriesInformation = unit.GetAll<SeriesInfo>()
             .Where(series => !series.IsHidden && series.IsCustomization)
             .ToList();
         List<Product> products = unit.GetAll<Product>()
             .Where(product => seriesInformation.Any(series => series.Name == product.Series))
             .ToList();
+        
+        unit.CloseConnection();
 
         var model = new EditViewModel {
             Cart = cartService.GetCartFromSession(),
@@ -121,12 +124,14 @@ public class CartController : Controller
         }
 
         int employee_id = 0;
+        UnitOfWork unit = new();
         if (role != "Customer") {
             employee_id = unit.GetAll<Employee>().FirstOrDefault(e => e.Email == email)!.Id;
         }
 
         Order order = new(-1, employee_id, name, DateTime.Now, cart.TotalCost(), ids);
         unit.Add(order);
+        unit.CloseConnection();
 
         cart.Clear();
         cartService.SetCartInSession(cart);

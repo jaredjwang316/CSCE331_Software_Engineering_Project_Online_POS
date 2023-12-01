@@ -32,6 +32,8 @@ public class MenuBoardController : Controller
         var products = uok.GetAll<Product>().ToList();
         var prodIngredients = uok.GetAll<ProductIngredients>().ToList();
 
+        uok.CloseConnection();
+
         // Filter products based on the search term
         if (!string.IsNullOrEmpty(search))  //if search string is not null nor empty
         {
@@ -71,6 +73,7 @@ public class MenuBoardController : Controller
             var products = uok.GetAll<Product>().ToList();
             // var prodIngredients = uok.GetAll<ProductIngredients>().ToList();
             List<string> theProducts = uok.GetUniqueSeries(true, false, false).ToList(); 
+            uok.CloseConnection();
 
             foreach (var p in theProducts)
             {
@@ -102,6 +105,8 @@ public class MenuBoardController : Controller
         var products = uok.GetAll<Product>().Where(p => p.Series == category).ToList(); 
         var productNames = products.Select(p => p.Name).ToList();
 
+        uok.CloseConnection();
+
         return PartialView("_ProductNamesPartial", productNames);
     }
 
@@ -115,6 +120,7 @@ public class MenuBoardController : Controller
         // Assuming you have a data repository or database context, fetch the product details by ID
         UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
         var product = uok.Get<Product>(id); // Fetch the product by its unique ID
+        uok.CloseConnection();
 
         if (product == null)
         {

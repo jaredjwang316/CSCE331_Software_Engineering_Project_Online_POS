@@ -39,6 +39,7 @@ public class ManagerController : Controller
                 .ToList();
             var inventory = uok.GetAll<Inventory>().ToList();
             var ingredients = uok.GetAll<Ingredient>().ToList();
+            uok.CloseConnection();
             return View((products, inventory, ingredients));
         }
     }

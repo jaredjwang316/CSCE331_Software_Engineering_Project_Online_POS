@@ -96,7 +96,7 @@ img {
     transition-delay: 0.1s;
     will-change: transform;
 }
-.menu-item img {
+.menu-item img:not(.favorite-icon) {
     height: 12rem;
 }
 .menu-item p {

@@ -28,7 +28,6 @@ public class CommandHandler {
     }
 
     public void ExecuteNonQuery(string statement) {
-        Console.WriteLine(statement);
         try {
             var command = new NpgsqlCommand(statement, connection);
             command.ExecuteNonQuery();

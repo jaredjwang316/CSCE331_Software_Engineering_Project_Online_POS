@@ -6,17 +6,58 @@
 *@
 
 @using WebApp.Models.UnitOfWork
+@using WebApp.Data
+@using WebApp.Models
+@using System.Security.Claims
 @model List<Product>
 
 @using WebApp.APIs.GoogleTranslate
 @{
     var translator = new GoogleTranslate();
+    UnitOfWork unit = new();
+    string? email = User.FindFirst(ClaimTypes.Email)?.Value;
+    User? user = unit.GetUser(email!);
 }
 
 @foreach (var product in Model) {
-    <button class="menu-item product-btn" id="@product.Id" endpoint="LoadCustomizations">
+    <button class="menu-item product-btn" id="@product.Id" endpoint="LoadCustomizations"\
+        onmouseover="showFavoriteButton(this)" onmouseout="hideFavoriteButton(this)"
+    >
         <img src="@product.ImgUrl" />
         <p>@await translator.TranslateText(product.Name)</p>
         <p class="product-price">@product.Price.ToString("C")</p>
+        @{
+            if (User.Identity!.IsAuthenticated) {
+                if (user!.Favorites.Contains(product.Id)) {
+                    <img class="favorite-icon favorite" src="~/img/favorite-heart1.png" alt="Favorite Icon" tabindex="0"
+                        onclick="toggleFavorite(this)" onkeypress="toggleFavorite(this)"
+                        onmouseover="disableProductButton(this)" onmouseout="enableProductButton(this)"
+                    />
+                } else {
+                    <img class="favorite-icon" src="~/img/favorite-default-heart.png" alt="Favorite Icon" tabindex="0"
+                        onclick="toggleFavorite(this)" onkeypress="toggleFavorite(this)"
+                        onmouseover="disableProductButton(this)" onmouseout="enableProductButton(this)"
+                    />
+                }
+            }
+        }
     </button>
 }
+
+<style>
+    .favorite-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        display: none;
+    }
+    .favorite-icon:hover {
+        cursor: pointer;
+        scale: 1.1;
+    }
+    .favorite-icon:active {
+        scale: 1.0;
+    }
+</style>

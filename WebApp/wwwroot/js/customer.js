@@ -7,8 +7,42 @@
         a button is clicked.
 */
 
+import { makeRequest } from './utils/request.js';
+
 // Path for back button
 var path = [];
+
+//onclick="toggleFavorite(this)" onkeypress="toggleFavorite(this)"
+window.toggleFavorite = function(element) {
+    $(element).toggleClass("favorite");
+    if ($(element).hasClass("favorite")) {
+        $(element).attr("src", "/img/favorite-heart1.png");
+        var productButton = $(element).closest(".product-btn");
+        console.log(productButton.attr("id"));
+        makeRequest("/Customer/AddFavorite", "POST", { productID: productButton.attr("id") }, null, null);
+    } else {
+        $(element).attr("src", "/img/favorite-default-heart.png");
+        var productButton = $(element).closest(".product-btn");
+        console.log(productButton.attr("id"));
+        makeRequest("/Customer/RemoveFavorite", "POST", { productID: productButton.attr("id") }, null, null);
+    }
+}
+
+
+window.showFavoriteButton = function(element) {
+    $(element).find(".favorite-icon").show();
+}
+window.hideFavoriteButton = function(element) {
+    $(element).find(".favorite-icon").hide();
+}
+window.disableProductButton = function(element) {
+    var productButton = $(element).closest(".product-btn");
+    productButton.attr("disabled", true);
+}
+window.enableProductButton = function(element) {
+    var productButton = $(element).closest(".product-btn");
+    productButton.attr("disabled", false);
+}
 
 document.addEventListener('DOMContentLoaded', (event) => {
     loadData($(".category-btn.active").attr("endpoint"));

@@ -38,7 +38,7 @@ public class AccountController : Controller
 
     public async Task<IActionResult> LoginCallback(string returnUrl)
     {
-        UnitOfWork unit = new(Config.AWS_DB_NAME);
+        UnitOfWork unit = new();
 
         var result = await HttpContext.AuthenticateAsync();
         if (result?.Succeeded != true)
@@ -68,6 +68,13 @@ public class AccountController : Controller
             new ClaimsPrincipal(identity),
             new AuthenticationProperties() { RedirectUri = Config.returnUrl, IsPersistent = false }
         );
+
+        string name = result.Principal!.FindFirst(ClaimTypes.Name)!.Value ?? "";
+        string email = result.Principal!.FindFirst(ClaimTypes.Email)!.Value ?? "";
+        User? user = unit.GetUser(email);
+        if (user == null) {
+            unit.Add(new User(name, email, Array.Empty<int>()));
+        }
 
         unit.CloseConnection();
 

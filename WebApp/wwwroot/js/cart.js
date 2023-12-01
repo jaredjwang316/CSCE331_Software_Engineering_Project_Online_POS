@@ -269,6 +269,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     hideCartContainer();
                     hideEmptyCartMessage();
                     showCheckoutMessage();
+                    hideCartCounter();
                 },
                 error: function () {
                     console.log("Error during checkout");

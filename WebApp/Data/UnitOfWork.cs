@@ -12,15 +12,29 @@ namespace WebApp.Data;
 public class UnitOfWork {
     private readonly ConnectionHandler connectionHandler;
     private readonly CommandHandler commandHandler;
-    private readonly DaoContainer daoContainer;
+    private readonly DaoTypeContainer daoTypeContainer;
     private readonly EntityServices entityServices;
-
-
-    public UnitOfWork(string databaseName) {
+    
+    public UnitOfWork(string databaseName = "") {
+        if (string.IsNullOrEmpty(databaseName)) {
+            databaseName = Config.AWS_DB_NAME;
+        }
         connectionHandler = new ConnectionHandler(databaseName);
         commandHandler = new CommandHandler(connectionHandler.GetConnection()!);
-        daoContainer = new DaoContainer(commandHandler);
-        entityServices = new EntityServices(daoContainer);
+
+        Dictionary<Type, object> daoTypeMap = new() {
+            { typeof(Employee), new EmployeeDao(commandHandler) },
+            { typeof(Ingredient), new IngredientDao(commandHandler) },
+            { typeof(Inventory), new InventoryDao(commandHandler) },
+            { typeof(Order), new OrderDao(commandHandler) },
+            { typeof(Product), new ProductDao(commandHandler) },
+            { typeof(ProductIngredients), new ProductIngredientsDao(commandHandler) },
+            { typeof(SeriesInfo), new SeriesInfoDao(commandHandler) },
+            { typeof(User), new UserDao(commandHandler) }
+        };
+        daoTypeContainer = new DaoTypeContainer(daoTypeMap);
+        
+        entityServices = new EntityServices(daoTypeContainer);
     }
 
     // use entity service to abstract the CRUD operations
@@ -55,7 +69,7 @@ public class UnitOfWork {
     //====================================================================================================
 
     public IEnumerable<Product> GetProductsBySeries(string series) {
-        return daoContainer.ProductDao.GetProductsBySeries(series);
+        return daoTypeContainer.GetProductDao().GetProductsBySeries(series);
     }
 
     public IEnumerable<string> GetUniqueSeries(
@@ -63,35 +77,61 @@ public class UnitOfWork {
         bool includeHidden = false,
         bool includeIsOption = false
     ) {
-        return daoContainer.ProductDao.GetUniqueSeries(includeDrinks, includeHidden, includeIsOption);
+        return daoTypeContainer.GetProductDao().GetUniqueSeries(includeDrinks, includeHidden, includeIsOption);
     }
 
     public IEnumerable<Product> GetBestSellingProducts(int limit) {
-        return daoContainer.ProductDao.GetBestSellingProducts(limit);
+        return daoTypeContainer.GetProductDao().GetBestSellingProducts(limit);
     }
 
     public SeriesInfo GetSeriesInfo(string name) {
-        return daoContainer.SeriesInfoDao.Get(name);
+        return daoTypeContainer.GetSeriesInfoDao().Get(name);
+    }
+
+    public User? GetUser(string email) {
+        return daoTypeContainer.GetUserDao().Get(email);
     }
 }
 
-public class DaoContainer {
-    public EmployeeDao EmployeeDao { get; }
-    public IngredientDao IngredientDao { get; }
-    public InventoryDao InventoryDao { get; }
-    public OrderDao OrderDao { get; }
-    public ProductDao ProductDao { get; }
-    public ProductIngredientsDao ProductIngredientsDao { get; }
-    public SeriesInfoDao SeriesInfoDao { get; }
+public class DaoTypeContainer {
+    private readonly Dictionary<Type, object> daoTypeMap;
 
-    public DaoContainer(CommandHandler commandHandler) {
-        EmployeeDao = new EmployeeDao(commandHandler);
-        IngredientDao = new IngredientDao(commandHandler);
-        InventoryDao = new InventoryDao(commandHandler);
-        OrderDao = new OrderDao(commandHandler);
-        ProductDao = new ProductDao(commandHandler);
-        ProductIngredientsDao = new ProductIngredientsDao(commandHandler);
-        SeriesInfoDao = new SeriesInfoDao(commandHandler);
+    public DaoTypeContainer(Dictionary<Type, object> daoTypeMap) {
+        this.daoTypeMap = daoTypeMap;
+    }
+
+    public IDao<T> GetDao<T>() where T : class {
+        if (daoTypeMap.TryGetValue(typeof(T), out object? dao)) {
+            return dao as IDao<T> ?? throw new InvalidCastException();
+        } else {
+            throw new InvalidCastException();
+        }
+    }
+
+    // Unique getters for each dao
+    public EmployeeDao GetEmployeeDao() {
+        return daoTypeMap[typeof(Employee)] as EmployeeDao ?? throw new InvalidCastException();
+    }
+    public IngredientDao GetIngredientDao() {
+        return daoTypeMap[typeof(Ingredient)] as IngredientDao ?? throw new InvalidCastException();
+    }
+    public InventoryDao GetInventoryDao() {
+        return daoTypeMap[typeof(Inventory)] as InventoryDao ?? throw new InvalidCastException();
+    }
+    public OrderDao GetOrderDao() {
+        return daoTypeMap[typeof(Order)] as OrderDao ?? throw new InvalidCastException();
+    }
+    public ProductDao GetProductDao() {
+        return daoTypeMap[typeof(Product)] as ProductDao ?? throw new InvalidCastException();
+    }
+    public ProductIngredientsDao GetProductIngredientsDao() {
+        return daoTypeMap[typeof(ProductIngredients)] as ProductIngredientsDao ?? throw new InvalidCastException();
+    }
+    public SeriesInfoDao GetSeriesInfoDao() {
+        return daoTypeMap[typeof(SeriesInfo)] as SeriesInfoDao ?? throw new InvalidCastException();
+    }
+    public UserDao GetUserDao() {
+        return daoTypeMap[typeof(User)] as UserDao ?? throw new InvalidCastException();
     }
 }
 
@@ -146,10 +186,10 @@ class ConnectionHandler {
 // EntityServices
 //====================================================================================================
 public class EntityServices {
-    private readonly DaoContainer daoContainer;
+    private readonly DaoTypeContainer daoTypeContainer;
 
-    public EntityServices(DaoContainer daoContainer) {
-        this.daoContainer = daoContainer;
+    public EntityServices(DaoTypeContainer daoTypeContainer) {
+        this.daoTypeContainer = daoTypeContainer;
     }
 
     public void Add<T>(T t) where T : class {
@@ -179,22 +219,6 @@ public class EntityServices {
 
     // Helper funciton to return the correct dao for the given type
     private IDao<T> GetDao<T>() where T : class {
-        if (typeof(T) == typeof(Employee)) {
-            return daoContainer.EmployeeDao as IDao<T> ?? throw new InvalidCastException();
-        } else if (typeof(T) == typeof(Ingredient)) {
-            return daoContainer.IngredientDao as IDao<T> ?? throw new InvalidCastException();
-        } else if (typeof(T) == typeof(Inventory)) {
-            return daoContainer.InventoryDao as IDao<T> ?? throw new InvalidCastException();
-        } else if (typeof(T) == typeof(Order)) {
-            return daoContainer.OrderDao as IDao<T> ?? throw new InvalidCastException();
-        } else if (typeof(T) == typeof(Product)) {
-            return daoContainer.ProductDao as IDao<T> ?? throw new InvalidCastException();
-        } else if (typeof(T) == typeof(ProductIngredients)) {
-            return daoContainer.ProductIngredientsDao as IDao<T> ?? throw new InvalidCastException();
-        } else if (typeof(T) == typeof(SeriesInfo)) {
-            return daoContainer.SeriesInfoDao as IDao<T> ?? throw new InvalidCastException();
-        } else {
-            throw new InvalidCastException();
-        }
+        return daoTypeContainer.GetDao<T>();
     }
 }

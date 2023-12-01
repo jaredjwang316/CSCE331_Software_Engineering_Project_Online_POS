@@ -14,13 +14,11 @@ namespace WebApp.Controllers;
 public class CashierController : Controller
 {
     private readonly ILogger<CashierController> _logger;
-    private readonly UnitOfWork unit;
     private readonly IMemoryCache cache;
 
-    public CashierController(ILogger<CashierController> logger, UnitOfWork unit, IMemoryCache cache)
+    public CashierController(ILogger<CashierController> logger, IMemoryCache cache)
     {
         _logger = logger;
-        this.unit = unit;
         this.cache = cache;
     }
     public IActionResult Index()
@@ -35,21 +33,27 @@ public class CashierController : Controller
     }
 
     public IActionResult LoadCategories() {
+        UnitOfWork unit = new();
         List<SeriesInfo> model = cache.GetOrCreate("Categories", entry => {
-            entry.SlidingExpiration = TimeSpan.FromMinutes(5);
+            entry.SlidingExpiration = TimeSpan.FromMinutes(10);
             return unit.GetAll<SeriesInfo>()
             .Where(series => !series.IsHidden && series.IsProduct)
             .ToList();
         })!;
+
+        unit.CloseConnection();
         
         return PartialView("_CategoriesPartial", model);
     }
 
     public IActionResult LoadBestSellers() {
+        UnitOfWork unit = new();
         List<Product> model = cache.GetOrCreate("BestSellers", entry => {
-            entry.SlidingExpiration = TimeSpan.FromMinutes(5);
+            entry.SlidingExpiration = TimeSpan.FromMinutes(10);
             return unit.GetBestSellingProducts(10).ToList();
         })!;
+
+        unit.CloseConnection();
 
         return PartialView("_ProductsPartial", model);
     }
@@ -60,11 +64,14 @@ public class CashierController : Controller
     }
 
     public IActionResult LoadProductsBySeries(string arg) {
+        UnitOfWork unit = new();
         List<Product> model = unit.GetProductsBySeries(arg).ToList();
+        unit.CloseConnection();
         return PartialView("_ProductsPartial", model);
     }
 
     public IActionResult LoadCustomizations(string arg) {
+        UnitOfWork unit = new();
         Product selectedProduct = unit.Get<Product>(int.Parse(arg));
         List<SeriesInfo> seriesInformation = unit.GetAll<SeriesInfo>()
             .Where(series => !series.IsHidden && series.IsCustomization)
@@ -77,6 +84,8 @@ public class CashierController : Controller
             SeriesInformation = seriesInformation,  // Information about each customization series
             Products = products                     // All products that are customizations
         };
+
+        unit.CloseConnection();
         
         return PartialView("_CustomizationsPartial", model);
     }
