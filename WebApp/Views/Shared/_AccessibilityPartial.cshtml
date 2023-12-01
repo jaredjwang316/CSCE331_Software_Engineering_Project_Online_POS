@@ -1,0 +1,65 @@
+@using WebApp.APIs.GoogleTranslate
+@{
+    var translator = new GoogleTranslate();
+
+}
+
+<div class="sidebar-image">
+    <img class="toggle-accessibility" src="~/img/accessibility1.png" alt="Accessibility"
+        onclick="toggleSidebar()"
+        title=@await translator.TranslateText("Explore your accessibility options")
+        tabindex="0"
+    />
+</div>
+<div class="sidebar sidebar-closed">
+    <div class="options">
+        <div class="option">
+            @* Big Cursor *@
+            <button
+                class="acc-btn toggle-big-cursor-btn"
+                title="@await translator.TranslateText("Toggle big cursor")"
+                tabindex="0"
+            >@await translator.TranslateText("Cursor")
+            </button>
+        </div>
+        <div class="option">
+            @* Text Size *@
+            <button
+                class="acc-btn toggle-text-size-btn"
+                title="@await translator.TranslateText("Toggle text size")"
+                tabindex="0"
+            >@await translator.TranslateText("Text Size")
+            </button>
+        </div>
+        <div class="option">
+            @* High Contrast *@
+            <button
+                class="acc-btn toggle-contrast-btn"
+                title="@await translator.TranslateText("Toggle high contrast")"
+                tabindex="0"
+            >@await translator.TranslateText("Contrast")
+            </button>
+        </div>
+
+        @* Language *@
+        <div class="option">
+            <label for="language">@await translator.TranslateText("Language")</label>
+                <select id="language">
+                    @{
+                        var languages = translator.GetSupportedLanguages();
+                        
+                        foreach (var language in languages!) {
+                            bool isSelected = language.Key == translator.CurrentLanguage;
+                            if (isSelected) {
+                                <option value="@language.Key" selected>@language.Value</option>
+                            }
+                            else {
+                                <option value="@language.Key">@language.Value</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
