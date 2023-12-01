@@ -17,6 +17,7 @@
     UnitOfWork unit = new();
     string? email = User.FindFirst(ClaimTypes.Email)?.Value;
     User? user = unit.GetUser(email!);
+    unit.CloseConnection();
 }
 
 @foreach (var product in Model) {
@@ -43,21 +44,3 @@
         }
     </button>
 }
-
-<style>
-    .favorite-icon {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 20px;
-        height: 20px;
-        display: none;
-    }
-    .favorite-icon:hover {
-        cursor: pointer;
-        scale: 1.1;
-    }
-    .favorite-icon:active {
-        scale: 1.0;
-    }
-</style>
