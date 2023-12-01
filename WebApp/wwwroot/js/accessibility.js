@@ -85,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 let selected = select.options[select.selectedIndex];
                 selected.setAttribute("selected", "");
-
                 document.cookie = "CurrentLanguage=" + selected.value;
                 location.reload();
                 $(".toggle-sidebar-btn").click();

@@ -6,7 +6,7 @@
 
 using System.Text.Json;
 using System.Web;
-using Google.Cloud.Translation.V2;
+
 
 namespace WebApp.APIs.GoogleTranslate;
 public class GoogleTranslate {
@@ -20,14 +20,8 @@ public class GoogleTranslate {
         apiKey = Config.GOOGLE_TRANSLATE_API_KEY;
         httpContextAccessor = new HttpContextAccessor();
 
-        if (httpContextAccessor.HttpContext!.Request.Cookies["CurrentLanguage"] == null) {
-            httpContextAccessor.HttpContext.Response.Cookies.Append("CurrentLanguage", GetPreferredLanguage());
-        } else {
-            string? savedLanguage = httpContextAccessor.HttpContext.Request.Cookies["CurrentLanguage"];
-            if (savedLanguage != null) {
-                CurrentLanguage = savedLanguage;
-            }
-        }
+        CurrentLanguage = httpContextAccessor.HttpContext!.Request.Cookies["CurrentLanguage"]
+            ?? GetPreferredLanguage();
     }
 
     public async Task<string> TranslateText(string text) {
