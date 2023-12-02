@@ -16,7 +16,7 @@
 
 </head>
 <body>
-    <div class="container">
+    <div class="container contrast">
         <main role="main" class="pb-3">
             @if (User.Identity!.IsAuthenticated) {
                 <div class="text-center">
@@ -46,7 +46,7 @@
 @using WebApp
 @model (List<Product>, List<Inventory>, List<Ingredient>)
 @if (Model.Item1 != null && Model.Item1.Count > 0) {
-    <table id="prod-table" class="table" style="display:none">
+    <table id="prod-table" class="table contrast" style="display:none">
         <thead>
             <tr>
                 <th>Product ID</th>
@@ -69,10 +69,10 @@
 } else {
     <p>No products found.</p>
 }
-<button id="saveButtonProd" class="save-button" style="display:none">Save</button>
+<button id="saveButtonProd" class="save-button contrast" style="display:none">Save</button>
 
 @if (Model.Item2 != null && Model.Item2.Count > 0) {
-    <table id="inv-table" class="table" style="display:none">
+    <table id="inv-table" class="table contrast" style="display:none">
         <thead>
             <tr>
                 <th>ID</th>
@@ -100,7 +100,7 @@
 } else {
     <p>No products found.</p>
 }
-<button id="saveButtonInv" class="save-button" style="display:none">Save</button>
+<button id="saveButtonInv" class="save-button contrast" style="display:none">Save</button>
 <h2 id="saveSuccess" style="display:none">Save Successful</h2>
 <h2 id="saveFail" style="display:none">Save Fail</h2>
 

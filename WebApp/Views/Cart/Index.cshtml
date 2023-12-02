@@ -21,9 +21,9 @@
 <link rel="stylesheet" href="~/css/cart.css" />
 
 <form method="post" asp-controller="Customer" asp-action="Index">
-    <button class="cartlayout-back" hidden type="submit">@await translator.TranslateText("Continue Shopping")</button>
+    <button class="cartlayout-back contrast" hidden type="submit">@await translator.TranslateText("Continue Shopping")</button>
 </form>
-<div class="cart-container" hidden>
+<div class="cart-container contrast" hidden>
     <!-- Load product partial view -->
     @await Html.PartialAsync("_ProductPartial", Model.Items)
    
@@ -31,7 +31,7 @@
     @await Html.PartialAsync("_CheckoutPartial", Model.TotalCost().ToString("C"))
 </div>
 
-<div class="emptycart-message" hidden>
+<div class="emptycart-message contrast" hidden>
     <h1>@await translator.TranslateText("Your cart is empty!")</h1>
     <p>@await translator.TranslateText("Looks like you haven't added anything to your cart yet.")</p>
     <p>@await translator.TranslateText("Click the button below to begin shopping.")</p>
@@ -40,7 +40,7 @@
     </form>
 </div>
 
-<div class="checkout-message" hidden>
+<div class="checkout-message contrast" hidden>
     <h1>@await translator.TranslateText("Your order has been placed")</h1>
     <p>@await translator.TranslateText("Thank you for shopping with us!")</p>
     <p>@await translator.TranslateText("Click the button below to begin a new order")</p>

@@ -5,14 +5,14 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Menu Board Page</h1>
+    <h1 class="display-4 contrast">Menu Board Page</h1>
 </div>
 
 <script src="~/js/menu.js" asp-append-version="true"></script>
 @using WebApp.Models.UnitOfWork
 @model (List<Product> products, List<ProductIngredients> prodIngredients, List<string> productCategories)
 
-<div class="row">
+<div class="row contrast">
     <div class="col-md-6">
         <form method="get" class="mb-3">
             <div class="input-group">
@@ -27,8 +27,8 @@
 
 @if (Model.Item1 != null && Model.Item1.Count > 0)
 {
-    <h2>Products</h2>
-    <table class="table">
+    <h2 class="contrast">Products</h2>
+    <table class="table contrast">
         <thead>
             <tr>
                 <th>Product ID</th>
@@ -59,8 +59,8 @@ else
 
 @if (Model.Item2 != null && Model.Item2.Count > 0)
 {
-    <h2>Product Ingredients</h2>
-    <table class="table">
+    <h2 class="contrast">Product Ingredients</h2>
+    <table class="table contrast">
         <thead>
             <tr>
                 <th>Product Ingredient ID</th>
@@ -80,13 +80,13 @@ else
 }
 else
 {
-    <p>No products ingredients found.</p>
+    <p class="contrast">No products ingredients found.</p>
 }
 
 @if (Model.productCategories != null && Model.productCategories.Count > 0)
 {
-    <h2>Product Categories</h2>
-    <div class="category-buttons">
+    <h2 class="contrast">Product Categories</h2>
+    <div class="category-buttons contrast">
         @foreach (var category in Model.productCategories)
         {
             <button class="btn btn-primary category-button" data-category="@category">@category</button>
