@@ -18,8 +18,13 @@
     <link rel="stylesheet" href="~/css/_AccessibilityPartial.css" asp-append-version="true"/>
     <script src="~/js/loading-screen.js" asp-append-version="true"></script>
     <script src="~/js/geolocation.js" asp-append-version="true"></script>
+    <script src="~/js/accessibility.js" asp-append-version="true"></script>
 </head>
-<body>
+@{
+    var grayscale = Context.Request.Cookies["Grayscale"];
+    var invert = Context.Request.Cookies["Invert"];
+}
+<body class="@(grayscale == "true" ? "contrast-grayscale" : "") @(invert == "true" ? "contrast-invert" : "")">
     <header>
         <nav class="contrast navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid"> <!--May change to container-->
@@ -131,6 +136,5 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
-<script src="~/js/accessibility.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </html>
