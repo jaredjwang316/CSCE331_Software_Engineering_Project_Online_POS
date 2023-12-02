@@ -44,6 +44,7 @@ body.contrast-invert {
     color: black;
     background-color: #C60734;
     border-radius: 40px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
 .elementor-box-title {
