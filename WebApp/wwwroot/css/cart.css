@@ -11,6 +11,18 @@ body {
     background-size: contain;
     background-color: #E7E7E7;
 }
+body.contrast-grayscale {
+    background-image: url("/img/checkout-background.png");
+    background-repeat: repeat-y;
+    background-size: contain;
+    background-color: #E7E7E7;
+}
+body.contrast-invert {
+    background-image: url("/img/checkout-background-invert.png");
+    background-repeat: repeat-y;
+    background-size: contain;
+    background-color: #E7E7E7;
+}
 
 .city-background-container img {
     right: 0;
