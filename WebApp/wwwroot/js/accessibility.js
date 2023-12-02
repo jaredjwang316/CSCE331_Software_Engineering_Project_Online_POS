@@ -61,15 +61,37 @@ document.addEventListener('DOMContentLoaded', function () {
     // Contrast
     $(".toggle-contrast-btn").on("click", function () {
         if ($(this).hasClass("active")) {
-            document.body.classList.remove("contrast");
-            $(this).removeClass("active");
-            document.cookie = "Contrast=false";
+            if (document.body.classList.contains("contrast-grayscale")) {
+                document.body.classList.remove("contrast-grayscale");
+                document.body.classList.add("contrast-invert");
+                $(this).html("Contrast - Invert");
+                document.cookie = "Grayscale=false";
+                document.cookie = "Invert=true";
+            } else if (document.body.classList.contains("contrast-invert")) {
+                document.body.classList.remove("contrast-invert");
+                document.cookie = "Invert=false";
+                $(this).removeClass("active");
+                $(this).html("Contrast - Normal");
+            }
         } else {
-            document.body.classList.add("contrast");
+            document.body.classList.add("contrast-grayscale");
             $(this).addClass("active");
-            document.cookie = "Contrast=true";
+            $(this).html("Contrast - Grayscale");
+            document.cookie = "Grayscale=true";
         }
     });
+
+    var grayscale = getCookie("Grayscale") == "true";
+    var invert = getCookie("Invert") == "true";
+    if (grayscale) {
+        document.body.classList.add("contrast-grayscale");
+        $(".toggle-contrast-btn").addClass("active");
+        $(".toggle-contrast-btn").html("Contrast - Grayscale");
+    } else if (invert) {
+        document.body.classList.add("contrast-invert");
+        $(".toggle-contrast-btn").addClass("active");
+        $(".toggle-contrast-btn").html("Contrast - Invert");
+    }
 });
 
 // Language

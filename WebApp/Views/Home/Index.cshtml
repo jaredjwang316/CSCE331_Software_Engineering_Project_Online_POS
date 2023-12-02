@@ -14,7 +14,7 @@
     var translator = new GoogleTranslate();
 }
 
-<div class="text-center">
+<div class="text-center contrast">
     @{
         string text = "Bringing Bubble Tea to the United States!";
         <h1 class="display-4">@await translator.TranslateText(text)</h1>
@@ -22,7 +22,7 @@
 </div>
 <h2></h2>
 
-<section class="elementor-section">
+<section class="elementor-section contrast">
     <div class="elementor-container left">
         <a class="elementor-box-title" asp-area="" asp-controller="MenuBoard" asp-action="Index">
             <figure class="elementor-image-box-img">
