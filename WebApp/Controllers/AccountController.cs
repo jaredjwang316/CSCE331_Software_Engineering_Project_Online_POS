@@ -190,7 +190,9 @@ public class AccountController : Controller
         HttpContext.Response.Cookies.Append("Invert", "false");
         HttpContext.Response.Cookies.Append("BigCursor", "false");
         HttpContext.Response.Cookies.Append("BigText", "false");
-        HttpContext.Response.Cookies.Append("CurrentLanguage", "en");
+
+        var translateAPI = new GoogleTranslate();
+        HttpContext.Response.Cookies.Append("CurrentLanguage", translateAPI.GetPreferredLanguage());
         return Json(new { success = true });
     }
 }
