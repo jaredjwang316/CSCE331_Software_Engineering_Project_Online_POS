@@ -80,18 +80,20 @@ document.addEventListener('DOMContentLoaded', function () {
             document.cookie = "Grayscale=true";
         }
     });
+
+    var grayscale = getCookie("Grayscale") == "true";
+    var invert = getCookie("Invert") == "true";
+    if (grayscale) {
+        document.body.classList.add("contrast-grayscale");
+        $(".toggle-contrast-btn").addClass("active");
+        $(".toggle-contrast-btn").html("Contrast - Grayscale");
+    } else if (invert) {
+        document.body.classList.add("contrast-invert");
+        $(".toggle-contrast-btn").addClass("active");
+        $(".toggle-contrast-btn").html("Contrast - Invert");
+    }
+
 });
-var grayscale = getCookie("Grayscale") == "true";
-var invert = getCookie("Invert") == "true";
-if (grayscale) {
-    document.body.classList.add("contrast-grayscale");
-    $(".toggle-contrast-btn").addClass("active");
-    $(".toggle-contrast-btn").html("Contrast - Grayscale");
-} else if (invert) {
-    document.body.classList.add("contrast-invert");
-    $(".toggle-contrast-btn").addClass("active");
-    $(".toggle-contrast-btn").html("Contrast - Invert");
-}
 
 // Language
 document.addEventListener('DOMContentLoaded', function () {
