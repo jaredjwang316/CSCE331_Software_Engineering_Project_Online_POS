@@ -9,9 +9,11 @@
 @using WebApp.APIs.AzureMaps;
 @using WebApp.Models.AzureMaps.Weather;
 
+
 @{
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
     var translator = new GoogleTranslate();
+    @* translator.CurrentLanguage = Context.Request.Cookies["CurrentLanguage"] ?? translator.CurrentLanguage; *@
 }
 
 <div class="text-center contrast">

@@ -7,6 +7,10 @@
 @using WebApp.APIs.GoogleTranslate
 @using WebApp.APIs.AzureMaps
 @using WebApp.Models.AzureMaps.Weather
+@using WebApp.Data
+@using WebApp.Models.UnitOfWork
+@using System.Security.Claims
+
 @{
     var translator = new GoogleTranslate();
 }
@@ -23,13 +27,13 @@
         <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/_AccessibilityPartial.css" asp-append-version="true"/>
         <script src="~/js/geolocation.js" asp-append-version="true"></script>
-        <script src="~/js/accessibility.js" asp-append-version="true"></script>
+        <script type="module" src="~/js/accessibility.js" asp-append-version="true"></script>
     </head>
     @{
-        var grayscale = Context.Request.Cookies["Grayscale"];
-        var invert = Context.Request.Cookies["Invert"];
+        bool grayscale = Context.Request.Cookies["Grayscale"] == "true";
+        bool invert = Context.Request.Cookies["Invert"] == "true";
     }
-    <body class="@(grayscale == "true" ? "contrast-grayscale" : "") @(invert == "true" ? "contrast-invert" : "")">
+    <body class="@(grayscale ? "contrast-grayscale" : "") @(invert ? "contrast-invert" : "")">
         <header>
             <nav class="contrast navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div class="container-fluid">

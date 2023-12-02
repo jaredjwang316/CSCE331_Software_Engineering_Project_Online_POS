@@ -1,15 +1,17 @@
 
-    // Accessibility Button
-    function toggleSidebar() {
-        var sidebar = document.querySelector(".sidebar");
-        if (sidebar.classList.contains("sidebar-open")) {
-            sidebar.classList.remove("sidebar-open");
-            sidebar.classList.add("sidebar-closed");
-        } else {
-            sidebar.classList.remove("sidebar-closed");
-            sidebar.classList.add("sidebar-open");
-        }
+import { makeRequest } from './utils/request.js';
+
+// Accessibility Button
+window.toggleSidebar = function() {
+    var sidebar = document.querySelector(".sidebar");
+    if (sidebar.classList.contains("sidebar-open")) {
+        sidebar.classList.remove("sidebar-open");
+        sidebar.classList.add("sidebar-closed");
+    } else {
+        sidebar.classList.remove("sidebar-closed");
+        sidebar.classList.add("sidebar-open");
     }
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     let BigCursor = getCookie("BigCursor");
@@ -37,11 +39,13 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.classList.remove("big-cursor");
             $(this).removeClass("active");
             document.cookie = "BigCursor=false";
+            makeRequest('/Account/SaveUserPreferences', 'POST', { accCursor: false }, null, null)
         } else {
             document.body.style.cursor = "url('https://wsv3cdn.audioeye.com/v2/build/bafc1df6358adc764094db250cf5a718.cur'), auto";
             document.body.classList.add("big-cursor");
             $(this).addClass("active");
             document.cookie = "BigCursor=true";
+            makeRequest('/Account/SaveUserPreferences', 'POST', { accCursor: true }, null, null)
         }
     });
 
@@ -51,10 +55,12 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.classList.remove("big-text");
             $(this).removeClass("active");
             document.cookie = "BigText=false";
+            makeRequest('/Account/SaveUserPreferences', 'POST', { accTextSize: false }, null, null)
         } else {
             document.body.classList.add("big-text");
             $(this).addClass("active");
             document.cookie = "BigText=true";
+            makeRequest('/Account/SaveUserPreferences', 'POST', { accTextSize: true }, null, null)
         }
     });
 
@@ -67,17 +73,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 $(this).html("Contrast - Invert");
                 document.cookie = "Grayscale=false";
                 document.cookie = "Invert=true";
+                makeRequest('/Account/SaveUserPreferences', 'POST', { accContrast: "Invert" }, null, null)
             } else if (document.body.classList.contains("contrast-invert")) {
                 document.body.classList.remove("contrast-invert");
                 document.cookie = "Invert=false";
                 $(this).removeClass("active");
                 $(this).html("Contrast - Normal");
+                makeRequest('/Account/SaveUserPreferences', 'POST', { accContrast: "Normal" }, null, null)
             }
         } else {
             document.body.classList.add("contrast-grayscale");
             $(this).addClass("active");
             $(this).html("Contrast - Grayscale");
             document.cookie = "Grayscale=true";
+            makeRequest('/Account/SaveUserPreferences', 'POST', { accContrast: "Grayscale" }, null, null)
         }
     });
 
@@ -109,9 +118,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 let selected = select.options[select.selectedIndex];
                 selected.setAttribute("selected", "");
                 document.cookie = "CurrentLanguage=" + selected.value;
-                location.reload();
-                $(".toggle-sidebar-btn").click();
+                makeRequest('/Account/SaveUserPreferences', 'POST', { accLanguage: selected.value }, ReloadLanguage(), ReloadLanguage());
             });
         }
     });
 });
+
+function ReloadLanguage() {
+    location.reload();
+    $(".toggle-sidebar-btn").click();
+}

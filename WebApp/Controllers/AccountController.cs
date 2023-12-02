@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using WebApp.Data;
+using WebApp.APIs.GoogleTranslate;
 
 namespace WebApp.Controllers;
 
@@ -73,9 +74,24 @@ public class AccountController : Controller
         string email = result.Principal!.FindFirst(ClaimTypes.Email)!.Value ?? "";
         User? user = unit.GetUser(email);
         if (user == null) {
-            unit.Add(new User(name, email, Array.Empty<int>()));
+            var googleTranslateAPI = new GoogleTranslate();
+            string accLanguage = googleTranslateAPI.GetPreferredLanguage();
+            unit.Add(new User(
+                name,
+                email,
+                Array.Empty<int>(),
+                accLanguage: accLanguage
+            ));
+        } else {
+            HttpContext.Response.Cookies.Append("CurrentLanguage", user.AccLanguage);
+            var grayscale = user.AccContrast == "Grayscale";
+            var invert = user.AccContrast == "Invert";
+            HttpContext.Response.Cookies.Append("Grayscale", grayscale.ToString().ToLower());
+            HttpContext.Response.Cookies.Append("Invert", invert.ToString().ToLower());
+            HttpContext.Response.Cookies.Append("BigCursor", user.AccCursor.ToString().ToLower());
+            HttpContext.Response.Cookies.Append("BigText", user.AccTextSize.ToString().ToLower());
         }
-
+        
         unit.CloseConnection();
 
         bool isManagerOrCashier = role == "Manager" || role == "Cashier";
@@ -93,6 +109,7 @@ public class AccountController : Controller
         if (isManagerOrCashier) {
             returnUrl = Config.returnUrl;
         }
+        ResetPreferencesToDefault();
         return SignOut(new AuthenticationProperties() { RedirectUri = returnUrl }, CookieAuthenticationDefaults.AuthenticationScheme);
     }
 
@@ -140,5 +157,40 @@ public class AccountController : Controller
 
     public IActionResult GetUserInfo() {
         return Json(new { name = GetName(), role = GetRole(), email = GetEmail() });
+    }
+
+    public IActionResult SaveUserPreferences(
+        string? accCursor = null,
+        string? accTextSize = null,
+        string? accContrast = null,
+        string? accLanguage = null)
+    {
+        if (User.Identity?.IsAuthenticated != true) {
+            return Json(new { success = false });
+        }
+
+        UnitOfWork unit = new();
+        string email = GetEmail();
+        User? user = unit.GetUser(email);
+        User? newUser = user;
+        if (user == null || newUser == null) {
+            return Json(new { success = false });
+        }
+        newUser.AccCursor = accCursor ?? user.AccCursor;
+        newUser.AccTextSize = accTextSize ?? user.AccTextSize;
+        newUser.AccContrast = accContrast ?? user.AccContrast;
+        newUser.AccLanguage = accLanguage ?? user.AccLanguage;
+        unit.Update(user, newUser);
+        unit.CloseConnection();
+        return Json(new { success = true });
+    }
+
+    public IActionResult ResetPreferencesToDefault() {
+        HttpContext.Response.Cookies.Append("Grayscale", "false");
+        HttpContext.Response.Cookies.Append("Invert", "false");
+        HttpContext.Response.Cookies.Append("BigCursor", "false");
+        HttpContext.Response.Cookies.Append("BigText", "false");
+        HttpContext.Response.Cookies.Append("CurrentLanguage", "en");
+        return Json(new { success = true });
     }
 }

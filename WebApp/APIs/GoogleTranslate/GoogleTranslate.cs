@@ -6,6 +6,9 @@
 
 using System.Text.Json;
 using System.Web;
+using WebApp.Data;
+using WebApp.Models.UnitOfWork;
+using System.Security.Claims;
 
 
 namespace WebApp.APIs.GoogleTranslate;

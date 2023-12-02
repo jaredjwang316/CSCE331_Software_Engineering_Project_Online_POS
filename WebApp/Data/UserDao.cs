@@ -32,7 +32,11 @@ public class UserDao : IDao<User> {
         User user = new(
             reader.GetString(0),
             reader.GetString(1),
-            (int[])reader.GetValue(2)
+            (int[])reader.GetValue(2),
+            reader.GetString(3),
+            reader.GetString(4),
+            reader.GetString(5),
+            reader.GetString(6)
         );
 
         reader?.Close();
@@ -49,7 +53,11 @@ public class UserDao : IDao<User> {
             users.Add(new User(
                 reader.GetString(0),
                 reader.GetString(1),
-                (int[])reader.GetValue(2)
+                (int[])reader.GetValue(2),
+                reader.GetString(3),
+                reader.GetString(4),
+                reader.GetString(5),
+                reader.GetString(6)
             ));
         }
 
@@ -60,8 +68,8 @@ public class UserDao : IDao<User> {
     public void Add(User t) {
         string favorites = t.Favorites != null ? string.Join(",", t.Favorites) : string.Join(",", Array.Empty<int>());
         string statement = (
-            $"INSERT INTO users (name, email, favorites) " +
-            $"VALUES ('{t.Name}', '{t.Email}', ARRAY[{favorites}]::integer[])"
+            $"INSERT INTO users (name, email, favorites, acc_cursor, acc_text_size, acc_contrast, acc_language) " +
+            $"VALUES ('{t.Name}', '{t.Email}', ARRAY[{favorites}]::integer[], '{t.AccCursor}', '{t.AccTextSize}', '{t.AccContrast}', '{t.AccLanguage}')"
         );
         commandHandler.ExecuteNonQuery(statement);
     }
@@ -72,7 +80,11 @@ public class UserDao : IDao<User> {
             $"UPDATE users SET " +
             $"name = '{newT.Name}', " +
             $"email = '{newT.Email}', " +
-            $"favorites = ARRAY[{string.Join(",", favorites)}]::integer[] " +
+            $"favorites = ARRAY[{string.Join(",", favorites)}]::integer[], " +
+            $"acc_cursor = '{newT.AccCursor}', " +
+            $"acc_text_size = '{newT.AccTextSize}', " +
+            $"acc_contrast = '{newT.AccContrast}', " +
+            $"acc_language = '{newT.AccLanguage}' " +
             $"WHERE email = '{t.Email}'"
         );
         
