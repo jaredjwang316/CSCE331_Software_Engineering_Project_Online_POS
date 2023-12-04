@@ -1,18 +1,27 @@
-
 using System.Text.Json;
 using WebApp.Models.AzureMaps.Weather;
 
 namespace WebApp.APIs.AzureMaps;
+/// <summary>
+/// Provides methods to retrieve weather information from Azure Maps.
+/// </summary>
 public class Weather {
     private readonly IHttpContextAccessor httpContextAccessor;
     private readonly string apiKey;
     private readonly string URL_BASE = "https://atlas.microsoft.com/weather";
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Weather"/> class.
+    /// </summary>
     public Weather() {
         apiKey = Config.AZURE_MAPS_API_KEY;
         httpContextAccessor = new HttpContextAccessor();
     }
 
+    /// <summary>
+    /// Gets the current weather condition based on the user's location.
+    /// </summary>
+    /// <returns>The current weather condition or null if the information is not available.</returns>
     public async Task<CurrentCondition?> GetCurrentCondition() {
         string latitude = httpContextAccessor.HttpContext!.Request.Cookies["latitude"] ?? "30";
         string longitude = httpContextAccessor.HttpContext!.Request.Cookies["longitude"] ?? "-90";
@@ -35,6 +44,12 @@ public class Weather {
         return new CurrentCondition(temperature, iconCode);
     }
 
+    /// <summary>
+    /// Makes an HTTP request to the specified URL and returns the JSON document.
+    /// </summary>
+    /// <param name="url">The URL to make the request to.</param>
+    /// <param name="errorCallback">An optional callback to be executed in case of an error.</param>
+    /// <returns>The JSON document or null if the request fails.</returns>
     static async Task<JsonDocument?> MakeRequest(string url, Action? errorCallback = null) {
         using HttpClient client = new();
         HttpResponseMessage response = await client.GetAsync(url);
@@ -55,6 +70,11 @@ public class Weather {
         return null;
     }
 
+    /// <summary>
+    /// Gets the weather icon name based on the provided icon code.
+    /// </summary>
+    /// <param name="iconCode">The icon code representing the weather condition.</param>
+    /// <returns>The name of the weather icon or null if the icon code is not recognized.</returns>
     public string? GetWeatherIconName(int? iconCode) {
         string? iconName;
         iconName = iconCode switch

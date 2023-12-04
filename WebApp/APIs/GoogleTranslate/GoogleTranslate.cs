@@ -12,13 +12,23 @@ using System.Security.Claims;
 
 
 namespace WebApp.APIs.GoogleTranslate;
+
+/// <summary>
+/// Provides translation services using the Google Translate API.
+/// </summary>
 public class GoogleTranslate {
+    /// <summary>
+    /// Gets or sets the current language for translation.
+    /// </summary>
     public string CurrentLanguage = "en";
     
     private readonly IHttpContextAccessor httpContextAccessor;
     private readonly string apiKey;
     private readonly string URL_BASE = "https://www.googleapis.com/language/translate/v2";
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GoogleTranslate"/> class.
+    /// </summary>
     public GoogleTranslate() {
         apiKey = Config.GOOGLE_TRANSLATE_API_KEY;
         httpContextAccessor = new HttpContextAccessor();
@@ -27,6 +37,11 @@ public class GoogleTranslate {
             ?? GetPreferredLanguage();
     }
 
+    /// <summary>
+    /// Translates the specified text to the current language.
+    /// </summary>
+    /// <param name="text">The text to be translated.</param>
+    /// <returns>The translated text or the original text if translation fails.</returns>
     public async Task<string> TranslateText(string text) {
         string source = "en";
         if (source == CurrentLanguage) return text;
@@ -65,12 +80,20 @@ public class GoogleTranslate {
         return translatedText ?? text;
     }
 
+    /// <summary>
+    /// Gets the preferred language from the request headers.
+    /// </summary>
+    /// <returns>The preferred language or "en" if not available.</returns>
     public string GetPreferredLanguage() {
         string? preferredLanguage = httpContextAccessor.HttpContext!.Request.Headers["Accept-Language"].ToString().Split(',')[0].Split('-')[0];
         preferredLanguage ??= "en";
         return preferredLanguage;
     }
 
+    /// <summary>
+    /// Gets the list of supported languages and their codes.
+    /// </summary>
+    /// <returns>An array of key-value pairs representing supported languages and their codes.</returns>
     public KeyValuePair<string, string>[]? GetSupportedLanguages() {
         string url = $"{URL_BASE}/languages?target=en&key={apiKey}";
         using HttpClient client = new();
