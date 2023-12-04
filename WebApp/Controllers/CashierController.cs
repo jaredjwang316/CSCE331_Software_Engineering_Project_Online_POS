@@ -22,7 +22,8 @@ using Microsoft.AspNetCore.Authorization;
 using WebApp.Models.ViewModels;
 using WebApp.Data;
 using Microsoft.Extensions.Caching.Memory;
-
+using WebApp.Models.Cart;
+using System.Security.Claims;
 
 namespace WebApp.Controllers;
 
@@ -31,14 +32,18 @@ public class CashierController : Controller
 {
     private readonly ILogger<CashierController> _logger;
     private readonly IMemoryCache cache;
-
-    public CashierController(ILogger<CashierController> logger, IMemoryCache cache)
+    private readonly CartService cartService;
+    public CashierController(ILogger<CashierController> logger, IMemoryCache cache, CartService cartService)
     {
         _logger = logger;
         this.cache = cache;
+        this.cartService = cartService;
     }
     public IActionResult Index()
     {
+        Cart cart = cartService.GetCartFromSession();
+        int itemsInCart = cart!.Items.Sum(i => i.Quantity);
+        ViewBag.itemsInCart = itemsInCart;
         return View();
     }
 
@@ -76,7 +81,26 @@ public class CashierController : Controller
 
     public IActionResult LoadFavorites() {
         // Use _ProductsPartial when favorites are implemented
-        return Content("Not Implemented");
+
+        if (!User.Identity!.IsAuthenticated) {
+            return Content("You must be logged in to view favorites.");
+        }
+
+        UnitOfWork unit = new();
+        string email = User.FindFirstValue(ClaimTypes.Email)!;
+        User? user = unit.GetUser(email);
+        if (user == null) {
+            unit.CloseConnection();
+            return Content("User not found.");
+        }
+
+        List<Product> model = unit.GetAll<Product>()
+            .Where(product => user.Favorites.Any(favorite => favorite == product.Id))
+            .ToList();
+        
+        unit.CloseConnection();
+
+        return PartialView("_ProductsPartial", model);
     }
 
     public IActionResult LoadProductsBySeries(string arg) {
@@ -104,5 +128,64 @@ public class CashierController : Controller
         unit.CloseConnection();
         
         return PartialView("_CustomizationsPartial", model);
+    }
+
+    public IActionResult AddFavorite(int productID) {
+        if (!User.Identity!.IsAuthenticated) {
+            return BadRequest("You must be logged in to add favorites.");
+        }
+
+        string email = User.FindFirstValue(ClaimTypes.Email)!;
+        if (email == null) {
+            return BadRequest("No email found for user.");
+        }
+
+        UnitOfWork unit = new();
+        User? user = unit.GetUser(email);
+        if (user == null) {
+            unit.CloseConnection();
+            return BadRequest("User not found.");
+        }
+
+        if (user.Favorites.Any(favorite => favorite == productID)) {
+            unit.CloseConnection();
+            return Ok();
+        }
+
+        int[] favorites = user.Favorites.Append(productID).ToArray();
+        User newUser = new(user.Name, user.Email, favorites);
+        unit.Update(user, newUser);
+        unit.CloseConnection();
+
+        return Ok();
+    }
+    public IActionResult RemoveFavorite(int productID) {
+        if (!User.Identity!.IsAuthenticated) {
+            return BadRequest("You must be logged in to remove favorites.");
+        }
+
+        string email = User.FindFirstValue(ClaimTypes.Email)!;
+        if (email == null) {
+            return BadRequest("No email found for user.");
+        }
+
+        UnitOfWork unit = new();
+        User? user = unit.GetUser(email);
+        if (user == null) {
+            unit.CloseConnection();
+            return BadRequest("User not found.");
+        }
+
+        if (!user.Favorites.Any(favorite => favorite == productID)) {
+            unit.CloseConnection();
+            return Ok();
+        }
+
+        int[] favorites = user.Favorites.Where(favorite => favorite != productID).ToArray();
+        User newUser = new(user.Name, user.Email, favorites);
+        unit.Update(user, newUser);
+        unit.CloseConnection();
+
+        return Ok();
     }
 }
