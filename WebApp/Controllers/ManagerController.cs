@@ -104,13 +104,14 @@ public class ManagerController : Controller
     public IActionResult AddProduct() {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         Product product = unit.Get<Product>(-1);
+        product.IsDrink = true;
         unit.Add<Product>(product);
-        
+        product = unit.GetRecentProduct();
         unit.CloseConnection();
 
         ClearCache();
 
-        return Ok();
+        return Ok(product.Id);
     }
 
 

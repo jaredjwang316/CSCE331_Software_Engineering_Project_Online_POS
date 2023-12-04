@@ -107,7 +107,7 @@
 <button id="saveButtonInv" class="save-button" style="display:none">Save</button>
 <h2 id="saveSuccess" style="display:none">Save Successful</h2>
 <h2 id="saveFail" style="display:none">Save Fail</h2>
-<h2 id="saveFail" style="display:none">Save Fail</h2>
+<h2 id="saveFail2" style="display:none">Invalid Data Type</h2>
 
 <button id="addButtonInv" class="add-button" style="display:none">Add</button>
 
@@ -117,7 +117,7 @@
     document.getElementById('saveButtonProd').addEventListener('click', function() {
         console.log('Save button clicked');
         var editedCells = document.querySelectorAll('td.edited');
-
+        var fail = false;
         var data = [];
 
         editedCells.forEach(function(cell) {
@@ -125,14 +125,20 @@
                 cell.parentElement.querySelector('td:nth-child(2)').innerText = "N/A";
             }
             if (cell.parentElement.querySelector('td:nth-child(3)').innerText == "") {
-                cell.parentElement.querySelector('td:nth-child(3)').innerText = "N/A";
+                cell.parentElement.querySelector('td:nth-child(3)').innerText = "0";
             } 
             if (cell.parentElement.querySelector('td:nth-child(4)').innerText == "") {
-                cell.parentElement.querySelector('td:nth-child(4)').innerText = "0";
+                cell.parentElement.querySelector('td:nth-child(4)').innerText = "N/A";
             }
             if (cell.parentElement.querySelector('td:nth-child(5)').innerText == "") {
                 cell.parentElement.querySelector('td:nth-child(5)').innerText = "FILLER";
             }
+
+            if (isNaN(parseFloat(cell.parentElement.querySelector('td:nth-child(3)').innerText))) {
+                cell.parentElement.querySelector('td:nth-child(3)').innerText = "0";
+                fail = true;
+            }
+
             data.push({
                 id: cell.parentElement.querySelector('td:first-child').innerText,
                 name: cell.parentElement.querySelector('td:nth-child(2)').innerText,
@@ -163,14 +169,22 @@
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function (response) {
-                document.getElementById("saveSuccess").style.display = 'inline';
-                setTimeout(function() {
-                    $('#saveSuccess').fadeOut('fast');
-                }, 5000);
+                if (fail == true) {
+                    document.getElementById("saveFail2").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveFail2').fadeOut('fast');
+                    }, 5000);
+                }
+                else {
+                    document.getElementById("saveSuccess").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveSuccess').fadeOut('fast');
+                    }, 5000);
+                }
                 console.log(response);
             },
             error: function () {
-                document.getElementById("saveFail").style.display = 'inline';
+                document.getElementById("saveFail").style.display = 'block';
                 setTimeout(function() {
                     $('#saveFail').fadeOut('fast');
                 }, 5000);
@@ -183,6 +197,49 @@
             cell.classList.remove('edited');
         });
     });
+    document.getElementById('addButtonProd').addEventListener('click', function() {
+        var table = document.getElementById("prod-table");
+        console.log('Add product button clicked');
+        var row = table.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        cell2.setAttribute("contenteditable", true);
+        cell3.setAttribute("contenteditable", true);
+        cell4.setAttribute("contenteditable", true);
+        cell5.setAttribute("contenteditable", true);
+        cell2.addEventListener('input', function() {
+                console.log('Cell changed');
+                cell2.classList.add('edited');
+            });
+        cell3.addEventListener('input', function() {
+                console.log('Cell changed');
+                cell3.classList.add('edited');
+            });
+        cell4.addEventListener('input', function() {
+                console.log('Cell changed');
+                cell4.classList.add('edited');
+            });
+        cell5.addEventListener('input', function() {
+                console.log('Cell changed');
+                cell5.classList.add('edited');
+            });
+        $.ajax({
+            url: "/Manager/AddProduct",
+            type: "POST",
+            contentType: "application/json",
+            success: function (response) {
+                cell1.innerHTML = response;
+            },
+            error: function () {
+                console.log("Error saving products");
+            }
+        });
+        
+    });
+
     // Inventory Save Button Function
     document.getElementById('saveButtonInv').addEventListener('click', function() {
         console.log('Save button clicked');
@@ -220,14 +277,14 @@
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function (response) {
-                document.getElementById("saveSuccess").style.display = 'inline';
+                document.getElementById("saveSuccess").style.display = 'block';
                 setTimeout(function() {
                     $('#saveSuccess').fadeOut('fast');
                 }, 5000);
                 console.log(response);
             },
             error: function () {
-                document.getElementById("saveFail").style.display = 'inline';
+                document.getElementById("saveFail").style.display = 'block';
                 setTimeout(function() {
                     $('#saveFail').fadeOut('fast');
                 }, 5000);
@@ -246,30 +303,6 @@
             console.log('Cell changed');
             cell.classList.add('edited');
         });
-    });
-    document.getElementById('addButtonProd').addEventListener('click', function() {
-        var table = document.getElementById("prod-table");
-        console.log('Add product button clicked');
-        var row = table.insertRow(-1);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
-        cell1.innerHTML = "TEST";
-        cell1.setAttribute("contenteditable", true);
-
-        $.ajax({
-            url: "/Manager/AddProduct",
-            type: "POST",
-            contentType: "application/json",
-            success: function (response) {
-                console.log(response);
-            },
-            error: function () {
-                console.log("Error saving products");
-            }
-        });
-        
     });
     document.getElementById('addButtonInv').addEventListener('click', function() {
         var table = document.getElementById("inv-table");
