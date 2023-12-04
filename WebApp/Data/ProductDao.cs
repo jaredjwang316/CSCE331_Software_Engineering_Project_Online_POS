@@ -73,8 +73,8 @@ public class ProductDao : IDao<Product> {
                 $"'{t.Series}', " +
                 $"'{t.ImgUrl}', " +
                 $"{t.Hidden}, " +
-                $"{t.IsOption})" +
-                $"{t.IsDrink}"
+                $"{t.IsOption}," +
+                $"{t.IsDrink})"
         );
         commandHandler.ExecuteNonQuery(statement);
     }
