@@ -8,17 +8,27 @@ using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Data;
 
+/// <summary>
+/// Data Access Object (DAO) for handling operations related to <see cref="SeriesInfo"/>.
+/// </summary>
+/// <seealso cref="IDao{SeriesInfo}"/>
 public class SeriesInfoDao : IDao<SeriesInfo> {
     private readonly CommandHandler commandHandler;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SeriesInfoDao"/> class.
+    /// </summary>
+    /// <param name="commandHandler">The command handler used for database operations.</param>
     public SeriesInfoDao(CommandHandler commandHandler) {
         this.commandHandler = commandHandler;
     }
 
+    /// <inheritdoc/>
     public SeriesInfo Get(int id) {
         throw new NotSupportedException();
     }
 
+    /// <inheritdoc/>
     public SeriesInfo Get(string name) {
         name = char.ToUpper(name[0]) + name[1..].ToLower();
         var query = $"SELECT * FROM series_info WHERE name = '{name}'";
@@ -42,6 +52,7 @@ public class SeriesInfoDao : IDao<SeriesInfo> {
         return seriesInfo;
     }
 
+    /// <inheritdoc/>
     public IEnumerable<SeriesInfo> GetAll() {
         var query = "SELECT * FROM series_info";
         var reader = commandHandler.ExecuteReader(query);
@@ -63,6 +74,7 @@ public class SeriesInfoDao : IDao<SeriesInfo> {
         return seriesInfo;
     }
 
+    /// <inheritdoc/>
     public void Add(SeriesInfo t) {
         string sattement = (
             $"INSERT INTO series_info (name, series_image_url, multi_selectable, is_product, is_customization, is_hidden) " +
@@ -71,6 +83,7 @@ public class SeriesInfoDao : IDao<SeriesInfo> {
         commandHandler.ExecuteNonQuery(sattement);
     }
 
+    /// <inheritdoc/>
     public void Update(SeriesInfo t, SeriesInfo newT) {
         string statement = (
             $"UPDATE series_info SET " +
@@ -86,6 +99,7 @@ public class SeriesInfoDao : IDao<SeriesInfo> {
         commandHandler.ExecuteNonQuery(statement);
     }
 
+    /// <inheritdoc/>
     public void Delete(SeriesInfo t) {
         string statement = $"DELETE FROM series_info WHERE name = {t.Name}";
         commandHandler.ExecuteNonQuery(statement);
