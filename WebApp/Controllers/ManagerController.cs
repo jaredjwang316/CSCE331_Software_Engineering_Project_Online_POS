@@ -9,6 +9,9 @@ using WebApp.Models.Cart;
 
 namespace WebApp.Controllers;
 
+/// <summary>
+/// Controller responsible for handling requests related to the manager's view and actions.
+/// </summary>
 [Authorize(Roles = "Manager")]
 public class ManagerController : Controller
 {
@@ -16,6 +19,12 @@ public class ManagerController : Controller
     private readonly IMemoryCache cache;
     private readonly CartService cartService;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ManagerController"/> class.
+    /// </summary>
+    /// <param name="logger">The logger for ManagerController.</param>
+    /// <param name="cartService">The service for managing the shopping cart.</param>
+    /// <param name="cache">The cache for storing and retrieving data.</param>
     public ManagerController(ILogger<ManagerController> logger,  CartService cartService, IMemoryCache cache)
     {
         _logger = logger;
@@ -23,6 +32,10 @@ public class ManagerController : Controller
         this.cartService = cartService;
     }
 
+    /// <summary>
+    /// Displays the manager's view with product, inventory, and ingredient information.
+    /// </summary>
+    /// <returns>The view for the manager's dashboard.</returns>
     public IActionResult Index()
     {
 
@@ -44,18 +57,34 @@ public class ManagerController : Controller
         }
     }
 
+    /// <summary>
+    /// Displays the manager's information. (Not implemented)
+    /// </summary>
+    /// <returns>A content result indicating that the feature is not implemented.</returns>
     public IActionResult ShowManager() {
         return Content("Not Implemented");
     }
 
+    /// <summary>
+    /// Displays the list of products. (Not implemented)
+    /// </summary>
+    /// <returns>A content result indicating that the feature is not implemented.</returns>
     public IActionResult ShowProducts() {
         return Content("Not Implemented");
     }
 
-     public IActionResult ShowInventory() {
+    /// <summary>
+    /// Displays the inventory. (Not implemented)
+    /// </summary>
+    /// <returns>A content result indicating that the feature is not implemented.</returns>
+    public IActionResult ShowInventory() {
         return Content("Not Implemented");
     }
 
+    /// <summary>
+    /// Handles errors and displays the error view.
+    /// </summary>
+    /// <returns>The view for the error page.</returns>
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
@@ -74,6 +103,12 @@ public class ManagerController : Controller
     //     }).catch(function(error) {
     //         console.log(error);
     //     });
+
+    /// <summary>
+    /// Saves the updated product information received from the client.
+    /// </summary>
+    /// <param name="data">The list of products to be updated.</param>
+    /// <returns>An IActionResult indicating the result of the operation.</returns>
     [HttpPost]
     public IActionResult SaveProducts([FromBody]List<Product> data) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
@@ -94,6 +129,11 @@ public class ManagerController : Controller
     }
 
 
+    /// <summary>
+    /// Saves the updated inventory information received from the client.
+    /// </summary>
+    /// <param name="data">The list of inventory items to be updated.</param>
+    /// <returns>An IActionResult indicating the result of the operation.</returns>
     public IActionResult SaveInventory([FromBody]List<Inventory> data) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         foreach (Inventory inventory in data) {
@@ -108,6 +148,10 @@ public class ManagerController : Controller
         return Ok();
     }
 
+    /// <summary>
+    /// Clears cached data related to categories and best sellers.
+    /// </summary>
+    /// <returns>An IActionResult indicating the result of the operation.</returns>
     public IActionResult ClearCache() {
         cache.Remove("Categories");
         cache.Remove("BestSellers");

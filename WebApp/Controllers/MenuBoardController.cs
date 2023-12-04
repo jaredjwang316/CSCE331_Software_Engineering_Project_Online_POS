@@ -7,17 +7,30 @@ using WebApp.Data;
 
 namespace WebApp.Controllers;
 
+/// <summary>
+/// Controller responsible for handling requests related to the menu board, including displaying products and handling product details.
+/// </summary>
 public class MenuBoardController : Controller
 {
     private readonly ILogger<MenuBoardController> _logger;
     private readonly CartService cartService;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MenuBoardController"/> class.
+    /// </summary>
+    /// <param name="logger">The logger for MenuBoardController.</param>
+    /// <param name="cartService">The service for managing the shopping cart.</param>
     public MenuBoardController(ILogger<MenuBoardController> logger, CartService cartService)
     {
         _logger = logger;
         this.cartService = cartService;
     }
 
+    /// <summary>
+    /// Displays the menu board with filtered products based on the search term and organized by categories.
+    /// </summary>
+    /// <param name="search">The search term used to filter products.</param>
+    /// <returns>The view for the menu board with product information.</returns>
     public IActionResult Index(string search)
     {
 
@@ -58,12 +71,20 @@ public class MenuBoardController : Controller
         return View((products, prodIngredients, productCategories));
     }
 
+    /// <summary>
+    /// Handles errors and displays the error view.
+    /// </summary>
+    /// <returns>The view for the error page.</returns>
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    /// <summary>
+    /// Gets the products and their categories in HTML format for use in a view.
+    /// </summary>
+    /// <returns>The HTML string containing product information.</returns>
     public IActionResult getProducts()
     {
         string html = "<div class=\"customization-menu\">";    
@@ -99,6 +120,11 @@ public class MenuBoardController : Controller
         return Content(html);   //return the string html
     }
 
+    /// <summary>
+    /// Gets product names by category for use in a partial view.
+    /// </summary>
+    /// <param name="category">The product category.</param>
+    /// <returns>A partial view with product names.</returns>
     public IActionResult GetProductsByCategory(string category)
     {
         UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
@@ -110,6 +136,11 @@ public class MenuBoardController : Controller
         return PartialView("_ProductNamesPartial", productNames);
     }
 
+    /// <summary>
+    /// Displays detailed information about a specific product.
+    /// </summary>
+    /// <param name="id">The unique identifier of the product.</param>
+    /// <returns>The view for the product detail page.</returns>
     public IActionResult ProductDetail(int id)
     {
 

@@ -13,17 +13,29 @@ using WebApp.Models.UnitOfWork;
 using WebApp.Models.ViewModels;
 
 namespace WebApp.Controllers;
+/// <summary>
+/// Controller responsible for managing shopping cart operations, including adding, removing, and editing items.
+/// </summary>
 public class CartController : Controller
 {
     private readonly ILogger<CartController> _logger;
     private readonly CartService cartService;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CartController"/> class.
+    /// </summary>
+    /// <param name="logger">The logger instance.</param>
+    /// <param name="cartService">The service responsible for cart operations.</param>
     public CartController(ILogger<CartController> logger, CartService cartService)
     {
         _logger = logger;
         this.cartService = cartService;
     }
 
+    /// <summary>
+    /// Displays the shopping cart contents along with the total number of items.
+    /// </summary>
+    /// <returns>The view containing the shopping cart information.</returns>
     public IActionResult Index()
     {
         Cart cart = cartService.GetCartFromSession();
@@ -41,6 +53,13 @@ public class CartController : Controller
         return products.Where(p => ids.Contains(p.Id)).ToList();
     }
 
+    /// <summary>
+    /// Adds an item to the shopping cart based on the provided product and customizations.
+    /// </summary>
+    /// <param name="product_id">The ID of the product to add.</param>
+    /// <param name="customization_ids">The IDs of customizations to add.</param>
+    /// <param name="quantity">The quantity of the item to add.</param>
+    /// <returns>An HTTP result indicating the success of the operation.</returns>
     public IActionResult AddItem(int product_id, List<int> customization_ids, int quantity) {
         UnitOfWork unit = new();
         List<Product> products = unit.GetAll<Product>().ToList();
@@ -64,6 +83,11 @@ public class CartController : Controller
         return Ok();
     }
 
+    /// <summary>
+    /// Removes an item from the shopping cart at the specified index.
+    /// </summary>
+    /// <param name="index">The index of the item to remove.</param>
+    /// <returns>An HTTP result indicating the success of the operation.</returns>
     public IActionResult RemoveItem(int index) {
         Cart cart = cartService.GetCartFromSession();
         cart.RemoveItem(index);
@@ -71,6 +95,12 @@ public class CartController : Controller
         return Ok();
     }
 
+    /// <summary>
+    /// Edits the quantity of an item in the shopping cart.
+    /// </summary>
+    /// <param name="index">The index of the item to edit.</param>
+    /// <param name="isIncrement">A flag indicating whether to increment or decrement the quantity.</param>
+    /// <returns>An HTTP result indicating the success of the operation.</returns>
     public IActionResult EditCount(int index, bool isIncrement) {
         Cart cart = cartService.GetCartFromSession();
         if (cart.Items[index].Quantity == 1 && !isIncrement) {
@@ -87,6 +117,11 @@ public class CartController : Controller
         return Ok();
     }
 
+    /// <summary>
+    /// Displays the partial view for editing item options.
+    /// </summary>
+    /// <param name="index">The index of the item to edit.</param>
+    /// <returns>The partial view for editing item options.</returns>
     public IActionResult EditOptions(int index) {
         UnitOfWork unit = new();
         List<SeriesInfo> seriesInformation = unit.GetAll<SeriesInfo>()
@@ -108,6 +143,13 @@ public class CartController : Controller
         return PartialView("_EditPartial", model);
     }
 
+    /// <summary>
+    /// Processes the checkout operation, creating an order based on the items in the shopping cart.
+    /// </summary>
+    /// <param name="name">The name associated with the order.</param>
+    /// <param name="role">The role of the user performing the checkout.</param>
+    /// <param name="email">The email of the user performing the checkout.</param>
+    /// <returns>An HTTP result indicating the success of the checkout operation.</returns>
     public IActionResult Checkout(string name, string role, string email) {
         Cart cart = cartService.GetCartFromSession();
 
@@ -139,14 +181,26 @@ public class CartController : Controller
         return Ok();
     }
 
+    /// <summary>
+    /// Retrieves the shopping cart from the session.
+    /// </summary>
+    /// <returns>The current shopping cart.</returns>
     public Cart GetCartFromSession() {
         return cartService.GetCartFromSession();
     }
 
+    /// <summary>
+    /// Sets the provided shopping cart in the session.
+    /// </summary>
+    /// <param name="cart">The shopping cart to set in the session.</param>
     public void SetCartInSession(Cart cart) {
         cartService.SetCartInSession(cart);
     }
 
+    /// <summary>
+    /// Displays the error view.
+    /// </summary>
+    /// <returns>The error view.</returns>
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
