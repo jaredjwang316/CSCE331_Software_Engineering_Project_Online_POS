@@ -39,7 +39,12 @@ public class ManagerController : Controller
                 .ToList();
             var inventory = uok.GetAll<Inventory>().ToList();
             var ingredients = uok.GetAll<Ingredient>().ToList();
-            uok.CloseConnection();
+            foreach (var ingredient in inventory) {
+                if (ingredient.Quantity <= 0) {
+                    ingredient.Quantity = ingredient.FillLevel;
+                    uok.Update<Inventory>(ingredient, ingredient);
+                }
+            }
             return View((products, inventory, ingredients));
         }
     }
@@ -78,12 +83,17 @@ public class ManagerController : Controller
     public IActionResult SaveProducts([FromBody]List<Product> data) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         foreach (Product product in data) {
-            Product initial_product = unit.Get<Product>(product.Id);
-            product.IsDrink = initial_product.IsDrink;
-            product.Hidden = initial_product.Hidden;
-            product.IsOption = initial_product.IsOption;
-            product.ImgUrl = initial_product.ImgUrl;
-            unit.Update<Product>(initial_product, product);
+            try {
+                Product initial_product = unit.Get<Product>(product.Id);
+                product.IsDrink = initial_product.IsDrink;
+                product.Hidden = initial_product.Hidden;
+                product.IsOption = initial_product.IsOption;
+                product.ImgUrl = initial_product.ImgUrl;
+                unit.Update<Product>(initial_product, product);
+            } catch {
+                continue;
+            }
+            
         }
 
         unit.CloseConnection();
@@ -97,8 +107,12 @@ public class ManagerController : Controller
     public IActionResult SaveInventory([FromBody]List<Inventory> data) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         foreach (Inventory inventory in data) {
-            Inventory initial_inventory = unit.Get<Inventory>(inventory.Id);
-            unit.Update<Inventory>(initial_inventory, inventory);
+            try {
+                Inventory initial_inventory = unit.Get<Inventory>(inventory.Id);
+                unit.Update<Inventory>(initial_inventory, inventory);
+            } catch {
+                continue;
+            }
         }
 
         unit.CloseConnection();

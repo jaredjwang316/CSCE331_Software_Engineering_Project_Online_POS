@@ -58,7 +58,7 @@
         <tbody>
             @foreach (var product in Model.Item1) {
                 <tr>
-                    <td contenteditable="true">@product.Id</td>
+                    <td>@product.Id</td>
                     <td contenteditable="true">@product.Name</td>
                     <td contenteditable="true">@product.Price</td>
                     <td contenteditable="true">@product.Series</td>
@@ -70,6 +70,8 @@
     <p>No products found.</p>
 }
 <button id="saveButtonProd" class="save-button" style="display:none">Save</button>
+
+<button id="addButtonProd" class="add-button" style="display:none">Add</button>
 
 @if (Model.Item2 != null && Model.Item2.Count > 0) {
     <table id="inv-table" class="table" style="display:none">
@@ -84,7 +86,7 @@
         <tbody>
             @foreach (var inventory in Model.Item2) {
                 <tr>
-                    <td contenteditable="true">@inventory.Id</td>
+                    <td>@inventory.Id</td>
                     <td contenteditable="true">@inventory.IngredientId</td>
                     <td contenteditable="true">
                         @foreach (var ingredient in Model.Item3) {
@@ -92,7 +94,7 @@
                                 @ingredient.Name
                             }
                         }</td>
-                    <td contenteditable="true">@inventory.Quantity</td>
+                    <td contenteditable="true"> @inventory.Quantity</td>
                 </tr>
             }
         </tbody>
@@ -103,7 +105,9 @@
 <button id="saveButtonInv" class="save-button" style="display:none">Save</button>
 <h2 id="saveSuccess" style="display:none">Save Successful</h2>
 <h2 id="saveFail" style="display:none">Save Fail</h2>
-<h2 id="manager-msg">Future manager landing page</h2>
+<h2 id="saveFail" style="display:none">Save Fail</h2>
+
+<button id="addButtonInv" class="add-button" style="display:none">Add</button>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
@@ -115,6 +119,18 @@
         var data = [];
 
         editedCells.forEach(function(cell) {
+            if (cell.parentElement.querySelector('td:first-child').innerText == "") {
+                cell.parentElement.querySelector('td:first-child').innerText = "0";
+            }
+            if (cell.parentElement.querySelector('td:nth-child(2)').innerText == "") {
+                cell.parentElement.querySelector('td:nth-child(2)').innerText = "0";
+            }
+            if (cell.parentElement.querySelector('td:nth-child(3)').innerText == "") {
+                cell.parentElement.querySelector('td:nth-child(3)').innerText = "0";
+            } 
+            if (cell.parentElement.querySelector('td:nth-child(4)').innerText == "") {
+                cell.parentElement.querySelector('td:nth-child(4)').innerText = "0";
+            }
             data.push({
                 id: cell.parentElement.querySelector('td:first-child').innerText,
                 name: cell.parentElement.querySelector('td:nth-child(2)').innerText,
@@ -172,6 +188,18 @@
         var data = [];
 
         editedCells.forEach(function(cell) {
+            if (cell.parentElement.querySelector('td:first-child').innerText == "") {
+                cell.parentElement.querySelector('td:first-child').innerText = "0";
+            }
+            if (cell.parentElement.querySelector('td:nth-child(2)').innerText == "") {
+                cell.parentElement.querySelector('td:nth-child(2)').innerText = "0";
+            }
+            if (cell.parentElement.querySelector('td:nth-child(3)').innerText == "") {
+                cell.parentElement.querySelector('td:nth-child(3)').innerText = "0";
+            } 
+            if (cell.parentElement.querySelector('td:nth-child(4)').innerText == "") {
+                cell.parentElement.querySelector('td:nth-child(4)').innerText = "0";
+            }
             data.push({
                 id: cell.parentElement.querySelector('td:first-child').innerText,
                 ingredientid: cell.parentElement.querySelector('td:nth-child(2)').innerText,
