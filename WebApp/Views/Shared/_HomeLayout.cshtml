@@ -25,9 +25,7 @@
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/_AccessibilityPartial.css" asp-append-version="true"/>
         <script src="~/js/geolocation.js" asp-append-version="true"></script>
-        <script type="module" src="~/js/accessibility.js" asp-append-version="true"></script>
     </head>
     @{
         bool grayscale = Context.Request.Cookies["Grayscale"] == "true";
@@ -123,6 +121,7 @@
         </header>
           
         @await Html.PartialAsync("_AccessibilityPartial")
+        @await Html.PartialAsync("_AIPartial")
         @RenderBody()
     </body>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

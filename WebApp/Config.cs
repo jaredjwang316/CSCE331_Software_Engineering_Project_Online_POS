@@ -5,6 +5,7 @@
     Purpose: This file contains the Config class, which is used to store
         general configuration information for the web app.
 */
+using WebApp.AI;
 
 namespace WebApp;
 

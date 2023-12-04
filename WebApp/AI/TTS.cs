@@ -4,7 +4,7 @@ namespace WebApp.AI;
 public class TTS {
     public TTS() {}
 
-    public async Task Run(string text) {
+    public async Task Run(string text, bool debugMode = false) {
         var speechConfig = SpeechConfig.FromSubscription(
             Config.AZURE_SPEECH_KEY,
             Config.AZURE_SPEECH_REGION
@@ -15,7 +15,10 @@ public class TTS {
         using var synthesizer = new SpeechSynthesizer(speechConfig);
 
         var result = await synthesizer.SpeakTextAsync(text);
-        OutputSpeechSythensisResult(result, text);
+
+        if (debugMode) {
+            OutputSpeechSythensisResult(result, text);
+        }
     }
 
     static void OutputSpeechSythensisResult(SpeechSynthesisResult speechSynthesisResult, string text)

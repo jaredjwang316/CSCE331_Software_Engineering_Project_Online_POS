@@ -18,12 +18,10 @@ window.toggleFavorite = function(element) {
     if ($(element).hasClass("favorite")) {
         $(element).attr("src", "/img/favorite-heart1.png");
         var productButton = $(element).closest(".product-btn");
-        console.log(productButton.attr("id"));
         makeRequest("/Customer/AddFavorite", "POST", { productID: productButton.attr("id") }, null, null);
     } else {
         $(element).attr("src", "/img/favorite-default-heart.png");
         var productButton = $(element).closest(".product-btn");
-        console.log(productButton.attr("id"));
         makeRequest("/Customer/RemoveFavorite", "POST", { productID: productButton.attr("id") }, null, null);
     }
 }

@@ -1,10 +1,6 @@
 
 import { makeRequest } from './utils/request.js';
 
-window.sendRequest = function() {
-    console.log("Send Request");
-}
-
 // Accessibility Button
 window.toggleSidebar = function() {
     var sidebar = document.querySelector(".sidebar");
