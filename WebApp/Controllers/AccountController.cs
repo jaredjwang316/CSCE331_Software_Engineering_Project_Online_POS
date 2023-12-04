@@ -2,6 +2,20 @@
     File: Controllers/AccountController.cs
     Author: Griffin Beaudreau
     Date: November 5, 2023
+    Purpose: The AccountController class manages user authentication and authorization 
+    functionalities within the Point of Sale (POS) system. This controller handles various actions related to user 
+    account management, login, logout, access control, and error handling.
+
+    The Login method initiates user authentication using a specified provider (defaulting to Google) and redirects 
+    users to the provider's authentication page. Upon successful authentication, the LoginCallback method retrieves 
+    user information, assigns appropriate roles (Manager, Cashier, or Customer), and signs in the user, redirecting to 
+    the appropriate location based on roles and returnUrl.
+
+    The Logout method handles user sign-out, redirecting users to the appropriate location based on their role. 
+    AccessDenied handles scenarios where users encounter unauthorized access, logging details and redirecting to the configured return URL.
+
+    Additionally, the controller includes methods to retrieve user role, name, email, and user information in JSON format.
+
 */
 
 using System.Diagnostics;
