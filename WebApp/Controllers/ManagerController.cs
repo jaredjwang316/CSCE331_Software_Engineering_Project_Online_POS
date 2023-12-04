@@ -6,6 +6,8 @@ using WebApp.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Memory;
 using WebApp.Models.Cart;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
+using Newtonsoft.Json;
 
 namespace WebApp.Controllers;
 
@@ -116,12 +118,46 @@ public class ManagerController : Controller
 
 
 
-    public IActionResult SaveInventory([FromBody]List<Inventory> data) {
+    public IActionResult SaveInventory([FromBody] Dictionary<string, string> payload) {
+        string data = payload["data"];
+        string data2 = payload["data2"];
         UnitOfWork unit = new(Config.AWS_DB_NAME);
-        foreach (Inventory inventory in data) {
-            try {
+        if (!ModelState.IsValid)
+        {
+            Console.WriteLine("ISNT VALID MODEL BINDING");
+            foreach (var entry in ModelState.Values) {
+                foreach (var error in entry.Errors)
+                {
+                    Console.WriteLine($"Property: {entry} Error: {error.ErrorMessage}");
+                }
+            }
+            return BadRequest(ModelState);
+        }
+        if (data == null) {
+            Console.WriteLine("null inventory");
+            return BadRequest("Inventory is null");
+        }
+        if (data2 == null) {
+            Console.WriteLine("null ingredient");
+            return BadRequest("Ingredient is null");
+        }
+        List<Inventory> item1 = JsonConvert.DeserializeObject<List<Inventory>>(data);
+        List<Ingredient> item2 = JsonConvert.DeserializeObject<List<Ingredient>>(data2);
+
+
+        foreach (Inventory inventory in item1) {
+             try {
                 Inventory initial_inventory = unit.Get<Inventory>(inventory.Id);
                 unit.Update<Inventory>(initial_inventory, inventory);
+            } catch {
+                continue;
+            }
+        }
+
+        foreach (Ingredient ingredient in item2) {
+             try {
+                Ingredient initial_ingredient = unit.Get<Ingredient>(ingredient.Id);
+                unit.Update<Ingredient>(initial_ingredient, ingredient);
             } catch {
                 continue;
             }
@@ -131,6 +167,19 @@ public class ManagerController : Controller
 
         ClearCache();
 
+        return Ok();
+    }
+
+    public IActionResult AddInventory() {
+        UnitOfWork unit = new(Config.AWS_DB_NAME);
+        //Inventory inventory = unit.Get<Inventory>(-1);
+
+
+        unit.CloseConnection();
+
+        ClearCache();
+        
+        //return Ok(inventory.Id);
         return Ok();
     }
 

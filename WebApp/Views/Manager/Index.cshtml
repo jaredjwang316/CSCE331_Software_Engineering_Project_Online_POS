@@ -72,8 +72,8 @@
     <p>No products found.</p>
 }
 <button id="saveButtonProd" class="save-button" style="display:none">Save</button>
-
 <button id="addButtonProd" class="add-button" style="display:none">Add</button>
+<button id="deleteButtonProd" class="save-button" style="display:none">Delete</button>
 
 @if (Model.Item2 != null && Model.Item2.Count > 0) {
     <table id="inv-table" class="table" style="display:none">
@@ -83,13 +83,14 @@
                 <th>Ingredient ID</th>
                 <th>Name</th>
                 <th>Quantity</th>
+                <th>Fill Level</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var inventory in Model.Item2) {
                 <tr>
                     <td>@inventory.Id</td>
-                    <td contenteditable="true">@inventory.IngredientId</td>
+                    <td>@inventory.IngredientId</td>
                     <td contenteditable="true">
                         @foreach (var ingredient in Model.Item3) {
                             @if(ingredient.Id == inventory.IngredientId) {
@@ -97,6 +98,7 @@
                             }
                         }</td>
                     <td contenteditable="true"> @inventory.Quantity</td>
+                    <td contenteditable="true"> @inventory.FillLevel</td>
                 </tr>
             }
         </tbody>
@@ -105,11 +107,13 @@
     <p>No products found.</p>
 }
 <button id="saveButtonInv" class="save-button" style="display:none">Save</button>
+<button id="addButtonInv" class="add-button" style="display:none">Add</button>
+<button id="deleteButtonInv" class="save-button" style="display:none">Delete</button>
+
 <h2 id="saveSuccess" style="display:none">Save Successful</h2>
 <h2 id="saveFail" style="display:none">Save Fail</h2>
 <h2 id="saveFail2" style="display:none">Invalid Data Type</h2>
 
-<button id="addButtonInv" class="add-button" style="display:none">Add</button>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
@@ -244,24 +248,39 @@
     document.getElementById('saveButtonInv').addEventListener('click', function() {
         console.log('Save button clicked');
         var editedCells = document.querySelectorAll('td.edited');
+        var Data = [];
+        var Data2 = [];
 
-        var data = [];
+        function getCellValue(row, index) {
+            var cellValue = row.querySelector('td:nth-child(' + index + ')').innerText;
+            return cellValue.trim() === "" ? null : cellValue;
+        }
 
-        editedCells.forEach(function(cell) {
-            if (cell.parentElement.querySelector('td:nth-child(2)').innerText == "") {
-                cell.parentElement.querySelector('td:nth-child(2)').innerText = "0";
-            }
+        editedCells.forEach(function (cell) {
             if (cell.parentElement.querySelector('td:nth-child(3)').innerText == "") {
                 cell.parentElement.querySelector('td:nth-child(3)').innerText = "N/A";
             } 
             if (cell.parentElement.querySelector('td:nth-child(4)').innerText == "") {
                 cell.parentElement.querySelector('td:nth-child(4)').innerText = "0";
             }
-            data.push({
-                id: cell.parentElement.querySelector('td:first-child').innerText,
-                ingredientid: cell.parentElement.querySelector('td:nth-child(2)').innerText,
-                quantity: cell.parentElement.querySelector('td:nth-child(4)').innerText,
-                filllevel: 100
+            if (cell.parentElement.querySelector('td:nth-child(5)').innerText == "") {
+                cell.parentElement.querySelector('td:nth-child(5)').innerText = "0";
+            }
+            var _id = getCellValue(cell.parentElement, 1) || "0";
+            var _ingredientId = getCellValue(cell.parentElement, 2) || "0";
+            var _quantity = getCellValue(cell.parentElement, 4) || "0";
+            var _fillLevel = getCellValue(cell.parentElement, 5) || "0";
+
+            Data.push({
+                Id: parseInt(_id, 10),
+                IngredientId: parseInt(_ingredientId, 10),
+                Quantity: parseInt(_quantity, 10),
+                FillLevel: parseInt(_fillLevel, 10)
+            });
+
+            Data2.push({
+                Id: parseInt(_ingredientId, 10),
+                Name: getCellValue(cell.parentElement, 3) || "N/A"
             });
         });
 
@@ -270,18 +289,25 @@
         editedCells.forEach(function(cell) {
             cell.classList.remove('edited');
         });
-
+        console.log(Data);
+        console.log(Data2);
+        var output = {
+            data: JSON.stringify(Data),
+            data2: JSON.stringify(Data2)
+        };
         $.ajax({
             url: "/Manager/SaveInventory",
             type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            success: function (response) {
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(output),
+            success: function (data) {
                 document.getElementById("saveSuccess").style.display = 'block';
                 setTimeout(function() {
                     $('#saveSuccess').fadeOut('fast');
                 }, 5000);
-                console.log(response);
+                console.log(data);
+                console.log({ 'data' : JSON.stringify(Data),
+            'data2': JSON.stringify(Data2)});
             },
             error: function () {
                 document.getElementById("saveFail").style.display = 'block';
@@ -289,6 +315,45 @@
                     $('#saveFail').fadeOut('fast');
                 }, 5000);
                 console.log("Error saving inventory");
+                console.log({ 'data' : JSON.stringify(Data),
+            'data2': JSON.stringify(Data2)});
+            }
+        });
+    });
+
+    document.getElementById('addButtonInv').addEventListener('click', function() {
+        var table = document.getElementById("inv-table");
+        console.log('Add Inventory button clicked');
+        var row = table.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        cell3.setAttribute("contenteditable", true);
+        cell4.setAttribute("contenteditable", true);
+        cell5.setAttribute("contenteditable", true);
+        cell3.addEventListener('input', function() {
+                console.log('Cell changed');
+                cell3.classList.add('edited');
+            });
+        cell4.addEventListener('input', function() {
+                console.log('Cell changed');
+                cell4.classList.add('edited');
+            });
+        cell5.addEventListener('input', function() {
+                console.log('Cell changed');
+                cell5.classList.add('edited');
+            });
+        $.ajax({
+            url: "/Manager/AddInventory",
+            type: "POST",
+            contentType: "application/json",
+            success: function (response) {
+                cell1.innerHTML = response;
+            },
+            error: function () {
+                console.log("Error saving products");
             }
         });
     });
@@ -303,10 +368,5 @@
             console.log('Cell changed');
             cell.classList.add('edited');
         });
-    });
-    document.getElementById('addButtonInv').addEventListener('click', function() {
-        var table = document.getElementById("inv-table");
-        console.log('Add inventory button clicked');
-        var row = table.insertRow(-1);
     });
 </script> 
