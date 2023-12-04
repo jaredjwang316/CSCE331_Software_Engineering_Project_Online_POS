@@ -1,4 +1,4 @@
-﻿@* 
+@* 
     File: Home/Index.cshtml
     Author: Nihar Shah
     Date: November 24, 2023
@@ -19,6 +19,17 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<!--
+    Purpose: The Index.cshtml file serves as the landing page for the web application. 
+    Authored by Nihar Shah, this view file integrates with external APIs like Google 
+    Translate and Azure Maps to provide translated text and potentially location-based services. 
+    The view is structured using sections, displaying a headline in the center with 
+    translated content regarding "Bringing Bubble Tea to the United States!" The layout includes 
+    three sections, each containing an image and a translated title linked to different functionalities: 
+    "Menu," "Order," and a section marked as "WIP" (Work in Progress). The 'await translator.TranslateText()' 
+    method is used to dynamically translate text displayed on the page. The layout used for this view is 
+    defined in the shared `_HomeLayout.cshtml` file.
+-->
 
 <div class="text-center contrast">
     @{
@@ -29,7 +40,7 @@
 <h2></h2>
 
 <section class="elementor-section contrast">
-    <div class="elementor-container left">
+    <div class="elementor-container left" tabindex="1">
         <a class="elementor-box-title" asp-area="" asp-controller="MenuBoard" asp-action="Index">
             <figure class="elementor-image-box-img">
             <img src="https://gongchausa.com/wp-content/uploads/2021/12/25-w.png">
@@ -37,7 +48,7 @@
             <h3>@await translator.TranslateText("Menu")</h3>
         </a>
     </div>
-    <div class="elementor-container center">
+    <div class="elementor-container center" tabindex="2">
         <a class="elementor-box-title" asp-area="" asp-controller="Customer" asp-action="Index">
             <figure class="elementor-image-box-img">
             <img src="https://gongchausa.com/wp-content/uploads/2021/12/Tea-17.png">
@@ -45,7 +56,7 @@
             <h3>@await translator.TranslateText("Order")</h3>
         </a>
     </div>
-    <div class="elementor-container right">
+    <div class="elementor-container right" tabindex="3">
         <a class="elementor-box-title" asp-area="" asp-controller="Story" asp-action="Index">
             <figure class="elementor-image-box-img">
             <img src="https://gongchausa.com/wp-content/uploads/2021/12/Tea-29-scaled.jpg">
