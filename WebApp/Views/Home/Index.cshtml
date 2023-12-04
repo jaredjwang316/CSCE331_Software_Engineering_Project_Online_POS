@@ -16,6 +16,10 @@
     @* translator.CurrentLanguage = Context.Request.Cookies["CurrentLanguage"] ?? translator.CurrentLanguage; *@
 }
 
+@{
+    ViewData["Title"] = "Home Page";
+}
+
 <div class="text-center contrast">
     @{
         string text = "Bringing Bubble Tea to the United States!";
@@ -42,7 +46,7 @@
         </a>
     </div>
     <div class="elementor-container right">
-        <a class="elementor-box-title" asp-area="" asp-controller="" asp-action="">
+        <a class="elementor-box-title" asp-area="" asp-controller="Story" asp-action="Index">
             <figure class="elementor-image-box-img">
             <img src="https://gongchausa.com/wp-content/uploads/2021/12/Tea-29-scaled.jpg">
             </figure>
