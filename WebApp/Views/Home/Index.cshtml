@@ -16,6 +16,18 @@
     @* translator.CurrentLanguage = Context.Request.Cookies["CurrentLanguage"] ?? translator.CurrentLanguage; *@
 }
 
+<!--
+    Purpose: The Index.cshtml file serves as the landing page for the web application. 
+    Authored by Nihar Shah, this view file integrates with external APIs like Google 
+    Translate and Azure Maps to provide translated text and potentially location-based services. 
+    The view is structured using sections, displaying a headline in the center with 
+    translated content regarding "Bringing Bubble Tea to the United States!" The layout includes 
+    three sections, each containing an image and a translated title linked to different functionalities: 
+    "Menu," "Order," and a section marked as "WIP" (Work in Progress). The 'await translator.TranslateText()' 
+    method is used to dynamically translate text displayed on the page. The layout used for this view is 
+    defined in the shared `_HomeLayout.cshtml` file.
+-->
+
 <div class="text-center contrast">
     @{
         string text = "Bringing Bubble Tea to the United States!";

@@ -1,3 +1,19 @@
+/*
+    File: Controllers/CashierController.cs
+    Author: [Author's Name]
+    Date: [Date]
+    Purpose: This file contains the CashierController class, which manages actions and
+        functionalities specifically tailored for the Point of Sale (POS) system.
+
+    Description:
+
+    The CashierController class is an essential component of the web application's backend,
+    dedicated to handling operations and requests related to the Point of Sale (POS) functionalities.
+    It is designed to ensure secure access and execution of actions primarily intended for users
+    with roles assigned as 'Cashier' or 'Manager'.
+
+*/
+
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models.UnitOfWork;

@@ -1,24 +1,37 @@
-
-
 @{
     ViewData["Title"] = "Menu Board Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4 contrast">Menu Board Page</h1>
-</div>
-
+@{
+    //The Menu Board Page serves as the central hub for displaying products, their ingredients, 
+    //and categories within the Point of Sale (POS) system. It provides a user-friendly 
+    //interface with a search bar for locating specific items. This page showcases 
+    //products and their associated details, including product IDs, names, prices, and categories. 
+    //Furthermore, it presents a comprehensive list of product ingredients for each item. 
+    //Users can explore different product categories through interactive buttons, revealing 
+    //specific product lists upon selection. The JavaScript functionality incorporated here 
+    //enhances user experience by dynamically showing or hiding product lists based on 
+    //category selections, allowing efficient navigation through the menu board.
+}
 <script src="~/js/menu.js" asp-append-version="true"></script>
 @using WebApp.Models.UnitOfWork
+@using WebApp.APIs.GoogleTranslate
 @model (List<Product> products, List<ProductIngredients> prodIngredients, List<string> productCategories)
+@{
+    var translate = new GoogleTranslate();
+}
+
+<div class="text-center">
+    <h1 class="display-4 contrast">@await translate.TranslateText("Menu Board Page")</h1>
+</div>
 
 <div class="row contrast">
     <div class="col-md-6">
         <form method="get" class="mb-3">
             <div class="input-group">
-                <input type="text" class="form-control" name="search" placeholder="Search products">
+                <input type="text" class="form-control" name="search" placeholder="@await translate.TranslateText("Search Products")">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Search</button>
+                    <button class="btn btn-primary" type="submit">@await translate.TranslateText("Search")</button>
                 </div>
             </div>
         </form>
@@ -27,14 +40,14 @@
 
 @if (Model.Item1 != null && Model.Item1.Count > 0)
 {
-    <h2 class="contrast">Products</h2>
+    <h2 class="contrast">@await translate.TranslateText("Products")</h2>
     <table class="table contrast">
         <thead>
             <tr>
-                <th>Product ID</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Series</th>
+                <th>@await translate.TranslateText("Product ID")</th>
+                <th>@await translate.TranslateText("Name")</th>
+                <th>@await translate.TranslateText("Price")</th>
+                <th>@await translate.TranslateText("Series")</th>
             </tr>
         </thead>
         <tbody>
@@ -43,10 +56,10 @@
                 <tr class="product-row" data-category="@product.Series">
                     <td>@product.Id</td>
                     <td>
-                        <a href="@Url.Action("ProductDetail", "MenuBoard", new { id = product.Id })">@product.Name</a>
+                        <a href="@Url.Action("ProductDetail", "MenuBoard", new { id = product.Id })">@await translate.TranslateText(product.Name)</a>
                     </td>
-                    <td>@product.Price</td>
-                    <td>@product.Series</td>
+                    <td>@product.Price.ToString("C")</td>
+                    <td>@await translate.TranslateText(product.Series)</td>
                 </tr>
             }
         </tbody>
@@ -54,17 +67,17 @@
 }
 else
 {
-    <p>No products found.</p>
+    <p>@await translate.TranslateText("No products found.")</p>
 }
 
 @if (Model.Item2 != null && Model.Item2.Count > 0)
 {
-    <h2 class="contrast">Product Ingredients</h2>
+    <h2 class="contrast">@await translate.TranslateText("Product Ingredients")</h2>
     <table class="table contrast">
         <thead>
             <tr>
-                <th>Product Ingredient ID</th>
-                <th>Name</th>
+                <th>@await translate.TranslateText("Product Ingredient ID")</th>
+                <th>@await translate.TranslateText("Ingredients")</th>
             </tr>
         </thead>
         <tbody>
@@ -72,7 +85,12 @@ else
             {
                 <tr>
                     <td>@pingredient.ProductId</td>
-                    <td>@pingredient.IngredientIds</td>
+                    <td>
+                        @foreach (var ingredientId in pingredient.IngredientIds)
+                        {
+                            <div>@ingredientId</div>
+                        }
+                    </td>
                 </tr>
             }
         </tbody>
@@ -80,16 +98,43 @@ else
 }
 else
 {
-    <p class="contrast">No products ingredients found.</p>
+    <p class="contrast">@await translate.TranslateText("No products ingredients found.")</p>
 }
 
 @if (Model.productCategories != null && Model.productCategories.Count > 0)
 {
-    <h2 class="contrast">Product Categories</h2>
+    <h2 class="contrast">@await translate.TranslateText("Product Categories")</h2>
     <div class="category-buttons contrast">
         @foreach (var category in Model.productCategories)
         {
-            <button class="btn btn-primary category-button" data-category="@category">@category</button>
+            <button class="btn btn-primary category-button" data-category="@category">@await translate.TranslateText(category)</button>
+            <div class="product-list-for-category" data-category="@category" style="display: none;">
+                @foreach (var product in Model.Item1!)
+                {
+                    if (product.Series == category)
+                    {
+                        <p>@await translate.TranslateText(product.Name)</p>
+                        <!-- Display other product details as needed -->
+                    }
+                }
+            </div>
         }
     </div>
 }
+
+<!-- Ensure jQuery is included -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- JavaScript to handle button click -->
+<script>
+    $('.category-button').on('click', function() {
+        var category = $(this).data('category');
+        
+        // Hide all product lists initially
+        $('.product-list-for-category').hide();
+        
+        // Show product list for the clicked category
+        $('.product-list-for-category[data-category="' + category + '"]').show();
+    });
+</script>
+
