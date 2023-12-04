@@ -84,6 +84,10 @@ public class UnitOfWork {
         return daoTypeContainer.GetProductDao().GetBestSellingProducts(limit);
     }
 
+    public Product GetRecentProduct() {
+        return daoTypeContainer.GetProductDao().GetRecentProduct();
+    }
+
     public SeriesInfo GetSeriesInfo(string name) {
         return daoTypeContainer.GetSeriesInfoDao().Get(name);
     }
