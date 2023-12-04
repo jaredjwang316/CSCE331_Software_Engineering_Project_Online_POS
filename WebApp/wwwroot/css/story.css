@@ -1,0 +1,38 @@
+/* 
+    File: story.css
+    Author: Nihar Shah
+    Date: December 3, 2023
+*/
+
+html {
+    font-size: 16px;
+}
+
+body {
+    background-image: url('https://gongchausa.com/wp-content/uploads/2021/11/Our-Philosophy-Section-3-background.png');
+    background-repeat: no-repeat;
+}
+body.contrast-grayscale {
+    background-image: url('/img/Our-Philosophy-Section-3-background-grayscale.png');
+    background-repeat: no-repeat;
+}
+body.contrast-invert {
+    background-image: url('/img/Our-Philosophy-Section-3-background-invert.png');
+    background-repeat: no-repeat;
+}
+
+/* Style for the parent container */
+.story-container {
+    background-color: aqua;
+    display: flex; /* Use flexbox to arrange child elements */
+    width: 60%; /* Take up the entire width of the screen */
+    box-sizing: border-box; /* Include padding and border in the total width */
+}
+
+/* Style for the child divs */
+.story-column {
+    width: 100%; /* Make each child div take up 50% of the parent width */
+    box-sizing: border-box; /* Include padding and border in the total width */
+    border: 1px solid #ccc; /* Add a border for visibility */
+    padding: 20px; /* Add padding for spacing inside the div */
+}
