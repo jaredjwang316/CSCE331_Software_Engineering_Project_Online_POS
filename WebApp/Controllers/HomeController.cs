@@ -23,6 +23,7 @@ using System.Text.Json;
 using WebApp.APIs.AzureMaps;
 using WebApp.Models.AzureMaps.Weather;
 using WebApp.APIs.GoogleTranslate;
+using WebApp.AI;
 
 namespace WebApp.Controllers;
 
