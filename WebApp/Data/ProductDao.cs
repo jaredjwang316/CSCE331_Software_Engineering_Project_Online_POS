@@ -65,7 +65,7 @@ public class ProductDao : IDao<Product> {
     }
 
     public void Add(Product t) {
-        string sattement = (
+        string statement = (
             $"INSERT INTO products (name, price, series, img_url, hidden, is_option, is_drink) " +
             $"VALUES (" +
                 $"'{t.Name}', " +
@@ -76,7 +76,7 @@ public class ProductDao : IDao<Product> {
                 $"{t.IsOption})" +
                 $"{t.IsDrink}"
         );
-        commandHandler.ExecuteNonQuery(sattement);
+        commandHandler.ExecuteNonQuery(statement);
     }
 
     public void Update(Product t, Product newT) {

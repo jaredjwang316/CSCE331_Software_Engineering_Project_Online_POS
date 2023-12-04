@@ -88,7 +88,6 @@ public class ManagerController : Controller
                 product.IsDrink = initial_product.IsDrink;
                 product.Hidden = initial_product.Hidden;
                 product.IsOption = initial_product.IsOption;
-                product.ImgUrl = initial_product.ImgUrl;
                 unit.Update<Product>(initial_product, product);
             } catch {
                 continue;
@@ -102,6 +101,18 @@ public class ManagerController : Controller
 
         return Ok();
     }
+    public IActionResult AddProduct() {
+        UnitOfWork unit = new(Config.AWS_DB_NAME);
+        Product product = unit.Get<Product>(-1);
+        unit.Add<Product>(product);
+        
+        unit.CloseConnection();
+
+        ClearCache();
+
+        return Ok();
+    }
+
 
 
     public IActionResult SaveInventory([FromBody]List<Inventory> data) {
