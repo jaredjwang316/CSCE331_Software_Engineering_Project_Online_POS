@@ -1,0 +1,54 @@
+@* 
+    File: Home/Index.cshtml
+    Author: Nihar Shah
+    Date: December 3, 2023
+*@
+
+@using System.Security.Claims;
+@using WebApp.APIs.GoogleTranslate;
+@using WebApp.APIs.AzureMaps;
+@using WebApp.Models.AzureMaps.Weather;
+
+
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    var translator = new GoogleTranslate();
+    @* translator.CurrentLanguage = Context.Request.Cookies["CurrentLanguage"] ?? translator.CurrentLanguage; *@
+}
+
+@{
+    ViewData["Title"] = "Our Story";
+}
+
+<div class="text-center contrast">
+    @{
+        string text = "Our Story!";
+        <h1 class="display-4">@await translator.TranslateText(text)</h1>
+    } 
+</div>
+<h2></h2>
+
+<section class="elementor-section contrast">
+    <div class="story-container">
+        <div class="story-column">
+            <!-- Content for the first child div -->
+            <p class="red-text">Founded in 2006 in Kaohsiung, Taiwan; Gong Cha, which translates to “tribute tea for the emperor” opened its doors to the bubble tea market.</h2>
+            <p>Gong cha’s success in Taiwan launched our stores all over the globe with customers loving our premium quality tea, products & services:</p>
+            <ul>
+                <li>Fresh Tea brewed throughout the day</li>
+                <li>Pearls (bubbles) freshly prepared to perfection continuously through the day</li>
+                <li>Tea sourced from the finest tea estates in Taiwan</li>
+                <li>Strict quality controls for all ingredients</li>
+            </ul>
+            <p>Gong cha is known across the world for its signature Milk Foam. Its creamy, sweet and savory flavor balance and whipped texture make it the perfect complement to our freshly brewed teas. Our delicious milk foam is hand-crafted for each customer and made from the freshest milk and highest quality, signature ingredients.</p>
+        </div>
+        
+        <div class="story-column">
+            <!-- Content for the second child div -->
+            <div class="vertical-images">
+                <img src="https://gongchausa.com/wp-content/uploads/2022/01/Kaohsiung-01-scaled.jpg" alt="Image 1">
+                <img src="https://gongchausa.com/wp-content/uploads/2022/01/IMG_0075-768x512.jpg" alt="Image 2">
+            </div>
+        </div>
+    </div>
+</section>

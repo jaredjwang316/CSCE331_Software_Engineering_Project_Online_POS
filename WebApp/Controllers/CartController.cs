@@ -16,6 +16,17 @@ namespace WebApp.Controllers;
 /// <summary>
 /// Controller responsible for managing shopping cart operations, including adding, removing, and editing items.
 /// </summary>
+
+/* The `CartController.cs` manages the functionality associated with the shopping cart within the web application. 
+Primarily responsible for handling cart interactions, this controller orchestrates operations such as adding, 
+removing, or editing items, alongside facilitating the checkout process. Within its methods, it manipulates 
+cart items stored in the session, performs operations including adding items with customizations, 
+modifying quantities, and removing items. Additionally, it interfaces with the unit of work to retrieve 
+product information and series details for editing cart items. Notably, this controller also supports user 
+checkout by generating orders based on the current cart contents and employee/customer information. 
+By implementing these functionalities, the controller efficiently organizes cart-related actions and 
+integrates them seamlessly into the web application's shopping experience */
+
 public class CartController : Controller
 {
     private readonly ILogger<CartController> _logger;

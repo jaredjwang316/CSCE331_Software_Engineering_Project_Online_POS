@@ -4,6 +4,11 @@
     Date: November 12, 2023
     Purpose: This file contains the CustomerController class, which is used to handle
         requests from the customer view.
+
+    Description:  The CustomerController class is an integral part of the web application's backend,
+    specifically designed to manage and respond to various requests originating from
+    the customer-facing view. It interacts with the UnitOfWork, CartService, IMemoryCache,
+    and other components to facilitate operations related to customer activities.
 */
 
 using WebApp.Models.UnitOfWork;

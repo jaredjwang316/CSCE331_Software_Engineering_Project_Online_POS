@@ -6,6 +6,16 @@ using WebApp.Models.Cart;
 using WebApp.Data;
 
 namespace WebApp.Controllers;
+/* This part of the program manages the display and functionality of the menu board in our Point of Sale (POS) system.
+The MenuBoardController orchestrates the retrieval of products, product categories, and their details from the database. 
+The 'Index' method generates the main menu board view, allowing users to search for specific items, 
+displaying them by categories, and handling various interactions. 
+Additionally, 'getProducts' retrieves and organizes items and categories for the frontend, enabling the creation of the 
+interactive menu interface. 
+This controller also handles errors through the 'Error' method and provides detailed 
+product information through the 'ProductDetail' method. Overall, this controller acts as the bridge between the 
+database and the user interface, facilitating the effective presentation and interaction with menu items within the 
+POS system. */
 
 /// <summary>
 /// Controller responsible for handling requests related to the menu board, including displaying products and handling product details.
@@ -25,12 +35,16 @@ public class MenuBoardController : Controller
         _logger = logger;
         this.cartService = cartService;
     }
+<<<<<<< HEAD
 
     /// <summary>
     /// Displays the menu board with filtered products based on the search term and organized by categories.
     /// </summary>
     /// <param name="search">The search term used to filter products.</param>
     /// <returns>The view for the menu board with product information.</returns>
+=======
+ 
+>>>>>>> main
     public IActionResult Index(string search)
     {
 

@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="~/css/_AccessibilityPartial.css" asp-append-version="true"/>
+<script type="module" src="~/js/accessibility.js" asp-append-version="true"></script>
+
 @using WebApp.APIs.GoogleTranslate
 @{
     var translator = new GoogleTranslate();
@@ -6,10 +9,12 @@
 <div class="sidebar-image contrast">
     <img class="toggle-accessibility" src="~/img/accessibility1.png" alt="Accessibility"
         onclick="toggleSidebar()"
+        onkeydown="if(event.keyCode == 13) toggleSidebar()"
         title=@await translator.TranslateText("Explore your accessibility options")
         tabindex="0"
     />
 </div>
+
 <div class="sidebar sidebar-closed contrast">
     <div class="options">
         <div class="option">

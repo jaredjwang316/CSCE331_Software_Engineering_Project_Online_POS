@@ -78,6 +78,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="MenuBoard" asp-action="Index">Menu Board</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Story" asp-action="Index">Our Story</a>
+                            </li>
                         }
                     </ul>
                     <ul class="navbar-nav">
@@ -130,6 +133,7 @@
     </header>
     
     @await Html.PartialAsync("_AccessibilityPartial")
+    @await Html.PartialAsync("_AIPartial")
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
