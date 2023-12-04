@@ -88,7 +88,6 @@ public class GoogleTranslate {
         HttpResponseMessage response = client.GetAsync(url).Result;
         if (!response.IsSuccessStatusCode)
         {
-            // throw new Exception("Failed to get supported languages.");
             KeyValuePair<string, string>[]? empty = Array.Empty<KeyValuePair<string, string>>();
             return empty;
         }
