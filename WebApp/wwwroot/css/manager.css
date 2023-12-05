@@ -76,6 +76,21 @@ img {
     font-size: 1.2rem;
 }
 
+.table-button {
+    flex: 1;
+    padding: 10px;
+    margin: 5px;
+    color: #000000;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border-width: 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-family: Lusitana;
+    font-size: 1.2rem;
+}
+
 .spinner-border {
     position: absolute;
     top: 50%;
