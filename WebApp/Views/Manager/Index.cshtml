@@ -55,6 +55,7 @@
                 <th>Series</th>
                 <th>Image Url</th>
                 <th>Delete</th>
+                <th>Product Ingredients</th>
             </tr>
         </thead>
         <tbody>
@@ -66,6 +67,7 @@
                     <td contenteditable="true">@product.Series</td>
                     <td contenteditable="true">@product.ImgUrl</td>
                     <td><input type="button" value="Delete" onclick="deleteRowProd(this)"/></td>
+                    <td><input type+"button" value="Edit Product Ingredients" onlick=""/></td>
                 </tr>
             }
         </tbody>
@@ -391,25 +393,27 @@
     });
     function deleteRowProd(btn) {
         var row = btn.parentNode.parentNode;
+        id = parseInt(row.querySelector('td:first-child').innerText);
         row.parentNode.removeChild(row);
-
+        console.log(id);
         $.ajax({
             url: "/Manager/DeleteProduct",
             type: "POST",
             contentType: "application/json",
+            data: JSON.stringify(id),
             success: function (response) {
                 document.getElementById("saveSuccess").style.display = 'block';
                     setTimeout(function() {
                         $('#saveSuccess').fadeOut('fast');
                     }, 5000);
-                console.log("Success deleting products");
+                console.log("Success deleting inventory");
             },
             error: function () {
                 document.getElementById("saveFail").style.display = 'block';
                     setTimeout(function() {
                         $('#saveFail').fadeOut('fast');
                     }, 5000);
-                console.log("Error deleting products");
+                console.log("Error deleting inventory");
             }
         });
     }
