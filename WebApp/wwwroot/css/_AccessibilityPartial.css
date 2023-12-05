@@ -12,6 +12,9 @@
   .toggle-sidebar-btn:hover {
     background-color: #ccc;
   }
+  .toggle-accessibility:hover {
+    background-color: #ccc;
+  }
   .sidebar {
     position: fixed;
     height: 100%;

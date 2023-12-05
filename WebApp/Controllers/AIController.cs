@@ -10,6 +10,7 @@ namespace WebApp.Controllers;
 public class AIController : Controller
 {
     private readonly ILogger<AIController> _logger;
+    private readonly int MAX_HISTORY_LENGTH = 10;
 
     public AIController(ILogger<AIController> logger)
     {
@@ -17,37 +18,21 @@ public class AIController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> TTS(string text) {
-        var tts = new TTS();
-        await tts.Run(text);
-
-        return Ok();
-    }
-
-    [HttpPost]
     public async Task<IActionResult> GetResponse(string input) {
         string response = "";
         string history = GetHistory();
 
-        string systemPrompt = "!RespondOnlyInEnglish!ExpertONGongCha!IF!QuestiUnrelaTOGongChaORGreetSAY\"I'mSorry,MyKnowledgeIsLimitedToGongCha\"!GreetOk!";
+        string systemPrompt = "";
 
         try {
-            response = await new Chatbot("SYSPROMPT:" + systemPrompt + "\n\n" + history).Run(input);
+            var chatbot = new Chatbot(systemPrompt, 300, 0.9f);
+            chatbot.AddHistory(history);
+            response = await chatbot.Run(input);
         } catch (Exception e) {
             return BadRequest(e.Message);
         }
 
-        bool TTS = HttpContext.Request.Cookies["tts"] == "true";
-        if (TTS) {
-            var ignore = new TTS().Run(response).ContinueWith(task => {
-                if (task.IsFaulted) {
-                    Console.WriteLine($"Error: {task.Exception?.InnerException?.Message ?? "No details available"}");
-                }
-            });
-        }
-
         string translatedResponse = await new GoogleTranslate().TranslateText(response);
-
         SetHistory(history + $"\nUser: {input}\nAssistant: {response}");
         return Ok(translatedResponse);
     }
@@ -62,8 +47,8 @@ public class AIController : Controller
         string? history = GetHistory();
         string[] splitHistory = history.Split("\n");
 
-        if (splitHistory.Length > 5) {
-            splitHistory = splitHistory[^5..];
+        if (splitHistory.Length > MAX_HISTORY_LENGTH) {
+            splitHistory = splitHistory[^MAX_HISTORY_LENGTH..];
             SetHistory(string.Join("\n", splitHistory));
         }
 
