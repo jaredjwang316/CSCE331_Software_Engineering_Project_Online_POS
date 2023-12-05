@@ -44,7 +44,7 @@
 @using WebApp.Data
 @using WebApp.Models.UnitOfWork
 @using WebApp
-@model (List<Product>, List<Inventory>, List<Ingredient>)
+@model (List<Product>, List<Inventory>, List<Ingredient>, List<ProductIngredients>)
 @if (Model.Item1 != null && Model.Item1.Count > 0) {
     <table id="prod-table" class="table" style="display:none">
         <thead>
@@ -67,7 +67,7 @@
                     <td contenteditable="true">@product.Series</td>
                     <td contenteditable="true">@product.ImgUrl</td>
                     <td><input type="button" value="Delete" onclick="deleteRowProd(this)"/></td>
-                    <td><input type+"button" value="Edit Product Ingredients" onlick=""/></td>
+                    <td><input type="button" value="Edit Product Ingredients" onclick="editProductIngredients(this)"/></td>
                 </tr>
             }
         </tbody>
@@ -123,6 +123,21 @@
 <button id="restockReport" class="table-button" style="display:inline-block">Restock Report</button>
 <button id="salesTogether" class="table-button" style="display:inline-block">Sales Together</button>
 <button id="popularityAnalysis" class="table-button" style="display:inline-block">Menu Items Popularity Analysis</button>
+
+@* @if (Model.Item4 != null && Model.Item4.Count > 0) {
+    @foreach (var productingredient in Model.Item4) {
+        @foreach (var pingredient in productingredient.ingredientIds) {
+            @foreach (var ingredient in Model.Item3) {
+
+            }
+        }
+    }
+} *@
+
+
+
+
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -448,5 +463,11 @@
                 console.log("Error deleting inventory");
             }
         });
+    }
+    function editProductIngredients(btn) {
+        showProductIngredients();
+        var row = btn.parentNode.parentNode;
+        id = parseInt(row.querySelector('td:first-child').innerText);
+        console.log(id);
     }
 </script> 

@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if ($(this).hasClass("active")) return;
         $(".table-button").removeClass("active");
         $(this).addClass("active");
-        
 
     });
 });
@@ -104,4 +103,8 @@ function showInventoryPage() {
     document.getElementById('inv-table').style.display = 'inline-table';
     document.getElementById('saveButtonInv').style.display = 'inline-block';
     document.getElementById('addButtonInv').style.display = 'inline-block';
+}
+
+function showProductIngredients() {
+    clearView();
 }
