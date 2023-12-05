@@ -1,17 +1,24 @@
+@* 
+    File: Views/MenuBoard/Index.cshtml
+    Author: Jared Wang
+    Date: November 27, 2023
+    Purpose: The Menu Board Page serves as the central hub for displaying products, their ingredients, 
+    and categories within the Point of Sale (POS) system. It provides a user-friendly 
+    interface with a search bar for locating specific items. This page showcases 
+    products and their associated details, including product IDs, names, prices, and categories. 
+    Furthermore, it presents a comprehensive list of product ingredients for each item. 
+    Users can explore different product categories through interactive buttons, revealing 
+    specific product lists upon selection. The JavaScript functionality incorporated here 
+    enhances user experience by dynamically showing or hiding product lists based on 
+    category selections, allowing efficient navigation through the menu board.
+*@
+
 @{
     ViewData["Title"] = "Menu Board Page";
 }
 
 @{
-    //The Menu Board Page serves as the central hub for displaying products, their ingredients, 
-    //and categories within the Point of Sale (POS) system. It provides a user-friendly 
-    //interface with a search bar for locating specific items. This page showcases 
-    //products and their associated details, including product IDs, names, prices, and categories. 
-    //Furthermore, it presents a comprehensive list of product ingredients for each item. 
-    //Users can explore different product categories through interactive buttons, revealing 
-    //specific product lists upon selection. The JavaScript functionality incorporated here 
-    //enhances user experience by dynamically showing or hiding product lists based on 
-    //category selections, allowing efficient navigation through the menu board.
+
 }
 <script src="~/js/menu.js" asp-append-version="true"></script>
 @using WebApp.Models.UnitOfWork

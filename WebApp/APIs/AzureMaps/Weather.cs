@@ -1,21 +1,16 @@
-
+/*
+File: APIs/AzureMaps/Weather.cs
+Author: Jared Wang and Griffin Beaudreau
+Date: December 4th, 2023
+Purpose: The Weather class serves as part of the WeatherService, authored for user accessibility within the Point of Sale (POS) system. 
+This class integrates with Azure Maps API to retrieve weather-related information based on user location. The constructor initializes 
+components, including the Azure Maps API key obtained from the configuration and an HttpContextAccessor for accessing HTTP context.
+*/
 using System.Text.Json;
 using WebApp.Models.AzureMaps.Weather;
 
 namespace WebApp.APIs.AzureMaps;
 
-/*
-The Weather class serves as part of the WeatherService, authored for user accessibility within the Point of Sale (POS) system. 
-This class integrates with Azure Maps API to retrieve weather-related information based on user location. The constructor initializes 
-components, including the Azure Maps API key obtained from the configuration and an HttpContextAccessor for accessing HTTP context.
-
-The GetCurrentCondition method asynchronously fetches the current weather conditions using latitude and longitude coordinates 
-obtained from cookies in the HTTP request. It constructs a URL for the Azure Maps API weather endpoint and makes a request to retrieve 
-weather data. Upon a successful response, the method parses the JSON response to extract temperature and weather icon code, creating a 
-CurrentCondition object representing the current weather condition.
-
-The GetWeatherIconName method maps the received weather icon code to an appropriate icon name for displaying weather icons in the POS system interface.
-*/
 
 public class Weather {
     private readonly IHttpContextAccessor httpContextAccessor;

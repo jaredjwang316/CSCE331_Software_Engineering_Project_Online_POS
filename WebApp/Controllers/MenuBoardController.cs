@@ -1,3 +1,19 @@
+/* 
+    File: Controllers/MenuBoardContoller.cs
+    Author: Jared Wang
+    Date: November 24, 2023
+    Purpose: This part of the program manages the display and functionality of the menu board in our Point of Sale (POS) system.
+    The MenuBoardController orchestrates the retrieval of products, product categories, and their details from the database. 
+    The 'Index' method generates the main menu board view, allowing users to search for specific items, 
+    displaying them by categories, and handling various interactions. 
+    Additionally, 'getProducts' retrieves and organizes items and categories for the frontend, enabling the creation of the 
+    interactive menu interface. 
+    This controller also handles errors through the 'Error' method and provides detailed 
+    product information through the 'ProductDetail' method. Overall, this controller acts as the bridge between the 
+    database and the user interface, facilitating the effective presentation and interaction with menu items within the 
+    POS system.
+*/
+
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models.UnitOfWork;
@@ -6,16 +22,6 @@ using WebApp.Models.Cart;
 using WebApp.Data;
 
 namespace WebApp.Controllers;
-/* This part of the program manages the display and functionality of the menu board in our Point of Sale (POS) system.
-The MenuBoardController orchestrates the retrieval of products, product categories, and their details from the database. 
-The 'Index' method generates the main menu board view, allowing users to search for specific items, 
-displaying them by categories, and handling various interactions. 
-Additionally, 'getProducts' retrieves and organizes items and categories for the frontend, enabling the creation of the 
-interactive menu interface. 
-This controller also handles errors through the 'Error' method and provides detailed 
-product information through the 'ProductDetail' method. Overall, this controller acts as the bridge between the 
-database and the user interface, facilitating the effective presentation and interaction with menu items within the 
-POS system. */
 
 public class MenuBoardController : Controller
 {
