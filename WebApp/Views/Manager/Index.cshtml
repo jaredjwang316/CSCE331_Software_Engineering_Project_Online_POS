@@ -16,7 +16,7 @@
 
 </head>
 <body>
-    <div class="container">
+    <div class="container contrast">
         <main role="main" class="pb-3">
             @if (User.Identity!.IsAuthenticated) {
                 <div class="text-center">
@@ -46,7 +46,7 @@
 @using WebApp
 @model (List<Product>, List<Inventory>, List<Ingredient>, List<ProductIngredients>)
 @if (Model.Item1 != null && Model.Item1.Count > 0) {
-    <table id="prod-table" class="table" style="display:none">
+    <table id="prod-table" class="table contrast" style="display:none">
         <thead>
             <tr>
                 <th>Product ID</th>
@@ -79,7 +79,7 @@
 <button id="addButtonProd" class="add-button" style="display:none">Add</button>
 
 @if (Model.Item2 != null && Model.Item2.Count > 0) {
-    <table id="inv-table" class="table" style="display:none">
+    <table id="inv-table" class="table contrast" style="display:none">
         <thead>
             <tr>
                 <th>ID</th>

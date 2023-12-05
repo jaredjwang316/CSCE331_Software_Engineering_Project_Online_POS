@@ -9,6 +9,14 @@ body {
     background-image: url('https://gongchausa.com/wp-content/uploads/2021/11/Our-Philosophy-Section-3-background.png');
     background-repeat: no-repeat;
 }
+body.contrast-grayscale {
+    background-image: url('/img/Our-Philosophy-Section-3-background-grayscale.png');
+    background-repeat: no-repeat;
+}
+body.contrast-invert {
+    background-image: url('/img/Our-Philosophy-Section-3-background-invert.png');
+    background-repeat: no-repeat;
+}
 
 .city-background-container img {
     width: 100%;

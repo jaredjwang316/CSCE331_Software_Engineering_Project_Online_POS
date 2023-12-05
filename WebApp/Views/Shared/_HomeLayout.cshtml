@@ -7,9 +7,27 @@
 @using WebApp.APIs.GoogleTranslate
 @using WebApp.APIs.AzureMaps
 @using WebApp.Models.AzureMaps.Weather
+@using WebApp.Data
+@using WebApp.Models.UnitOfWork
+@using System.Security.Claims
+
 @{
     var translator = new GoogleTranslate();
 }
+
+<!--
+    Purpose: The _HomeLayout.cshtml file, authored by Nihar Shah, serves as the layout template for various pages within the application. 
+    This layout defines the HTML structure and common elements shared across multiple views. The file starts by setting the language 
+    attribute based on the preferred language retrieved using the GoogleTranslate API. It includes metadata, title configuration, 
+    and links to CSS and JavaScript files, enhancing the visual and functional aspects of the application.
+    Within the body section, the layout contains a header with a navigation bar that facilitates user interaction. 
+    The navigation bar displays the application logo, offers quick access links based on user roles (e.g., Manager, Cashier, Customer), 
+    and enables user authentication options (Log in/Log out). Additionally, the layout incorporates weather-related information 
+    fetched using Azure Maps API, displaying the current temperature and weather condition as an icon.
+    This layout utilizes Bootstrap for responsive design and interactivity, allowing seamless navigation and a visually appealing interface. 
+    The file includes references to jQuery and Bootstrap JavaScript files for enhanced functionality and styling. 
+    Views that implement this layout benefit from its consistent structure and elements, providing a cohesive user experience across the application.
+-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,12 +39,15 @@
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/_AccessibilityPartial.css" asp-append-version="true"/>
         <script src="~/js/geolocation.js" asp-append-version="true"></script>
     </head>
-    <body>
+    @{
+        bool grayscale = Context.Request.Cookies["Grayscale"] == "true";
+        bool invert = Context.Request.Cookies["Invert"] == "true";
+    }
+    <body class="@(grayscale ? "contrast-grayscale" : "") @(invert ? "contrast-invert" : "")">
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <nav class="contrast navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div class="container-fluid">
                     <!--Logo-->
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" asp-route-autoRedirect="false">
@@ -74,6 +95,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="MenuBoard" asp-action="Index">Menu Board</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Story" asp-action="Index">Our Story</a>
+                                </li>
                             }
                         </ul>
                         <ul class="navbar-nav">
@@ -114,11 +138,11 @@
         </header>
           
         @await Html.PartialAsync("_AccessibilityPartial")
+        @await Html.PartialAsync("_AIPartial")
         @RenderBody()
     </body>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/accessibility.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </html>

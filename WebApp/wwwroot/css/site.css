@@ -76,3 +76,40 @@ body {
 .big-text, .big-text a, .big-text h2, .big-text h3, .big-text .category-btn, .big-text .price {
   font-size: 1.5em;
 }
+
+/* .contrast {
+  background-color: black;
+}
+.contrast a, .contrast p, .contrast h1, .contrast h2, .contrast h3 {
+  color: white;
+}
+.contrast .category-btn, .contrast .menu-item {
+  background-color: rgb(75, 75, 75);
+} */
+
+/* .contrast {
+  background-color: black;
+}
+.contrast a, .contrast p, .contrast h1, .contrast h2, .contrast h3 {
+  color: white;
+}
+.contrast img {
+  filter: invert(100%);
+}
+.contrast .category-btn {
+  filter: invert(100%);
+} */
+
+.contrast-invert .contrast {
+  filter: invert(100%);
+}
+.contrast-invert {
+  background-color: black;
+}
+
+.contrast-grayscale .contrast {
+  filter: grayscale(100%);
+}
+.contrast-grayscale {
+  background-color: rgb(75, 75, 75);
+}
