@@ -170,6 +170,11 @@ public class CashierController : Controller
         return PartialView("_CustomizationsPartial", model);
     }
 
+    /// <summary>
+    /// Adds the specified product to the user's favorites.
+    /// </summary>
+    /// <param name="productID">The ID of the product to be added to favorites.</param>
+    /// <returns>An IActionResult indicating the success or failure of the operation.</returns>
     public IActionResult AddFavorite(int productID) {
         if (!User.Identity!.IsAuthenticated) {
             return BadRequest("You must be logged in to add favorites.");
@@ -199,6 +204,12 @@ public class CashierController : Controller
 
         return Ok();
     }
+    
+    /// <summary>
+    /// Removes the specified product from the user's favorites.
+    /// </summary>
+    /// <param name="productID">The ID of the product to be removed from favorites.</param>
+    /// <returns>An IActionResult indicating the success or failure of the operation.</returns>
     public IActionResult RemoveFavorite(int productID) {
         if (!User.Identity!.IsAuthenticated) {
             return BadRequest("You must be logged in to remove favorites.");
