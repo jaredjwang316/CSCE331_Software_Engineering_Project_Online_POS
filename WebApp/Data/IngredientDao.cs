@@ -72,4 +72,20 @@ public class IngredientDao : IDao<Ingredient> {
         string statement = $"DELETE FROM ingredients WHERE id = {t.Id}";
         commandHandler.ExecuteNonQuery(statement);
     }
+
+    public Ingredient GetRecentIngredient() {
+        string query = $"SELECT * FROM ingredients ORDER BY id DESC LIMIT 1";
+        var reader = commandHandler.ExecuteReader(query);
+        List<Ingredient> ingredients = new();
+
+        while (reader?.Read() == true) {
+            ingredients.Add(new Ingredient(
+                reader.GetInt32(0),
+                reader.GetString(0)
+            ));
+        }
+
+        reader?.Close();
+        return ingredients.ElementAt(0);
+    }
 }

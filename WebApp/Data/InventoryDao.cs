@@ -79,4 +79,22 @@ public class InventoryDao : IDao<Inventory> {
         string statement = $"DELETE FROM inventory WHERE id = {t.Id}";
         commandHandler.ExecuteNonQuery(statement);
     }
+
+    public Inventory GetRecentInventory() {
+        string query = $"SELECT * FROM inventory ORDER BY id DESC LIMIT 1";
+        var reader = commandHandler.ExecuteReader(query);
+        List<Inventory> inventory = new();
+
+        while (reader?.Read() == true) {
+            inventory.Add(new Inventory(
+                reader.GetInt32(0),
+                reader.GetInt32(0),
+                reader.GetInt32(0),
+                reader.GetInt32(0)
+            ));
+        }
+
+        reader?.Close();
+        return inventory.ElementAt(0);
+    }
 }

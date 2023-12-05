@@ -95,6 +95,15 @@ public class UnitOfWork {
     public User? GetUser(string email) {
         return daoTypeContainer.GetUserDao().Get(email);
     }
+
+    public Inventory GetRecentInventory() {
+        return daoTypeContainer.GetInventoryDao().GetRecentInventory();
+    }
+
+    public Ingredient GetRecentIngredient() {
+        return daoTypeContainer.GetIngredientDao().GetRecentIngredient();
+    }
+
 }
 
 public class DaoTypeContainer {
