@@ -40,8 +40,7 @@ public class CashierController : Controller
     /// Initializes a new instance of the <see cref="CashierController"/> class.
     /// </summary>
     /// <param name="logger">The logger instance.</param>
-    /// <param name="cache">The memory cache instance.</param>
-    public CashierController(ILogger<CashierController> logger, IMemoryCache cache)
+    /// <param name="cache">The memory cache instance.</param>\
     private readonly CartService cartService;
     public CashierController(ILogger<CashierController> logger, IMemoryCache cache, CartService cartService)
     {
@@ -49,6 +48,7 @@ public class CashierController : Controller
         this.cache = cache;
         this.cartService = cartService;
     }
+    
     /// <summary>
     /// Displays the default view for the cashier controller.
     /// </summary>
