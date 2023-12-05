@@ -141,25 +141,28 @@ public class ManagerController : Controller
             Console.WriteLine("null ingredient");
             return BadRequest("Ingredient is null");
         }
-        List<Inventory> item1 = JsonConvert.DeserializeObject<List<Inventory>>(data);
-        List<Ingredient> item2 = JsonConvert.DeserializeObject<List<Ingredient>>(data2);
+        List<Inventory>? item1 = JsonConvert.DeserializeObject<List<Inventory>>(data);
+        List<Ingredient>? item2 = JsonConvert.DeserializeObject<List<Ingredient>>(data2);
 
-
-        foreach (Inventory inventory in item1) {
-             try {
-                Inventory initial_inventory = unit.Get<Inventory>(inventory.Id);
-                unit.Update<Inventory>(initial_inventory, inventory);
-            } catch {
-                continue;
+        if (item1 is not null) {
+            foreach (Inventory inventory in item1) {
+                try {
+                    Inventory initial_inventory = unit.Get<Inventory>(inventory.Id);
+                    unit.Update<Inventory>(initial_inventory, inventory);
+                } catch {
+                    continue;
+                }
             }
         }
 
-        foreach (Ingredient ingredient in item2) {
-             try {
-                Ingredient initial_ingredient = unit.Get<Ingredient>(ingredient.Id);
-                unit.Update<Ingredient>(initial_ingredient, ingredient);
-            } catch {
-                continue;
+        if (item2 is not null) {
+            foreach (Ingredient ingredient in item2) {
+                try {
+                    Ingredient initial_ingredient = unit.Get<Ingredient>(ingredient.Id);
+                    unit.Update<Ingredient>(initial_ingredient, ingredient);
+                } catch {
+                    continue;
+                }
             }
         }
 

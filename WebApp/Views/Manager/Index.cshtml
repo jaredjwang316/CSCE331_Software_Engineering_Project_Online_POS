@@ -54,6 +54,7 @@
                 <th>Price</th>
                 <th>Series</th>
                 <th>Image Url</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -64,6 +65,7 @@
                     <td contenteditable="true">@product.Price</td>
                     <td contenteditable="true">@product.Series</td>
                     <td contenteditable="true">@product.ImgUrl</td>
+                    <td><input type="button" value="Delete" onclick="deleteRow(this)"/></td>
                 </tr>
             }
         </tbody>
@@ -84,6 +86,7 @@
                 <th>Name</th>
                 <th>Quantity</th>
                 <th>Fill Level</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -99,6 +102,7 @@
                         }</td>
                     <td contenteditable="true"> @inventory.Quantity</td>
                     <td contenteditable="true"> @inventory.FillLevel</td>
+                    <td><input type="button" value="Delete" onclick="deleteRow(this)"/></td>
                 </tr>
             }
         </tbody>
@@ -330,6 +334,8 @@
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+        cell6.innerHTML = '<input type="button" value="Delete" onclick="deleteRow(this)"/>';
         cell3.setAttribute("contenteditable", true);
         cell4.setAttribute("contenteditable", true);
         cell5.setAttribute("contenteditable", true);
@@ -369,4 +375,8 @@
             cell.classList.add('edited');
         });
     });
+    function deleteRow(btn) {
+        var row = btn.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+    }
 </script> 
