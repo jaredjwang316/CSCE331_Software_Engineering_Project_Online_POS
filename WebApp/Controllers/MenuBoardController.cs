@@ -35,16 +35,13 @@ public class MenuBoardController : Controller
         _logger = logger;
         this.cartService = cartService;
     }
-<<<<<<< HEAD
 
     /// <summary>
     /// Displays the menu board with filtered products based on the search term and organized by categories.
     /// </summary>
     /// <param name="search">The search term used to filter products.</param>
     /// <returns>The view for the menu board with product information.</returns>
-=======
  
->>>>>>> main
     public IActionResult Index(string search)
     {
 
