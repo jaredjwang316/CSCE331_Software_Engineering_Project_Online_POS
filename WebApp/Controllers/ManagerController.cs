@@ -177,13 +177,23 @@ public class ManagerController : Controller
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         Inventory inventory = unit.Get<Inventory>(-1);
         Ingredient ingredient = unit.Get<Ingredient>(-1);
-
+        unit.Add<Ingredient>(ingredient);
+        ingredient = unit.GetRecentIngredient();
+        inventory.IngredientId = ingredient.Id;
+        unit.Add<Inventory>(inventory);
+        inventory = unit.GetRecentInventory();
+        
 
         unit.CloseConnection();
 
         ClearCache();
         
-        //return Ok(inventory.Id);
+        return Ok(inventory.Id);
+    }
+
+    public IActionResult DeleteInventory(int id) {
+        UnitOfWork unit = new(Config.AWS_DB_NAME);
+        
         return Ok();
     }
 

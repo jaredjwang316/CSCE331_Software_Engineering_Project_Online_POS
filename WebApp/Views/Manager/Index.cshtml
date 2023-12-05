@@ -254,7 +254,7 @@
         var editedCells = document.querySelectorAll('td.edited');
         var Data = [];
         var Data2 = [];
-        Boolean fail = false;
+        var fail = false;
 
         function getCellValue(row, index) {
             var cellValue = row.querySelector('td:nth-child(' + index + ')').innerText;
@@ -314,7 +314,7 @@
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(output),
             success: function (data) {
-                if (fail) {
+                if (fail == true) {
                     document.getElementById("saveFail2").style.display = 'block';
                     setTimeout(function() {
                         $('#saveFail2').fadeOut('fast');
@@ -370,6 +370,7 @@
             contentType: "application/json",
             success: function (response) {
                 cell1.innerHTML = response;
+                cell2.innerHTML = (parseInt(response)-9000).toString();
             },
             error: function () {
                 console.log("Error saving products");
