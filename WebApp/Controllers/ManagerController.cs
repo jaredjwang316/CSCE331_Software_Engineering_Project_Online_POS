@@ -175,7 +175,8 @@ public class ManagerController : Controller
 
     public IActionResult AddInventory() {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
-        //Inventory inventory = unit.Get<Inventory>(-1);
+        Inventory inventory = unit.Get<Inventory>(-1);
+        Ingredient ingredient = unit.Get<Ingredient>(-1);
 
 
         unit.CloseConnection();

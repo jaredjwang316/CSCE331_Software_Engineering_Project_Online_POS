@@ -75,7 +75,6 @@
 }
 <button id="saveButtonProd" class="save-button" style="display:none">Save</button>
 <button id="addButtonProd" class="add-button" style="display:none">Add</button>
-<button id="deleteButtonProd" class="save-button" style="display:none">Delete</button>
 
 @if (Model.Item2 != null && Model.Item2.Count > 0) {
     <table id="inv-table" class="table" style="display:none">
@@ -112,7 +111,6 @@
 }
 <button id="saveButtonInv" class="save-button" style="display:none">Save</button>
 <button id="addButtonInv" class="add-button" style="display:none">Add</button>
-<button id="deleteButtonInv" class="save-button" style="display:none">Delete</button>
 
 <h2 id="saveSuccess" style="display:none">Save Successful</h2>
 <h2 id="saveFail" style="display:none">Save Fail</h2>
@@ -218,6 +216,8 @@
         cell3.setAttribute("contenteditable", true);
         cell4.setAttribute("contenteditable", true);
         cell5.setAttribute("contenteditable", true);
+        var cell6 = row.insertCell(5);
+        cell6.innerHTML = '<input type="button" value="Delete" onclick="deleteRow(this)"/>';
         cell2.addEventListener('input', function() {
                 console.log('Cell changed');
                 cell2.classList.add('edited');
@@ -254,6 +254,7 @@
         var editedCells = document.querySelectorAll('td.edited');
         var Data = [];
         var Data2 = [];
+        Boolean fail = false;
 
         function getCellValue(row, index) {
             var cellValue = row.querySelector('td:nth-child(' + index + ')').innerText;
@@ -270,11 +271,19 @@
             if (cell.parentElement.querySelector('td:nth-child(5)').innerText == "") {
                 cell.parentElement.querySelector('td:nth-child(5)').innerText = "0";
             }
+            if (isNaN(parseInt(cell.parentElement.querySelector('td:nth-child(4)').innerText))) {
+                cell.parentElement.querySelector('td:nth-child(4)').innerText = "0";
+                fail = true;
+            }
+            if (isNaN(parseInt(cell.parentElement.querySelector('td:nth-child(5)').innerText))) {
+                cell.parentElement.querySelector('td:nth-child(5)').innerText = "0";
+                fail = true;
+            }
+            
             var _id = getCellValue(cell.parentElement, 1) || "0";
             var _ingredientId = getCellValue(cell.parentElement, 2) || "0";
             var _quantity = getCellValue(cell.parentElement, 4) || "0";
             var _fillLevel = getCellValue(cell.parentElement, 5) || "0";
-
             Data.push({
                 Id: parseInt(_id, 10),
                 IngredientId: parseInt(_ingredientId, 10),
@@ -305,13 +314,19 @@
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(output),
             success: function (data) {
-                document.getElementById("saveSuccess").style.display = 'block';
-                setTimeout(function() {
-                    $('#saveSuccess').fadeOut('fast');
-                }, 5000);
+                if (fail) {
+                    document.getElementById("saveFail2").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveFail2').fadeOut('fast');
+                    }, 5000);
+                }
+                else {
+                    document.getElementById("saveSuccess").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveSuccess').fadeOut('fast');
+                    }, 5000);
+                }
                 console.log(data);
-                console.log({ 'data' : JSON.stringify(Data),
-            'data2': JSON.stringify(Data2)});
             },
             error: function () {
                 document.getElementById("saveFail").style.display = 'block';
@@ -319,8 +334,6 @@
                     $('#saveFail').fadeOut('fast');
                 }, 5000);
                 console.log("Error saving inventory");
-                console.log({ 'data' : JSON.stringify(Data),
-            'data2': JSON.stringify(Data2)});
             }
         });
     });
