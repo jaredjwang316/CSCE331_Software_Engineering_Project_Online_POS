@@ -44,20 +44,6 @@ window.clearHistory = function() {
     }, error);
 }
 
-// TTS
-window.enableTTS = function() {
-    var ttsButton = $(".sidebar-TTS-button");
-    if (ttsButton.attr("on") == "false") {
-        ttsButton.attr("on", "true");
-        ttsButton.find("img").attr("src", "/img/tts.png");
-        document.cookie = "tts=true";
-    } else {
-        ttsButton.attr("on", "false");
-        ttsButton.find("img").attr("src", "/img/tts-off.png");
-        document.cookie = "tts=false";
-    }
-}
-
 window.sendInput = function() {
     var input = $(".sidebar-input-text").val();
     clearInput($(".sidebar-input-text"));

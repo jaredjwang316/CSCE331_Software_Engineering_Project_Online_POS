@@ -22,14 +22,8 @@ public class StoryController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index(bool autoRedirect = true)
+    public IActionResult Index()
     {
-        if (autoRedirect && User.Identity!.IsAuthenticated && User.IsInRole("Cashier")) {
-            return RedirectToAction("Index", "Cashier");
-        } else if (autoRedirect && User.Identity!.IsAuthenticated && User.IsInRole("Manager")) {
-            return RedirectToAction("Index", "Manager");
-        }
-
         return View();
     }
 
