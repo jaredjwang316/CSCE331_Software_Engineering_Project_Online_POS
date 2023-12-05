@@ -1,6 +1,13 @@
 using Azure.AI.OpenAI;
 
 namespace WebApp.AI;
+
+/*
+The Chatbot.cs file implements the chatbot feature within the Point of Sale (POS) system for the Gong Cha restaurant. 
+This file defines the Chatbot class responsible for interacting with the OpenAI GPT-3 API to facilitate conversation 
+between users and the AI-powered assistant.
+*/
+
 public class Chatbot : Core {
     public Chatbot(
         string? systemPrompt = null,
