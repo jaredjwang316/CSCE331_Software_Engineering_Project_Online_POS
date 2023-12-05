@@ -34,6 +34,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     });
+
+    $(".table-button").click(function () {
+        if ($(this).hasClass("active")) return;
+        $(".table-button").removeClass("active");
+        $(this).addClass("active");
+        
+
+    });
 });
 
 function loadData(action, args, element) {
@@ -67,10 +75,21 @@ function clearView() {
     document.getElementById('inv-table').style.display = 'none';
     document.getElementById('saveButtonInv').style.display = 'none';
     document.getElementById('addButtonInv').style.display = 'none';
+
+    document.getElementById('salesReport').style.display = 'none';
+    document.getElementById('excessReport').style.display = 'none';
+    document.getElementById('restockReport').style.display = 'none';
+    document.getElementById('salesTogether').style.display = 'none';
+    document.getElementById('popularityAnalysis').style.display = 'none';
 }
 
 function showManagerPage() {
     clearView();
+    document.getElementById('salesReport').style.display = 'inline-block';
+    document.getElementById('excessReport').style.display = 'inline-block';
+    document.getElementById('restockReport').style.display = 'inline-block';
+    document.getElementById('salesTogether').style.display = 'inline-block';
+    document.getElementById('popularityAnalysis').style.display = 'inline-block';
 }
 
 function showProductPage() {

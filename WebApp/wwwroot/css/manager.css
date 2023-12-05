@@ -91,6 +91,17 @@ img {
     font-size: 1.2rem;
 }
 
+.table-button.active {
+    color: #C30E2F;
+    cursor: default;          
+}
+.table-button.active:focus {
+    outline-color: #C30E2F;
+}
+.table-button:hover:not(.active) {
+    color: #000000;
+}
+
 .spinner-border {
     position: absolute;
     top: 50%;
