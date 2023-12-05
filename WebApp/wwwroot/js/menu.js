@@ -1,4 +1,9 @@
-// menu.js
+/*
+    File: wwwroot/js/cart.js
+    Author: Griffin Beaudreau
+    Date: November 5th, 2023
+    Purpose: Contains all javascript functions for the menu page.
+*/
 
 document.addEventListener("DOMContentLoaded", function () {
     // Load default data
