@@ -41,6 +41,31 @@ document.addEventListener("DOMContentLoaded", function () {
         $(this).addClass("active");
 
     });
+        
+    document.getElementById('salesReport').addEventListener('click', function() {
+        showManagerPage();
+        document.getElementById('salesReportTable').style.display = 'inline-table';
+    });
+
+    document.getElementById('restockReport').addEventListener('click', function() {
+        showManagerPage();
+        document.getElementById('restockReportTable').style.display = 'inline-table';
+    });
+
+    document.getElementById('excessReport').addEventListener('click', function() {
+        showManagerPage();
+        document.getElementById('excessReportTable').style.display = 'inline-table';
+    });
+
+    document.getElementById('salesTogether').addEventListener('click', function() {
+        showManagerPage();
+        document.getElementById('salesTogetherTable').style.display = 'inline-table';
+    });
+
+    document.getElementById('popularityAnalysis').addEventListener('click', function() {
+        showManagerPage();
+        document.getElementById('popularityAnalysisTable').style.display = 'inline-table';
+    });
 });
 
 function loadData(action, args, element) {
@@ -80,6 +105,12 @@ function clearView() {
     document.getElementById('restockReport').style.display = 'none';
     document.getElementById('salesTogether').style.display = 'none';
     document.getElementById('popularityAnalysis').style.display = 'none';
+
+    document.getElementById('salesReportTable').style.display = 'none';
+    document.getElementById('excessReportTable').style.display = 'none';
+    document.getElementById('restockReportTable').style.display = 'none';
+    document.getElementById('salesTogetherTable').style.display = 'none';
+    document.getElementById('popularityAnalysisTable').style.display = 'none';
 }
 
 function showManagerPage() {

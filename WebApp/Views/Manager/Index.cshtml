@@ -118,24 +118,69 @@
 <h2 id="saveFail" style="display:none">Fail</h2>
 <h2 id="saveFail2" style="display:none">Invalid Data Type</h2>
 
+@if (Model.Item4 != null && Model.Item4.Count > 0) {
+    @foreach (var productingredient in Model.Item4) {
+        @foreach (var pingredient in productingredient.IngredientIds) {
+            @foreach (var ingredient in Model.Item3) {
+
+            }
+        }
+    }
+}
+
+
+
 <button id="salesReport" class="table-button" style="display:inline-block">Sales Report</button>
 <button id="excessReport" class="table-button" style="display:inline-block">Excess Report</button>
 <button id="restockReport" class="table-button" style="display:inline-block">Restock Report</button>
 <button id="salesTogether" class="table-button" style="display:inline-block">Sales Together</button>
 <button id="popularityAnalysis" class="table-button" style="display:inline-block">Menu Items Popularity Analysis</button>
 
-@* @if (Model.Item4 != null && Model.Item4.Count > 0) {
-    @foreach (var productingredient in Model.Item4) {
-        @foreach (var pingredient in productingredient.ingredientIds) {
-            @foreach (var ingredient in Model.Item3) {
+<table id="salesReportTable" class="table contrast" style="display:none">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Sales</th>
+        </tr>
+    </thead>
+</table>
 
-            }
-        }
-    }
-} *@
+<table id="excessReportTable" class="table contrast" style="display:none">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ingredient Name</th>
+        </tr>
+    </thead>
+</table>
+
+<table id="restockReportTable" class="table contrast" style="display:none">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ingredient Name</th>
+        </tr>
+    </thead>
+</table>
 
 
+<table id="salesTogetherTable" class="table contrast" style="display:none">
+    <thead>
+        <tr>
+            <th>Item 1 Name</th>
+            <th>Item 2 Name</th>
+            <th>Frequency</th>
+        </tr>
+    </thead>
+</table>
 
+<table id="popularityAnalysisTable" class="table contrast" style="display:none">
+    <thead>
+        <tr>
+
+        </tr>
+    </thead>
+</table>
 
 
 
