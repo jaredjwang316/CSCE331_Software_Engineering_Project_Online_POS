@@ -1,3 +1,11 @@
+/*
+    File: wwwroot/js/accessibility.js
+    Author: Griffin Beaudreau
+    Date: November 5th, 2023
+    Purpose: Manages accessibility features and user preferences for the Gong Cha restaurant's 
+    Point of Sale (POS) system, enhancing user experience and inclusivity.
+
+*/
 
 import { makeRequest } from './utils/request.js';
 
