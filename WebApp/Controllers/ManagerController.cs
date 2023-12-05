@@ -214,7 +214,45 @@ public class ManagerController : Controller
     }
 
     public IActionResult showExcessReport () {
-        return Ok();
+        UnitOfWork unit = new(Config.AWS_DB_NAME);
+        DateTime start_time = new DateTime(2023,09,05);
+        DateTime end_time = DateTime.Now;
+        Console.WriteLine(start_time);
+        Console.WriteLine(end_time);
+        List<Order> orders = unit.GetOrdersBetween(start_time, end_time);
+        List<int> ingredient_ids = new();
+        List<Ingredient> ingredients = unit.GetAll<Ingredient>().ToList();
+        List<ProductIngredients> product_ingredients = unit.GetAll<ProductIngredients>().ToList();
+        foreach (Order order in orders) {
+            foreach (int id in order.ItemIds) {
+                foreach (ProductIngredients product_ingredient in product_ingredients) {
+                    if(product_ingredient.ProductId == id) {
+                        ingredient_ids = ingredient_ids.Concat(product_ingredient.IngredientIds).ToList();
+                    }
+                }
+            }
+        }
+        List<Ingredient> excess_ingredients = new();
+        var frequency = ingredient_ids.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
+        foreach (Ingredient ingredient in ingredients) {
+            bool found = false;
+            foreach (var temp in frequency) {
+                if(ingredient.Id == temp.Key) {
+                    if (temp.Value <= 10) {
+                        excess_ingredients.Add(ingredient);
+                        found = true;
+                    }
+                    else {
+                        found = true;
+                    }
+                }
+            }
+            if(!found) {
+                excess_ingredients.Add(ingredient);
+            }
+        }
+        
+        return Ok(excess_ingredients);
     }
 
     public IActionResult showRestockReport () {

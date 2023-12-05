@@ -114,10 +114,6 @@
 <button id="saveButtonInv" class="save-button" style="display:none">Save</button>
 <button id="addButtonInv" class="add-button" style="display:none">Add</button>
 
-<h2 id="saveSuccess" style="display:none">Successful</h2>
-<h2 id="saveFail" style="display:none">Fail</h2>
-<h2 id="saveFail2" style="display:none">Invalid Data Type</h2>
-
 @if (Model.Item4 != null && Model.Item4.Count > 0) {
     @foreach (var productingredient in Model.Item4) {
         @foreach (var pingredient in productingredient.IngredientIds) {
@@ -182,7 +178,9 @@
     </thead>
 </table>
 
-
+<h2 id="saveSuccess" style="display:none">Successful</h2>
+<h2 id="saveFail" style="display:none">Fail</h2>
+<h2 id="saveFail2" style="display:none">Invalid Data Type</h2>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
