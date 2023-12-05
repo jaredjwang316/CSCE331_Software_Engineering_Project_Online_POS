@@ -22,30 +22,15 @@ document.addEventListener("DOMContentLoaded", function () {
         // console.log(manager_path);
         // loadData($(this).attr("id"), null, $(this).attr("data-to"));
         if ($(this).attr("id") == "ShowManager") {
-            document.getElementById('prod-table').style.display = 'none';
-            document.getElementById('saveButtonProd').style.display = 'none';
-            document.getElementById('addButtonProd').style.display = 'none';
-            document.getElementById('inv-table').style.display = 'none';
-            document.getElementById('saveButtonInv').style.display = 'none';
-            document.getElementById('addButtonInv').style.display = 'none';
+            showManagerPage();
         }
         else if ($(this).attr("id") == "ShowProducts") {
           //  document.getElementById('prod-table').style.width = '100%';
-            document.getElementById('prod-table').style.display = 'inline-table';
-            document.getElementById('saveButtonProd').style.display = 'inline-block';
-            document.getElementById('addButtonProd').style.display = 'inline-block';
-            document.getElementById('inv-table').style.display = 'none';
-            document.getElementById('saveButtonInv').style.display = 'none';
-            document.getElementById('addButtonInv').style.display = 'none';
+            showProductPage();
         }
         else if ($(this).attr("id") == "ShowInventory") {
          //   document.getElementById('inv-table').style.width = '100%';
-            document.getElementById('inv-table').style.display = 'inline-table';
-            document.getElementById('saveButtonInv').style.display = 'inline-block';
-            document.getElementById('addButtonInv').style.display = 'inline-block';
-            document.getElementById('prod-table').style.display = 'none';
-            document.getElementById('saveButtonProd').style.display = 'none';
-            document.getElementById('addButtonProd').style.display = 'none';
+            showInventoryPage();
         }
 
     });
@@ -73,4 +58,31 @@ function loadData(action, args, element) {
             document.dispatchEvent(new Event("HideLoadingScreen"));
         }
     });
+}
+
+function clearView() {
+    document.getElementById('prod-table').style.display = 'none';
+    document.getElementById('saveButtonProd').style.display = 'none';
+    document.getElementById('addButtonProd').style.display = 'none';
+    document.getElementById('inv-table').style.display = 'none';
+    document.getElementById('saveButtonInv').style.display = 'none';
+    document.getElementById('addButtonInv').style.display = 'none';
+}
+
+function showManagerPage() {
+    clearView();
+}
+
+function showProductPage() {
+    clearView();
+    document.getElementById('prod-table').style.display = 'inline-table';
+    document.getElementById('saveButtonProd').style.display = 'inline-block';
+    document.getElementById('addButtonProd').style.display = 'inline-block';
+}
+
+function showInventoryPage() {
+    clearView();
+    document.getElementById('inv-table').style.display = 'inline-table';
+    document.getElementById('saveButtonInv').style.display = 'inline-block';
+    document.getElementById('addButtonInv').style.display = 'inline-block';
 }
