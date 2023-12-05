@@ -65,7 +65,7 @@
                     <td contenteditable="true">@product.Price</td>
                     <td contenteditable="true">@product.Series</td>
                     <td contenteditable="true">@product.ImgUrl</td>
-                    <td><input type="button" value="Delete" onclick="deleteRow(this)"/></td>
+                    <td><input type="button" value="Delete" onclick="deleteRowProd(this)"/></td>
                 </tr>
             }
         </tbody>
@@ -101,7 +101,7 @@
                         }</td>
                     <td contenteditable="true"> @inventory.Quantity</td>
                     <td contenteditable="true"> @inventory.FillLevel</td>
-                    <td><input type="button" value="Delete" onclick="deleteRow(this)"/></td>
+                    <td><input type="button" value="Delete" onclick="deleteRowInv(this)"/></td>
                 </tr>
             }
         </tbody>
@@ -112,8 +112,8 @@
 <button id="saveButtonInv" class="save-button" style="display:none">Save</button>
 <button id="addButtonInv" class="add-button" style="display:none">Add</button>
 
-<h2 id="saveSuccess" style="display:none">Save Successful</h2>
-<h2 id="saveFail" style="display:none">Save Fail</h2>
+<h2 id="saveSuccess" style="display:none">Successful</h2>
+<h2 id="saveFail" style="display:none">Fail</h2>
 <h2 id="saveFail2" style="display:none">Invalid Data Type</h2>
 
 
@@ -217,7 +217,7 @@
         cell4.setAttribute("contenteditable", true);
         cell5.setAttribute("contenteditable", true);
         var cell6 = row.insertCell(5);
-        cell6.innerHTML = '<input type="button" value="Delete" onclick="deleteRow(this)"/>';
+        cell6.innerHTML = '<input type="button" value="Delete" onclick="deleteRowProd(this)"/>';
         cell2.addEventListener('input', function() {
                 console.log('Cell changed');
                 cell2.classList.add('edited');
@@ -348,7 +348,7 @@
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
         var cell6 = row.insertCell(5);
-        cell6.innerHTML = '<input type="button" value="Delete" onclick="deleteRow(this)"/>';
+        cell6.innerHTML = '<input type="button" value="Delete" onclick="deleteRowInv(this)"/>';
         cell3.setAttribute("contenteditable", true);
         cell4.setAttribute("contenteditable", true);
         cell5.setAttribute("contenteditable", true);
@@ -389,8 +389,54 @@
             cell.classList.add('edited');
         });
     });
-    function deleteRow(btn) {
+    function deleteRowProd(btn) {
         var row = btn.parentNode.parentNode;
         row.parentNode.removeChild(row);
+
+        $.ajax({
+            url: "/Manager/DeleteProduct",
+            type: "POST",
+            contentType: "application/json",
+            success: function (response) {
+                document.getElementById("saveSuccess").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveSuccess').fadeOut('fast');
+                    }, 5000);
+                console.log("Success deleting products");
+            },
+            error: function () {
+                document.getElementById("saveFail").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveFail').fadeOut('fast');
+                    }, 5000);
+                console.log("Error deleting products");
+            }
+        });
+    }
+    function deleteRowInv(btn) {
+        var row = btn.parentNode.parentNode;
+        id = parseInt(row.querySelector('td:first-child').innerText);
+        row.parentNode.removeChild(row);
+        console.log(id);
+        $.ajax({
+            url: "/Manager/DeleteInventory",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(id),
+            success: function (response) {
+                document.getElementById("saveSuccess").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveSuccess').fadeOut('fast');
+                    }, 5000);
+                console.log("Success deleting inventory");
+            },
+            error: function () {
+                document.getElementById("saveFail").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveFail').fadeOut('fast');
+                    }, 5000);
+                console.log("Error deleting inventory");
+            }
+        });
     }
 </script> 

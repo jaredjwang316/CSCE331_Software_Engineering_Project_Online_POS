@@ -191,9 +191,13 @@ public class ManagerController : Controller
         return Ok(inventory.Id);
     }
 
-    public IActionResult DeleteInventory(int id) {
+    public IActionResult DeleteInventory([FromBody]int inv) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
-        
+        Inventory inventory = unit.Get<Inventory>(inv);
+        Ingredient ingredient = unit.Get<Ingredient>(inventory.IngredientId);
+        //unit.Delete<Inventory>(inventory);
+       // unit.Delete<Ingredient>(ingredient);
+        Console.WriteLine("Can Delete Id: " + inventory.Id + " " + ingredient.Id);
         return Ok();
     }
 
