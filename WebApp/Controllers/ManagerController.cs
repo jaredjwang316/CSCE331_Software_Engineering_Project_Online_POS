@@ -9,6 +9,12 @@ using WebApp.Models.Cart;
 
 namespace WebApp.Controllers;
 
+/*
+The ManagerController.cs file is a critical component of the Gong Cha restaurant's Point of Sale (POS) system, 
+managing and controlling functionalities accessible to users with the "Manager" role. This controller handles 
+actions related to managing products, inventory, and caching for the POS system.
+*/
+
 [Authorize(Roles = "Manager")]
 public class ManagerController : Controller
 {
