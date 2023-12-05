@@ -2,10 +2,24 @@
     File: APIs/GoogleTranslate/GoogleTranslate.cs
     Author: Griffin Beaudreau
     Date: November 17, 2023
+    Purpose: The GoogleTranslate class facilitates language translation functionalities within the Point of Sale (POS) system. 
+    This class integrates with the Google Translate API to dynamically translate  text based on the user's preferred language. 
+    The constructor initializes the necessary components, including an  API key retrieved from the configuration and an 
+    HttpContextAccessor for accessing HTTP context.
+    The TranslateText method asynchronously translates input text from a source language (defaulting to English 'en') to 
+    the user's preferred language. It constructs a URL using the Google Translate API endpoint, API key, source, target 
+    languages, and the provided text. Upon receiving a successful response, the method parses the JSON response to extract 
+    the translated text, providing a fallback to the original text if translation fails or no translation is available.
+
+    The GetPreferredLanguage method retrieves the user's preferred language from the Accept-Language header in the HTTP request, 
+    considering the primary language specified in the header.
 */
 
 using System.Text.Json;
 using System.Web;
+using WebApp.Data;
+using WebApp.Models.UnitOfWork;
+using System.Security.Claims;
 
 
 namespace WebApp.APIs.GoogleTranslate;
@@ -74,7 +88,8 @@ public class GoogleTranslate {
         HttpResponseMessage response = client.GetAsync(url).Result;
         if (!response.IsSuccessStatusCode)
         {
-            throw new Exception("Failed to get supported languages.");
+            KeyValuePair<string, string>[]? empty = Array.Empty<KeyValuePair<string, string>>();
+            return empty;
         }
 
         string responseBody = response.Content.ReadAsStringAsync().Result;

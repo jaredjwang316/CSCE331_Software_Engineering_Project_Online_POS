@@ -12,6 +12,14 @@ body {
     background-image: url('https://gongchausa.com/wp-content/uploads/2021/11/Our-Philosophy-Section-3-background.png');
     background-repeat: no-repeat;
 }
+body.contrast-grayscale {
+    background-image: url('/img/Our-Philosophy-Section-3-background-grayscale.png');
+    background-repeat: no-repeat;
+}
+body.contrast-invert {
+    background-image: url('/img/Our-Philosophy-Section-3-background-invert.png');
+    background-repeat: no-repeat;
+}
 
 .display-4 {
     padding: 40px;
@@ -36,6 +44,7 @@ body {
     color: black;
     background-color: #C60734;
     border-radius: 40px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
 .elementor-box-title {
@@ -108,4 +117,48 @@ body {
     .elementor-box-title h3 {
         margin-bottom: 38px;
     }
+}
+
+/* Style for the parent container */
+.story-container {
+    display: flex; /* Use flexbox to arrange child elements */
+    justify-content: center;
+    align-items: center;
+    width: 90%; /* Take up the entire width of the screen */
+    box-sizing: border-box; /* Include padding and border in the total width */
+}
+
+/* Style for the child divs */
+.story-column {
+    margin: 0 auto;
+    max-width: 600px;
+    justify-content: center;
+    width:100%; /* Make each child div take up 50% of the parent width */
+    box-sizing: border-box; /* Include padding and border in the total width */
+    padding: 20px; /* Add padding for spacing inside the div */
+}
+
+.red-text {
+    color: #C60734;
+    font-weight: bold;
+    font-size: 1.6em; /* Adjust the size as needed */
+}
+
+/* Style for the images */
+.vertical-images {
+    display: flex;
+    flex-direction: column; /* Arrange images vertically */
+}
+
+.vertical-images img {
+    object-fit: cover;
+    border-radius: 40px;
+    transition: all 0.3s ease-in-out;
+    max-width: 100%; /* Make sure images don't exceed the container width */
+    margin-bottom: 10px; /* Add some spacing between images */
+    padding: 15px;
+}
+
+.vertical-images img:hover {
+    transform: scale(1.05);
 }

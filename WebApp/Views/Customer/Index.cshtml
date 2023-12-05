@@ -20,22 +20,22 @@
     var translator = new GoogleTranslate();
 }
 
-<h2>@await translator.TranslateText("Menu")</h2>
+<h2 class="contrast">@await translator.TranslateText("Menu")</h2>
             
 <!-- Category bar -->
-<div class="text-center" style="display: flex; justify-content: space-around;">
+<div class="text-center contrast" style="display: flex; justify-content: space-around;">
     <button endpoint="LoadCategories" class="category-btn active">@await translator.TranslateText("Categories")</button>
     <button endpoint="LoadBestSellers" class="category-btn">@await translator.TranslateText("Best Sellers")</button>
     <button endpoint="LoadFavorites" class="category-btn">@await translator.TranslateText("Favorites")</button>
 </div>
 
-<div class="content-container">
+<div class="content-container contrast">
     <button class="back-btn">@await translator.TranslateText("Back")</button>
     <div class="data-container"></div>
     <div class="customization-menu"></div>
 </div>
 
-<div class="cart-msg" style="display: none;">
+<div class="cart-msg contrast" style="display: none;">
     <div class="cart-msg-container">
         <div class="cart-msg-text">
             <p>@await translator.TranslateText("Item added to cart")</p>

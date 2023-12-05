@@ -7,13 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.9" />
     <PackageReference Include="Google.Apis.Auth" Version="1.62.1" />
     <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.62.0.1869" />
     <PackageReference Include="Google.Cloud.Translation.V2" Version="3.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.13" />
-    <!-- <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.13" /> -->
-    <!-- <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="7.0.13" /> -->
-    <!-- <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12" /> -->
+    <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.33.0" />
     <PackageReference Include="Npgsql" Version="7.0.6" />
   </ItemGroup>
 

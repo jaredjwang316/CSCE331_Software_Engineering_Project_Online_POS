@@ -1,0 +1,147 @@
+.sidebar-image-robot {
+    position: fixed;
+    z-index: 10000;
+    bottom: 0;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 80px;
+    margin-left: 10px;
+  }
+
+  .sidebar-robot {
+    position: fixed;
+    height: 100%;
+    right: 0;
+    margin-top: -16px;
+    background-color: #f1f1f1;
+    border: 2px solid #ccc;
+    border-top: none;
+    border-right: none;
+    z-index: 9999;
+    padding-top: 20px;
+}
+
+.sidebar-closed {
+    width: 0;
+}
+
+.sidebar-open {
+    width: 400px;
+}
+
+.sidebar-output {
+    height: 80%;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0 10px;
+}
+
+.sidebar-output-text {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-input {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    padding-bottom: 70px;
+    background-color: #f1f1f1;
+}
+
+.sidebar-input-text {
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+    border: none;
+    border-radius: 4px;
+    resize: none;
+    outline: none;
+}
+
+.sidebar-input-button {
+    float: right;
+    padding: 10px;
+    margin: 0;
+    margin-top: 5px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+
+    background: linear-gradient(to right, #45a049, #317735);
+    
+    
+}
+.sidebar-input-button img {
+    width: 65px;
+    height: 20px;
+}
+
+.sidebar-robot button:hover, .sidebar-robot button:focus {
+    background: linear-gradient(to right, #54c259, #3e9442);
+}
+
+.toggle-AIMenu:hover {
+    background-color: #ddd;
+}
+
+.response-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.response-container img {
+    margin: 10px;
+    height: 50px;
+    width: auto;
+}
+.response-container p {
+    color: black;
+    padding: 10px;
+    margin: 0;
+}
+
+.sidebar-output-text > .ai {
+    margin-right: 30px;
+    background-color: rgb(216, 216, 216);
+    max-width: 90%;
+    width: fit-content;
+    margin-right: auto;
+    align-items: flex-start;
+}
+.sidebar-output-text > .user {
+    background-color: white;
+    display: flex;
+    flex-direction: row-reverse;
+    max-width: 90%;
+    width: fit-content;
+    margin-left: auto;
+    word-break: break-all;
+
+    align-items: flex-start;
+}
+
+.sidebar-clear-button{
+    float: left;
+    padding: 10px;
+    margin: 0;
+    margin-top: 5px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    margin-right: 5px;
+
+    background: linear-gradient(to right, #45a049, #317735);
+}
+.sidebar-clear-button img {
+    height: 25px;
+    width: auto;
+}

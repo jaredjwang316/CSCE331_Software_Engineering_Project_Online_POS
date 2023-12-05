@@ -1,6 +1,9 @@
 ﻿@using WebApp.APIs.GoogleTranslate
 @using WebApp.APIs.AzureMaps
 @using WebApp.Models.AzureMaps.Weather
+@using WebApp.Data
+@using WebApp.Models.UnitOfWork
+@using System.Security.Claims
 @{
     var translator = new GoogleTranslate();
     int itemsInCart = ViewBag.ItemsInCart;
@@ -18,10 +21,15 @@
     <link rel="stylesheet" href="~/css/_AccessibilityPartial.css" asp-append-version="true"/>
     <script src="~/js/loading-screen.js" asp-append-version="true"></script>
     <script src="~/js/geolocation.js" asp-append-version="true"></script>
+    <script type="module" src="~/js/accessibility.js" asp-append-version="true"></script>
 </head>
-<body>
+@{
+    bool grayscale = Context.Request.Cookies["Grayscale"] == "true";
+    bool invert = Context.Request.Cookies["Invert"] == "true";
+}
+<body class="@(grayscale ? "contrast-grayscale" : "") @(invert ? "contrast-invert" : "")">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="contrast navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid"> <!--May change to container-->
                 <!--Logo-->
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" asp-route-autoRedirect="false">
@@ -69,6 +77,9 @@
                             }
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="MenuBoard" asp-action="Index">Menu Board</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Story" asp-action="Index">Our Story</a>
                             </li>
                         }
                     </ul>
@@ -122,6 +133,7 @@
     </header>
     
     @await Html.PartialAsync("_AccessibilityPartial")
+    @await Html.PartialAsync("_AIPartial")
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -131,6 +143,5 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
-<script src="~/js/accessibility.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </html>
