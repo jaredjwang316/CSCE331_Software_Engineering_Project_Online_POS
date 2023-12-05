@@ -209,6 +209,29 @@ public class ManagerController : Controller
         return Ok();
     }
 
+    public IActionResult showSalesReport () {
+        return Ok();
+    }
+
+    public IActionResult showExcessReport () {
+        return Ok();
+    }
+
+    public IActionResult showRestockReport () {
+        return Ok();
+    }
+
+    public IActionResult showSalesTogether () {
+        return Ok();
+    }
+
+    public IActionResult showPopularityAnalysis () {
+        return Ok();
+    }
+
+
+
+
     public IActionResult ClearCache() {
         cache.Remove("Categories");
         cache.Remove("BestSellers");
