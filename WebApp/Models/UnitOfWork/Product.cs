@@ -60,7 +60,7 @@ public class Product {
     /// <param name="imgUrl"></param>
     /// <param name="hidden"></param>
     /// <param name="isOption"></param>
-    /// <param name="isMain"></param>
+    /// <param name="isDrink"></param>
     public Product(int id, string name, double price, string series, string imgUrl, bool hidden, bool isOption, bool isDrink) {
         Id = id;
         Name = name;
