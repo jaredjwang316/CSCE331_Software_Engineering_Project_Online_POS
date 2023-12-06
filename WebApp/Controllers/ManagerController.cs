@@ -203,10 +203,18 @@ public class ManagerController : Controller
         //unit.Delete<Inventory>(inventory);
        // unit.Delete<Ingredient>(ingredient);
         Console.WriteLine("Can Delete Id: " + inventory.Id + " " + ingredient.Id);
+        unit.CloseConnection();
         return Ok();
     }
 
-    [HttpPost, Route("Manager/SaveIngredients")]
+    [HttpDelete, Route("Manager/ClearCache")]
+    public IActionResult ClearCache() {
+        cache.Remove("Categories");
+        cache.Remove("BestSellers");
+        return Ok();
+    }
+
+    [HttpPost, Route("Manager/ShowSalesReport")]
     public IActionResult ShowSalesReport([FromBody] Dictionary<string, string> payload) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         string data = payload["data"];
@@ -215,10 +223,11 @@ public class ManagerController : Controller
         DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
+        unit.CloseConnection();
         return Ok();
     }
 
-    [HttpPost, Route("Manager/ShowSalesReport")]
+    [HttpPost, Route("Manager/ShowExcessReport")]
     public IActionResult ShowExcessReport([FromBody] Dictionary<string, string> payload) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         string data = payload["data"];
@@ -259,11 +268,11 @@ public class ManagerController : Controller
                 excess_ingredients.Add(ingredient);
             }
         }
-
+        unit.CloseConnection();
         return Ok(excess_ingredients);
     }
 
-    [HttpPost, Route("Manager/ShowExcessReport")]
+    [HttpPost, Route("Manager/ShowRestockReport")]
     public IActionResult ShowRestockReport([FromBody] Dictionary<string, string> payload) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         string data = payload["data"];
@@ -272,10 +281,11 @@ public class ManagerController : Controller
         DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
+        unit.CloseConnection();
         return Ok();
     }
 
-    [HttpPost, Route("Manager/ShowRestockReport")]
+    [HttpPost, Route("Manager/ShowSalesTogether")]
     public IActionResult ShowSalesTogether([FromBody] Dictionary<string, string> payload) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         string data = payload["data"];
@@ -284,6 +294,7 @@ public class ManagerController : Controller
         DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
+        unit.CloseConnection();
         return Ok();
     }
 
@@ -296,13 +307,7 @@ public class ManagerController : Controller
         DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
-        return Ok();
-    }
-
-    [HttpDelete, Route("Manager/ClearCache")]
-    public IActionResult ClearCache() {
-        cache.Remove("Categories");
-        cache.Remove("BestSellers");
+        unit.CloseConnection();
         return Ok();
     }
 }

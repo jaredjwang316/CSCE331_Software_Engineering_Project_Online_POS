@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
         
     document.getElementById('salesReport').addEventListener('click', function() {
-        console.log("Sales Report");
         ShowManagerPage();
         ClearDates();
         document.getElementById('salesReportTable').style.display = 'inline-table';
