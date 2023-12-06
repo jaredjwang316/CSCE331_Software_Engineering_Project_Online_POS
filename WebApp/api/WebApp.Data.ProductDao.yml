@@ -1,0 +1,1240 @@
+### YamlMime:ManagedReference
+items:
+- uid: WebApp.Data.ProductDao
+  commentId: T:WebApp.Data.ProductDao
+  id: ProductDao
+  parent: WebApp.Data
+  children:
+  - WebApp.Data.ProductDao.#ctor(WebApp.Data.CommandHandler)
+  - WebApp.Data.ProductDao.Add(WebApp.Models.UnitOfWork.Product)
+  - WebApp.Data.ProductDao.Delete(WebApp.Models.UnitOfWork.Product)
+  - WebApp.Data.ProductDao.Get(System.Int32)
+  - WebApp.Data.ProductDao.GetAll
+  - WebApp.Data.ProductDao.GetBestSellingProducts(System.Int32)
+  - WebApp.Data.ProductDao.GetProductsBySeries(System.String)
+  - WebApp.Data.ProductDao.GetRecentProduct
+  - WebApp.Data.ProductDao.GetUniqueSeries(System.Boolean,System.Boolean,System.Boolean)
+  - WebApp.Data.ProductDao.Update(WebApp.Models.UnitOfWork.Product,WebApp.Models.UnitOfWork.Product)
+  langs:
+  - csharp
+  - vb
+  name: ProductDao
+  nameWithType: ProductDao
+  fullName: WebApp.Data.ProductDao
+  type: Class
+  source:
+    remote:
+      path: WebApp/Data/ProductDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: ProductDao
+    path: Data/ProductDao.cs
+    startLine: 11
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: 'public class ProductDao : IDao<Product>'
+    content.vb: Public Class ProductDao Implements IDao(Of Product)
+  inheritance:
+  - System.Object
+  implements:
+  - WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: WebApp.Data.ProductDao.#ctor(WebApp.Data.CommandHandler)
+  commentId: M:WebApp.Data.ProductDao.#ctor(WebApp.Data.CommandHandler)
+  id: '#ctor(WebApp.Data.CommandHandler)'
+  parent: WebApp.Data.ProductDao
+  langs:
+  - csharp
+  - vb
+  name: ProductDao(CommandHandler)
+  nameWithType: ProductDao.ProductDao(CommandHandler)
+  fullName: WebApp.Data.ProductDao.ProductDao(WebApp.Data.CommandHandler)
+  type: Constructor
+  source:
+    remote:
+      path: WebApp/Data/ProductDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: .ctor
+    path: Data/ProductDao.cs
+    startLine: 14
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: public ProductDao(CommandHandler commandHandler)
+    parameters:
+    - id: commandHandler
+      type: WebApp.Data.CommandHandler
+    content.vb: Public Sub New(commandHandler As CommandHandler)
+  overload: WebApp.Data.ProductDao.#ctor*
+  nameWithType.vb: ProductDao.New(CommandHandler)
+  fullName.vb: WebApp.Data.ProductDao.New(WebApp.Data.CommandHandler)
+  name.vb: New(CommandHandler)
+- uid: WebApp.Data.ProductDao.Get(System.Int32)
+  commentId: M:WebApp.Data.ProductDao.Get(System.Int32)
+  id: Get(System.Int32)
+  parent: WebApp.Data.ProductDao
+  langs:
+  - csharp
+  - vb
+  name: Get(int)
+  nameWithType: ProductDao.Get(int)
+  fullName: WebApp.Data.ProductDao.Get(int)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/ProductDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: Get
+    path: Data/ProductDao.cs
+    startLine: 18
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  example: []
+  syntax:
+    content: public Product Get(int id)
+    parameters:
+    - id: id
+      type: System.Int32
+    return:
+      type: WebApp.Models.UnitOfWork.Product
+    content.vb: Public Function [Get](id As Integer) As Product
+  overload: WebApp.Data.ProductDao.Get*
+  implements:
+  - WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Get(System.Int32)
+  nameWithType.vb: ProductDao.Get(Integer)
+  fullName.vb: WebApp.Data.ProductDao.Get(Integer)
+  name.vb: Get(Integer)
+- uid: WebApp.Data.ProductDao.GetAll
+  commentId: M:WebApp.Data.ProductDao.GetAll
+  id: GetAll
+  parent: WebApp.Data.ProductDao
+  langs:
+  - csharp
+  - vb
+  name: GetAll()
+  nameWithType: ProductDao.GetAll()
+  fullName: WebApp.Data.ProductDao.GetAll()
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/ProductDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: GetAll
+    path: Data/ProductDao.cs
+    startLine: 43
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  example: []
+  syntax:
+    content: public IEnumerable<Product> GetAll()
+    return:
+      type: System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.Product}
+    content.vb: Public Function GetAll() As IEnumerable(Of Product)
+  overload: WebApp.Data.ProductDao.GetAll*
+  implements:
+  - WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.GetAll
+- uid: WebApp.Data.ProductDao.Add(WebApp.Models.UnitOfWork.Product)
+  commentId: M:WebApp.Data.ProductDao.Add(WebApp.Models.UnitOfWork.Product)
+  id: Add(WebApp.Models.UnitOfWork.Product)
+  parent: WebApp.Data.ProductDao
+  langs:
+  - csharp
+  - vb
+  name: Add(Product)
+  nameWithType: ProductDao.Add(Product)
+  fullName: WebApp.Data.ProductDao.Add(WebApp.Models.UnitOfWork.Product)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/ProductDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: Add
+    path: Data/ProductDao.cs
+    startLine: 66
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  example: []
+  syntax:
+    content: public void Add(Product t)
+    parameters:
+    - id: t
+      type: WebApp.Models.UnitOfWork.Product
+    content.vb: Public Sub Add(t As Product)
+  overload: WebApp.Data.ProductDao.Add*
+  implements:
+  - WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Add(WebApp.Models.UnitOfWork.Product)
+- uid: WebApp.Data.ProductDao.Update(WebApp.Models.UnitOfWork.Product,WebApp.Models.UnitOfWork.Product)
+  commentId: M:WebApp.Data.ProductDao.Update(WebApp.Models.UnitOfWork.Product,WebApp.Models.UnitOfWork.Product)
+  id: Update(WebApp.Models.UnitOfWork.Product,WebApp.Models.UnitOfWork.Product)
+  parent: WebApp.Data.ProductDao
+  langs:
+  - csharp
+  - vb
+  name: Update(Product, Product)
+  nameWithType: ProductDao.Update(Product, Product)
+  fullName: WebApp.Data.ProductDao.Update(WebApp.Models.UnitOfWork.Product, WebApp.Models.UnitOfWork.Product)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/ProductDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: Update
+    path: Data/ProductDao.cs
+    startLine: 81
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  example: []
+  syntax:
+    content: public void Update(Product t, Product newT)
+    parameters:
+    - id: t
+      type: WebApp.Models.UnitOfWork.Product
+    - id: newT
+      type: WebApp.Models.UnitOfWork.Product
+    content.vb: Public Sub Update(t As Product, newT As Product)
+  overload: WebApp.Data.ProductDao.Update*
+  implements:
+  - WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Update(WebApp.Models.UnitOfWork.Product,WebApp.Models.UnitOfWork.Product)
+- uid: WebApp.Data.ProductDao.Delete(WebApp.Models.UnitOfWork.Product)
+  commentId: M:WebApp.Data.ProductDao.Delete(WebApp.Models.UnitOfWork.Product)
+  id: Delete(WebApp.Models.UnitOfWork.Product)
+  parent: WebApp.Data.ProductDao
+  langs:
+  - csharp
+  - vb
+  name: Delete(Product)
+  nameWithType: ProductDao.Delete(Product)
+  fullName: WebApp.Data.ProductDao.Delete(WebApp.Models.UnitOfWork.Product)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/ProductDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: Delete
+    path: Data/ProductDao.cs
+    startLine: 96
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  example: []
+  syntax:
+    content: public void Delete(Product t)
+    parameters:
+    - id: t
+      type: WebApp.Models.UnitOfWork.Product
+    content.vb: Public Sub Delete(t As Product)
+  overload: WebApp.Data.ProductDao.Delete*
+  implements:
+  - WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Delete(WebApp.Models.UnitOfWork.Product)
+- uid: WebApp.Data.ProductDao.GetProductsBySeries(System.String)
+  commentId: M:WebApp.Data.ProductDao.GetProductsBySeries(System.String)
+  id: GetProductsBySeries(System.String)
+  parent: WebApp.Data.ProductDao
+  langs:
+  - csharp
+  - vb
+  name: GetProductsBySeries(string)
+  nameWithType: ProductDao.GetProductsBySeries(string)
+  fullName: WebApp.Data.ProductDao.GetProductsBySeries(string)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/ProductDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: GetProductsBySeries
+    path: Data/ProductDao.cs
+    startLine: 105
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: public IEnumerable<Product> GetProductsBySeries(string series)
+    parameters:
+    - id: series
+      type: System.String
+    return:
+      type: System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.Product}
+    content.vb: Public Function GetProductsBySeries(series As String) As IEnumerable(Of Product)
+  overload: WebApp.Data.ProductDao.GetProductsBySeries*
+  nameWithType.vb: ProductDao.GetProductsBySeries(String)
+  fullName.vb: WebApp.Data.ProductDao.GetProductsBySeries(String)
+  name.vb: GetProductsBySeries(String)
+- uid: WebApp.Data.ProductDao.GetUniqueSeries(System.Boolean,System.Boolean,System.Boolean)
+  commentId: M:WebApp.Data.ProductDao.GetUniqueSeries(System.Boolean,System.Boolean,System.Boolean)
+  id: GetUniqueSeries(System.Boolean,System.Boolean,System.Boolean)
+  parent: WebApp.Data.ProductDao
+  langs:
+  - csharp
+  - vb
+  name: GetUniqueSeries(bool, bool, bool)
+  nameWithType: ProductDao.GetUniqueSeries(bool, bool, bool)
+  fullName: WebApp.Data.ProductDao.GetUniqueSeries(bool, bool, bool)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/ProductDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: GetUniqueSeries
+    path: Data/ProductDao.cs
+    startLine: 128
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: public IEnumerable<string> GetUniqueSeries(bool includeDrinks = true, bool includeHidden = false, bool includeIsOption = false)
+    parameters:
+    - id: includeDrinks
+      type: System.Boolean
+    - id: includeHidden
+      type: System.Boolean
+    - id: includeIsOption
+      type: System.Boolean
+    return:
+      type: System.Collections.Generic.IEnumerable{System.String}
+    content.vb: Public Function GetUniqueSeries(includeDrinks As Boolean = True, includeHidden As Boolean = False, includeIsOption As Boolean = False) As IEnumerable(Of String)
+  overload: WebApp.Data.ProductDao.GetUniqueSeries*
+  nameWithType.vb: ProductDao.GetUniqueSeries(Boolean, Boolean, Boolean)
+  fullName.vb: WebApp.Data.ProductDao.GetUniqueSeries(Boolean, Boolean, Boolean)
+  name.vb: GetUniqueSeries(Boolean, Boolean, Boolean)
+- uid: WebApp.Data.ProductDao.GetBestSellingProducts(System.Int32)
+  commentId: M:WebApp.Data.ProductDao.GetBestSellingProducts(System.Int32)
+  id: GetBestSellingProducts(System.Int32)
+  parent: WebApp.Data.ProductDao
+  langs:
+  - csharp
+  - vb
+  name: GetBestSellingProducts(int)
+  nameWithType: ProductDao.GetBestSellingProducts(int)
+  fullName: WebApp.Data.ProductDao.GetBestSellingProducts(int)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/ProductDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: GetBestSellingProducts
+    path: Data/ProductDao.cs
+    startLine: 148
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: public IEnumerable<Product> GetBestSellingProducts(int limit = 5)
+    parameters:
+    - id: limit
+      type: System.Int32
+    return:
+      type: System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.Product}
+    content.vb: Public Function GetBestSellingProducts(limit As Integer = 5) As IEnumerable(Of Product)
+  overload: WebApp.Data.ProductDao.GetBestSellingProducts*
+  nameWithType.vb: ProductDao.GetBestSellingProducts(Integer)
+  fullName.vb: WebApp.Data.ProductDao.GetBestSellingProducts(Integer)
+  name.vb: GetBestSellingProducts(Integer)
+- uid: WebApp.Data.ProductDao.GetRecentProduct
+  commentId: M:WebApp.Data.ProductDao.GetRecentProduct
+  id: GetRecentProduct
+  parent: WebApp.Data.ProductDao
+  langs:
+  - csharp
+  - vb
+  name: GetRecentProduct()
+  nameWithType: ProductDao.GetRecentProduct()
+  fullName: WebApp.Data.ProductDao.GetRecentProduct()
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/ProductDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: GetRecentProduct
+    path: Data/ProductDao.cs
+    startLine: 186
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: public Product GetRecentProduct()
+    return:
+      type: WebApp.Models.UnitOfWork.Product
+    content.vb: Public Function GetRecentProduct() As Product
+  overload: WebApp.Data.ProductDao.GetRecentProduct*
+references:
+- uid: WebApp.Data
+  commentId: N:WebApp.Data
+  href: WebApp.html
+  name: WebApp.Data
+  nameWithType: WebApp.Data
+  fullName: WebApp.Data
+  spec.csharp:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Data
+    name: Data
+    href: WebApp.Data.html
+  spec.vb:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Data
+    name: Data
+    href: WebApp.Data.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}
+  commentId: T:WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}
+  parent: WebApp.Data
+  definition: WebApp.Data.IDao`1
+  href: WebApp.Data.IDao-1.html
+  name: IDao<Product>
+  nameWithType: IDao<Product>
+  fullName: WebApp.Data.IDao<WebApp.Models.UnitOfWork.Product>
+  nameWithType.vb: IDao(Of Product)
+  fullName.vb: WebApp.Data.IDao(Of WebApp.Models.UnitOfWork.Product)
+  name.vb: IDao(Of Product)
+  spec.csharp:
+  - uid: WebApp.Data.IDao`1
+    name: IDao
+    href: WebApp.Data.IDao-1.html
+  - name: <
+  - uid: WebApp.Models.UnitOfWork.Product
+    name: Product
+    href: WebApp.Models.UnitOfWork.Product.html
+  - name: '>'
+  spec.vb:
+  - uid: WebApp.Data.IDao`1
+    name: IDao
+    href: WebApp.Data.IDao-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: WebApp.Models.UnitOfWork.Product
+    name: Product
+    href: WebApp.Models.UnitOfWork.Product.html
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: WebApp.Data.IDao`1
+  commentId: T:WebApp.Data.IDao`1
+  href: WebApp.Data.IDao-1.html
+  name: IDao<T>
+  nameWithType: IDao<T>
+  fullName: WebApp.Data.IDao<T>
+  nameWithType.vb: IDao(Of T)
+  fullName.vb: WebApp.Data.IDao(Of T)
+  name.vb: IDao(Of T)
+  spec.csharp:
+  - uid: WebApp.Data.IDao`1
+    name: IDao
+    href: WebApp.Data.IDao-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: WebApp.Data.IDao`1
+    name: IDao
+    href: WebApp.Data.IDao-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: WebApp.Data.ProductDao.#ctor*
+  commentId: Overload:WebApp.Data.ProductDao.#ctor
+  href: WebApp.Data.ProductDao.html#WebApp_Data_ProductDao__ctor_WebApp_Data_CommandHandler_
+  name: ProductDao
+  nameWithType: ProductDao.ProductDao
+  fullName: WebApp.Data.ProductDao.ProductDao
+  nameWithType.vb: ProductDao.New
+  fullName.vb: WebApp.Data.ProductDao.New
+  name.vb: New
+- uid: WebApp.Data.CommandHandler
+  commentId: T:WebApp.Data.CommandHandler
+  parent: WebApp.Data
+  href: WebApp.Data.CommandHandler.html
+  name: CommandHandler
+  nameWithType: CommandHandler
+  fullName: WebApp.Data.CommandHandler
+- uid: WebApp.Data.ProductDao.Get*
+  commentId: Overload:WebApp.Data.ProductDao.Get
+  href: WebApp.Data.ProductDao.html#WebApp_Data_ProductDao_Get_System_Int32_
+  name: Get
+  nameWithType: ProductDao.Get
+  fullName: WebApp.Data.ProductDao.Get
+- uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Get(System.Int32)
+  commentId: M:WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Get(System.Int32)
+  parent: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}
+  definition: WebApp.Data.IDao`1.Get(System.Int32)
+  href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Get_System_Int32_
+  name: Get(int)
+  nameWithType: IDao<Product>.Get(int)
+  fullName: WebApp.Data.IDao<WebApp.Models.UnitOfWork.Product>.Get(int)
+  nameWithType.vb: IDao(Of Product).Get(Integer)
+  fullName.vb: WebApp.Data.IDao(Of WebApp.Models.UnitOfWork.Product).Get(Integer)
+  name.vb: Get(Integer)
+  spec.csharp:
+  - uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Get(System.Int32)
+    name: Get
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Get_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Get(System.Int32)
+    name: Get
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Get_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: WebApp.Models.UnitOfWork.Product
+  commentId: T:WebApp.Models.UnitOfWork.Product
+  parent: WebApp.Models.UnitOfWork
+  href: WebApp.Models.UnitOfWork.Product.html
+  name: Product
+  nameWithType: Product
+  fullName: WebApp.Models.UnitOfWork.Product
+- uid: WebApp.Data.IDao`1.Get(System.Int32)
+  commentId: M:WebApp.Data.IDao`1.Get(System.Int32)
+  isExternal: true
+  href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Get_System_Int32_
+  name: Get(int)
+  nameWithType: IDao<T>.Get(int)
+  fullName: WebApp.Data.IDao<T>.Get(int)
+  nameWithType.vb: IDao(Of T).Get(Integer)
+  fullName.vb: WebApp.Data.IDao(Of T).Get(Integer)
+  name.vb: Get(Integer)
+  spec.csharp:
+  - uid: WebApp.Data.IDao`1.Get(System.Int32)
+    name: Get
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Get_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: WebApp.Data.IDao`1.Get(System.Int32)
+    name: Get
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Get_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: WebApp.Models.UnitOfWork
+  commentId: N:WebApp.Models.UnitOfWork
+  href: WebApp.html
+  name: WebApp.Models.UnitOfWork
+  nameWithType: WebApp.Models.UnitOfWork
+  fullName: WebApp.Models.UnitOfWork
+  spec.csharp:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Models
+    name: Models
+    href: WebApp.Models.html
+  - name: .
+  - uid: WebApp.Models.UnitOfWork
+    name: UnitOfWork
+    href: WebApp.Models.UnitOfWork.html
+  spec.vb:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Models
+    name: Models
+    href: WebApp.Models.html
+  - name: .
+  - uid: WebApp.Models.UnitOfWork
+    name: UnitOfWork
+    href: WebApp.Models.UnitOfWork.html
+- uid: WebApp.Data.ProductDao.GetAll*
+  commentId: Overload:WebApp.Data.ProductDao.GetAll
+  href: WebApp.Data.ProductDao.html#WebApp_Data_ProductDao_GetAll
+  name: GetAll
+  nameWithType: ProductDao.GetAll
+  fullName: WebApp.Data.ProductDao.GetAll
+- uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.GetAll
+  commentId: M:WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.GetAll
+  parent: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}
+  definition: WebApp.Data.IDao`1.GetAll
+  href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_GetAll
+  name: GetAll()
+  nameWithType: IDao<Product>.GetAll()
+  fullName: WebApp.Data.IDao<WebApp.Models.UnitOfWork.Product>.GetAll()
+  nameWithType.vb: IDao(Of Product).GetAll()
+  fullName.vb: WebApp.Data.IDao(Of WebApp.Models.UnitOfWork.Product).GetAll()
+  spec.csharp:
+  - uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.GetAll
+    name: GetAll
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_GetAll
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.GetAll
+    name: GetAll
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_GetAll
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.Product}
+  commentId: T:System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.Product}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<Product>
+  nameWithType: IEnumerable<Product>
+  fullName: System.Collections.Generic.IEnumerable<WebApp.Models.UnitOfWork.Product>
+  nameWithType.vb: IEnumerable(Of Product)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of WebApp.Models.UnitOfWork.Product)
+  name.vb: IEnumerable(Of Product)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: WebApp.Models.UnitOfWork.Product
+    name: Product
+    href: WebApp.Models.UnitOfWork.Product.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: WebApp.Models.UnitOfWork.Product
+    name: Product
+    href: WebApp.Models.UnitOfWork.Product.html
+  - name: )
+- uid: WebApp.Data.IDao`1.GetAll
+  commentId: M:WebApp.Data.IDao`1.GetAll
+  href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_GetAll
+  name: GetAll()
+  nameWithType: IDao<T>.GetAll()
+  fullName: WebApp.Data.IDao<T>.GetAll()
+  nameWithType.vb: IDao(Of T).GetAll()
+  fullName.vb: WebApp.Data.IDao(Of T).GetAll()
+  spec.csharp:
+  - uid: WebApp.Data.IDao`1.GetAll
+    name: GetAll
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_GetAll
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: WebApp.Data.IDao`1.GetAll
+    name: GetAll
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_GetAll
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: WebApp.Data.ProductDao.Add*
+  commentId: Overload:WebApp.Data.ProductDao.Add
+  href: WebApp.Data.ProductDao.html#WebApp_Data_ProductDao_Add_WebApp_Models_UnitOfWork_Product_
+  name: Add
+  nameWithType: ProductDao.Add
+  fullName: WebApp.Data.ProductDao.Add
+- uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Add(WebApp.Models.UnitOfWork.Product)
+  commentId: M:WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Add(WebApp.Models.UnitOfWork.Product)
+  parent: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}
+  definition: WebApp.Data.IDao`1.Add(`0)
+  href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Add__0_
+  name: Add(Product)
+  nameWithType: IDao<Product>.Add(Product)
+  fullName: WebApp.Data.IDao<WebApp.Models.UnitOfWork.Product>.Add(WebApp.Models.UnitOfWork.Product)
+  nameWithType.vb: IDao(Of Product).Add(Product)
+  fullName.vb: WebApp.Data.IDao(Of WebApp.Models.UnitOfWork.Product).Add(WebApp.Models.UnitOfWork.Product)
+  spec.csharp:
+  - uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Add(WebApp.Models.UnitOfWork.Product)
+    name: Add
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Add__0_
+  - name: (
+  - uid: WebApp.Models.UnitOfWork.Product
+    name: Product
+    href: WebApp.Models.UnitOfWork.Product.html
+  - name: )
+  spec.vb:
+  - uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Add(WebApp.Models.UnitOfWork.Product)
+    name: Add
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Add__0_
+  - name: (
+  - uid: WebApp.Models.UnitOfWork.Product
+    name: Product
+    href: WebApp.Models.UnitOfWork.Product.html
+  - name: )
+- uid: WebApp.Data.IDao`1.Add(`0)
+  commentId: M:WebApp.Data.IDao`1.Add(`0)
+  href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Add__0_
+  name: Add(T)
+  nameWithType: IDao<T>.Add(T)
+  fullName: WebApp.Data.IDao<T>.Add(T)
+  nameWithType.vb: IDao(Of T).Add(T)
+  fullName.vb: WebApp.Data.IDao(Of T).Add(T)
+  spec.csharp:
+  - uid: WebApp.Data.IDao`1.Add(`0)
+    name: Add
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Add__0_
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: WebApp.Data.IDao`1.Add(`0)
+    name: Add
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Add__0_
+  - name: (
+  - name: T
+  - name: )
+- uid: WebApp.Data.ProductDao.Update*
+  commentId: Overload:WebApp.Data.ProductDao.Update
+  href: WebApp.Data.ProductDao.html#WebApp_Data_ProductDao_Update_WebApp_Models_UnitOfWork_Product_WebApp_Models_UnitOfWork_Product_
+  name: Update
+  nameWithType: ProductDao.Update
+  fullName: WebApp.Data.ProductDao.Update
+- uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Update(WebApp.Models.UnitOfWork.Product,WebApp.Models.UnitOfWork.Product)
+  commentId: M:WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Update(WebApp.Models.UnitOfWork.Product,WebApp.Models.UnitOfWork.Product)
+  parent: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}
+  definition: WebApp.Data.IDao`1.Update(`0,`0)
+  href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Update__0__0_
+  name: Update(Product, Product)
+  nameWithType: IDao<Product>.Update(Product, Product)
+  fullName: WebApp.Data.IDao<WebApp.Models.UnitOfWork.Product>.Update(WebApp.Models.UnitOfWork.Product, WebApp.Models.UnitOfWork.Product)
+  nameWithType.vb: IDao(Of Product).Update(Product, Product)
+  fullName.vb: WebApp.Data.IDao(Of WebApp.Models.UnitOfWork.Product).Update(WebApp.Models.UnitOfWork.Product, WebApp.Models.UnitOfWork.Product)
+  spec.csharp:
+  - uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Update(WebApp.Models.UnitOfWork.Product,WebApp.Models.UnitOfWork.Product)
+    name: Update
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Update__0__0_
+  - name: (
+  - uid: WebApp.Models.UnitOfWork.Product
+    name: Product
+    href: WebApp.Models.UnitOfWork.Product.html
+  - name: ','
+  - name: " "
+  - uid: WebApp.Models.UnitOfWork.Product
+    name: Product
+    href: WebApp.Models.UnitOfWork.Product.html
+  - name: )
+  spec.vb:
+  - uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Update(WebApp.Models.UnitOfWork.Product,WebApp.Models.UnitOfWork.Product)
+    name: Update
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Update__0__0_
+  - name: (
+  - uid: WebApp.Models.UnitOfWork.Product
+    name: Product
+    href: WebApp.Models.UnitOfWork.Product.html
+  - name: ','
+  - name: " "
+  - uid: WebApp.Models.UnitOfWork.Product
+    name: Product
+    href: WebApp.Models.UnitOfWork.Product.html
+  - name: )
+- uid: WebApp.Data.IDao`1.Update(`0,`0)
+  commentId: M:WebApp.Data.IDao`1.Update(`0,`0)
+  href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Update__0__0_
+  name: Update(T, T)
+  nameWithType: IDao<T>.Update(T, T)
+  fullName: WebApp.Data.IDao<T>.Update(T, T)
+  nameWithType.vb: IDao(Of T).Update(T, T)
+  fullName.vb: WebApp.Data.IDao(Of T).Update(T, T)
+  spec.csharp:
+  - uid: WebApp.Data.IDao`1.Update(`0,`0)
+    name: Update
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Update__0__0_
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: WebApp.Data.IDao`1.Update(`0,`0)
+    name: Update
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Update__0__0_
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: WebApp.Data.ProductDao.Delete*
+  commentId: Overload:WebApp.Data.ProductDao.Delete
+  href: WebApp.Data.ProductDao.html#WebApp_Data_ProductDao_Delete_WebApp_Models_UnitOfWork_Product_
+  name: Delete
+  nameWithType: ProductDao.Delete
+  fullName: WebApp.Data.ProductDao.Delete
+- uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Delete(WebApp.Models.UnitOfWork.Product)
+  commentId: M:WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Delete(WebApp.Models.UnitOfWork.Product)
+  parent: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}
+  definition: WebApp.Data.IDao`1.Delete(`0)
+  href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Delete__0_
+  name: Delete(Product)
+  nameWithType: IDao<Product>.Delete(Product)
+  fullName: WebApp.Data.IDao<WebApp.Models.UnitOfWork.Product>.Delete(WebApp.Models.UnitOfWork.Product)
+  nameWithType.vb: IDao(Of Product).Delete(Product)
+  fullName.vb: WebApp.Data.IDao(Of WebApp.Models.UnitOfWork.Product).Delete(WebApp.Models.UnitOfWork.Product)
+  spec.csharp:
+  - uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Delete(WebApp.Models.UnitOfWork.Product)
+    name: Delete
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Delete__0_
+  - name: (
+  - uid: WebApp.Models.UnitOfWork.Product
+    name: Product
+    href: WebApp.Models.UnitOfWork.Product.html
+  - name: )
+  spec.vb:
+  - uid: WebApp.Data.IDao{WebApp.Models.UnitOfWork.Product}.Delete(WebApp.Models.UnitOfWork.Product)
+    name: Delete
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Delete__0_
+  - name: (
+  - uid: WebApp.Models.UnitOfWork.Product
+    name: Product
+    href: WebApp.Models.UnitOfWork.Product.html
+  - name: )
+- uid: WebApp.Data.IDao`1.Delete(`0)
+  commentId: M:WebApp.Data.IDao`1.Delete(`0)
+  href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Delete__0_
+  name: Delete(T)
+  nameWithType: IDao<T>.Delete(T)
+  fullName: WebApp.Data.IDao<T>.Delete(T)
+  nameWithType.vb: IDao(Of T).Delete(T)
+  fullName.vb: WebApp.Data.IDao(Of T).Delete(T)
+  spec.csharp:
+  - uid: WebApp.Data.IDao`1.Delete(`0)
+    name: Delete
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Delete__0_
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: WebApp.Data.IDao`1.Delete(`0)
+    name: Delete
+    href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Delete__0_
+  - name: (
+  - name: T
+  - name: )
+- uid: WebApp.Data.ProductDao.GetProductsBySeries*
+  commentId: Overload:WebApp.Data.ProductDao.GetProductsBySeries
+  href: WebApp.Data.ProductDao.html#WebApp_Data_ProductDao_GetProductsBySeries_System_String_
+  name: GetProductsBySeries
+  nameWithType: ProductDao.GetProductsBySeries
+  fullName: WebApp.Data.ProductDao.GetProductsBySeries
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: WebApp.Data.ProductDao.GetUniqueSeries*
+  commentId: Overload:WebApp.Data.ProductDao.GetUniqueSeries
+  href: WebApp.Data.ProductDao.html#WebApp_Data_ProductDao_GetUniqueSeries_System_Boolean_System_Boolean_System_Boolean_
+  name: GetUniqueSeries
+  nameWithType: ProductDao.GetUniqueSeries
+  fullName: WebApp.Data.ProductDao.GetUniqueSeries
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.Collections.Generic.IEnumerable{System.String}
+  commentId: T:System.Collections.Generic.IEnumerable{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<string>
+  nameWithType: IEnumerable<string>
+  fullName: System.Collections.Generic.IEnumerable<string>
+  nameWithType.vb: IEnumerable(Of String)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of String)
+  name.vb: IEnumerable(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: WebApp.Data.ProductDao.GetBestSellingProducts*
+  commentId: Overload:WebApp.Data.ProductDao.GetBestSellingProducts
+  href: WebApp.Data.ProductDao.html#WebApp_Data_ProductDao_GetBestSellingProducts_System_Int32_
+  name: GetBestSellingProducts
+  nameWithType: ProductDao.GetBestSellingProducts
+  fullName: WebApp.Data.ProductDao.GetBestSellingProducts
+- uid: WebApp.Data.ProductDao.GetRecentProduct*
+  commentId: Overload:WebApp.Data.ProductDao.GetRecentProduct
+  href: WebApp.Data.ProductDao.html#WebApp_Data_ProductDao_GetRecentProduct
+  name: GetRecentProduct
+  nameWithType: ProductDao.GetRecentProduct
+  fullName: WebApp.Data.ProductDao.GetRecentProduct

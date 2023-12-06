@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: WebApp.APIs.AzureMaps
+  commentId: N:WebApp.APIs.AzureMaps
+  id: WebApp.APIs.AzureMaps
+  children:
+  - WebApp.APIs.AzureMaps.Weather
+  langs:
+  - csharp
+  - vb
+  name: WebApp.APIs.AzureMaps
+  nameWithType: WebApp.APIs.AzureMaps
+  fullName: WebApp.APIs.AzureMaps
+  type: Namespace
+  assemblies:
+  - WebApp
+references:
+- uid: WebApp.APIs.AzureMaps.Weather
+  commentId: T:WebApp.APIs.AzureMaps.Weather
+  href: WebApp.APIs.AzureMaps.Weather.html
+  name: Weather
+  nameWithType: Weather
+  fullName: WebApp.APIs.AzureMaps.Weather

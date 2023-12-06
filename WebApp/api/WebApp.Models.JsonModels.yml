@@ -1,0 +1,70 @@
+### YamlMime:ManagedReference
+items:
+- uid: WebApp.Models.JsonModels
+  commentId: N:WebApp.Models.JsonModels
+  id: WebApp.Models.JsonModels
+  children:
+  - WebApp.Models.JsonModels.AddItemModel
+  - WebApp.Models.JsonModels.CheckoutModel
+  - WebApp.Models.JsonModels.EditCountModel
+  langs:
+  - csharp
+  - vb
+  name: WebApp.Models.JsonModels
+  nameWithType: WebApp.Models.JsonModels
+  fullName: WebApp.Models.JsonModels
+  type: Namespace
+  assemblies:
+  - WebApp
+references:
+- uid: WebApp.Models.JsonModels.AddItemModel
+  commentId: T:WebApp.Models.JsonModels.AddItemModel
+  parent: WebApp.Models.JsonModels
+  href: WebApp.Models.JsonModels.AddItemModel.html
+  name: AddItemModel
+  nameWithType: AddItemModel
+  fullName: WebApp.Models.JsonModels.AddItemModel
+- uid: WebApp.Models.JsonModels.CheckoutModel
+  commentId: T:WebApp.Models.JsonModels.CheckoutModel
+  parent: WebApp.Models.JsonModels
+  href: WebApp.Models.JsonModels.CheckoutModel.html
+  name: CheckoutModel
+  nameWithType: CheckoutModel
+  fullName: WebApp.Models.JsonModels.CheckoutModel
+- uid: WebApp.Models.JsonModels.EditCountModel
+  commentId: T:WebApp.Models.JsonModels.EditCountModel
+  parent: WebApp.Models.JsonModels
+  href: WebApp.Models.JsonModels.EditCountModel.html
+  name: EditCountModel
+  nameWithType: EditCountModel
+  fullName: WebApp.Models.JsonModels.EditCountModel
+- uid: WebApp.Models.JsonModels
+  commentId: N:WebApp.Models.JsonModels
+  href: WebApp.html
+  name: WebApp.Models.JsonModels
+  nameWithType: WebApp.Models.JsonModels
+  fullName: WebApp.Models.JsonModels
+  spec.csharp:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Models
+    name: Models
+    href: WebApp.Models.html
+  - name: .
+  - uid: WebApp.Models.JsonModels
+    name: JsonModels
+    href: WebApp.Models.JsonModels.html
+  spec.vb:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Models
+    name: Models
+    href: WebApp.Models.html
+  - name: .
+  - uid: WebApp.Models.JsonModels
+    name: JsonModels
+    href: WebApp.Models.JsonModels.html

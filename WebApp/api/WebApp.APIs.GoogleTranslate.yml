@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: WebApp.APIs.GoogleTranslate
+  commentId: N:WebApp.APIs.GoogleTranslate
+  id: WebApp.APIs.GoogleTranslate
+  children:
+  - WebApp.APIs.GoogleTranslate.GoogleTranslate
+  langs:
+  - csharp
+  - vb
+  name: WebApp.APIs.GoogleTranslate
+  nameWithType: WebApp.APIs.GoogleTranslate
+  fullName: WebApp.APIs.GoogleTranslate
+  type: Namespace
+  assemblies:
+  - WebApp
+references:
+- uid: WebApp.APIs.GoogleTranslate.GoogleTranslate
+  commentId: T:WebApp.APIs.GoogleTranslate.GoogleTranslate
+  href: WebApp.APIs.GoogleTranslate.GoogleTranslate.html
+  name: GoogleTranslate
+  nameWithType: GoogleTranslate
+  fullName: WebApp.APIs.GoogleTranslate.GoogleTranslate

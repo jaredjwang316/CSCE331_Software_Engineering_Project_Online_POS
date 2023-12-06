@@ -1,0 +1,124 @@
+### YamlMime:TableOfContent
+items:
+- uid: WebApp.AI
+  name: WebApp.AI
+  items:
+  - uid: WebApp.AI.Chatbot
+    name: Chatbot
+  - uid: WebApp.AI.Core
+    name: Core
+- uid: WebApp.APIs.AzureMaps
+  name: WebApp.APIs.AzureMaps
+  items:
+  - uid: WebApp.APIs.AzureMaps.Weather
+    name: Weather
+- uid: WebApp.APIs.GoogleTranslate
+  name: WebApp.APIs.GoogleTranslate
+  items:
+  - uid: WebApp.APIs.GoogleTranslate.GoogleTranslate
+    name: GoogleTranslate
+- uid: WebApp.Controllers
+  name: WebApp.Controllers
+  items:
+  - uid: WebApp.Controllers.AIController
+    name: AIController
+  - uid: WebApp.Controllers.AccountController
+    name: AccountController
+  - uid: WebApp.Controllers.CartController
+    name: CartController
+  - uid: WebApp.Controllers.CashierController
+    name: CashierController
+  - uid: WebApp.Controllers.CustomerController
+    name: CustomerController
+  - uid: WebApp.Controllers.HomeController
+    name: HomeController
+  - uid: WebApp.Controllers.ManagerController
+    name: ManagerController
+  - uid: WebApp.Controllers.MenuBoardController
+    name: MenuBoardController
+  - uid: WebApp.Controllers.StoryController
+    name: StoryController
+- uid: WebApp.Data
+  name: WebApp.Data
+  items:
+  - uid: WebApp.Data.CommandHandler
+    name: CommandHandler
+  - uid: WebApp.Data.DaoTypeContainer
+    name: DaoTypeContainer
+  - uid: WebApp.Data.EmployeeDao
+    name: EmployeeDao
+  - uid: WebApp.Data.EntityServices
+    name: EntityServices
+  - uid: WebApp.Data.IDao`1
+    name: IDao<T>
+  - uid: WebApp.Data.IngredientDao
+    name: IngredientDao
+  - uid: WebApp.Data.InventoryDao
+    name: InventoryDao
+  - uid: WebApp.Data.OrderDao
+    name: OrderDao
+  - uid: WebApp.Data.ProductDao
+    name: ProductDao
+  - uid: WebApp.Data.ProductIngredientsDao
+    name: ProductIngredientsDao
+  - uid: WebApp.Data.SeriesInfoDao
+    name: SeriesInfoDao
+  - uid: WebApp.Data.UnitOfWork
+    name: UnitOfWork
+  - uid: WebApp.Data.UserDao
+    name: UserDao
+- uid: WebApp.Models
+  name: WebApp.Models
+  items:
+  - uid: WebApp.Models.ErrorViewModel
+    name: ErrorViewModel
+- uid: WebApp.Models.AzureMaps.Weather
+  name: WebApp.Models.AzureMaps.Weather
+  items:
+  - uid: WebApp.Models.AzureMaps.Weather.CurrentCondition
+    name: CurrentCondition
+- uid: WebApp.Models.Cart
+  name: WebApp.Models.Cart
+  items:
+  - uid: WebApp.Models.Cart.Cart
+    name: Cart
+  - uid: WebApp.Models.Cart.CartService
+    name: CartService
+  - uid: WebApp.Models.Cart.Item
+    name: Item
+- uid: WebApp.Models.JsonModels
+  name: WebApp.Models.JsonModels
+  items:
+  - uid: WebApp.Models.JsonModels.AddItemModel
+    name: AddItemModel
+  - uid: WebApp.Models.JsonModels.CheckoutModel
+    name: CheckoutModel
+  - uid: WebApp.Models.JsonModels.EditCountModel
+    name: EditCountModel
+- uid: WebApp.Models.UnitOfWork
+  name: WebApp.Models.UnitOfWork
+  items:
+  - uid: WebApp.Models.UnitOfWork.Employee
+    name: Employee
+  - uid: WebApp.Models.UnitOfWork.Ingredient
+    name: Ingredient
+  - uid: WebApp.Models.UnitOfWork.Inventory
+    name: Inventory
+  - uid: WebApp.Models.UnitOfWork.Order
+    name: Order
+  - uid: WebApp.Models.UnitOfWork.Product
+    name: Product
+  - uid: WebApp.Models.UnitOfWork.ProductIngredients
+    name: ProductIngredients
+  - uid: WebApp.Models.UnitOfWork.SeriesInfo
+    name: SeriesInfo
+  - uid: WebApp.Models.UnitOfWork.User
+    name: User
+- uid: WebApp.Models.ViewModels
+  name: WebApp.Models.ViewModels
+  items:
+  - uid: WebApp.Models.ViewModels.CustomizationViewModel
+    name: CustomizationViewModel
+  - uid: WebApp.Models.ViewModels.EditViewModel
+    name: EditViewModel
+memberLayout: SamePage

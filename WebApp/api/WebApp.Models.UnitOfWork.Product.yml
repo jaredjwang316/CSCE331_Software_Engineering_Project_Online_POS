@@ -1,0 +1,705 @@
+### YamlMime:ManagedReference
+items:
+- uid: WebApp.Models.UnitOfWork.Product
+  commentId: T:WebApp.Models.UnitOfWork.Product
+  id: Product
+  parent: WebApp.Models.UnitOfWork
+  children:
+  - WebApp.Models.UnitOfWork.Product.#ctor(System.Int32,System.String,System.Double,System.String,System.String,System.Boolean,System.Boolean,System.Boolean)
+  - WebApp.Models.UnitOfWork.Product.Hidden
+  - WebApp.Models.UnitOfWork.Product.Id
+  - WebApp.Models.UnitOfWork.Product.ImgUrl
+  - WebApp.Models.UnitOfWork.Product.IsDrink
+  - WebApp.Models.UnitOfWork.Product.IsOption
+  - WebApp.Models.UnitOfWork.Product.Name
+  - WebApp.Models.UnitOfWork.Product.Price
+  - WebApp.Models.UnitOfWork.Product.Series
+  langs:
+  - csharp
+  - vb
+  name: Product
+  nameWithType: Product
+  fullName: WebApp.Models.UnitOfWork.Product
+  type: Class
+  source:
+    remote:
+      path: WebApp/Models/UnitOfWork/Product.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: Product
+    path: Models/UnitOfWork/Product.cs
+    startLine: 11
+  assemblies:
+  - WebApp
+  namespace: WebApp.Models.UnitOfWork
+  summary: This class is used to represent a row in the Product table.
+  example: []
+  syntax:
+    content: public class Product
+    content.vb: Public Class Product
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: WebApp.Models.UnitOfWork.Product.Id
+  commentId: P:WebApp.Models.UnitOfWork.Product.Id
+  id: Id
+  parent: WebApp.Models.UnitOfWork.Product
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: Product.Id
+  fullName: WebApp.Models.UnitOfWork.Product.Id
+  type: Property
+  source:
+    remote:
+      path: WebApp/Models/UnitOfWork/Product.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: Id
+    path: Models/UnitOfWork/Product.cs
+    startLine: 12
+  assemblies:
+  - WebApp
+  namespace: WebApp.Models.UnitOfWork
+  syntax:
+    content: public int Id { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Id As Integer
+  overload: WebApp.Models.UnitOfWork.Product.Id*
+- uid: WebApp.Models.UnitOfWork.Product.Name
+  commentId: P:WebApp.Models.UnitOfWork.Product.Name
+  id: Name
+  parent: WebApp.Models.UnitOfWork.Product
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: Product.Name
+  fullName: WebApp.Models.UnitOfWork.Product.Name
+  type: Property
+  source:
+    remote:
+      path: WebApp/Models/UnitOfWork/Product.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: Name
+    path: Models/UnitOfWork/Product.cs
+    startLine: 13
+  assemblies:
+  - WebApp
+  namespace: WebApp.Models.UnitOfWork
+  syntax:
+    content: public string Name { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Name As String
+  overload: WebApp.Models.UnitOfWork.Product.Name*
+- uid: WebApp.Models.UnitOfWork.Product.Price
+  commentId: P:WebApp.Models.UnitOfWork.Product.Price
+  id: Price
+  parent: WebApp.Models.UnitOfWork.Product
+  langs:
+  - csharp
+  - vb
+  name: Price
+  nameWithType: Product.Price
+  fullName: WebApp.Models.UnitOfWork.Product.Price
+  type: Property
+  source:
+    remote:
+      path: WebApp/Models/UnitOfWork/Product.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: Price
+    path: Models/UnitOfWork/Product.cs
+    startLine: 14
+  assemblies:
+  - WebApp
+  namespace: WebApp.Models.UnitOfWork
+  syntax:
+    content: public double Price { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Price As Double
+  overload: WebApp.Models.UnitOfWork.Product.Price*
+- uid: WebApp.Models.UnitOfWork.Product.Series
+  commentId: P:WebApp.Models.UnitOfWork.Product.Series
+  id: Series
+  parent: WebApp.Models.UnitOfWork.Product
+  langs:
+  - csharp
+  - vb
+  name: Series
+  nameWithType: Product.Series
+  fullName: WebApp.Models.UnitOfWork.Product.Series
+  type: Property
+  source:
+    remote:
+      path: WebApp/Models/UnitOfWork/Product.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: Series
+    path: Models/UnitOfWork/Product.cs
+    startLine: 15
+  assemblies:
+  - WebApp
+  namespace: WebApp.Models.UnitOfWork
+  syntax:
+    content: public string Series { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Series As String
+  overload: WebApp.Models.UnitOfWork.Product.Series*
+- uid: WebApp.Models.UnitOfWork.Product.ImgUrl
+  commentId: P:WebApp.Models.UnitOfWork.Product.ImgUrl
+  id: ImgUrl
+  parent: WebApp.Models.UnitOfWork.Product
+  langs:
+  - csharp
+  - vb
+  name: ImgUrl
+  nameWithType: Product.ImgUrl
+  fullName: WebApp.Models.UnitOfWork.Product.ImgUrl
+  type: Property
+  source:
+    remote:
+      path: WebApp/Models/UnitOfWork/Product.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: ImgUrl
+    path: Models/UnitOfWork/Product.cs
+    startLine: 16
+  assemblies:
+  - WebApp
+  namespace: WebApp.Models.UnitOfWork
+  syntax:
+    content: public string ImgUrl { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ImgUrl As String
+  overload: WebApp.Models.UnitOfWork.Product.ImgUrl*
+- uid: WebApp.Models.UnitOfWork.Product.Hidden
+  commentId: P:WebApp.Models.UnitOfWork.Product.Hidden
+  id: Hidden
+  parent: WebApp.Models.UnitOfWork.Product
+  langs:
+  - csharp
+  - vb
+  name: Hidden
+  nameWithType: Product.Hidden
+  fullName: WebApp.Models.UnitOfWork.Product.Hidden
+  type: Property
+  source:
+    remote:
+      path: WebApp/Models/UnitOfWork/Product.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: Hidden
+    path: Models/UnitOfWork/Product.cs
+    startLine: 17
+  assemblies:
+  - WebApp
+  namespace: WebApp.Models.UnitOfWork
+  syntax:
+    content: public bool Hidden { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property Hidden As Boolean
+  overload: WebApp.Models.UnitOfWork.Product.Hidden*
+- uid: WebApp.Models.UnitOfWork.Product.IsOption
+  commentId: P:WebApp.Models.UnitOfWork.Product.IsOption
+  id: IsOption
+  parent: WebApp.Models.UnitOfWork.Product
+  langs:
+  - csharp
+  - vb
+  name: IsOption
+  nameWithType: Product.IsOption
+  fullName: WebApp.Models.UnitOfWork.Product.IsOption
+  type: Property
+  source:
+    remote:
+      path: WebApp/Models/UnitOfWork/Product.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: IsOption
+    path: Models/UnitOfWork/Product.cs
+    startLine: 18
+  assemblies:
+  - WebApp
+  namespace: WebApp.Models.UnitOfWork
+  syntax:
+    content: public bool IsOption { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsOption As Boolean
+  overload: WebApp.Models.UnitOfWork.Product.IsOption*
+- uid: WebApp.Models.UnitOfWork.Product.IsDrink
+  commentId: P:WebApp.Models.UnitOfWork.Product.IsDrink
+  id: IsDrink
+  parent: WebApp.Models.UnitOfWork.Product
+  langs:
+  - csharp
+  - vb
+  name: IsDrink
+  nameWithType: Product.IsDrink
+  fullName: WebApp.Models.UnitOfWork.Product.IsDrink
+  type: Property
+  source:
+    remote:
+      path: WebApp/Models/UnitOfWork/Product.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: IsDrink
+    path: Models/UnitOfWork/Product.cs
+    startLine: 19
+  assemblies:
+  - WebApp
+  namespace: WebApp.Models.UnitOfWork
+  syntax:
+    content: public bool IsDrink { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsDrink As Boolean
+  overload: WebApp.Models.UnitOfWork.Product.IsDrink*
+- uid: WebApp.Models.UnitOfWork.Product.#ctor(System.Int32,System.String,System.Double,System.String,System.String,System.Boolean,System.Boolean,System.Boolean)
+  commentId: M:WebApp.Models.UnitOfWork.Product.#ctor(System.Int32,System.String,System.Double,System.String,System.String,System.Boolean,System.Boolean,System.Boolean)
+  id: '#ctor(System.Int32,System.String,System.Double,System.String,System.String,System.Boolean,System.Boolean,System.Boolean)'
+  parent: WebApp.Models.UnitOfWork.Product
+  langs:
+  - csharp
+  - vb
+  name: Product(int, string, double, string, string, bool, bool, bool)
+  nameWithType: Product.Product(int, string, double, string, string, bool, bool, bool)
+  fullName: WebApp.Models.UnitOfWork.Product.Product(int, string, double, string, string, bool, bool, bool)
+  type: Constructor
+  source:
+    remote:
+      path: WebApp/Models/UnitOfWork/Product.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: .ctor
+    path: Models/UnitOfWork/Product.cs
+    startLine: 32
+  assemblies:
+  - WebApp
+  namespace: WebApp.Models.UnitOfWork
+  summary: Constructor for the Product class.
+  example: []
+  syntax:
+    content: public Product(int id, string name, double price, string series, string imgUrl, bool hidden, bool isOption, bool isDrink)
+    parameters:
+    - id: id
+      type: System.Int32
+      description: ''
+    - id: name
+      type: System.String
+      description: ''
+    - id: price
+      type: System.Double
+      description: ''
+    - id: series
+      type: System.String
+      description: ''
+    - id: imgUrl
+      type: System.String
+      description: ''
+    - id: hidden
+      type: System.Boolean
+      description: ''
+    - id: isOption
+      type: System.Boolean
+      description: ''
+    - id: isDrink
+      type: System.Boolean
+    content.vb: Public Sub New(id As Integer, name As String, price As Double, series As String, imgUrl As String, hidden As Boolean, isOption As Boolean, isDrink As Boolean)
+  overload: WebApp.Models.UnitOfWork.Product.#ctor*
+  nameWithType.vb: Product.New(Integer, String, Double, String, String, Boolean, Boolean, Boolean)
+  fullName.vb: WebApp.Models.UnitOfWork.Product.New(Integer, String, Double, String, String, Boolean, Boolean, Boolean)
+  name.vb: New(Integer, String, Double, String, String, Boolean, Boolean, Boolean)
+references:
+- uid: WebApp.Models.UnitOfWork
+  commentId: N:WebApp.Models.UnitOfWork
+  href: WebApp.html
+  name: WebApp.Models.UnitOfWork
+  nameWithType: WebApp.Models.UnitOfWork
+  fullName: WebApp.Models.UnitOfWork
+  spec.csharp:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Models
+    name: Models
+    href: WebApp.Models.html
+  - name: .
+  - uid: WebApp.Models.UnitOfWork
+    name: UnitOfWork
+    href: WebApp.Models.UnitOfWork.html
+  spec.vb:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Models
+    name: Models
+    href: WebApp.Models.html
+  - name: .
+  - uid: WebApp.Models.UnitOfWork
+    name: UnitOfWork
+    href: WebApp.Models.UnitOfWork.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: WebApp.Models.UnitOfWork.Product.Id*
+  commentId: Overload:WebApp.Models.UnitOfWork.Product.Id
+  href: WebApp.Models.UnitOfWork.Product.html#WebApp_Models_UnitOfWork_Product_Id
+  name: Id
+  nameWithType: Product.Id
+  fullName: WebApp.Models.UnitOfWork.Product.Id
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: WebApp.Models.UnitOfWork.Product.Name*
+  commentId: Overload:WebApp.Models.UnitOfWork.Product.Name
+  href: WebApp.Models.UnitOfWork.Product.html#WebApp_Models_UnitOfWork_Product_Name
+  name: Name
+  nameWithType: Product.Name
+  fullName: WebApp.Models.UnitOfWork.Product.Name
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: WebApp.Models.UnitOfWork.Product.Price*
+  commentId: Overload:WebApp.Models.UnitOfWork.Product.Price
+  href: WebApp.Models.UnitOfWork.Product.html#WebApp_Models_UnitOfWork_Product_Price
+  name: Price
+  nameWithType: Product.Price
+  fullName: WebApp.Models.UnitOfWork.Product.Price
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: WebApp.Models.UnitOfWork.Product.Series*
+  commentId: Overload:WebApp.Models.UnitOfWork.Product.Series
+  href: WebApp.Models.UnitOfWork.Product.html#WebApp_Models_UnitOfWork_Product_Series
+  name: Series
+  nameWithType: Product.Series
+  fullName: WebApp.Models.UnitOfWork.Product.Series
+- uid: WebApp.Models.UnitOfWork.Product.ImgUrl*
+  commentId: Overload:WebApp.Models.UnitOfWork.Product.ImgUrl
+  href: WebApp.Models.UnitOfWork.Product.html#WebApp_Models_UnitOfWork_Product_ImgUrl
+  name: ImgUrl
+  nameWithType: Product.ImgUrl
+  fullName: WebApp.Models.UnitOfWork.Product.ImgUrl
+- uid: WebApp.Models.UnitOfWork.Product.Hidden*
+  commentId: Overload:WebApp.Models.UnitOfWork.Product.Hidden
+  href: WebApp.Models.UnitOfWork.Product.html#WebApp_Models_UnitOfWork_Product_Hidden
+  name: Hidden
+  nameWithType: Product.Hidden
+  fullName: WebApp.Models.UnitOfWork.Product.Hidden
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: WebApp.Models.UnitOfWork.Product.IsOption*
+  commentId: Overload:WebApp.Models.UnitOfWork.Product.IsOption
+  href: WebApp.Models.UnitOfWork.Product.html#WebApp_Models_UnitOfWork_Product_IsOption
+  name: IsOption
+  nameWithType: Product.IsOption
+  fullName: WebApp.Models.UnitOfWork.Product.IsOption
+- uid: WebApp.Models.UnitOfWork.Product.IsDrink*
+  commentId: Overload:WebApp.Models.UnitOfWork.Product.IsDrink
+  href: WebApp.Models.UnitOfWork.Product.html#WebApp_Models_UnitOfWork_Product_IsDrink
+  name: IsDrink
+  nameWithType: Product.IsDrink
+  fullName: WebApp.Models.UnitOfWork.Product.IsDrink
+- uid: WebApp.Models.UnitOfWork.Product.#ctor*
+  commentId: Overload:WebApp.Models.UnitOfWork.Product.#ctor
+  href: WebApp.Models.UnitOfWork.Product.html#WebApp_Models_UnitOfWork_Product__ctor_System_Int32_System_String_System_Double_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_
+  name: Product
+  nameWithType: Product.Product
+  fullName: WebApp.Models.UnitOfWork.Product.Product
+  nameWithType.vb: Product.New
+  fullName.vb: WebApp.Models.UnitOfWork.Product.New
+  name.vb: New

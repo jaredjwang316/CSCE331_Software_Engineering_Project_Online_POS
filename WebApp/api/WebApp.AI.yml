@@ -1,0 +1,53 @@
+### YamlMime:ManagedReference
+items:
+- uid: WebApp.AI
+  commentId: N:WebApp.AI
+  id: WebApp.AI
+  children:
+  - WebApp.AI.Chatbot
+  - WebApp.AI.Core
+  langs:
+  - csharp
+  - vb
+  name: WebApp.AI
+  nameWithType: WebApp.AI
+  fullName: WebApp.AI
+  type: Namespace
+  assemblies:
+  - WebApp
+references:
+- uid: WebApp.AI.Chatbot
+  commentId: T:WebApp.AI.Chatbot
+  href: WebApp.AI.Chatbot.html
+  name: Chatbot
+  nameWithType: Chatbot
+  fullName: WebApp.AI.Chatbot
+- uid: WebApp.AI.Core
+  commentId: T:WebApp.AI.Core
+  parent: WebApp.AI
+  href: WebApp.AI.Core.html
+  name: Core
+  nameWithType: Core
+  fullName: WebApp.AI.Core
+- uid: WebApp.AI
+  commentId: N:WebApp.AI
+  href: WebApp.html
+  name: WebApp.AI
+  nameWithType: WebApp.AI
+  fullName: WebApp.AI
+  spec.csharp:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.AI
+    name: AI
+    href: WebApp.AI.html
+  spec.vb:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.AI
+    name: AI
+    href: WebApp.AI.html
