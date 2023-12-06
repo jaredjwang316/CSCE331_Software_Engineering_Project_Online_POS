@@ -1,7 +1,7 @@
 /*
     File: Controllers/CashierController.cs
-    Author: [Author's Name]
-    Date: [Date]
+    Author: Mrinal Yadav
+    Date: 12/1
     Purpose: This file contains the CashierController class, which manages actions and
         functionalities specifically tailored for the Point of Sale (POS) system.
 
