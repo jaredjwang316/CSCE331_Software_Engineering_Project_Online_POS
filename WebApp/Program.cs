@@ -8,7 +8,6 @@
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using WebApp;
 using WebApp.Models.Cart;
 
@@ -27,10 +26,6 @@ builder.Services.AddSession(
     }
 );
 builder.Services.AddMemoryCache();
-
-builder.Services.AddSwaggerGen(c => {
-    c.SwaggerDoc("v1", new() { Title = "WebApp", Version = "v1" });
-});
 
 builder.Services.AddSingleton(Config.returnUrl);
 builder.WebHost.UseUrls(Config.returnUrl);
@@ -54,12 +49,6 @@ builder.Services.AddAuthentication(options => {
 });
 
 var app = builder.Build();
-
-app.UseSwagger();
-app.UseSwaggerUI(c => {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApp v1");
-    c.RoutePrefix = "api-docs";
-});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
