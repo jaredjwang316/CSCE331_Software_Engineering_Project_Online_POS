@@ -1,5 +1,5 @@
 
-import { makeRequest } from './utils/request.js';
+import { makeRequest } from './utils/make-request.js';
 
 // Accessibility Button
 window.toggleSidebar = function() {

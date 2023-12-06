@@ -10,7 +10,7 @@ using WebApp.Data;
 using WebApp.Models;
 using WebApp.Models.Cart;
 using WebApp.Models.UnitOfWork;
-using WebApp.Models.ViewModels;
+using WebApp.Models.JsonModels;
 
 namespace WebApp.Controllers;
 
@@ -24,6 +24,7 @@ checkout by generating orders based on the current cart contents and employee/cu
 By implementing these functionalities, the controller efficiently organizes cart-related actions and 
 integrates them seamlessly into the web application's shopping experience */
 
+[ApiController]
 public class CartController : Controller
 {
     private readonly ILogger<CartController> _logger;
@@ -35,6 +36,7 @@ public class CartController : Controller
         this.cartService = cartService;
     }
 
+    [HttpGet, Route("/Cart")]
     public IActionResult Index()
     {
         Cart cart = cartService.GetCartFromSession();
@@ -44,25 +46,28 @@ public class CartController : Controller
         return View(cart);
     }
 
+    [HttpGet, Route("/Cart/FindProduct")]
     static Product? FindProduct(List<Product> products, int id) {
         return products.FirstOrDefault(p => p.Id == id);
     }
 
+    [HttpGet, Route("/Cart/FindCustomizations")]
     static List<Product> FindCustomizations(List<Product> products, List<int> ids) {
         return products.Where(p => ids.Contains(p.Id)).ToList();
     }
 
-    public IActionResult AddItem(int product_id, List<int> customization_ids, int quantity) {
+    [HttpPost, Route("/Cart/AddItem")]
+    public IActionResult AddItem([FromBody] AddItemModel model) {
         UnitOfWork unit = new();
         List<Product> products = unit.GetAll<Product>().ToList();
         unit.CloseConnection();
 
-        Product? selected_product = FindProduct(products, product_id);
-        List<Product> selected_customizations = FindCustomizations(products, customization_ids);
+        Product? selected_product = FindProduct(products, model.ProductId);
+        List<Product> selected_customizations = FindCustomizations(products, model.CustomizationIds);
 
         if (selected_product == null) return BadRequest();
 
-        Item item = new(selected_product, selected_customizations, quantity);
+        Item item = new(selected_product, selected_customizations, model.Quantity);
         Cart cart = cartService.GetCartFromSession();
         int initial_size = cart.Items.Sum(i => i.Quantity);
 
@@ -75,6 +80,7 @@ public class CartController : Controller
         return Ok();
     }
 
+    [HttpPost, Route("/Cart/RemoveItem")]
     public IActionResult RemoveItem(int index) {
         Cart cart = cartService.GetCartFromSession();
         cart.RemoveItem(index);
@@ -82,44 +88,25 @@ public class CartController : Controller
         return Ok();
     }
 
-    public IActionResult EditCount(int index, bool isIncrement) {
+    [HttpPost, Route("/Cart/EditCount")]
+    public IActionResult EditCount([FromBody] EditCountModel model) {
         Cart cart = cartService.GetCartFromSession();
-        if (cart.Items[index].Quantity == 1 && !isIncrement) {
-            cart.RemoveItem(index);
+        if (cart.Items[model.Index].Quantity == 1 && !model.IsIncrement) {
+            cart.RemoveItem(model.Index);
             cartService.SetCartInSession(cart);
             return Ok();
         }
-        if (isIncrement) {
-            cart.Items[index].Quantity++;
+        if (model.IsIncrement) {
+            cart.Items[model.Index].Quantity++;
         } else {
-            cart.Items[index].Quantity--;
+            cart.Items[model.Index].Quantity--;
         }
         cartService.SetCartInSession(cart);
         return Ok();
     }
 
-    public IActionResult EditOptions(int index) {
-        UnitOfWork unit = new();
-        List<SeriesInfo> seriesInformation = unit.GetAll<SeriesInfo>()
-            .Where(series => !series.IsHidden && series.IsCustomization)
-            .ToList();
-        List<Product> products = unit.GetAll<Product>()
-            .Where(product => seriesInformation.Any(series => series.Name == product.Series))
-            .ToList();
-        
-        unit.CloseConnection();
-
-        var model = new EditViewModel {
-            Cart = cartService.GetCartFromSession(),
-            Index = index,
-            SeriesInformation = seriesInformation,
-            Products = products
-        };
-
-        return PartialView("_EditPartial", model);
-    }
-
-    public IActionResult Checkout(string name, string role, string email) {
+    [HttpPost, Route("/Cart/Checkout")]
+    public IActionResult Checkout([FromBody] CheckoutModel model) {
         Cart cart = cartService.GetCartFromSession();
 
         if (cart == null) return BadRequest();
@@ -136,11 +123,11 @@ public class CartController : Controller
 
         int employee_id = 0;
         UnitOfWork unit = new();
-        if (role != "Customer") {
-            employee_id = unit.GetAll<Employee>().FirstOrDefault(e => e.Email == email)!.Id;
+        if (model.Role != "Customer") {
+            employee_id = unit.GetAll<Employee>().FirstOrDefault(e => e.Email == model.Email)!.Id;
         }
 
-        Order order = new(-1, employee_id, name, DateTime.Now, cart.TotalCost(), ids);
+        Order order = new(-1, employee_id, model.Name, DateTime.Now, cart.TotalCost(), ids);
         unit.Add(order);
         unit.CloseConnection();
 
@@ -150,14 +137,17 @@ public class CartController : Controller
         return Ok();
     }
 
+    [HttpGet, Route("/Cart/GetCartFromSession")]
     public Cart GetCartFromSession() {
         return cartService.GetCartFromSession();
     }
 
+    [HttpPost, Route("/Cart/SetCartInSession")]
     public void SetCartInSession(Cart cart) {
         cartService.SetCartInSession(cart);
     }
 
+    [HttpGet, Route("/Cart/GetCartSize")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
