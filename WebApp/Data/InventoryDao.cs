@@ -20,7 +20,8 @@ public class InventoryDao : IDao<Inventory> {
         var query = $"SELECT * FROM inventory WHERE id = {id}";
         var reader = commandHandler.ExecuteReader(query);
 
-        if (reader == null) {
+        if (reader == null || !reader.HasRows) {
+            reader?.Close();
             return new Inventory(-1, -1, -1, -1);
         }
 
@@ -78,5 +79,23 @@ public class InventoryDao : IDao<Inventory> {
     public void Delete(Inventory t) {
         string statement = $"DELETE FROM inventory WHERE id = {t.Id}";
         commandHandler.ExecuteNonQuery(statement);
+    }
+
+    public Inventory GetRecentInventory() {
+        string query = $"SELECT * FROM inventory ORDER BY id DESC LIMIT 1";
+        var reader = commandHandler.ExecuteReader(query);
+        List<Inventory> inventory = new();
+
+        while (reader?.Read() == true) {
+            inventory.Add(new Inventory(
+                reader.GetInt32(0),
+                reader.GetInt32(1),
+                reader.GetInt32(2),
+                reader.GetInt32(3)
+            ));
+        }
+
+        reader?.Close();
+        return inventory.ElementAt(0);
     }
 }

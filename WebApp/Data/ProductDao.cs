@@ -65,7 +65,7 @@ public class ProductDao : IDao<Product> {
     }
 
     public void Add(Product t) {
-        string sattement = (
+        string statement = (
             $"INSERT INTO products (name, price, series, img_url, hidden, is_option, is_drink) " +
             $"VALUES (" +
                 $"'{t.Name}', " +
@@ -73,10 +73,10 @@ public class ProductDao : IDao<Product> {
                 $"'{t.Series}', " +
                 $"'{t.ImgUrl}', " +
                 $"{t.Hidden}, " +
-                $"{t.IsOption})" +
-                $"{t.IsDrink}"
+                $"{t.IsOption}," +
+                $"{t.IsDrink})"
         );
-        commandHandler.ExecuteNonQuery(sattement);
+        commandHandler.ExecuteNonQuery(statement);
     }
 
     public void Update(Product t, Product newT) {
@@ -182,5 +182,27 @@ public class ProductDao : IDao<Product> {
         }
 
         return products;
+    }
+
+    public Product GetRecentProduct() {
+        string query = $"SELECT * FROM products ORDER BY id DESC LIMIT 1";
+        var reader = commandHandler.ExecuteReader(query);
+        List<Product> products = new();
+
+        while (reader?.Read() == true) {
+            products.Add(new Product(
+                reader.GetInt32(0),
+                reader.GetString(1),
+                reader.GetDouble(2), 
+                reader.GetString(3),
+                reader.GetString(4),
+                reader.GetBoolean(5),
+                reader.GetBoolean(6),
+                reader.GetBoolean(7)
+            ));
+        }
+
+        reader?.Close();
+        return products.ElementAt(0);
     }
 }

@@ -5,7 +5,7 @@
     Purpose: Contains all javascript functions for the cart page.
 */
 
-import { makeRequest } from './utils/request.js';
+import { makeRequest } from './utils/make-request.js';
 import { Cart, Item } from './models/cartModel.js';
 
 function showCartContainer() {
@@ -68,11 +68,11 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
         $(this).prop("disabled", true);
-        var productID = $(this).attr("id");
+        var productID = parseInt($(this).attr("id"));
         var customizationIDs = [];
 
         $(".customization-btn.active").each(function() {
-            customizationIDs.push($(this).attr("id"));
+            customizationIDs.push(parseInt($(this).attr("id")));
         });
 
         function AddToCartSuccess() {
@@ -84,21 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("Error adding to cart. Retrying...");
         }
 
-        makeRequest("/Cart/AddItem", "POST", { product_id: productID, customization_ids: customizationIDs, quantity: 1 }, AddToCartSuccess, AddToCartError);
-
-        // $.ajax({
-        //     url: "/Cart/AddItem",
-        //     type: "POST",
-        //     data: { product_id: productID, customization_ids: customizationIDs, quantity: 1 },
-        //     success: function (data) {
-        //         console.log("Added to cart");
-        //         $(".cart-msg").fadeIn(500);
-        //     },
-        //     error: function () {
-        //         console.log("Error adding to cart. Retrying...");
-        //         $(".add-to-cart-btn").trigger("click");
-        //     }
-        // });
+        makeRequest("/Cart/AddItem", "POST", { ProductId: productID, CustomizationIds: customizationIDs, Quantity: 1 }, AddToCartSuccess, AddToCartError);
 
         $(".cart-counter").show();
         $(".cart-counter").text(cart.Length() + 1);
@@ -225,17 +211,8 @@ document.addEventListener("DOMContentLoaded", function() {
         $(".cart-counter").text(cart.Length());
     });
 
-    // $(document).on('click', '.edit-product-options-btn', function() {
-    //     // Use customer controller and navigate to customization page
-    //     var productID = $(this).attr("id");
-    //     var customizations = $(this).attr("customizations");
-    // });
-
     // Checkout button
     $(document).on('click', '.checkout-btn', function() {
-        // var confirmCheckout = confirm("Process payment");
-        // if (!confirmCheckout) return;
-        console.log(cart.Length());
         if (cart.Length() == 0) {
             return;
         }
@@ -253,30 +230,28 @@ document.addEventListener("DOMContentLoaded", function() {
             role = user_data.role;
             email = user_data.email;
 
-            $.ajax({
-                url: "/Cart/Checkout",
-                type: "POST",
-                data: {name: name, role: role, email: email},
-                success: function (response) {
-                    // Update cart and html
-                    cart.items = [];
-                    $(".product").remove();
-                    $(".subtotal-value").text("$0.00");
-                    clearTimeout(timeout);
-                    document.dispatchEvent(new Event("HideLoadingScreen"));
-                    $(this).prop("disabled", false);
-                    $(".cart-counter").text(cart.Length());
-                    hideCartContainer();
-                    hideEmptyCartMessage();
-                    showCheckoutMessage();
-                    hideCartCounter();
-                },
-                error: function () {
-                    console.log("Error during checkout");
-                    clearTimeout(timeout);
-                    document.dispatchEvent(new Event("HideLoadingScreen"));
-                }
-            });
+            function CheckoutSuccess() {
+                // Update cart and html
+                cart.items = [];
+                $(".product").remove();
+                $(".subtotal-value").text("$0.00");
+                clearTimeout(timeout);
+                document.dispatchEvent(new Event("HideLoadingScreen"));
+                $(this).prop("disabled", false);
+                $(".cart-counter").text(cart.Length());
+                hideCartContainer();
+                hideEmptyCartMessage();
+                showCheckoutMessage();
+                hideCartCounter();
+            }
+
+            function CheckoutError() {
+                console.log("Error during checkout");
+                clearTimeout(timeout);
+                document.dispatchEvent(new Event("HideLoadingScreen"));
+            }
+
+            makeRequest("/Cart/Checkout", "POST", {name: name, role: role, email: email}, CheckoutSuccess, CheckoutError);
         }, function() {
             console.log("Error fetching user info");
         });

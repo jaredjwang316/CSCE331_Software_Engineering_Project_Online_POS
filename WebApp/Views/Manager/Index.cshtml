@@ -11,8 +11,8 @@
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/Manager.css" asp-append-version="true" />
-<script src="~/js/manager.js"></script>
-<script src="~/js/loading-screen.js"></script>
+<script src="~/js/manager.js" asp-append-version="true"></script>
+<script src="~/js/loading-screen.js" asp-append-version="true"></script>
 
 </head>
 <body>
@@ -44,7 +44,7 @@
 @using WebApp.Data
 @using WebApp.Models.UnitOfWork
 @using WebApp
-@model (List<Product>, List<Inventory>, List<Ingredient>)
+@model (List<Product>, List<Inventory>, List<Ingredient>, List<ProductIngredients>)
 @if (Model.Item1 != null && Model.Item1.Count > 0) {
     <table id="prod-table" class="table contrast" style="display:none">
         <thead>
@@ -53,15 +53,21 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Series</th>
+                <th>Image Url</th>
+                <th>Delete</th>
+                <th>Product Ingredients</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var product in Model.Item1) {
                 <tr>
-                    <td contenteditable="true">@product.Id</td>
+                    <td>@product.Id</td>
                     <td contenteditable="true">@product.Name</td>
                     <td contenteditable="true">@product.Price</td>
                     <td contenteditable="true">@product.Series</td>
+                    <td contenteditable="true">@product.ImgUrl</td>
+                    <td><input type="button" value="Delete" onclick="deleteRowProd(this)"/></td>
+                    <td><input type="button" value="Edit Product Ingredients" onclick="editProductIngredients(this)"/></td>
                 </tr>
             }
         </tbody>
@@ -69,7 +75,8 @@
 } else {
     <p>No products found.</p>
 }
-<button id="saveButtonProd" class="save-button contrast" style="display:none">Save</button>
+<button id="saveButtonProd" class="save-button" style="display:none">Save</button>
+<button id="addButtonProd" class="add-button" style="display:none">Add</button>
 
 @if (Model.Item2 != null && Model.Item2.Count > 0) {
     <table id="inv-table" class="table contrast" style="display:none">
@@ -79,20 +86,24 @@
                 <th>Ingredient ID</th>
                 <th>Name</th>
                 <th>Quantity</th>
+                <th>Fill Level</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var inventory in Model.Item2) {
                 <tr>
-                    <td contenteditable="true">@inventory.Id</td>
-                    <td contenteditable="true">@inventory.IngredientId</td>
+                    <td>@inventory.Id</td>
+                    <td>@inventory.IngredientId</td>
                     <td contenteditable="true">
                         @foreach (var ingredient in Model.Item3) {
                             @if(ingredient.Id == inventory.IngredientId) {
                                 @ingredient.Name
                             }
                         }</td>
-                    <td contenteditable="true">@inventory.Quantity</td>
+                    <td contenteditable="true"> @inventory.Quantity</td>
+                    <td contenteditable="true"> @inventory.FillLevel</td>
+                    <td><input type="button" value="Delete" onclick="deleteRowInv(this)"/></td>
                 </tr>
             }
         </tbody>
@@ -100,9 +111,85 @@
 } else {
     <p>No products found.</p>
 }
-<button id="saveButtonInv" class="save-button contrast" style="display:none">Save</button>
-<h2 id="saveSuccess" style="display:none">Save Successful</h2>
-<h2 id="saveFail" style="display:none">Save Fail</h2>
+<button id="saveButtonInv" class="save-button" style="display:none">Save</button>
+<button id="addButtonInv" class="add-button" style="display:none">Add</button>
+
+@if (Model.Item4 != null && Model.Item4.Count > 0) {
+    @foreach (var productingredient in Model.Item4) {
+        @foreach (var pingredient in productingredient.IngredientIds) {
+            @foreach (var ingredient in Model.Item3) {
+
+            }
+        }
+    }
+}
+
+
+
+<button id="salesReport" class="table-button" style="display:inline-block">Sales Report</button>
+<button id="excessReport" class="table-button" style="display:inline-block">Excess Report</button>
+<button id="restockReport" class="table-button" style="display:inline-block">Restock Report</button>
+<button id="salesTogether" class="table-button" style="display:inline-block">Sales Together</button>
+<button id="popularityAnalysis" class="table-button" style="display:inline-block">Menu Items Popularity Analysis</button>
+
+<table id="salesReportTable" class="table contrast" style="display:none">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Sales</th>
+        </tr>
+    </thead>
+</table>
+
+<table id="excessReportTable" class="table contrast" style="display:none">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ingredient Name</th>
+        </tr>
+    </thead>
+</table>
+
+<table id="restockReportTable" class="table contrast" style="display:none">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ingredient Name</th>
+        </tr>
+    </thead>
+</table>
+
+
+<table id="salesTogetherTable" class="table contrast" style="display:none">
+    <thead>
+        <tr>
+            <th>Item 1 Name</th>
+            <th>Item 2 Name</th>
+            <th>Frequency</th>
+        </tr>
+    </thead>
+</table>
+
+<table id="popularityAnalysisTable" class="table contrast" style="display:none">
+    <thead>
+        <tr>
+
+        </tr>
+    </thead>
+</table>
+
+<br>
+<label for="starttime" id="slabel" style="display:inline-block"> Enter Start Time: </label><br>
+<input type="date" id="starttime" value="2023-01-01" style="display:inline-block"><br>
+
+<label for="endtime" id = "elabel" style="display:inline-block"> Enter End Time: </label><br>
+<input type="date" id="endtime" value="2023-12-31" style="display:inline-block"><br>
+
+
+<h2 id="saveSuccess" style="display:none">Successful</h2>
+<h2 id="saveFail" style="display:none">Fail</h2>
+<h2 id="saveFail2" style="display:none">Invalid Data Type</h2>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
@@ -110,15 +197,34 @@
     document.getElementById('saveButtonProd').addEventListener('click', function() {
         console.log('Save button clicked');
         var editedCells = document.querySelectorAll('td.edited');
-
+        var fail = false;
         var data = [];
 
         editedCells.forEach(function(cell) {
+            if (cell.parentElement.querySelector('td:nth-child(2)').innerText == "") {
+                cell.parentElement.querySelector('td:nth-child(2)').innerText = "N/A";
+            }
+            if (cell.parentElement.querySelector('td:nth-child(3)').innerText == "") {
+                cell.parentElement.querySelector('td:nth-child(3)').innerText = "0";
+            } 
+            if (cell.parentElement.querySelector('td:nth-child(4)').innerText == "") {
+                cell.parentElement.querySelector('td:nth-child(4)').innerText = "N/A";
+            }
+            if (cell.parentElement.querySelector('td:nth-child(5)').innerText == "") {
+                cell.parentElement.querySelector('td:nth-child(5)').innerText = "FILLER";
+            }
+
+            if (isNaN(parseFloat(cell.parentElement.querySelector('td:nth-child(3)').innerText))) {
+                cell.parentElement.querySelector('td:nth-child(3)').innerText = "0";
+                fail = true;
+            }
+
             data.push({
                 id: cell.parentElement.querySelector('td:first-child').innerText,
                 name: cell.parentElement.querySelector('td:nth-child(2)').innerText,
                 price: cell.parentElement.querySelector('td:nth-child(3)').innerText,
-                series: cell.parentElement.querySelector('td:nth-child(4)').innerText
+                series: cell.parentElement.querySelector('td:nth-child(4)').innerText,
+                imgurl: cell.parentElement.querySelector('td:nth-child(5)').innerText
             });
         });
 
@@ -143,14 +249,22 @@
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function (response) {
-                document.getElementById("saveSuccess").style.display = 'inline';
-                setTimeout(function() {
-                    $('#saveSuccess').fadeOut('fast');
-                }, 5000);
+                if (fail == true) {
+                    document.getElementById("saveFail2").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveFail2').fadeOut('fast');
+                    }, 5000);
+                }
+                else {
+                    document.getElementById("saveSuccess").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveSuccess').fadeOut('fast');
+                    }, 5000);
+                }
                 console.log(response);
             },
             error: function () {
-                document.getElementById("saveFail").style.display = 'inline';
+                document.getElementById("saveFail").style.display = 'block';
                 setTimeout(function() {
                     $('#saveFail').fadeOut('fast');
                 }, 5000);
@@ -163,19 +277,97 @@
             cell.classList.remove('edited');
         });
     });
+    document.getElementById('addButtonProd').addEventListener('click', function() {
+        var table = document.getElementById("prod-table");
+        console.log('Add product button clicked');
+        var row = table.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        cell2.setAttribute("contenteditable", true);
+        cell3.setAttribute("contenteditable", true);
+        cell4.setAttribute("contenteditable", true);
+        cell5.setAttribute("contenteditable", true);
+        var cell6 = row.insertCell(5);
+        cell6.innerHTML = '<input type="button" value="Delete" onclick="deleteRowProd(this)"/>';
+        cell2.addEventListener('input', function() {
+                console.log('Cell changed');
+                cell2.classList.add('edited');
+            });
+        cell3.addEventListener('input', function() {
+                console.log('Cell changed');
+                cell3.classList.add('edited');
+            });
+        cell4.addEventListener('input', function() {
+                console.log('Cell changed');
+                cell4.classList.add('edited');
+            });
+        cell5.addEventListener('input', function() {
+                console.log('Cell changed');
+                cell5.classList.add('edited');
+            });
+        $.ajax({
+            url: "/Manager/AddProduct",
+            type: "POST",
+            contentType: "application/json",
+            success: function (response) {
+                cell1.innerHTML = response;
+            },
+            error: function () {
+                console.log("Error saving products");
+            }
+        });
+        
+    });
+
     // Inventory Save Button Function
     document.getElementById('saveButtonInv').addEventListener('click', function() {
         console.log('Save button clicked');
         var editedCells = document.querySelectorAll('td.edited');
+        var Data = [];
+        var Data2 = [];
+        var fail = false;
 
-        var data = [];
+        function getCellValue(row, index) {
+            var cellValue = row.querySelector('td:nth-child(' + index + ')').innerText;
+            return cellValue.trim() === "" ? null : cellValue;
+        }
 
-        editedCells.forEach(function(cell) {
-            data.push({
-                id: cell.parentElement.querySelector('td:first-child').innerText,
-                ingredientid: cell.parentElement.querySelector('td:nth-child(2)').innerText,
-                quantity: cell.parentElement.querySelector('td:nth-child(4)').innerText,
-                filllevel: 100
+        editedCells.forEach(function (cell) {
+            if (cell.parentElement.querySelector('td:nth-child(3)').innerText == "") {
+                cell.parentElement.querySelector('td:nth-child(3)').innerText = "N/A";
+            } 
+            if (cell.parentElement.querySelector('td:nth-child(4)').innerText == "") {
+                cell.parentElement.querySelector('td:nth-child(4)').innerText = "0";
+            }
+            if (cell.parentElement.querySelector('td:nth-child(5)').innerText == "") {
+                cell.parentElement.querySelector('td:nth-child(5)').innerText = "0";
+            }
+            if (isNaN(parseInt(cell.parentElement.querySelector('td:nth-child(4)').innerText))) {
+                cell.parentElement.querySelector('td:nth-child(4)').innerText = "0";
+                fail = true;
+            }
+            if (isNaN(parseInt(cell.parentElement.querySelector('td:nth-child(5)').innerText))) {
+                cell.parentElement.querySelector('td:nth-child(5)').innerText = "0";
+                fail = true;
+            }
+            
+            var _id = getCellValue(cell.parentElement, 1) || "0";
+            var _ingredientId = getCellValue(cell.parentElement, 2) || "0";
+            var _quantity = getCellValue(cell.parentElement, 4) || "0";
+            var _fillLevel = getCellValue(cell.parentElement, 5) || "0";
+            Data.push({
+                Id: parseInt(_id, 10),
+                IngredientId: parseInt(_ingredientId, 10),
+                Quantity: parseInt(_quantity, 10),
+                FillLevel: parseInt(_fillLevel, 10)
+            });
+
+            Data2.push({
+                Id: parseInt(_ingredientId, 10),
+                Name: getCellValue(cell.parentElement, 3) || "N/A"
             });
         });
 
@@ -184,25 +376,78 @@
         editedCells.forEach(function(cell) {
             cell.classList.remove('edited');
         });
-
+        console.log(Data);
+        console.log(Data2);
+        var output = {
+            data: JSON.stringify(Data),
+            data2: JSON.stringify(Data2)
+        };
         $.ajax({
             url: "/Manager/SaveInventory",
             type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            success: function (response) {
-                document.getElementById("saveSuccess").style.display = 'inline';
-                setTimeout(function() {
-                    $('#saveSuccess').fadeOut('fast');
-                }, 5000);
-                console.log(response);
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(output),
+            success: function (data) {
+                if (fail == true) {
+                    document.getElementById("saveFail2").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveFail2').fadeOut('fast');
+                    }, 5000);
+                }
+                else {
+                    document.getElementById("saveSuccess").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveSuccess').fadeOut('fast');
+                    }, 5000);
+                }
+                console.log(data);
             },
             error: function () {
-                document.getElementById("saveFail").style.display = 'inline';
+                document.getElementById("saveFail").style.display = 'block';
                 setTimeout(function() {
                     $('#saveFail').fadeOut('fast');
                 }, 5000);
                 console.log("Error saving inventory");
+            }
+        });
+    });
+
+    document.getElementById('addButtonInv').addEventListener('click', function() {
+        var table = document.getElementById("inv-table");
+        console.log('Add Inventory button clicked');
+        var row = table.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+        cell6.innerHTML = '<input type="button" value="Delete" onclick="deleteRowInv(this)"/>';
+        cell3.setAttribute("contenteditable", true);
+        cell4.setAttribute("contenteditable", true);
+        cell5.setAttribute("contenteditable", true);
+        cell3.addEventListener('input', function() {
+                console.log('Cell changed');
+                cell3.classList.add('edited');
+            });
+        cell4.addEventListener('input', function() {
+                console.log('Cell changed');
+                cell4.classList.add('edited');
+            });
+        cell5.addEventListener('input', function() {
+                console.log('Cell changed');
+                cell5.classList.add('edited');
+            });
+        $.ajax({
+            url: "/Manager/AddInventory",
+            type: "POST",
+            contentType: "application/json",
+            success: function (response) {
+                cell1.innerHTML = response;
+                cell2.innerHTML = (parseInt(response)-9000).toString();
+            },
+            error: function () {
+                console.log("Error saving products");
             }
         });
     });
@@ -218,4 +463,62 @@
             cell.classList.add('edited');
         });
     });
+    function deleteRowProd(btn) {
+        var row = btn.parentNode.parentNode;
+        id = parseInt(row.querySelector('td:first-child').innerText);
+        row.parentNode.removeChild(row);
+        console.log(id);
+        $.ajax({
+            url: "/Manager/DeleteProduct/" + id,
+            type: "DELETE",
+            contentType: "application/json",
+            data: "",
+            success: function (response) {
+                document.getElementById("saveSuccess").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveSuccess').fadeOut('fast');
+                    }, 5000);
+                console.log("Success deleting inventory");
+            },
+            error: function () {
+                document.getElementById("saveFail").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveFail').fadeOut('fast');
+                    }, 5000);
+                console.log("Error deleting inventory");
+            }
+        });
+    }
+    function deleteRowInv(btn) {
+        var row = btn.parentNode.parentNode;
+        id = parseInt(row.querySelector('td:first-child').innerText);
+        row.parentNode.removeChild(row);
+        console.log(id);
+        $.ajax({
+            url: "/Manager/DeleteInventory/" + id,
+            type: "DELETE",
+            contentType: "application/json",
+            data: "",
+            success: function (response) {
+                document.getElementById("saveSuccess").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveSuccess').fadeOut('fast');
+                    }, 5000);
+                console.log("Success deleting inventory");
+            },
+            error: function () {
+                document.getElementById("saveFail").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveFail').fadeOut('fast');
+                    }, 5000);
+                console.log("Error deleting inventory");
+            }
+        });
+    }
+    function editProductIngredients(btn) {
+        ShowProductIngredients();
+        var row = btn.parentNode.parentNode;
+        id = parseInt(row.querySelector('td:first-child').innerText);
+        console.log(id);
+    }
 </script> 

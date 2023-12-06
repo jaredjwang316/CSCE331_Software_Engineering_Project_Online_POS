@@ -19,7 +19,9 @@ public class IngredientDao : IDao<Ingredient> {
         var query = $"SELECT * FROM ingredients WHERE id = {id}";
         var reader = commandHandler.ExecuteReader(query);
 
-        if (reader == null) {
+
+        if (reader == null || !reader.HasRows) {
+            reader?.Close();
             return new Ingredient(-1, "null");
         }
 
@@ -71,5 +73,21 @@ public class IngredientDao : IDao<Ingredient> {
     public void Delete(Ingredient t) {
         string statement = $"DELETE FROM ingredients WHERE id = {t.Id}";
         commandHandler.ExecuteNonQuery(statement);
+    }
+
+    public Ingredient GetRecentIngredient() {
+        string query = $"SELECT * FROM ingredients ORDER BY id DESC LIMIT 1";
+        var reader = commandHandler.ExecuteReader(query);
+        List<Ingredient> ingredients = new();
+
+        while (reader?.Read() == true) {
+            ingredients.Add(new Ingredient(
+                reader.GetInt32(0),
+                reader.GetString(1)
+            ));
+        }
+
+        reader?.Close();
+        return ingredients.ElementAt(0);
     }
 }
