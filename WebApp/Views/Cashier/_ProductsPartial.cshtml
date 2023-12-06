@@ -20,22 +20,6 @@
         <img src="@product.ImgUrl" />
         <p>@await translator.TranslateText(product.Name)</p>
         <p class="product-price">@product.Price.ToString("C")</p>
-        @{
-            if (User.Identity!.IsAuthenticated) {
-                if (user!.Favorites.Contains(product.Id)) {
-                    <img class="favorite-icon favorite" src="~/img/favorite-heart1.png" alt="Favorite Icon" tabindex="0"
-                        onclick="toggleFavorite(this)" onkeypress="toggleFavorite(this)"
-                        onmouseover="disableProductButton(this)" onmouseout="enableProductButton(this)"
-                        title=@await translator.TranslateText("Favorite")
-                    />
-                } else {
-                    <img class="favorite-icon" src="~/img/favorite-default-heart.png" alt="Favorite Icon" tabindex="0"
-                        onclick="toggleFavorite(this)" onkeypress="toggleFavorite(this)"
-                        onmouseover="disableProductButton(this)" onmouseout="enableProductButton(this)"
-                        title=@await translator.TranslateText("Favorite")
-                    />
-                }
-            }
-        }
+        
     </button>
 }

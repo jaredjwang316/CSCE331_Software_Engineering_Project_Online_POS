@@ -1,7 +1,7 @@
 /*
     File: Controllers/CashierController.cs
-    Author: [Author's Name]
-    Date: [Date]
+    Author: Mrinal Yadav
+    Date: 12/1
     Purpose: This file contains the CashierController class, which manages actions and
         functionalities specifically tailored for the Point of Sale (POS) system.
 
@@ -93,51 +93,6 @@ public class CashierController : Controller
         return PartialView("_CategoriesPartial", model);
     }
 
-    /// <summary>
-    /// Loads and returns the best-selling products from the cache or database.
-    /// </summary>
-    /// <returns>The partial view containing the loaded best-selling products.</returns>
-    [HttpGet, Route("Cashier/LoadBestSellers")]
-    public IActionResult LoadBestSellers() {
-        UnitOfWork unit = new();
-        List<Product> model = cache.GetOrCreate("BestSellers", entry => {
-            entry.SlidingExpiration = TimeSpan.FromMinutes(10);
-            return unit.GetBestSellingProducts(10).ToList();
-        })!;
-
-        unit.CloseConnection();
-
-        return PartialView("_ProductsPartial", model);
-    }
-
-    /// <summary>
-    /// Placeholder method for loading favorites (not yet implemented).
-    /// </summary>
-    /// <returns>A content result indicating that the feature is not implemented.</returns>
-    [HttpGet, Route("Cashier/LoadFavorites")]
-    public IActionResult LoadFavorites() {
-        // Use _ProductsPartial when favorites are implemented
-
-        if (!User.Identity!.IsAuthenticated) {
-            return Content("You must be logged in to view favorites.");
-        }
-
-        UnitOfWork unit = new();
-        string email = User.FindFirstValue(ClaimTypes.Email)!;
-        User? user = unit.GetUser(email);
-        if (user == null) {
-            unit.CloseConnection();
-            return Content("User not found.");
-        }
-
-        List<Product> model = unit.GetAll<Product>()
-            .Where(product => user.Favorites.Any(favorite => favorite == product.Id))
-            .ToList();
-        
-        unit.CloseConnection();
-
-        return PartialView("_ProductsPartial", model);
-    }
 
     /// <summary>
     /// Loads and returns products based on the specified series name.
@@ -177,77 +132,6 @@ public class CashierController : Controller
         
         return PartialView("_CustomizationsPartial", model);
     }
-    
-    /// <summary>
-    /// Adds the specified product to the user's favorites.
-    /// </summary>
-    /// <param name="productID">The ID of the product to be added to favorites.</param>
-    /// <returns>An IActionResult indicating the success or failure of the operation.</returns>
-    [HttpPost, Route("Cashier/AddFavorite")]
-    public IActionResult AddFavorite(int productID) {
-        if (!User.Identity!.IsAuthenticated) {
-            return BadRequest("You must be logged in to add favorites.");
-        }
 
-        string email = User.FindFirstValue(ClaimTypes.Email)!;
-        if (email == null) {
-            return BadRequest("No email found for user.");
-        }
 
-        UnitOfWork unit = new();
-        User? user = unit.GetUser(email);
-        if (user == null) {
-            unit.CloseConnection();
-            return BadRequest("User not found.");
-        }
-
-        if (user.Favorites.Any(favorite => favorite == productID)) {
-            unit.CloseConnection();
-            return Ok();
-        }
-
-        int[] favorites = user.Favorites.Append(productID).ToArray();
-        User newUser = new(user.Name, user.Email, favorites);
-        unit.Update(user, newUser);
-        unit.CloseConnection();
-
-        return Ok();
-    }
-    
-    /// <summary>
-    /// Removes the specified product from the user's favorites.
-    /// </summary>
-    /// <param name="productID">The ID of the product to be removed from favorites.</param>
-    /// <returns>An IActionResult indicating the success or failure of the operation.</returns>
-
-    [HttpDelete, Route("Cashier/RemoveFavorite")]
-    public IActionResult RemoveFavorite(int productID) {
-        if (!User.Identity!.IsAuthenticated) {
-            return BadRequest("You must be logged in to remove favorites.");
-        }
-
-        string email = User.FindFirstValue(ClaimTypes.Email)!;
-        if (email == null) {
-            return BadRequest("No email found for user.");
-        }
-
-        UnitOfWork unit = new();
-        User? user = unit.GetUser(email);
-        if (user == null) {
-            unit.CloseConnection();
-            return BadRequest("User not found.");
-        }
-
-        if (!user.Favorites.Any(favorite => favorite == productID)) {
-            unit.CloseConnection();
-            return Ok();
-        }
-
-        int[] favorites = user.Favorites.Where(favorite => favorite != productID).ToArray();
-        User newUser = new(user.Name, user.Email, favorites);
-        unit.Update(user, newUser);
-        unit.CloseConnection();
-
-        return Ok();
-    }
 }
