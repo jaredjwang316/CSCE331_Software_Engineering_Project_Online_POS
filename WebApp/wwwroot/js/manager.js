@@ -174,6 +174,17 @@ document.addEventListener("DOMContentLoaded", function () {
             contentType: "application/json",
             data: JSON.stringify(output),
             success: function (response) {
+                var table = document.getElementById("salesTogetherTable");
+                console.log(response);
+                for (var ing of response) {
+                    var row = table.insertRow(-1);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
+                    cell1.innerHTML = ing.item1;
+                    cell2.innerHTML = ing.item2;
+                    cell3.innerHTML = ing.item3.toString();
+                }
                 document.getElementById("saveSuccess").style.display = 'block';
                     setTimeout(function() {
                         $('#saveSuccess').fadeOut('fast');

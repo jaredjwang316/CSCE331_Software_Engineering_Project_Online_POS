@@ -186,4 +186,50 @@ public class OrderDao : IDao<Order> {
         return orders;
         
     }
+    public List<(string, string, int)> GetSalesTogether(DateTime start_date, DateTime end_date) {
+        List<(string,string, int)> orders = new();
+        var query = $"WITH ItemPairs AS (\n" +
+            $"  SELECT\n" +
+            $"    a.item_id AS item1," +
+            $"    b.item_id AS item2\n" +
+            $"  FROM\n" +
+            $"    orders_final,\n" +
+            $"    UNNEST(item_ids) AS a(item_id),\n" +
+            $"    UNNEST(item_ids) AS b(item_id)\n" +
+            $"  WHERE\n" +
+            $"    a.item_id < b.item_id\n" +
+            $"    AND a.item_id >= 1 AND a.item_id <= 71\n" +
+            $"    AND b.item_id >= 1 AND b.item_id <= 71\n" +
+            $"    AND order_date >= '{ start_date }' AND order_date < '{ end_date }'\n" +
+            $")\n" +
+            $"SELECT\n" +
+            $"  p1.name AS item1_name,\n" + 
+            $"  p2.name AS item2_name,\n" + 
+            $"  COUNT(*) AS frequency\n" +
+            $"FROM\n" + 
+            $"  ItemPairs\n" + 
+            $"JOIN\n" + 
+            $"  products AS p1 ON ItemPairs.item1 = p1.id\n" + 
+            $"JOIN\n" + 
+            $"  products AS p2 ON ItemPairs.item2 = p2.id\n" +
+            $"GROUP BY\n" +
+            $"  p1.name,\n" + 
+            $"  p2.name\n" +
+            $"ORDER BY\n" + 
+            $"  frequency DESC;";
+        
+        var reader = commandHandler.ExecuteReader(query);
+
+        if (reader == null) {
+            return orders;
+        }
+
+
+        while (reader?.Read() == true) {
+            orders.Add((reader.GetString(0), reader.GetString(1), reader.GetInt32(2)));
+        }
+
+        reader?.Close();
+        return orders;
+    }
 }

@@ -292,8 +292,14 @@ public class ManagerController : Controller
         DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
+        List<(string,string,int)> orders = unit.GetSalesTogether(start_time, end_time);
+        List<Tuple<string,string,int>> output = new();
+
+        foreach (var order in orders) {
+            output.Add(new Tuple<string, string,int>(order.Item1, order.Item2, order.Item3));
+        }
         unit.CloseConnection();
-        return Ok();
+        return Ok(output);
     }
 
     public IActionResult ShowPopularityAnalysis([FromBody] Dictionary<string, string> payload) {
