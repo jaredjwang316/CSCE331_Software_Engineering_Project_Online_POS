@@ -209,14 +209,23 @@ public class ManagerController : Controller
         return Ok();
     }
 
-    public IActionResult showSalesReport () {
+    public IActionResult ShowSalesReport([FromBody] Dictionary<string, string> payload) {
+        UnitOfWork unit = new(Config.AWS_DB_NAME);
+        string data = payload["data"];
+        string data2 = payload["data2"];
+        DateTime start_time = JsonConvert.DeserializeObject<DateTime>(data);
+        DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
+        Console.WriteLine(start_time);
+        Console.WriteLine(end_time);
         return Ok();
     }
 
-    public IActionResult showExcessReport () {
+    public IActionResult ShowExcessReport([FromBody] Dictionary<string, string> payload) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
-        DateTime start_time = new DateTime(2023,09,05);
-        DateTime end_time = DateTime.Now;
+        string data = payload["data"];
+        string data2 = payload["data2"];
+        DateTime start_time = JsonConvert.DeserializeObject<DateTime>(data);
+        DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
         List<Order> orders = unit.GetOrdersBetween(start_time, end_time);
@@ -236,9 +245,9 @@ public class ManagerController : Controller
         var frequency = ingredient_ids.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
         foreach (Ingredient ingredient in ingredients) {
             bool found = false;
-            foreach (var temp in frequency) {
-                if(ingredient.Id == temp.Key) {
-                    if (temp.Value <= 10) {
+            foreach (var element in frequency) {
+                if(ingredient.Id == element.Key) {
+                    if (element.Value <= 10) {
                         excess_ingredients.Add(ingredient);
                         found = true;
                     }
@@ -251,19 +260,40 @@ public class ManagerController : Controller
                 excess_ingredients.Add(ingredient);
             }
         }
-        
+
         return Ok(excess_ingredients);
     }
 
-    public IActionResult showRestockReport () {
+    public IActionResult ShowRestockReport([FromBody] Dictionary<string, string> payload) {
+        UnitOfWork unit = new(Config.AWS_DB_NAME);
+        string data = payload["data"];
+        string data2 = payload["data2"];
+        DateTime start_time = JsonConvert.DeserializeObject<DateTime>(data);
+        DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
+        Console.WriteLine(start_time);
+        Console.WriteLine(end_time);
         return Ok();
     }
 
-    public IActionResult showSalesTogether () {
+    public IActionResult ShowSalesTogether([FromBody] Dictionary<string, string> payload) {
+        UnitOfWork unit = new(Config.AWS_DB_NAME);
+        string data = payload["data"];
+        string data2 = payload["data2"];
+        DateTime start_time = JsonConvert.DeserializeObject<DateTime>(data);
+        DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
+        Console.WriteLine(start_time);
+        Console.WriteLine(end_time);
         return Ok();
     }
 
-    public IActionResult showPopularityAnalysis () {
+    public IActionResult ShowPopularityAnalysis([FromBody] Dictionary<string, string> payload) {
+        UnitOfWork unit = new(Config.AWS_DB_NAME);
+        string data = payload["data"];
+        string data2 = payload["data2"];
+        DateTime start_time = JsonConvert.DeserializeObject<DateTime>(data);
+        DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
+        Console.WriteLine(start_time);
+        Console.WriteLine(end_time);
         return Ok();
     }
 
