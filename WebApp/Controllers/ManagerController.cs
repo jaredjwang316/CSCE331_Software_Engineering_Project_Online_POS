@@ -266,16 +266,22 @@ public class ManagerController : Controller
         return Ok(excess_ingredients);
     }
 
-    public IActionResult ShowRestockReport([FromBody] Dictionary<string, string> payload) {
+    public IActionResult ShowRestockReport() {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
-        string data = payload["data"];
-        string data2 = payload["data2"];
-        DateTime start_time = JsonConvert.DeserializeObject<DateTime>(data);
-        DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
-        Console.WriteLine(start_time);
-        Console.WriteLine(end_time);
+        List<Inventory> inventory = unit.GetAll<Inventory>().ToList();
+        List<Ingredient> ingredients = unit.GetAll<Ingredient>().ToList();
+        List<Ingredient> output = new();
+        foreach (Inventory ing in inventory) {
+            if (ing.Quantity < 0.2*ing.FillLevel) {
+                foreach (Ingredient ingredient in ingredients) {
+                    if (ingredient.Id == ing.IngredientId) {
+                        output.Add(ingredient);
+                    }
+                }
+            }
+        }
         unit.CloseConnection();
-        return Ok();
+        return Ok(output);
     }
 
     public IActionResult ShowSalesTogether([FromBody] Dictionary<string, string> payload) {
