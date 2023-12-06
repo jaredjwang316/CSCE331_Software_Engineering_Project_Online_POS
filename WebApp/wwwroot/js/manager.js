@@ -1,6 +1,6 @@
 /*
-    File: customer-category-btn.js
-    Author: Griffin Beaudreau
+    File: manager.js
+    Author: Christopher Kelley
     Date: November 5th, 2023
 */
 
@@ -277,6 +277,16 @@ function ClearView() {
     document.getElementById('inv-table').style.display = 'none';
     document.getElementById('saveButtonInv').style.display = 'none';
     document.getElementById('addButtonInv').style.display = 'none';
+    document.getElementById('confirm').style.display = 'none';
+    document.getElementById('cancel').style.display = 'none';
+    document.getElementById('proding').style.display = 'none';
+
+    var input = document.getElementsByClassName('ingredients');
+    for(var i = 0; input[i]; ++i) {
+        if (input[i].checked) {
+            document.getElementById(input[i].value).checked = false;
+        }
+    }
 
     document.getElementById('salesReport').style.display = 'none';
     document.getElementById('excessReport').style.display = 'none';
@@ -339,4 +349,7 @@ function ShowInventoryPage() {
 
 function ShowProductIngredients() {
     ClearView();
+    document.getElementById('proding').style.display = 'inline';
+    document.getElementById('confirm').style.display = 'inline-block';
+    document.getElementById('cancel').style.display = 'inline-block';
 }
