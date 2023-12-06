@@ -4,6 +4,7 @@
     Date: November 5, 2023
 */
 
+using System.ComponentModel.DataAnnotations;
 using Npgsql;
 using WebApp.Models.UnitOfWork;
 
@@ -102,6 +103,10 @@ public class UnitOfWork {
 
     public Ingredient GetRecentIngredient() {
         return daoTypeContainer.GetIngredientDao().GetRecentIngredient();
+    }
+
+    public List<Order> GetOrdersBetween(DateTime starttime, DateTime endtime) {
+        return daoTypeContainer.GetOrderDao().GetOrdersBetween(starttime, endtime);
     }
 
 }

@@ -6,7 +6,6 @@ using WebApp.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Memory;
 using WebApp.Models.Cart;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Newtonsoft.Json;
 
 namespace WebApp.Controllers;
@@ -98,6 +97,7 @@ public class ManagerController : Controller
         return Ok();
     }
     
+    [HttpPost, Route("Manager/AddProduct")]
     public IActionResult AddProduct() {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         Product product = unit.Get<Product>(-1);
@@ -111,15 +111,16 @@ public class ManagerController : Controller
         return Ok(product.Id);
     }
 
-    public IActionResult DeleteProduct([FromBody]int prod) {
+    [HttpDelete, Route("Manager/DeleteProduct/{prod}")]
+    public IActionResult DeleteProduct(int prod) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         Product product = unit.Get<Product>(prod);
-        //unit.Delete<Product>(product);
+        unit.Delete(product);
         Console.WriteLine("Can Delete Id: " + product.Id);
         return Ok();
     }
 
-
+    [HttpPost, Route("Manager/SaveInventory")]
     public IActionResult SaveInventory([FromBody] Dictionary<string, string> payload) {
         string data = payload["data"];
         string data2 = payload["data2"];
@@ -175,6 +176,7 @@ public class ManagerController : Controller
         return Ok();
     }
 
+    [HttpPost, Route("Manager/AddInventory")]
     public IActionResult AddInventory() {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         Inventory inventory = unit.Get<Inventory>(-1);
@@ -193,13 +195,107 @@ public class ManagerController : Controller
         return Ok(inventory.Id);
     }
 
-    public IActionResult DeleteInventory([FromBody]int inv) {
+    [HttpDelete, Route("Manager/DeleteInventory/{inv}")]
+    public IActionResult DeleteInventory(int inv) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         Inventory inventory = unit.Get<Inventory>(inv);
         Ingredient ingredient = unit.Get<Ingredient>(inventory.IngredientId);
         //unit.Delete<Inventory>(inventory);
        // unit.Delete<Ingredient>(ingredient);
         Console.WriteLine("Can Delete Id: " + inventory.Id + " " + ingredient.Id);
+        return Ok();
+    }
+
+    [HttpPost, Route("Manager/SaveIngredients")]
+    public IActionResult ShowSalesReport([FromBody] Dictionary<string, string> payload) {
+        UnitOfWork unit = new(Config.AWS_DB_NAME);
+        string data = payload["data"];
+        string data2 = payload["data2"];
+        DateTime start_time = JsonConvert.DeserializeObject<DateTime>(data);
+        DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
+        Console.WriteLine(start_time);
+        Console.WriteLine(end_time);
+        return Ok();
+    }
+
+    [HttpPost, Route("Manager/ShowSalesReport")]
+    public IActionResult ShowExcessReport([FromBody] Dictionary<string, string> payload) {
+        UnitOfWork unit = new(Config.AWS_DB_NAME);
+        string data = payload["data"];
+        string data2 = payload["data2"];
+        DateTime start_time = JsonConvert.DeserializeObject<DateTime>(data);
+        DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
+        Console.WriteLine(start_time);
+        Console.WriteLine(end_time);
+        List<Order> orders = unit.GetOrdersBetween(start_time, end_time);
+        List<int> ingredient_ids = new();
+        List<Ingredient> ingredients = unit.GetAll<Ingredient>().ToList();
+        List<ProductIngredients> product_ingredients = unit.GetAll<ProductIngredients>().ToList();
+        foreach (Order order in orders) {
+            foreach (int id in order.ItemIds) {
+                foreach (ProductIngredients product_ingredient in product_ingredients) {
+                    if(product_ingredient.ProductId == id) {
+                        ingredient_ids = ingredient_ids.Concat(product_ingredient.IngredientIds).ToList();
+                    }
+                }
+            }
+        }
+        List<Ingredient> excess_ingredients = new();
+        var frequency = ingredient_ids.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
+        foreach (Ingredient ingredient in ingredients) {
+            bool found = false;
+            foreach (var element in frequency) {
+                if(ingredient.Id == element.Key) {
+                    if (element.Value <= 10) {
+                        excess_ingredients.Add(ingredient);
+                        found = true;
+                    }
+                    else {
+                        found = true;
+                    }
+                }
+            }
+            if(!found) {
+                excess_ingredients.Add(ingredient);
+            }
+        }
+
+        return Ok(excess_ingredients);
+    }
+
+    [HttpPost, Route("Manager/ShowExcessReport")]
+    public IActionResult ShowRestockReport([FromBody] Dictionary<string, string> payload) {
+        UnitOfWork unit = new(Config.AWS_DB_NAME);
+        string data = payload["data"];
+        string data2 = payload["data2"];
+        DateTime start_time = JsonConvert.DeserializeObject<DateTime>(data);
+        DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
+        Console.WriteLine(start_time);
+        Console.WriteLine(end_time);
+        return Ok();
+    }
+
+    [HttpPost, Route("Manager/ShowRestockReport")]
+    public IActionResult ShowSalesTogether([FromBody] Dictionary<string, string> payload) {
+        UnitOfWork unit = new(Config.AWS_DB_NAME);
+        string data = payload["data"];
+        string data2 = payload["data2"];
+        DateTime start_time = JsonConvert.DeserializeObject<DateTime>(data);
+        DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
+        Console.WriteLine(start_time);
+        Console.WriteLine(end_time);
+        return Ok();
+    }
+
+    [HttpPost, Route("Manager/ShowPopularityAnalysis")]
+    public IActionResult ShowPopularityAnalysis([FromBody] Dictionary<string, string> payload) {
+        UnitOfWork unit = new(Config.AWS_DB_NAME);
+        string data = payload["data"];
+        string data2 = payload["data2"];
+        DateTime start_time = JsonConvert.DeserializeObject<DateTime>(data);
+        DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
+        Console.WriteLine(start_time);
+        Console.WriteLine(end_time);
         return Ok();
     }
 

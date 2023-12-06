@@ -159,4 +159,31 @@ public class OrderDao : IDao<Order> {
         string statement = $"DELETE FROM orders_final WHERE order_id = {t.Id}";
         commandHandler.ExecuteNonQuery(statement);
     }
+
+    public List<Order> GetOrdersBetween(DateTime starttime, DateTime endtime) {
+        var query = $"SELECT * FROM orders_final WHERE order_date between '{starttime}' AND '{endtime}'";
+
+        var reader = commandHandler.ExecuteReader(query);
+
+        List<Order> orders = new();
+        if (reader == null) {
+            return orders;
+        }
+
+
+        while (reader?.Read() == true) {
+            orders.Add(new Order(
+                reader.GetInt32(0),
+                reader.GetInt32(1),
+                reader.GetString(2),
+                reader.GetDateTime(3),
+                reader.GetDouble(4),
+                reader.GetFieldValue<int[]>(5).ToList()
+            ));
+        }
+
+        reader?.Close();
+        return orders;
+        
+    }
 }

@@ -11,8 +11,8 @@
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/Manager.css" asp-append-version="true" />
-<script src="~/js/manager.js"></script>
-<script src="~/js/loading-screen.js"></script>
+<script src="~/js/manager.js" asp-append-version="true"></script>
+<script src="~/js/loading-screen.js" asp-append-version="true"></script>
 
 </head>
 <body>
@@ -114,9 +114,17 @@
 <button id="saveButtonInv" class="save-button" style="display:none">Save</button>
 <button id="addButtonInv" class="add-button" style="display:none">Add</button>
 
-<h2 id="saveSuccess" style="display:none">Successful</h2>
-<h2 id="saveFail" style="display:none">Fail</h2>
-<h2 id="saveFail2" style="display:none">Invalid Data Type</h2>
+@if (Model.Item4 != null && Model.Item4.Count > 0) {
+    @foreach (var productingredient in Model.Item4) {
+        @foreach (var pingredient in productingredient.IngredientIds) {
+            @foreach (var ingredient in Model.Item3) {
+
+            }
+        }
+    }
+}
+
+
 
 <button id="salesReport" class="table-button" style="display:inline-block">Sales Report</button>
 <button id="excessReport" class="table-button" style="display:inline-block">Excess Report</button>
@@ -124,20 +132,63 @@
 <button id="salesTogether" class="table-button" style="display:inline-block">Sales Together</button>
 <button id="popularityAnalysis" class="table-button" style="display:inline-block">Menu Items Popularity Analysis</button>
 
-@* @if (Model.Item4 != null && Model.Item4.Count > 0) {
-    @foreach (var productingredient in Model.Item4) {
-        @foreach (var pingredient in productingredient.ingredientIds) {
-            @foreach (var ingredient in Model.Item3) {
+<table id="salesReportTable" class="table contrast" style="display:none">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Sales</th>
+        </tr>
+    </thead>
+</table>
 
-            }
-        }
-    }
-} *@
+<table id="excessReportTable" class="table contrast" style="display:none">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ingredient Name</th>
+        </tr>
+    </thead>
+</table>
+
+<table id="restockReportTable" class="table contrast" style="display:none">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ingredient Name</th>
+        </tr>
+    </thead>
+</table>
 
 
+<table id="salesTogetherTable" class="table contrast" style="display:none">
+    <thead>
+        <tr>
+            <th>Item 1 Name</th>
+            <th>Item 2 Name</th>
+            <th>Frequency</th>
+        </tr>
+    </thead>
+</table>
+
+<table id="popularityAnalysisTable" class="table contrast" style="display:none">
+    <thead>
+        <tr>
+
+        </tr>
+    </thead>
+</table>
 
 
+<label for="starttime" id="slabel"> Enter Start Time: </label><br>
+<input type="date" id="starttime" value="2023-01-01"><br>
 
+<label for="endtime" id = "elabel"> Enter End Time: </label><br>
+<input type="date" id="endtime" value="2023-12-31"><br>
+
+
+<h2 id="saveSuccess" style="display:none">Successful</h2>
+<h2 id="saveFail" style="display:none">Fail</h2>
+<h2 id="saveFail2" style="display:none">Invalid Data Type</h2>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -418,10 +469,10 @@
         row.parentNode.removeChild(row);
         console.log(id);
         $.ajax({
-            url: "/Manager/DeleteProduct",
-            type: "POST",
+            url: "/Manager/DeleteProduct/" + id,
+            type: "DELETE",
             contentType: "application/json",
-            data: JSON.stringify(id),
+            data: "",
             success: function (response) {
                 document.getElementById("saveSuccess").style.display = 'block';
                     setTimeout(function() {
@@ -444,10 +495,10 @@
         row.parentNode.removeChild(row);
         console.log(id);
         $.ajax({
-            url: "/Manager/DeleteInventory",
-            type: "POST",
+            url: "/Manager/DeleteInventory/" + id,
+            type: "DELETE",
             contentType: "application/json",
-            data: JSON.stringify(id),
+            data: "",
             success: function (response) {
                 document.getElementById("saveSuccess").style.display = 'block';
                     setTimeout(function() {
