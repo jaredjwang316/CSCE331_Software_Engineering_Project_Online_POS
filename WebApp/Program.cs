@@ -53,13 +53,6 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseStaticFiles(new StaticFileOptions {
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "_site")),
-    RequestPath = "/Docs"
-});
-
-Console.WriteLine("PATH: " + Path.Combine(Directory.GetCurrentDirectory(), "_site"));
 
 app.UseRouting();
 
