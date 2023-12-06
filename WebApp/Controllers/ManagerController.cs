@@ -353,7 +353,6 @@ public class ManagerController : Controller
     /// <summary>
     /// Displays the restock report.
     /// </summary>
-    /// <param name="payload"></param>
     /// <returns></returns>
     [HttpPost, Route("Manager/ShowRestockReport")]
     public IActionResult ShowRestockReport() {
