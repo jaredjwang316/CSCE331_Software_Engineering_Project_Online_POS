@@ -97,12 +97,13 @@ public class CashierController : Controller
     /// <summary>
     /// Loads and returns products based on the specified series name.
     /// </summary>
-    /// <param name="arg">The series name.</param>
     /// <returns>The partial view containing the loaded products.</returns>
     [HttpGet, Route("Cashier/LoadProductsBySeries")]
-    public IActionResult LoadProductsBySeries(string arg) {
+    public IActionResult LoadProductsBySeries() {
         UnitOfWork unit = new();
-        List<Product> model = unit.GetProductsBySeries(arg).ToList();
+        List<Product> model= unit.GetAll<Product>()
+                .Where(product => product.IsDrink && !product.Hidden && !product.IsOption)
+                .ToList();
         unit.CloseConnection();
         return PartialView("_ProductsPartial", model);
     }
