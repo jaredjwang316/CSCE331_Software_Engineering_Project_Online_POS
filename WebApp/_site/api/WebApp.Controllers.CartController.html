@@ -17,7 +17,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/new/test/apiSpec/new?filename=WebApp_Controllers_CartController.md&amp;value=---%0Auid%3A%20WebApp.Controllers.CartController%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/new/main/apiSpec/new?filename=WebApp_Controllers_CartController.md&amp;value=---%0Auid%3A%20WebApp.Controllers.CartController%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -91,7 +91,7 @@
 
   <h1 id="WebApp_Controllers_CartController" data-uid="WebApp.Controllers.CartController" class="text-break">
     Class CartController
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CartController.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CartController.cs/#L30"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -99,7 +99,8 @@
   <dl><dt>Assembly</dt><dd>WebApp.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Controller responsible for managing shopping cart operations, including adding, removing, and editing items.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -752,10 +753,11 @@ public class CartController : Controller, IActionFilter, IAsyncActionFilter, IFi
 
   <h3 id="WebApp_Controllers_CartController__ctor_Microsoft_Extensions_Logging_ILogger_WebApp_Controllers_CartController__WebApp_Models_Cart_CartService_" data-uid="WebApp.Controllers.CartController.#ctor(Microsoft.Extensions.Logging.ILogger{WebApp.Controllers.CartController},WebApp.Models.Cart.CartService)">
   CartController(ILogger&lt;CartController&gt;, CartService)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CartController.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CartController.cs/#L41"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="WebApp.Controllers.CartController.html">CartController</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -765,9 +767,11 @@ public class CartController : Controller, IActionFilter, IAsyncActionFilter, IFi
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>logger</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="WebApp.Controllers.CartController.html">CartController</a>&gt;</dt>
-    <dd></dd>
+    <dd><p>The logger instance.</p>
+</dd>
     <dt><code>cartService</code> <a class="xref" href="WebApp.Models.Cart.CartService.html">CartService</a></dt>
-    <dd></dd>
+    <dd><p>The service responsible for cart operations.</p>
+</dd>
   </dl>
 
 
@@ -789,10 +793,11 @@ public class CartController : Controller, IActionFilter, IAsyncActionFilter, IFi
 
   <h3 id="WebApp_Controllers_CartController_AddItem_WebApp_Models_JsonModels_AddItemModel_" data-uid="WebApp.Controllers.CartController.AddItem(WebApp.Models.JsonModels.AddItemModel)">
   AddItem(AddItemModel)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CartController.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CartController.cs/#L90"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds an item to the shopping cart with the specified product ID and customization IDs.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -804,7 +809,8 @@ public IActionResult AddItem(AddItemModel model)</code></pre>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>model</code> <a class="xref" href="WebApp.Models.JsonModels.AddItemModel.html">AddItemModel</a></dt>
-    <dd></dd>
+    <dd><p>The model containing the product ID and customization IDs.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
@@ -827,10 +833,11 @@ public IActionResult AddItem(AddItemModel model)</code></pre>
 
   <h3 id="WebApp_Controllers_CartController_Checkout_WebApp_Models_JsonModels_CheckoutModel_" data-uid="WebApp.Controllers.CartController.Checkout(WebApp.Models.JsonModels.CheckoutModel)">
   Checkout(CheckoutModel)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CartController.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CartController.cs/#L158"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Clears the shopping cart.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -842,7 +849,8 @@ public IActionResult Checkout(CheckoutModel model)</code></pre>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>model</code> <a class="xref" href="WebApp.Models.JsonModels.CheckoutModel.html">CheckoutModel</a></dt>
-    <dd></dd>
+    <dd><p>The model containing user information.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
@@ -865,10 +873,11 @@ public IActionResult Checkout(CheckoutModel model)</code></pre>
 
   <h3 id="WebApp_Controllers_CartController_EditCount_WebApp_Models_JsonModels_EditCountModel_" data-uid="WebApp.Controllers.CartController.EditCount(WebApp.Models.JsonModels.EditCountModel)">
   EditCount(EditCountModel)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CartController.cs/#L91"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CartController.cs/#L134"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Edits the quantity of an item in the shopping cart at the specified index.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -880,7 +889,8 @@ public IActionResult EditCount(EditCountModel model)</code></pre>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>model</code> <a class="xref" href="WebApp.Models.JsonModels.EditCountModel.html">EditCountModel</a></dt>
-    <dd></dd>
+    <dd><p>The model containing the index of the item to edit and whether to increment or decrement the quantity.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
@@ -903,10 +913,11 @@ public IActionResult EditCount(EditCountModel model)</code></pre>
 
   <h3 id="WebApp_Controllers_CartController_Error" data-uid="WebApp.Controllers.CartController.Error">
   Error()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CartController.cs/#L150"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CartController.cs/#L212"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Displays the error view.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -920,7 +931,8 @@ public IActionResult Error()</code></pre>
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
+    <dd><p>The error view.</p>
+</dd>
   </dl>
 
 
@@ -937,10 +949,11 @@ public IActionResult Error()</code></pre>
 
   <h3 id="WebApp_Controllers_CartController_GetCartFromSession" data-uid="WebApp.Controllers.CartController.GetCartFromSession">
   GetCartFromSession()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CartController.cs/#L140"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CartController.cs/#L194"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves the shopping cart from the session.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -953,7 +966,8 @@ public Cart GetCartFromSession()</code></pre>
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="WebApp.Models.Cart.Cart.html">Cart</a></dt>
-    <dd></dd>
+    <dd><p>The current shopping cart.</p>
+</dd>
   </dl>
 
 
@@ -970,10 +984,11 @@ public Cart GetCartFromSession()</code></pre>
 
   <h3 id="WebApp_Controllers_CartController_Index" data-uid="WebApp.Controllers.CartController.Index">
   Index()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CartController.cs/#L39"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CartController.cs/#L51"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Displays the shopping cart contents along with the total number of items.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -986,7 +1001,8 @@ public IActionResult Index()</code></pre>
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
+    <dd><p>The view containing the shopping cart information.</p>
+</dd>
   </dl>
 
 
@@ -1003,10 +1019,11 @@ public IActionResult Index()</code></pre>
 
   <h3 id="WebApp_Controllers_CartController_RemoveItem_System_Int32_" data-uid="WebApp.Controllers.CartController.RemoveItem(System.Int32)">
   RemoveItem(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CartController.cs/#L83"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CartController.cs/#L119"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes an item from the shopping cart at the specified index.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1018,13 +1035,15 @@ public IActionResult RemoveItem(int index)</code></pre>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>index</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd></dd>
+    <dd><p>The index of the item to remove.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
+    <dd><p>An HTTP result indicating the success of the operation.</p>
+</dd>
   </dl>
 
 
@@ -1041,10 +1060,11 @@ public IActionResult RemoveItem(int index)</code></pre>
 
   <h3 id="WebApp_Controllers_CartController_SetCartInSession_WebApp_Models_Cart_Cart_" data-uid="WebApp.Controllers.CartController.SetCartInSession(WebApp.Models.Cart.Cart)">
   SetCartInSession(Cart)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CartController.cs/#L145"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CartController.cs/#L203"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Sets the provided shopping cart in the session.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1056,7 +1076,8 @@ public void SetCartInSession(Cart cart)</code></pre>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>cart</code> <a class="xref" href="WebApp.Models.Cart.Cart.html">Cart</a></dt>
-    <dd></dd>
+    <dd><p>The shopping cart to set in the session.</p>
+</dd>
   </dl>
 
 
@@ -1074,7 +1095,7 @@ public void SetCartInSession(Cart cart)</code></pre>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CartController.cs/#L27" class="edit-link">Edit this page</a>
+          <a href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CartController.cs/#L30" class="edit-link">Edit this page</a>
         </div>
 
 

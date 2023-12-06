@@ -21,7 +21,7 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Employee.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Employee
     path: Models/UnitOfWork/Employee.cs
@@ -58,14 +58,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Employee.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Id
     path: Models/UnitOfWork/Employee.cs
-    startLine: 12
+    startLine: 15
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the unique identifier for the employee.
+  example: []
   syntax:
     content: public int Id { get; set; }
     parameters: []
@@ -87,14 +89,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Employee.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Name
     path: Models/UnitOfWork/Employee.cs
-    startLine: 13
+    startLine: 20
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the name of the employee.
+  example: []
   syntax:
     content: public string Name { get; set; }
     parameters: []
@@ -116,14 +120,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Employee.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Password
     path: Models/UnitOfWork/Employee.cs
-    startLine: 14
+    startLine: 25
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the password associated with the employee's account.
+  example: []
   syntax:
     content: public string Password { get; set; }
     parameters: []
@@ -145,14 +151,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Employee.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: IsManager
     path: Models/UnitOfWork/Employee.cs
-    startLine: 15
+    startLine: 30
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets a value indicating whether the employee is a manager.
+  example: []
   syntax:
     content: public bool IsManager { get; set; }
     parameters: []
@@ -174,14 +182,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Employee.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Email
     path: Models/UnitOfWork/Employee.cs
-    startLine: 16
+    startLine: 35
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the email address of the employee.
+  example: []
   syntax:
     content: public string Email { get; set; }
     parameters: []
@@ -203,34 +213,34 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Employee.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Models/UnitOfWork/Employee.cs
-    startLine: 26
+    startLine: 46
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
-  summary: Constructor for the Employee class.
+  summary: Initializes a new instance of the <xref href="WebApp.Models.UnitOfWork.Employee" data-throw-if-not-resolved="false"></xref> class.
   example: []
   syntax:
     content: public Employee(int id, string name, string password, bool isManager, string email)
     parameters:
     - id: id
       type: System.Int32
-      description: ''
+      description: The unique identifier for the employee.
     - id: name
       type: System.String
-      description: ''
+      description: The name of the employee.
     - id: password
       type: System.String
-      description: ''
+      description: The password associated with the employee's account.
     - id: isManager
       type: System.Boolean
-      description: ''
+      description: A value indicating whether the employee is a manager.
     - id: email
       type: System.String
-      description: ''
+      description: The email address of the employee.
     content.vb: Public Sub New(id As Integer, name As String, password As String, isManager As Boolean, email As String)
   overload: WebApp.Models.UnitOfWork.Employee.#ctor*
   nameWithType.vb: Employee.New(Integer, String, String, Boolean, String)
@@ -567,6 +577,13 @@ references:
   name: Email
   nameWithType: Employee.Email
   fullName: WebApp.Models.UnitOfWork.Employee.Email
+- uid: WebApp.Models.UnitOfWork.Employee
+  commentId: T:WebApp.Models.UnitOfWork.Employee
+  parent: WebApp.Models.UnitOfWork
+  href: WebApp.Models.UnitOfWork.Employee.html
+  name: Employee
+  nameWithType: Employee
+  fullName: WebApp.Models.UnitOfWork.Employee
 - uid: WebApp.Models.UnitOfWork.Employee.#ctor*
   commentId: Overload:WebApp.Models.UnitOfWork.Employee.#ctor
   href: WebApp.Models.UnitOfWork.Employee.html#WebApp_Models_UnitOfWork_Employee__ctor_System_Int32_System_String_System_String_System_Boolean_System_String_

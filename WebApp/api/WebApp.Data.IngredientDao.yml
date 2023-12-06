@@ -22,14 +22,16 @@ items:
   source:
     remote:
       path: WebApp/Data/IngredientDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: IngredientDao
     path: Data/IngredientDao.cs
-    startLine: 10
+    startLine: 13
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Data Access Object (DAO) for managing Ingredient entities.
+  example: []
   syntax:
     content: 'public class IngredientDao : IDao<Ingredient>'
     content.vb: Public Class IngredientDao Implements IDao(Of Ingredient)
@@ -59,19 +61,22 @@ items:
   source:
     remote:
       path: WebApp/Data/IngredientDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Data/IngredientDao.cs
-    startLine: 13
+    startLine: 20
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Initializes a new instance of the <xref href="WebApp.Data.IngredientDao" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public IngredientDao(CommandHandler commandHandler)
     parameters:
     - id: commandHandler
       type: WebApp.Data.CommandHandler
+      description: The command handler for executing database commands.
     content.vb: Public Sub New(commandHandler As CommandHandler)
   overload: WebApp.Data.IngredientDao.#ctor*
   nameWithType.vb: IngredientDao.New(CommandHandler)
@@ -91,22 +96,25 @@ items:
   source:
     remote:
       path: WebApp/Data/IngredientDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Get
     path: Data/IngredientDao.cs
-    startLine: 17
+    startLine: 25
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves an entity by its unique identifier.
   example: []
   syntax:
     content: public Ingredient Get(int id)
     parameters:
     - id: id
       type: System.Int32
+      description: The unique identifier of the entity.
     return:
       type: WebApp.Models.UnitOfWork.Ingredient
+      description: The entity with the specified identifier, or a default value if not found.
     content.vb: Public Function [Get](id As Integer) As Ingredient
   overload: WebApp.Data.IngredientDao.Get*
   implements:
@@ -128,19 +136,21 @@ items:
   source:
     remote:
       path: WebApp/Data/IngredientDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetAll
     path: Data/IngredientDao.cs
-    startLine: 37
+    startLine: 46
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves all entities of the specified type.
   example: []
   syntax:
     content: public IEnumerable<Ingredient> GetAll()
     return:
       type: System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.Ingredient}
+      description: An enumerable collection of all entities of the specified type.
     content.vb: Public Function GetAll() As IEnumerable(Of Ingredient)
   overload: WebApp.Data.IngredientDao.GetAll*
   implements:
@@ -159,20 +169,22 @@ items:
   source:
     remote:
       path: WebApp/Data/IngredientDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Add
     path: Data/IngredientDao.cs
-    startLine: 54
+    startLine: 64
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Adds a new entity to the data store.
   example: []
   syntax:
     content: public void Add(Ingredient t)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.Ingredient
+      description: The entity to be added.
     content.vb: Public Sub Add(t As Ingredient)
   overload: WebApp.Data.IngredientDao.Add*
   implements:
@@ -191,22 +203,25 @@ items:
   source:
     remote:
       path: WebApp/Data/IngredientDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Update
     path: Data/IngredientDao.cs
-    startLine: 62
+    startLine: 73
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Updates an existing entity in the data store.
   example: []
   syntax:
     content: public void Update(Ingredient t, Ingredient newT)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.Ingredient
+      description: The existing entity to be updated.
     - id: newT
       type: WebApp.Models.UnitOfWork.Ingredient
+      description: The new values for the entity.
     content.vb: Public Sub Update(t As Ingredient, newT As Ingredient)
   overload: WebApp.Data.IngredientDao.Update*
   implements:
@@ -225,20 +240,22 @@ items:
   source:
     remote:
       path: WebApp/Data/IngredientDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Delete
     path: Data/IngredientDao.cs
-    startLine: 72
+    startLine: 84
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Deletes an entity from the data store.
   example: []
   syntax:
     content: public void Delete(Ingredient t)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.Ingredient
+      description: The entity to be deleted.
     content.vb: Public Sub Delete(t As Ingredient)
   overload: WebApp.Data.IngredientDao.Delete*
   implements:
@@ -257,11 +274,11 @@ items:
   source:
     remote:
       path: WebApp/Data/IngredientDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetRecentIngredient
     path: Data/IngredientDao.cs
-    startLine: 77
+    startLine: 89
   assemblies:
   - WebApp
   namespace: WebApp.Data
@@ -587,6 +604,13 @@ references:
   - name: " "
   - name: T
   - name: )
+- uid: WebApp.Data.IngredientDao
+  commentId: T:WebApp.Data.IngredientDao
+  parent: WebApp.Data
+  href: WebApp.Data.IngredientDao.html
+  name: IngredientDao
+  nameWithType: IngredientDao
+  fullName: WebApp.Data.IngredientDao
 - uid: WebApp.Data.IngredientDao.#ctor*
   commentId: Overload:WebApp.Data.IngredientDao.#ctor
   href: WebApp.Data.IngredientDao.html#WebApp_Data_IngredientDao__ctor_WebApp_Data_CommandHandler_

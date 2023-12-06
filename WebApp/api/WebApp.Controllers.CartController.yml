@@ -24,14 +24,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CartController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: CartController
     path: Controllers/CartController.cs
-    startLine: 26
+    startLine: 29
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Controller responsible for managing shopping cart operations, including adding, removing, and editing items.
+  example: []
   syntax:
     content: >-
       [ApiController]
@@ -270,21 +272,25 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CartController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Controllers/CartController.cs
-    startLine: 32
+    startLine: 40
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Initializes a new instance of the <xref href="WebApp.Controllers.CartController" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public CartController(ILogger<CartController> logger, CartService cartService)
     parameters:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger{WebApp.Controllers.CartController}
+      description: The logger instance.
     - id: cartService
       type: WebApp.Models.Cart.CartService
+      description: The service responsible for cart operations.
     content.vb: Public Sub New(logger As ILogger(Of CartController), cartService As CartService)
   overload: WebApp.Controllers.CartController.#ctor*
   nameWithType.vb: CartController.New(ILogger(Of CartController), CartService)
@@ -304,14 +310,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CartController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Index
     path: Controllers/CartController.cs
-    startLine: 38
+    startLine: 50
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the shopping cart contents along with the total number of items.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -321,6 +329,7 @@ items:
       public IActionResult Index()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The view containing the shopping cart information.
     content.vb: >-
       <HttpGet>
 
@@ -351,14 +360,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CartController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: AddItem
     path: Controllers/CartController.cs
-    startLine: 58
+    startLine: 89
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Adds an item to the shopping cart with the specified product ID and customization IDs.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -369,12 +380,14 @@ items:
     parameters:
     - id: model
       type: WebApp.Models.JsonModels.AddItemModel
+      description: The model containing the product ID and customization IDs.
       attributes:
       - type: Microsoft.AspNetCore.Mvc.FromBodyAttribute
         ctor: Microsoft.AspNetCore.Mvc.FromBodyAttribute.#ctor
         arguments: []
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpPost>
 
@@ -405,14 +418,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CartController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: RemoveItem
     path: Controllers/CartController.cs
-    startLine: 82
+    startLine: 118
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Removes an item from the shopping cart at the specified index.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -423,8 +438,10 @@ items:
     parameters:
     - id: index
       type: System.Int32
+      description: The index of the item to remove.
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: An HTTP result indicating the success of the operation.
     content.vb: >-
       <HttpPost>
 
@@ -458,14 +475,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CartController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: EditCount
     path: Controllers/CartController.cs
-    startLine: 90
+    startLine: 133
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Edits the quantity of an item in the shopping cart at the specified index.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -476,12 +495,14 @@ items:
     parameters:
     - id: model
       type: WebApp.Models.JsonModels.EditCountModel
+      description: The model containing the index of the item to edit and whether to increment or decrement the quantity.
       attributes:
       - type: Microsoft.AspNetCore.Mvc.FromBodyAttribute
         ctor: Microsoft.AspNetCore.Mvc.FromBodyAttribute.#ctor
         arguments: []
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpPost>
 
@@ -512,14 +533,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CartController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Checkout
     path: Controllers/CartController.cs
-    startLine: 107
+    startLine: 157
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Clears the shopping cart.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -530,12 +553,14 @@ items:
     parameters:
     - id: model
       type: WebApp.Models.JsonModels.CheckoutModel
+      description: The model containing user information.
       attributes:
       - type: Microsoft.AspNetCore.Mvc.FromBodyAttribute
         ctor: Microsoft.AspNetCore.Mvc.FromBodyAttribute.#ctor
         arguments: []
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpPost>
 
@@ -566,14 +591,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CartController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetCartFromSession
     path: Controllers/CartController.cs
-    startLine: 139
+    startLine: 193
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Retrieves the shopping cart from the session.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -583,6 +610,7 @@ items:
       public Cart GetCartFromSession()
     return:
       type: WebApp.Models.Cart.Cart
+      description: The current shopping cart.
     content.vb: >-
       <HttpGet>
 
@@ -613,14 +641,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CartController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: SetCartInSession
     path: Controllers/CartController.cs
-    startLine: 144
+    startLine: 202
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Sets the provided shopping cart in the session.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -631,6 +661,7 @@ items:
     parameters:
     - id: cart
       type: WebApp.Models.Cart.Cart
+      description: The shopping cart to set in the session.
     content.vb: >-
       <HttpPost>
 
@@ -661,14 +692,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CartController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Error
     path: Controllers/CartController.cs
-    startLine: 149
+    startLine: 211
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the error view.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -680,6 +713,7 @@ items:
       public IActionResult Error()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The error view.
     content.vb: >-
       <HttpGet>
 
@@ -10442,6 +10476,12 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
   - name: )
+- uid: WebApp.Controllers.CartController
+  commentId: T:WebApp.Controllers.CartController
+  href: WebApp.Controllers.CartController.html
+  name: CartController
+  nameWithType: CartController
+  fullName: WebApp.Controllers.CartController
 - uid: WebApp.Controllers.CartController.#ctor*
   commentId: Overload:WebApp.Controllers.CartController.#ctor
   href: WebApp.Controllers.CartController.html#WebApp_Controllers_CartController__ctor_Microsoft_Extensions_Logging_ILogger_WebApp_Controllers_CartController__WebApp_Models_Cart_CartService_

@@ -25,14 +25,16 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: DaoTypeContainer
     path: Data/UnitOfWork.cs
-    startLine: 113
+    startLine: 186
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Represents a container for accessing various DAOs.
+  example: []
   syntax:
     content: public class DaoTypeContainer
     content.vb: Public Class DaoTypeContainer
@@ -60,19 +62,22 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Data/UnitOfWork.cs
-    startLine: 116
+    startLine: 193
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Initializes a new instance of the <xref href="WebApp.Data.DaoTypeContainer" data-throw-if-not-resolved="false"></xref> class with a given DAO map.
+  example: []
   syntax:
     content: public DaoTypeContainer(Dictionary<Type, object> daoTypeMap)
     parameters:
     - id: daoTypeMap
       type: System.Collections.Generic.Dictionary{System.Type,System.Object}
+      description: The map containing DAO instances for different types.
     content.vb: Public Sub New(daoTypeMap As Dictionary(Of Type, Object))
   overload: WebApp.Data.DaoTypeContainer.#ctor*
   nameWithType.vb: DaoTypeContainer.New(Dictionary(Of Type, Object))
@@ -92,22 +97,30 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetDao
     path: Data/UnitOfWork.cs
-    startLine: 120
+    startLine: 203
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Gets the DAO instance for a specified type.
+  example: []
   syntax:
     content: 'public IDao<T> GetDao<T>() where T : class'
     typeParameters:
     - id: T
+      description: The type of the DAO.
     return:
       type: WebApp.Data.IDao{{T}}
+      description: The DAO instance for the specified type.
     content.vb: Public Function GetDao(Of T As Class)() As IDao(Of T)
   overload: WebApp.Data.DaoTypeContainer.GetDao*
+  exceptions:
+  - type: System.InvalidCastException
+    commentId: T:System.InvalidCastException
+    description: Thrown if the DAO instance is not of the expected type.
   nameWithType.vb: DaoTypeContainer.GetDao(Of T)()
   fullName.vb: WebApp.Data.DaoTypeContainer.GetDao(Of T)()
   name.vb: GetDao(Of T)()
@@ -125,20 +138,27 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetEmployeeDao
     path: Data/UnitOfWork.cs
-    startLine: 129
+    startLine: 218
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Gets the DAO instance for the <xref href="WebApp.Models.UnitOfWork.Employee" data-throw-if-not-resolved="false"></xref> type.
+  example: []
   syntax:
     content: public EmployeeDao GetEmployeeDao()
     return:
       type: WebApp.Data.EmployeeDao
+      description: The DAO instance for the <xref href="WebApp.Models.UnitOfWork.Employee" data-throw-if-not-resolved="false"></xref> type.
     content.vb: Public Function GetEmployeeDao() As EmployeeDao
   overload: WebApp.Data.DaoTypeContainer.GetEmployeeDao*
+  exceptions:
+  - type: System.InvalidCastException
+    commentId: T:System.InvalidCastException
+    description: Thrown if the DAO instance is not of the expected type.
 - uid: WebApp.Data.DaoTypeContainer.GetIngredientDao
   commentId: M:WebApp.Data.DaoTypeContainer.GetIngredientDao
   id: GetIngredientDao
@@ -153,20 +173,27 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetIngredientDao
     path: Data/UnitOfWork.cs
-    startLine: 132
+    startLine: 227
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Gets the DAO instance for the <xref href="WebApp.Models.UnitOfWork.Ingredient" data-throw-if-not-resolved="false"></xref> type.
+  example: []
   syntax:
     content: public IngredientDao GetIngredientDao()
     return:
       type: WebApp.Data.IngredientDao
+      description: The DAO instance for the <xref href="WebApp.Models.UnitOfWork.Ingredient" data-throw-if-not-resolved="false"></xref> type.
     content.vb: Public Function GetIngredientDao() As IngredientDao
   overload: WebApp.Data.DaoTypeContainer.GetIngredientDao*
+  exceptions:
+  - type: System.InvalidCastException
+    commentId: T:System.InvalidCastException
+    description: Thrown if the DAO instance is not of the expected type.
 - uid: WebApp.Data.DaoTypeContainer.GetInventoryDao
   commentId: M:WebApp.Data.DaoTypeContainer.GetInventoryDao
   id: GetInventoryDao
@@ -181,20 +208,27 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetInventoryDao
     path: Data/UnitOfWork.cs
-    startLine: 135
+    startLine: 236
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Gets the DAO instance for the <xref href="WebApp.Models.UnitOfWork.Inventory" data-throw-if-not-resolved="false"></xref> type.
+  example: []
   syntax:
     content: public InventoryDao GetInventoryDao()
     return:
       type: WebApp.Data.InventoryDao
+      description: The DAO instance for the <xref href="WebApp.Models.UnitOfWork.Inventory" data-throw-if-not-resolved="false"></xref> type.
     content.vb: Public Function GetInventoryDao() As InventoryDao
   overload: WebApp.Data.DaoTypeContainer.GetInventoryDao*
+  exceptions:
+  - type: System.InvalidCastException
+    commentId: T:System.InvalidCastException
+    description: Thrown if the DAO instance is not of the expected type.
 - uid: WebApp.Data.DaoTypeContainer.GetOrderDao
   commentId: M:WebApp.Data.DaoTypeContainer.GetOrderDao
   id: GetOrderDao
@@ -209,20 +243,27 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetOrderDao
     path: Data/UnitOfWork.cs
-    startLine: 138
+    startLine: 245
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Gets the DAO instance for the <xref href="WebApp.Models.UnitOfWork.Order" data-throw-if-not-resolved="false"></xref> type.
+  example: []
   syntax:
     content: public OrderDao GetOrderDao()
     return:
       type: WebApp.Data.OrderDao
+      description: The DAO instance for the <xref href="WebApp.Models.UnitOfWork.Order" data-throw-if-not-resolved="false"></xref> type.
     content.vb: Public Function GetOrderDao() As OrderDao
   overload: WebApp.Data.DaoTypeContainer.GetOrderDao*
+  exceptions:
+  - type: System.InvalidCastException
+    commentId: T:System.InvalidCastException
+    description: Thrown if the DAO instance is not of the expected type.
 - uid: WebApp.Data.DaoTypeContainer.GetProductDao
   commentId: M:WebApp.Data.DaoTypeContainer.GetProductDao
   id: GetProductDao
@@ -237,20 +278,27 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetProductDao
     path: Data/UnitOfWork.cs
-    startLine: 141
+    startLine: 254
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Gets the DAO instance for the <xref href="WebApp.Models.UnitOfWork.Product" data-throw-if-not-resolved="false"></xref> type.
+  example: []
   syntax:
     content: public ProductDao GetProductDao()
     return:
       type: WebApp.Data.ProductDao
+      description: The DAO instance for the <xref href="WebApp.Models.UnitOfWork.Product" data-throw-if-not-resolved="false"></xref> type.
     content.vb: Public Function GetProductDao() As ProductDao
   overload: WebApp.Data.DaoTypeContainer.GetProductDao*
+  exceptions:
+  - type: System.InvalidCastException
+    commentId: T:System.InvalidCastException
+    description: Thrown if the DAO instance is not of the expected type.
 - uid: WebApp.Data.DaoTypeContainer.GetProductIngredientsDao
   commentId: M:WebApp.Data.DaoTypeContainer.GetProductIngredientsDao
   id: GetProductIngredientsDao
@@ -265,20 +313,27 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetProductIngredientsDao
     path: Data/UnitOfWork.cs
-    startLine: 144
+    startLine: 263
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Gets the DAO instance for the <xref href="WebApp.Models.UnitOfWork.ProductIngredients" data-throw-if-not-resolved="false"></xref> type.
+  example: []
   syntax:
     content: public ProductIngredientsDao GetProductIngredientsDao()
     return:
       type: WebApp.Data.ProductIngredientsDao
+      description: The DAO instance for the <xref href="WebApp.Models.UnitOfWork.ProductIngredients" data-throw-if-not-resolved="false"></xref> type.
     content.vb: Public Function GetProductIngredientsDao() As ProductIngredientsDao
   overload: WebApp.Data.DaoTypeContainer.GetProductIngredientsDao*
+  exceptions:
+  - type: System.InvalidCastException
+    commentId: T:System.InvalidCastException
+    description: Thrown if the DAO instance is not of the expected type.
 - uid: WebApp.Data.DaoTypeContainer.GetSeriesInfoDao
   commentId: M:WebApp.Data.DaoTypeContainer.GetSeriesInfoDao
   id: GetSeriesInfoDao
@@ -293,20 +348,27 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetSeriesInfoDao
     path: Data/UnitOfWork.cs
-    startLine: 147
+    startLine: 272
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Gets the DAO instance for the <xref href="WebApp.Models.UnitOfWork.SeriesInfo" data-throw-if-not-resolved="false"></xref> type.
+  example: []
   syntax:
     content: public SeriesInfoDao GetSeriesInfoDao()
     return:
       type: WebApp.Data.SeriesInfoDao
+      description: The DAO instance for the <xref href="WebApp.Models.UnitOfWork.SeriesInfo" data-throw-if-not-resolved="false"></xref> type.
     content.vb: Public Function GetSeriesInfoDao() As SeriesInfoDao
   overload: WebApp.Data.DaoTypeContainer.GetSeriesInfoDao*
+  exceptions:
+  - type: System.InvalidCastException
+    commentId: T:System.InvalidCastException
+    description: Thrown if the DAO instance is not of the expected type.
 - uid: WebApp.Data.DaoTypeContainer.GetUserDao
   commentId: M:WebApp.Data.DaoTypeContainer.GetUserDao
   id: GetUserDao
@@ -321,20 +383,27 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetUserDao
     path: Data/UnitOfWork.cs
-    startLine: 150
+    startLine: 281
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Gets the DAO instance for the <xref href="WebApp.Models.UnitOfWork.User" data-throw-if-not-resolved="false"></xref> type.
+  example: []
   syntax:
     content: public UserDao GetUserDao()
     return:
       type: WebApp.Data.UserDao
+      description: The DAO instance for the <xref href="WebApp.Models.UnitOfWork.User" data-throw-if-not-resolved="false"></xref> type.
     content.vb: Public Function GetUserDao() As UserDao
   overload: WebApp.Data.DaoTypeContainer.GetUserDao*
+  exceptions:
+  - type: System.InvalidCastException
+    commentId: T:System.InvalidCastException
+    description: Thrown if the DAO instance is not of the expected type.
 references:
 - uid: WebApp.Data
   commentId: N:WebApp.Data
@@ -595,6 +664,13 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: WebApp.Data.DaoTypeContainer
+  commentId: T:WebApp.Data.DaoTypeContainer
+  parent: WebApp.Data
+  href: WebApp.Data.DaoTypeContainer.html
+  name: DaoTypeContainer
+  nameWithType: DaoTypeContainer
+  fullName: WebApp.Data.DaoTypeContainer
 - uid: WebApp.Data.DaoTypeContainer.#ctor*
   commentId: Overload:WebApp.Data.DaoTypeContainer.#ctor
   href: WebApp.Data.DaoTypeContainer.html#WebApp_Data_DaoTypeContainer__ctor_System_Collections_Generic_Dictionary_System_Type_System_Object__
@@ -722,6 +798,13 @@ references:
     name: Generic
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: System.InvalidCastException
+  commentId: T:System.InvalidCastException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.invalidcastexception
+  name: InvalidCastException
+  nameWithType: InvalidCastException
+  fullName: System.InvalidCastException
 - uid: WebApp.Data.DaoTypeContainer.GetDao*
   commentId: Overload:WebApp.Data.DaoTypeContainer.GetDao
   href: WebApp.Data.DaoTypeContainer.html#WebApp_Data_DaoTypeContainer_GetDao__1
@@ -780,6 +863,13 @@ references:
   - name: " "
   - name: T
   - name: )
+- uid: WebApp.Models.UnitOfWork.Employee
+  commentId: T:WebApp.Models.UnitOfWork.Employee
+  parent: WebApp.Models.UnitOfWork
+  href: WebApp.Models.UnitOfWork.Employee.html
+  name: Employee
+  nameWithType: Employee
+  fullName: WebApp.Models.UnitOfWork.Employee
 - uid: WebApp.Data.DaoTypeContainer.GetEmployeeDao*
   commentId: Overload:WebApp.Data.DaoTypeContainer.GetEmployeeDao
   href: WebApp.Data.DaoTypeContainer.html#WebApp_Data_DaoTypeContainer_GetEmployeeDao
@@ -793,6 +883,43 @@ references:
   name: EmployeeDao
   nameWithType: EmployeeDao
   fullName: WebApp.Data.EmployeeDao
+- uid: WebApp.Models.UnitOfWork
+  commentId: N:WebApp.Models.UnitOfWork
+  href: WebApp.html
+  name: WebApp.Models.UnitOfWork
+  nameWithType: WebApp.Models.UnitOfWork
+  fullName: WebApp.Models.UnitOfWork
+  spec.csharp:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Models
+    name: Models
+    href: WebApp.Models.html
+  - name: .
+  - uid: WebApp.Models.UnitOfWork
+    name: UnitOfWork
+    href: WebApp.Models.UnitOfWork.html
+  spec.vb:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Models
+    name: Models
+    href: WebApp.Models.html
+  - name: .
+  - uid: WebApp.Models.UnitOfWork
+    name: UnitOfWork
+    href: WebApp.Models.UnitOfWork.html
+- uid: WebApp.Models.UnitOfWork.Ingredient
+  commentId: T:WebApp.Models.UnitOfWork.Ingredient
+  parent: WebApp.Models.UnitOfWork
+  href: WebApp.Models.UnitOfWork.Ingredient.html
+  name: Ingredient
+  nameWithType: Ingredient
+  fullName: WebApp.Models.UnitOfWork.Ingredient
 - uid: WebApp.Data.DaoTypeContainer.GetIngredientDao*
   commentId: Overload:WebApp.Data.DaoTypeContainer.GetIngredientDao
   href: WebApp.Data.DaoTypeContainer.html#WebApp_Data_DaoTypeContainer_GetIngredientDao
@@ -806,6 +933,13 @@ references:
   name: IngredientDao
   nameWithType: IngredientDao
   fullName: WebApp.Data.IngredientDao
+- uid: WebApp.Models.UnitOfWork.Inventory
+  commentId: T:WebApp.Models.UnitOfWork.Inventory
+  parent: WebApp.Models.UnitOfWork
+  href: WebApp.Models.UnitOfWork.Inventory.html
+  name: Inventory
+  nameWithType: Inventory
+  fullName: WebApp.Models.UnitOfWork.Inventory
 - uid: WebApp.Data.DaoTypeContainer.GetInventoryDao*
   commentId: Overload:WebApp.Data.DaoTypeContainer.GetInventoryDao
   href: WebApp.Data.DaoTypeContainer.html#WebApp_Data_DaoTypeContainer_GetInventoryDao
@@ -819,6 +953,13 @@ references:
   name: InventoryDao
   nameWithType: InventoryDao
   fullName: WebApp.Data.InventoryDao
+- uid: WebApp.Models.UnitOfWork.Order
+  commentId: T:WebApp.Models.UnitOfWork.Order
+  parent: WebApp.Models.UnitOfWork
+  href: WebApp.Models.UnitOfWork.Order.html
+  name: Order
+  nameWithType: Order
+  fullName: WebApp.Models.UnitOfWork.Order
 - uid: WebApp.Data.DaoTypeContainer.GetOrderDao*
   commentId: Overload:WebApp.Data.DaoTypeContainer.GetOrderDao
   href: WebApp.Data.DaoTypeContainer.html#WebApp_Data_DaoTypeContainer_GetOrderDao
@@ -832,6 +973,13 @@ references:
   name: OrderDao
   nameWithType: OrderDao
   fullName: WebApp.Data.OrderDao
+- uid: WebApp.Models.UnitOfWork.Product
+  commentId: T:WebApp.Models.UnitOfWork.Product
+  parent: WebApp.Models.UnitOfWork
+  href: WebApp.Models.UnitOfWork.Product.html
+  name: Product
+  nameWithType: Product
+  fullName: WebApp.Models.UnitOfWork.Product
 - uid: WebApp.Data.DaoTypeContainer.GetProductDao*
   commentId: Overload:WebApp.Data.DaoTypeContainer.GetProductDao
   href: WebApp.Data.DaoTypeContainer.html#WebApp_Data_DaoTypeContainer_GetProductDao
@@ -845,6 +993,13 @@ references:
   name: ProductDao
   nameWithType: ProductDao
   fullName: WebApp.Data.ProductDao
+- uid: WebApp.Models.UnitOfWork.ProductIngredients
+  commentId: T:WebApp.Models.UnitOfWork.ProductIngredients
+  parent: WebApp.Models.UnitOfWork
+  href: WebApp.Models.UnitOfWork.ProductIngredients.html
+  name: ProductIngredients
+  nameWithType: ProductIngredients
+  fullName: WebApp.Models.UnitOfWork.ProductIngredients
 - uid: WebApp.Data.DaoTypeContainer.GetProductIngredientsDao*
   commentId: Overload:WebApp.Data.DaoTypeContainer.GetProductIngredientsDao
   href: WebApp.Data.DaoTypeContainer.html#WebApp_Data_DaoTypeContainer_GetProductIngredientsDao
@@ -858,6 +1013,13 @@ references:
   name: ProductIngredientsDao
   nameWithType: ProductIngredientsDao
   fullName: WebApp.Data.ProductIngredientsDao
+- uid: WebApp.Models.UnitOfWork.SeriesInfo
+  commentId: T:WebApp.Models.UnitOfWork.SeriesInfo
+  parent: WebApp.Models.UnitOfWork
+  href: WebApp.Models.UnitOfWork.SeriesInfo.html
+  name: SeriesInfo
+  nameWithType: SeriesInfo
+  fullName: WebApp.Models.UnitOfWork.SeriesInfo
 - uid: WebApp.Data.DaoTypeContainer.GetSeriesInfoDao*
   commentId: Overload:WebApp.Data.DaoTypeContainer.GetSeriesInfoDao
   href: WebApp.Data.DaoTypeContainer.html#WebApp_Data_DaoTypeContainer_GetSeriesInfoDao
@@ -871,6 +1033,13 @@ references:
   name: SeriesInfoDao
   nameWithType: SeriesInfoDao
   fullName: WebApp.Data.SeriesInfoDao
+- uid: WebApp.Models.UnitOfWork.User
+  commentId: T:WebApp.Models.UnitOfWork.User
+  parent: WebApp.Models.UnitOfWork
+  href: WebApp.Models.UnitOfWork.User.html
+  name: User
+  nameWithType: User
+  fullName: WebApp.Models.UnitOfWork.User
 - uid: WebApp.Data.DaoTypeContainer.GetUserDao*
   commentId: Overload:WebApp.Data.DaoTypeContainer.GetUserDao
   href: WebApp.Data.DaoTypeContainer.html#WebApp_Data_DaoTypeContainer_GetUserDao

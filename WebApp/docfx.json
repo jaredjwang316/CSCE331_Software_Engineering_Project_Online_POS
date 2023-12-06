@@ -39,7 +39,7 @@
       "_appName": "Gong Cha",
       "_appTitle": "Gong Cha",
       "_enableSearch": true,
-      "pdf": false
+      "pdf": true
     }
   }
 }

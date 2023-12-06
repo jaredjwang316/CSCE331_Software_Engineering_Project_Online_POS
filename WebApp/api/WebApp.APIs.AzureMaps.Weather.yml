@@ -18,14 +18,16 @@ items:
   source:
     remote:
       path: WebApp/APIs/AzureMaps/Weather.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Weather
     path: APIs/AzureMaps/Weather.cs
-    startLine: 19
+    startLine: 21
   assemblies:
   - WebApp
   namespace: WebApp.APIs.AzureMaps
+  summary: Provides methods to retrieve weather information from Azure Maps.
+  example: []
   syntax:
     content: public class Weather
     content.vb: Public Class Weather
@@ -53,14 +55,16 @@ items:
   source:
     remote:
       path: WebApp/APIs/AzureMaps/Weather.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: APIs/AzureMaps/Weather.cs
-    startLine: 24
+    startLine: 29
   assemblies:
   - WebApp
   namespace: WebApp.APIs.AzureMaps
+  summary: Initializes a new instance of the <xref href="WebApp.APIs.AzureMaps.Weather" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public Weather()
     content.vb: Public Sub New()
@@ -82,18 +86,21 @@ items:
   source:
     remote:
       path: WebApp/APIs/AzureMaps/Weather.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetCurrentCondition
     path: APIs/AzureMaps/Weather.cs
-    startLine: 29
+    startLine: 38
   assemblies:
   - WebApp
   namespace: WebApp.APIs.AzureMaps
+  summary: Gets the current weather condition based on the user's location.
+  example: []
   syntax:
     content: public Task<CurrentCondition?> GetCurrentCondition()
     return:
       type: System.Threading.Tasks.Task{WebApp.Models.AzureMaps.Weather.CurrentCondition}
+      description: The current weather condition or null if the information is not available.
     content.vb: Public Function GetCurrentCondition() As Task(Of CurrentCondition)
   overload: WebApp.APIs.AzureMaps.Weather.GetCurrentCondition*
 - uid: WebApp.APIs.AzureMaps.Weather.GetWeatherIconName(System.Nullable{System.Int32})
@@ -110,21 +117,25 @@ items:
   source:
     remote:
       path: WebApp/APIs/AzureMaps/Weather.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetWeatherIconName
     path: APIs/AzureMaps/Weather.cs
-    startLine: 71
+    startLine: 91
   assemblies:
   - WebApp
   namespace: WebApp.APIs.AzureMaps
+  summary: Gets the weather icon name based on the provided icon code.
+  example: []
   syntax:
     content: public string? GetWeatherIconName(int? iconCode)
     parameters:
     - id: iconCode
       type: System.Nullable{System.Int32}
+      description: The icon code representing the weather condition.
     return:
       type: System.String
+      description: The name of the weather icon or null if the icon code is not recognized.
     content.vb: Public Function GetWeatherIconName(iconCode As Integer?) As String
   overload: WebApp.APIs.AzureMaps.Weather.GetWeatherIconName*
   nameWithType.vb: Weather.GetWeatherIconName(Integer?)
@@ -398,6 +409,12 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: WebApp.APIs.AzureMaps.Weather
+  commentId: T:WebApp.APIs.AzureMaps.Weather
+  href: WebApp.APIs.AzureMaps.Weather.html
+  name: Weather
+  nameWithType: Weather
+  fullName: WebApp.APIs.AzureMaps.Weather
 - uid: WebApp.APIs.AzureMaps.Weather.#ctor*
   commentId: Overload:WebApp.APIs.AzureMaps.Weather.#ctor
   href: WebApp.APIs.AzureMaps.Weather.html#WebApp_APIs_AzureMaps_Weather__ctor

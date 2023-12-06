@@ -20,7 +20,7 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Inventory.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Inventory
     path: Models/UnitOfWork/Inventory.cs
@@ -57,14 +57,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Inventory.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Id
     path: Models/UnitOfWork/Inventory.cs
-    startLine: 12
+    startLine: 15
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the unique identifier for the inventory item.
+  example: []
   syntax:
     content: public int Id { get; set; }
     parameters: []
@@ -86,14 +88,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Inventory.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: IngredientId
     path: Models/UnitOfWork/Inventory.cs
-    startLine: 13
+    startLine: 20
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the identifier of the associated ingredient.
+  example: []
   syntax:
     content: public int IngredientId { get; set; }
     parameters: []
@@ -115,14 +119,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Inventory.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Quantity
     path: Models/UnitOfWork/Inventory.cs
-    startLine: 14
+    startLine: 25
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the quantity of the ingredient in the inventory.
+  example: []
   syntax:
     content: public int Quantity { get; set; }
     parameters: []
@@ -144,14 +150,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Inventory.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: FillLevel
     path: Models/UnitOfWork/Inventory.cs
-    startLine: 15
+    startLine: 30
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the fill level of the inventory.
+  example: []
   syntax:
     content: public int FillLevel { get; set; }
     parameters: []
@@ -173,11 +181,11 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Inventory.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Models/UnitOfWork/Inventory.cs
-    startLine: 24
+    startLine: 39
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork

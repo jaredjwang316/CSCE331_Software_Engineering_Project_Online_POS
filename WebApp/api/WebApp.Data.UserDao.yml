@@ -22,14 +22,16 @@ items:
   source:
     remote:
       path: WebApp/Data/UserDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: UserDao
     path: Data/UserDao.cs
-    startLine: 10
+    startLine: 13
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Data Access Object (DAO) for managing user entities in the database.
+  example: []
   syntax:
     content: 'public class UserDao : IDao<User>'
     content.vb: Public Class UserDao Implements IDao(Of User)
@@ -59,19 +61,22 @@ items:
   source:
     remote:
       path: WebApp/Data/UserDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Data/UserDao.cs
-    startLine: 13
+    startLine: 20
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Initializes a new instance of the <xref href="WebApp.Data.UserDao" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public UserDao(CommandHandler commandHandler)
     parameters:
     - id: commandHandler
       type: WebApp.Data.CommandHandler
+      description: The command handler for executing database queries.
     content.vb: Public Sub New(commandHandler As CommandHandler)
   overload: WebApp.Data.UserDao.#ctor*
   nameWithType.vb: UserDao.New(CommandHandler)
@@ -91,22 +96,25 @@ items:
   source:
     remote:
       path: WebApp/Data/UserDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Get
     path: Data/UserDao.cs
-    startLine: 17
+    startLine: 29
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Not supported for user entities. Throws a <xref href="System.NotSupportedException" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
     content: public User Get(int id)
     parameters:
     - id: id
       type: System.Int32
+      description: The unique identifier of the user.
     return:
       type: WebApp.Models.UnitOfWork.User
+      description: Throws a <xref href="System.NotSupportedException" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Function [Get](id As Integer) As User
   overload: WebApp.Data.UserDao.Get*
   implements:
@@ -128,21 +136,25 @@ items:
   source:
     remote:
       path: WebApp/Data/UserDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Get
     path: Data/UserDao.cs
-    startLine: 21
+    startLine: 38
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Gets a user entity by email.
+  example: []
   syntax:
     content: public User? Get(string email)
     parameters:
     - id: email
       type: System.String
+      description: The email address of the user.
     return:
       type: WebApp.Models.UnitOfWork.User
+      description: The user entity with the specified email, or null if not found.
     content.vb: Public Function [Get](email As String) As User
   overload: WebApp.Data.UserDao.Get*
   nameWithType.vb: UserDao.Get(String)
@@ -162,19 +174,21 @@ items:
   source:
     remote:
       path: WebApp/Data/UserDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetAll
     path: Data/UserDao.cs
-    startLine: 45
+    startLine: 66
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Gets all user entities from the database.
   example: []
   syntax:
     content: public IEnumerable<User> GetAll()
     return:
       type: System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.User}
+      description: An enumerable collection of all user entities.
     content.vb: Public Function GetAll() As IEnumerable(Of User)
   overload: WebApp.Data.UserDao.GetAll*
   implements:
@@ -193,20 +207,22 @@ items:
   source:
     remote:
       path: WebApp/Data/UserDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Add
     path: Data/UserDao.cs
-    startLine: 67
+    startLine: 92
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Adds a new user entity to the database.
   example: []
   syntax:
     content: public void Add(User t)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.User
+      description: The user entity to be added.
     content.vb: Public Sub Add(t As User)
   overload: WebApp.Data.UserDao.Add*
   implements:
@@ -225,22 +241,25 @@ items:
   source:
     remote:
       path: WebApp/Data/UserDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Update
     path: Data/UserDao.cs
-    startLine: 76
+    startLine: 106
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Updates an existing user entity in the database.
   example: []
   syntax:
     content: public void Update(User t, User newT)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.User
+      description: The existing user entity to be updated.
     - id: newT
       type: WebApp.Models.UnitOfWork.User
+      description: The new data for the user entity.
     content.vb: Public Sub Update(t As User, newT As User)
   overload: WebApp.Data.UserDao.Update*
   implements:
@@ -259,20 +278,22 @@ items:
   source:
     remote:
       path: WebApp/Data/UserDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Delete
     path: Data/UserDao.cs
-    startLine: 93
+    startLine: 127
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Deletes a user entity from the database.
   example: []
   syntax:
     content: public void Delete(User t)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.User
+      description: The user entity to be deleted.
     content.vb: Public Sub Delete(t As User)
   overload: WebApp.Data.UserDao.Delete*
   implements:
@@ -593,6 +614,13 @@ references:
   - name: " "
   - name: T
   - name: )
+- uid: WebApp.Data.UserDao
+  commentId: T:WebApp.Data.UserDao
+  parent: WebApp.Data
+  href: WebApp.Data.UserDao.html
+  name: UserDao
+  nameWithType: UserDao
+  fullName: WebApp.Data.UserDao
 - uid: WebApp.Data.UserDao.#ctor*
   commentId: Overload:WebApp.Data.UserDao.#ctor
   href: WebApp.Data.UserDao.html#WebApp_Data_UserDao__ctor_WebApp_Data_CommandHandler_
@@ -609,6 +637,13 @@ references:
   name: CommandHandler
   nameWithType: CommandHandler
   fullName: WebApp.Data.CommandHandler
+- uid: System.NotSupportedException
+  commentId: T:System.NotSupportedException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.notsupportedexception
+  name: NotSupportedException
+  nameWithType: NotSupportedException
+  fullName: System.NotSupportedException
 - uid: WebApp.Data.UserDao.Get*
   commentId: Overload:WebApp.Data.UserDao.Get
   href: WebApp.Data.UserDao.html#WebApp_Data_UserDao_Get_System_Int32_

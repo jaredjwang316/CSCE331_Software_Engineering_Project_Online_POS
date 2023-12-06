@@ -22,17 +22,22 @@ items:
   source:
     remote:
       path: WebApp/Data/SeriesInfoDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: SeriesInfoDao
     path: Data/SeriesInfoDao.cs
-    startLine: 10
+    startLine: 14
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Data Access Object (DAO) for handling operations related to <xref href="WebApp.Models.UnitOfWork.SeriesInfo" data-throw-if-not-resolved="false"></xref>.
+  example: []
   syntax:
     content: 'public class SeriesInfoDao : IDao<SeriesInfo>'
     content.vb: Public Class SeriesInfoDao Implements IDao(Of SeriesInfo)
+  seealso:
+  - linkId: WebApp.Data.IDao`1
+    commentId: T:WebApp.Data.IDao`1
   inheritance:
   - System.Object
   implements:
@@ -59,19 +64,22 @@ items:
   source:
     remote:
       path: WebApp/Data/SeriesInfoDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Data/SeriesInfoDao.cs
-    startLine: 13
+    startLine: 21
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Initializes a new instance of the <xref href="WebApp.Data.SeriesInfoDao" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public SeriesInfoDao(CommandHandler commandHandler)
     parameters:
     - id: commandHandler
       type: WebApp.Data.CommandHandler
+      description: The command handler used for database operations.
     content.vb: Public Sub New(commandHandler As CommandHandler)
   overload: WebApp.Data.SeriesInfoDao.#ctor*
   nameWithType.vb: SeriesInfoDao.New(CommandHandler)
@@ -91,22 +99,25 @@ items:
   source:
     remote:
       path: WebApp/Data/SeriesInfoDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Get
     path: Data/SeriesInfoDao.cs
-    startLine: 17
+    startLine: 26
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves an entity by its unique identifier.
   example: []
   syntax:
     content: public SeriesInfo Get(int id)
     parameters:
     - id: id
       type: System.Int32
+      description: The unique identifier of the entity.
     return:
       type: WebApp.Models.UnitOfWork.SeriesInfo
+      description: The entity with the specified identifier, or a default value if not found.
     content.vb: Public Function [Get](id As Integer) As SeriesInfo
   overload: WebApp.Data.SeriesInfoDao.Get*
   implements:
@@ -128,14 +139,15 @@ items:
   source:
     remote:
       path: WebApp/Data/SeriesInfoDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Get
     path: Data/SeriesInfoDao.cs
-    startLine: 21
+    startLine: 31
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  example: []
   syntax:
     content: public SeriesInfo Get(string name)
     parameters:
@@ -162,19 +174,21 @@ items:
   source:
     remote:
       path: WebApp/Data/SeriesInfoDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetAll
     path: Data/SeriesInfoDao.cs
-    startLine: 44
+    startLine: 55
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves all entities of the specified type.
   example: []
   syntax:
     content: public IEnumerable<SeriesInfo> GetAll()
     return:
       type: System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.SeriesInfo}
+      description: An enumerable collection of all entities of the specified type.
     content.vb: Public Function GetAll() As IEnumerable(Of SeriesInfo)
   overload: WebApp.Data.SeriesInfoDao.GetAll*
   implements:
@@ -193,20 +207,22 @@ items:
   source:
     remote:
       path: WebApp/Data/SeriesInfoDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Add
     path: Data/SeriesInfoDao.cs
-    startLine: 65
+    startLine: 77
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Adds a new entity to the data store.
   example: []
   syntax:
     content: public void Add(SeriesInfo t)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.SeriesInfo
+      description: The entity to be added.
     content.vb: Public Sub Add(t As SeriesInfo)
   overload: WebApp.Data.SeriesInfoDao.Add*
   implements:
@@ -225,22 +241,25 @@ items:
   source:
     remote:
       path: WebApp/Data/SeriesInfoDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Update
     path: Data/SeriesInfoDao.cs
-    startLine: 73
+    startLine: 86
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Updates an existing entity in the data store.
   example: []
   syntax:
     content: public void Update(SeriesInfo t, SeriesInfo newT)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.SeriesInfo
+      description: The existing entity to be updated.
     - id: newT
       type: WebApp.Models.UnitOfWork.SeriesInfo
+      description: The new values for the entity.
     content.vb: Public Sub Update(t As SeriesInfo, newT As SeriesInfo)
   overload: WebApp.Data.SeriesInfoDao.Update*
   implements:
@@ -259,25 +278,59 @@ items:
   source:
     remote:
       path: WebApp/Data/SeriesInfoDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Delete
     path: Data/SeriesInfoDao.cs
-    startLine: 88
+    startLine: 102
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Deletes an entity from the data store.
   example: []
   syntax:
     content: public void Delete(SeriesInfo t)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.SeriesInfo
+      description: The entity to be deleted.
     content.vb: Public Sub Delete(t As SeriesInfo)
   overload: WebApp.Data.SeriesInfoDao.Delete*
   implements:
   - WebApp.Data.IDao{WebApp.Models.UnitOfWork.SeriesInfo}.Delete(WebApp.Models.UnitOfWork.SeriesInfo)
 references:
+- uid: WebApp.Data.IDao`1
+  commentId: T:WebApp.Data.IDao`1
+  href: WebApp.Data.IDao-1.html
+  name: IDao<T>
+  nameWithType: IDao<T>
+  fullName: WebApp.Data.IDao<T>
+  nameWithType.vb: IDao(Of T)
+  fullName.vb: WebApp.Data.IDao(Of T)
+  name.vb: IDao(Of T)
+  spec.csharp:
+  - uid: WebApp.Data.IDao`1
+    name: IDao
+    href: WebApp.Data.IDao-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: WebApp.Data.IDao`1
+    name: IDao
+    href: WebApp.Data.IDao-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: WebApp.Models.UnitOfWork.SeriesInfo
+  commentId: T:WebApp.Models.UnitOfWork.SeriesInfo
+  parent: WebApp.Models.UnitOfWork
+  href: WebApp.Models.UnitOfWork.SeriesInfo.html
+  name: SeriesInfo
+  nameWithType: SeriesInfo
+  fullName: WebApp.Models.UnitOfWork.SeriesInfo
 - uid: WebApp.Data
   commentId: N:WebApp.Data
   href: WebApp.html
@@ -561,6 +614,36 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
   - name: )
+- uid: WebApp.Models.UnitOfWork
+  commentId: N:WebApp.Models.UnitOfWork
+  href: WebApp.html
+  name: WebApp.Models.UnitOfWork
+  nameWithType: WebApp.Models.UnitOfWork
+  fullName: WebApp.Models.UnitOfWork
+  spec.csharp:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Models
+    name: Models
+    href: WebApp.Models.html
+  - name: .
+  - uid: WebApp.Models.UnitOfWork
+    name: UnitOfWork
+    href: WebApp.Models.UnitOfWork.html
+  spec.vb:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Models
+    name: Models
+    href: WebApp.Models.html
+  - name: .
+  - uid: WebApp.Models.UnitOfWork
+    name: UnitOfWork
+    href: WebApp.Models.UnitOfWork.html
 - uid: System
   commentId: N:System
   isExternal: true
@@ -568,31 +651,13 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: WebApp.Data.IDao`1
-  commentId: T:WebApp.Data.IDao`1
-  href: WebApp.Data.IDao-1.html
-  name: IDao<T>
-  nameWithType: IDao<T>
-  fullName: WebApp.Data.IDao<T>
-  nameWithType.vb: IDao(Of T)
-  fullName.vb: WebApp.Data.IDao(Of T)
-  name.vb: IDao(Of T)
-  spec.csharp:
-  - uid: WebApp.Data.IDao`1
-    name: IDao
-    href: WebApp.Data.IDao-1.html
-  - name: <
-  - name: T
-  - name: '>'
-  spec.vb:
-  - uid: WebApp.Data.IDao`1
-    name: IDao
-    href: WebApp.Data.IDao-1.html
-  - name: (
-  - name: Of
-  - name: " "
-  - name: T
-  - name: )
+- uid: WebApp.Data.SeriesInfoDao
+  commentId: T:WebApp.Data.SeriesInfoDao
+  parent: WebApp.Data
+  href: WebApp.Data.SeriesInfoDao.html
+  name: SeriesInfoDao
+  nameWithType: SeriesInfoDao
+  fullName: WebApp.Data.SeriesInfoDao
 - uid: WebApp.Data.SeriesInfoDao.#ctor*
   commentId: Overload:WebApp.Data.SeriesInfoDao.#ctor
   href: WebApp.Data.SeriesInfoDao.html#WebApp_Data_SeriesInfoDao__ctor_WebApp_Data_CommandHandler_
@@ -657,13 +722,6 @@ references:
   nameWithType.vb: Integer
   fullName.vb: Integer
   name.vb: Integer
-- uid: WebApp.Models.UnitOfWork.SeriesInfo
-  commentId: T:WebApp.Models.UnitOfWork.SeriesInfo
-  parent: WebApp.Models.UnitOfWork
-  href: WebApp.Models.UnitOfWork.SeriesInfo.html
-  name: SeriesInfo
-  nameWithType: SeriesInfo
-  fullName: WebApp.Models.UnitOfWork.SeriesInfo
 - uid: WebApp.Data.IDao`1.Get(System.Int32)
   commentId: M:WebApp.Data.IDao`1.Get(System.Int32)
   isExternal: true
@@ -694,36 +752,6 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.int32
   - name: )
-- uid: WebApp.Models.UnitOfWork
-  commentId: N:WebApp.Models.UnitOfWork
-  href: WebApp.html
-  name: WebApp.Models.UnitOfWork
-  nameWithType: WebApp.Models.UnitOfWork
-  fullName: WebApp.Models.UnitOfWork
-  spec.csharp:
-  - uid: WebApp
-    name: WebApp
-    href: WebApp.html
-  - name: .
-  - uid: WebApp.Models
-    name: Models
-    href: WebApp.Models.html
-  - name: .
-  - uid: WebApp.Models.UnitOfWork
-    name: UnitOfWork
-    href: WebApp.Models.UnitOfWork.html
-  spec.vb:
-  - uid: WebApp
-    name: WebApp
-    href: WebApp.html
-  - name: .
-  - uid: WebApp.Models
-    name: Models
-    href: WebApp.Models.html
-  - name: .
-  - uid: WebApp.Models.UnitOfWork
-    name: UnitOfWork
-    href: WebApp.Models.UnitOfWork.html
 - uid: System.String
   commentId: T:System.String
   parent: System

@@ -21,14 +21,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/MenuBoardController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: MenuBoardController
     path: Controllers/MenuBoardController.cs
-    startLine: 19
+    startLine: 22
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Controller responsible for handling requests related to the menu board, including displaying products and handling product details.
+  example: []
   syntax:
     content: >-
       [ApiController]
@@ -267,21 +269,25 @@ items:
   source:
     remote:
       path: WebApp/Controllers/MenuBoardController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Controllers/MenuBoardController.cs
-    startLine: 25
+    startLine: 33
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Initializes a new instance of the <xref href="WebApp.Controllers.MenuBoardController" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public MenuBoardController(ILogger<MenuBoardController> logger, CartService cartService)
     parameters:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger{WebApp.Controllers.MenuBoardController}
+      description: The logger for MenuBoardController.
     - id: cartService
       type: WebApp.Models.Cart.CartService
+      description: The service for managing the shopping cart.
     content.vb: Public Sub New(logger As ILogger(Of MenuBoardController), cartService As CartService)
   overload: WebApp.Controllers.MenuBoardController.#ctor*
   nameWithType.vb: MenuBoardController.New(ILogger(Of MenuBoardController), CartService)
@@ -301,14 +307,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/MenuBoardController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Index
     path: Controllers/MenuBoardController.cs
-    startLine: 31
+    startLine: 45
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the menu board with filtered products based on the search term and organized by categories.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -319,8 +327,10 @@ items:
     parameters:
     - id: search
       type: System.String
+      description: The search term used to filter products.
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The view for the menu board with product information.
     content.vb: >-
       <HttpGet>
 
@@ -354,14 +364,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/MenuBoardController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Error
     path: Controllers/MenuBoardController.cs
-    startLine: 71
+    startLine: 89
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Handles errors and displays the error view.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -373,6 +385,7 @@ items:
       public IActionResult Error()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The view for the error page.
     content.vb: >-
       <HttpGet>
 
@@ -418,14 +431,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/MenuBoardController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: getProducts
     path: Controllers/MenuBoardController.cs
-    startLine: 78
+    startLine: 100
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Gets the products and their categories in HTML format for use in a view.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -435,6 +450,7 @@ items:
       public IActionResult getProducts()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The HTML string containing product information.
     content.vb: >-
       <HttpGet>
 
@@ -465,14 +481,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/MenuBoardController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetProductsByCategory
     path: Controllers/MenuBoardController.cs
-    startLine: 114
+    startLine: 141
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Gets product names by category for use in a partial view.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -483,8 +501,10 @@ items:
     parameters:
     - id: category
       type: System.String
+      description: The product category.
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: A partial view with product names.
     content.vb: >-
       <HttpGet>
 
@@ -518,14 +538,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/MenuBoardController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ProductDetail
     path: Controllers/MenuBoardController.cs
-    startLine: 126
+    startLine: 158
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays detailed information about a specific product.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -536,8 +558,10 @@ items:
     parameters:
     - id: id
       type: System.Int32
+      description: The unique identifier of the product.
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The view for the product detail page.
     content.vb: >-
       <HttpGet>
 
@@ -10288,6 +10312,12 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
   - name: )
+- uid: WebApp.Controllers.MenuBoardController
+  commentId: T:WebApp.Controllers.MenuBoardController
+  href: WebApp.Controllers.MenuBoardController.html
+  name: MenuBoardController
+  nameWithType: MenuBoardController
+  fullName: WebApp.Controllers.MenuBoardController
 - uid: WebApp.Controllers.MenuBoardController.#ctor*
   commentId: Overload:WebApp.Controllers.MenuBoardController.#ctor
   href: WebApp.Controllers.MenuBoardController.html#WebApp_Controllers_MenuBoardController__ctor_Microsoft_Extensions_Logging_ILogger_WebApp_Controllers_MenuBoardController__WebApp_Models_Cart_CartService_

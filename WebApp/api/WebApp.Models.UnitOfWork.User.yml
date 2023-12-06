@@ -23,14 +23,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/User.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: User
     path: Models/UnitOfWork/User.cs
-    startLine: 8
+    startLine: 11
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Represents information about a user in the application.
+  example: []
   syntax:
     content: public class User
     content.vb: Public Class User
@@ -58,14 +60,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/User.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Name
     path: Models/UnitOfWork/User.cs
-    startLine: 9
+    startLine: 15
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the name of the user.
+  example: []
   syntax:
     content: public string Name { get; set; }
     parameters: []
@@ -87,14 +91,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/User.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Email
     path: Models/UnitOfWork/User.cs
-    startLine: 10
+    startLine: 20
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the email address of the user.
+  example: []
   syntax:
     content: public string Email { get; set; }
     parameters: []
@@ -116,14 +122,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/User.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Favorites
     path: Models/UnitOfWork/User.cs
-    startLine: 11
+    startLine: 25
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the array of user favorites.
+  example: []
   syntax:
     content: public int[] Favorites { get; set; }
     parameters: []
@@ -145,14 +153,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/User.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: AccCursor
     path: Models/UnitOfWork/User.cs
-    startLine: 12
+    startLine: 30
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the accessibility cursor setting for the user.
+  example: []
   syntax:
     content: public string AccCursor { get; set; }
     parameters: []
@@ -174,14 +184,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/User.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: AccTextSize
     path: Models/UnitOfWork/User.cs
-    startLine: 13
+    startLine: 35
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the accessibility text size setting for the user.
+  example: []
   syntax:
     content: public string AccTextSize { get; set; }
     parameters: []
@@ -203,14 +215,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/User.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: AccContrast
     path: Models/UnitOfWork/User.cs
-    startLine: 14
+    startLine: 40
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the accessibility contrast setting for the user.
+  example: []
   syntax:
     content: public string AccContrast { get; set; }
     parameters: []
@@ -232,14 +246,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/User.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: AccLanguage
     path: Models/UnitOfWork/User.cs
-    startLine: 15
+    startLine: 45
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the accessibility language setting for the user.
+  example: []
   syntax:
     content: public string AccLanguage { get; set; }
     parameters: []
@@ -261,31 +277,40 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/User.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Models/UnitOfWork/User.cs
-    startLine: 17
+    startLine: 57
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Initializes a new instance of the <xref href="WebApp.Models.UnitOfWork.User" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public User(string name, string email, int[] favorites, string accCursor = "false", string accTextSize = "false", string accContrast = "normal", string accLanguage = "")
     parameters:
     - id: name
       type: System.String
+      description: The name of the user.
     - id: email
       type: System.String
+      description: The email address of the user.
     - id: favorites
       type: System.Int32[]
+      description: The array of user favorites.
     - id: accCursor
       type: System.String
+      description: The accessibility cursor setting for the user.
     - id: accTextSize
       type: System.String
+      description: The accessibility text size setting for the user.
     - id: accContrast
       type: System.String
+      description: The accessibility contrast setting for the user.
     - id: accLanguage
       type: System.String
+      description: The accessibility language setting for the user.
     content.vb: Public Sub New(name As String, email As String, favorites As Integer(), accCursor As String = "false", accTextSize As String = "false", accContrast As String = "normal", accLanguage As String = "")
   overload: WebApp.Models.UnitOfWork.User.#ctor*
   nameWithType.vb: User.New(String, String, Integer(), String, String, String, String)
@@ -635,6 +660,13 @@ references:
   name: AccLanguage
   nameWithType: User.AccLanguage
   fullName: WebApp.Models.UnitOfWork.User.AccLanguage
+- uid: WebApp.Models.UnitOfWork.User
+  commentId: T:WebApp.Models.UnitOfWork.User
+  parent: WebApp.Models.UnitOfWork
+  href: WebApp.Models.UnitOfWork.User.html
+  name: User
+  nameWithType: User
+  fullName: WebApp.Models.UnitOfWork.User
 - uid: WebApp.Models.UnitOfWork.User.#ctor*
   commentId: Overload:WebApp.Models.UnitOfWork.User.#ctor
   href: WebApp.Models.UnitOfWork.User.html#WebApp_Models_UnitOfWork_User__ctor_System_String_System_String_System_Int32___System_String_System_String_System_String_System_String_

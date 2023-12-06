@@ -474,19 +474,6 @@ references:
   isSpec: "True"
   fullName: WebApp.Controllers.AccountController.GetUserInfo
   nameWithType: AccountController.GetUserInfo
-- uid: WebApp.Controllers.AccountController.Index
-  name: Index()
-  href: api/WebApp.Controllers.AccountController.html#WebApp_Controllers_AccountController_Index
-  commentId: M:WebApp.Controllers.AccountController.Index
-  fullName: WebApp.Controllers.AccountController.Index()
-  nameWithType: AccountController.Index()
-- uid: WebApp.Controllers.AccountController.Index*
-  name: Index
-  href: api/WebApp.Controllers.AccountController.html#WebApp_Controllers_AccountController_Index_
-  commentId: Overload:WebApp.Controllers.AccountController.Index
-  isSpec: "True"
-  fullName: WebApp.Controllers.AccountController.Index
-  nameWithType: AccountController.Index
 - uid: WebApp.Controllers.AccountController.Login(System.String,System.String)
   name: Login(string, string)
   href: api/WebApp.Controllers.AccountController.html#WebApp_Controllers_AccountController_Login_System_String_System_String_
@@ -721,22 +708,6 @@ references:
   fullName.vb: WebApp.Controllers.CashierController.New
   nameWithType: CashierController.CashierController
   nameWithType.vb: CashierController.New
-- uid: WebApp.Controllers.CashierController.AddFavorite(System.Int32)
-  name: AddFavorite(int)
-  href: api/WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_AddFavorite_System_Int32_
-  commentId: M:WebApp.Controllers.CashierController.AddFavorite(System.Int32)
-  name.vb: AddFavorite(Integer)
-  fullName: WebApp.Controllers.CashierController.AddFavorite(int)
-  fullName.vb: WebApp.Controllers.CashierController.AddFavorite(Integer)
-  nameWithType: CashierController.AddFavorite(int)
-  nameWithType.vb: CashierController.AddFavorite(Integer)
-- uid: WebApp.Controllers.CashierController.AddFavorite*
-  name: AddFavorite
-  href: api/WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_AddFavorite_
-  commentId: Overload:WebApp.Controllers.CashierController.AddFavorite
-  isSpec: "True"
-  fullName: WebApp.Controllers.CashierController.AddFavorite
-  nameWithType: CashierController.AddFavorite
 - uid: WebApp.Controllers.CashierController.Error
   name: Error()
   href: api/WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_Error
@@ -763,19 +734,6 @@ references:
   isSpec: "True"
   fullName: WebApp.Controllers.CashierController.Index
   nameWithType: CashierController.Index
-- uid: WebApp.Controllers.CashierController.LoadBestSellers
-  name: LoadBestSellers()
-  href: api/WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_LoadBestSellers
-  commentId: M:WebApp.Controllers.CashierController.LoadBestSellers
-  fullName: WebApp.Controllers.CashierController.LoadBestSellers()
-  nameWithType: CashierController.LoadBestSellers()
-- uid: WebApp.Controllers.CashierController.LoadBestSellers*
-  name: LoadBestSellers
-  href: api/WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_LoadBestSellers_
-  commentId: Overload:WebApp.Controllers.CashierController.LoadBestSellers
-  isSpec: "True"
-  fullName: WebApp.Controllers.CashierController.LoadBestSellers
-  nameWithType: CashierController.LoadBestSellers
 - uid: WebApp.Controllers.CashierController.LoadCategories
   name: LoadCategories()
   href: api/WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_LoadCategories
@@ -805,19 +763,6 @@ references:
   isSpec: "True"
   fullName: WebApp.Controllers.CashierController.LoadCustomizations
   nameWithType: CashierController.LoadCustomizations
-- uid: WebApp.Controllers.CashierController.LoadFavorites
-  name: LoadFavorites()
-  href: api/WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_LoadFavorites
-  commentId: M:WebApp.Controllers.CashierController.LoadFavorites
-  fullName: WebApp.Controllers.CashierController.LoadFavorites()
-  nameWithType: CashierController.LoadFavorites()
-- uid: WebApp.Controllers.CashierController.LoadFavorites*
-  name: LoadFavorites
-  href: api/WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_LoadFavorites_
-  commentId: Overload:WebApp.Controllers.CashierController.LoadFavorites
-  isSpec: "True"
-  fullName: WebApp.Controllers.CashierController.LoadFavorites
-  nameWithType: CashierController.LoadFavorites
 - uid: WebApp.Controllers.CashierController.LoadProductsBySeries(System.String)
   name: LoadProductsBySeries(string)
   href: api/WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_LoadProductsBySeries_System_String_
@@ -834,22 +779,6 @@ references:
   isSpec: "True"
   fullName: WebApp.Controllers.CashierController.LoadProductsBySeries
   nameWithType: CashierController.LoadProductsBySeries
-- uid: WebApp.Controllers.CashierController.RemoveFavorite(System.Int32)
-  name: RemoveFavorite(int)
-  href: api/WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_RemoveFavorite_System_Int32_
-  commentId: M:WebApp.Controllers.CashierController.RemoveFavorite(System.Int32)
-  name.vb: RemoveFavorite(Integer)
-  fullName: WebApp.Controllers.CashierController.RemoveFavorite(int)
-  fullName.vb: WebApp.Controllers.CashierController.RemoveFavorite(Integer)
-  nameWithType: CashierController.RemoveFavorite(int)
-  nameWithType.vb: CashierController.RemoveFavorite(Integer)
-- uid: WebApp.Controllers.CashierController.RemoveFavorite*
-  name: RemoveFavorite
-  href: api/WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_RemoveFavorite_
-  commentId: Overload:WebApp.Controllers.CashierController.RemoveFavorite
-  isSpec: "True"
-  fullName: WebApp.Controllers.CashierController.RemoveFavorite
-  nameWithType: CashierController.RemoveFavorite
 - uid: WebApp.Controllers.CustomerController
   name: CustomerController
   href: api/WebApp.Controllers.CustomerController.html
@@ -1283,15 +1212,12 @@ references:
   isSpec: "True"
   fullName: WebApp.Controllers.ManagerController.ShowProducts
   nameWithType: ManagerController.ShowProducts
-- uid: WebApp.Controllers.ManagerController.ShowRestockReport(System.Collections.Generic.Dictionary{System.String,System.String})
-  name: ShowRestockReport(Dictionary<string, string>)
-  href: api/WebApp.Controllers.ManagerController.html#WebApp_Controllers_ManagerController_ShowRestockReport_System_Collections_Generic_Dictionary_System_String_System_String__
-  commentId: M:WebApp.Controllers.ManagerController.ShowRestockReport(System.Collections.Generic.Dictionary{System.String,System.String})
-  name.vb: ShowRestockReport(Dictionary(Of String, String))
-  fullName: WebApp.Controllers.ManagerController.ShowRestockReport(System.Collections.Generic.Dictionary<string, string>)
-  fullName.vb: WebApp.Controllers.ManagerController.ShowRestockReport(System.Collections.Generic.Dictionary(Of String, String))
-  nameWithType: ManagerController.ShowRestockReport(Dictionary<string, string>)
-  nameWithType.vb: ManagerController.ShowRestockReport(Dictionary(Of String, String))
+- uid: WebApp.Controllers.ManagerController.ShowRestockReport
+  name: ShowRestockReport()
+  href: api/WebApp.Controllers.ManagerController.html#WebApp_Controllers_ManagerController_ShowRestockReport
+  commentId: M:WebApp.Controllers.ManagerController.ShowRestockReport
+  fullName: WebApp.Controllers.ManagerController.ShowRestockReport()
+  nameWithType: ManagerController.ShowRestockReport()
 - uid: WebApp.Controllers.ManagerController.ShowRestockReport*
   name: ShowRestockReport
   href: api/WebApp.Controllers.ManagerController.html#WebApp_Controllers_ManagerController_ShowRestockReport_
@@ -2290,6 +2216,38 @@ references:
   isSpec: "True"
   fullName: WebApp.Data.OrderDao.GetOrdersBetween
   nameWithType: OrderDao.GetOrdersBetween
+- uid: WebApp.Data.OrderDao.GetSalesReport(System.DateTime,System.DateTime)
+  name: GetSalesReport(DateTime, DateTime)
+  href: api/WebApp.Data.OrderDao.html#WebApp_Data_OrderDao_GetSalesReport_System_DateTime_System_DateTime_
+  commentId: M:WebApp.Data.OrderDao.GetSalesReport(System.DateTime,System.DateTime)
+  name.vb: GetSalesReport(Date, Date)
+  fullName: WebApp.Data.OrderDao.GetSalesReport(System.DateTime, System.DateTime)
+  fullName.vb: WebApp.Data.OrderDao.GetSalesReport(Date, Date)
+  nameWithType: OrderDao.GetSalesReport(DateTime, DateTime)
+  nameWithType.vb: OrderDao.GetSalesReport(Date, Date)
+- uid: WebApp.Data.OrderDao.GetSalesReport*
+  name: GetSalesReport
+  href: api/WebApp.Data.OrderDao.html#WebApp_Data_OrderDao_GetSalesReport_
+  commentId: Overload:WebApp.Data.OrderDao.GetSalesReport
+  isSpec: "True"
+  fullName: WebApp.Data.OrderDao.GetSalesReport
+  nameWithType: OrderDao.GetSalesReport
+- uid: WebApp.Data.OrderDao.GetSalesTogether(System.DateTime,System.DateTime)
+  name: GetSalesTogether(DateTime, DateTime)
+  href: api/WebApp.Data.OrderDao.html#WebApp_Data_OrderDao_GetSalesTogether_System_DateTime_System_DateTime_
+  commentId: M:WebApp.Data.OrderDao.GetSalesTogether(System.DateTime,System.DateTime)
+  name.vb: GetSalesTogether(Date, Date)
+  fullName: WebApp.Data.OrderDao.GetSalesTogether(System.DateTime, System.DateTime)
+  fullName.vb: WebApp.Data.OrderDao.GetSalesTogether(Date, Date)
+  nameWithType: OrderDao.GetSalesTogether(DateTime, DateTime)
+  nameWithType.vb: OrderDao.GetSalesTogether(Date, Date)
+- uid: WebApp.Data.OrderDao.GetSalesTogether*
+  name: GetSalesTogether
+  href: api/WebApp.Data.OrderDao.html#WebApp_Data_OrderDao_GetSalesTogether_
+  commentId: Overload:WebApp.Data.OrderDao.GetSalesTogether
+  isSpec: "True"
+  fullName: WebApp.Data.OrderDao.GetSalesTogether
+  nameWithType: OrderDao.GetSalesTogether
 - uid: WebApp.Data.OrderDao.Update(WebApp.Models.UnitOfWork.Order,WebApp.Models.UnitOfWork.Order)
   name: Update(Order, Order)
   href: api/WebApp.Data.OrderDao.html#WebApp_Data_OrderDao_Update_WebApp_Models_UnitOfWork_Order_WebApp_Models_UnitOfWork_Order_
@@ -2832,6 +2790,38 @@ references:
   isSpec: "True"
   fullName: WebApp.Data.UnitOfWork.GetRecentProduct
   nameWithType: UnitOfWork.GetRecentProduct
+- uid: WebApp.Data.UnitOfWork.GetSalesReport(System.DateTime,System.DateTime)
+  name: GetSalesReport(DateTime, DateTime)
+  href: api/WebApp.Data.UnitOfWork.html#WebApp_Data_UnitOfWork_GetSalesReport_System_DateTime_System_DateTime_
+  commentId: M:WebApp.Data.UnitOfWork.GetSalesReport(System.DateTime,System.DateTime)
+  name.vb: GetSalesReport(Date, Date)
+  fullName: WebApp.Data.UnitOfWork.GetSalesReport(System.DateTime, System.DateTime)
+  fullName.vb: WebApp.Data.UnitOfWork.GetSalesReport(Date, Date)
+  nameWithType: UnitOfWork.GetSalesReport(DateTime, DateTime)
+  nameWithType.vb: UnitOfWork.GetSalesReport(Date, Date)
+- uid: WebApp.Data.UnitOfWork.GetSalesReport*
+  name: GetSalesReport
+  href: api/WebApp.Data.UnitOfWork.html#WebApp_Data_UnitOfWork_GetSalesReport_
+  commentId: Overload:WebApp.Data.UnitOfWork.GetSalesReport
+  isSpec: "True"
+  fullName: WebApp.Data.UnitOfWork.GetSalesReport
+  nameWithType: UnitOfWork.GetSalesReport
+- uid: WebApp.Data.UnitOfWork.GetSalesTogether(System.DateTime,System.DateTime)
+  name: GetSalesTogether(DateTime, DateTime)
+  href: api/WebApp.Data.UnitOfWork.html#WebApp_Data_UnitOfWork_GetSalesTogether_System_DateTime_System_DateTime_
+  commentId: M:WebApp.Data.UnitOfWork.GetSalesTogether(System.DateTime,System.DateTime)
+  name.vb: GetSalesTogether(Date, Date)
+  fullName: WebApp.Data.UnitOfWork.GetSalesTogether(System.DateTime, System.DateTime)
+  fullName.vb: WebApp.Data.UnitOfWork.GetSalesTogether(Date, Date)
+  nameWithType: UnitOfWork.GetSalesTogether(DateTime, DateTime)
+  nameWithType.vb: UnitOfWork.GetSalesTogether(Date, Date)
+- uid: WebApp.Data.UnitOfWork.GetSalesTogether*
+  name: GetSalesTogether
+  href: api/WebApp.Data.UnitOfWork.html#WebApp_Data_UnitOfWork_GetSalesTogether_
+  commentId: Overload:WebApp.Data.UnitOfWork.GetSalesTogether
+  isSpec: "True"
+  fullName: WebApp.Data.UnitOfWork.GetSalesTogether
+  nameWithType: UnitOfWork.GetSalesTogether
 - uid: WebApp.Data.UnitOfWork.GetSeriesInfo(System.String)
   name: GetSeriesInfo(string)
   href: api/WebApp.Data.UnitOfWork.html#WebApp_Data_UnitOfWork_GetSeriesInfo_System_String_

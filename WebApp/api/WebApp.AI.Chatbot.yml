@@ -18,7 +18,7 @@ items:
   source:
     remote:
       path: WebApp/AI/Chatbot.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Chatbot
     path: AI/Chatbot.cs
@@ -57,7 +57,7 @@ items:
   source:
     remote:
       path: WebApp/AI/Chatbot.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: AI/Chatbot.cs
@@ -93,7 +93,7 @@ items:
   source:
     remote:
       path: WebApp/AI/Chatbot.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Run
     path: AI/Chatbot.cs
@@ -135,7 +135,7 @@ items:
   source:
     remote:
       path: WebApp/AI/Chatbot.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: AddHistory
     path: AI/Chatbot.cs

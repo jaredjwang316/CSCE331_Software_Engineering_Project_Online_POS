@@ -17,7 +17,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/new/test/apiSpec/new?filename=WebApp_Controllers_MenuBoardController.md&amp;value=---%0Auid%3A%20WebApp.Controllers.MenuBoardController%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/new/main/apiSpec/new?filename=WebApp_Controllers_MenuBoardController.md&amp;value=---%0Auid%3A%20WebApp.Controllers.MenuBoardController%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -91,7 +91,7 @@
 
   <h1 id="WebApp_Controllers_MenuBoardController" data-uid="WebApp.Controllers.MenuBoardController" class="text-break">
     Class MenuBoardController
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/MenuBoardController.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/MenuBoardController.cs/#L23"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -99,7 +99,8 @@
   <dl><dt>Assembly</dt><dd>WebApp.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Controller responsible for handling requests related to the menu board, including displaying products and handling product details.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -752,10 +753,11 @@ public class MenuBoardController : Controller, IActionFilter, IAsyncActionFilter
 
   <h3 id="WebApp_Controllers_MenuBoardController__ctor_Microsoft_Extensions_Logging_ILogger_WebApp_Controllers_MenuBoardController__WebApp_Models_Cart_CartService_" data-uid="WebApp.Controllers.MenuBoardController.#ctor(Microsoft.Extensions.Logging.ILogger{WebApp.Controllers.MenuBoardController},WebApp.Models.Cart.CartService)">
   MenuBoardController(ILogger&lt;MenuBoardController&gt;, CartService)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/MenuBoardController.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/MenuBoardController.cs/#L34"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="WebApp.Controllers.MenuBoardController.html">MenuBoardController</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -765,9 +767,11 @@ public class MenuBoardController : Controller, IActionFilter, IAsyncActionFilter
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>logger</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="WebApp.Controllers.MenuBoardController.html">MenuBoardController</a>&gt;</dt>
-    <dd></dd>
+    <dd><p>The logger for MenuBoardController.</p>
+</dd>
     <dt><code>cartService</code> <a class="xref" href="WebApp.Models.Cart.CartService.html">CartService</a></dt>
-    <dd></dd>
+    <dd><p>The service for managing the shopping cart.</p>
+</dd>
   </dl>
 
 
@@ -789,10 +793,11 @@ public class MenuBoardController : Controller, IActionFilter, IAsyncActionFilter
 
   <h3 id="WebApp_Controllers_MenuBoardController_Error" data-uid="WebApp.Controllers.MenuBoardController.Error">
   Error()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/MenuBoardController.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/MenuBoardController.cs/#L90"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Handles errors and displays the error view.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -806,7 +811,8 @@ public IActionResult Error()</code></pre>
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
+    <dd><p>The view for the error page.</p>
+</dd>
   </dl>
 
 
@@ -823,10 +829,11 @@ public IActionResult Error()</code></pre>
 
   <h3 id="WebApp_Controllers_MenuBoardController_GetProductsByCategory_System_String_" data-uid="WebApp.Controllers.MenuBoardController.GetProductsByCategory(System.String)">
   GetProductsByCategory(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/MenuBoardController.cs/#L115"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/MenuBoardController.cs/#L142"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets product names by category for use in a partial view.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -838,13 +845,15 @@ public IActionResult GetProductsByCategory(string category)</code></pre>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>category</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>The product category.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
+    <dd><p>A partial view with product names.</p>
+</dd>
   </dl>
 
 
@@ -861,10 +870,11 @@ public IActionResult GetProductsByCategory(string category)</code></pre>
 
   <h3 id="WebApp_Controllers_MenuBoardController_Index_System_String_" data-uid="WebApp.Controllers.MenuBoardController.Index(System.String)">
   Index(string?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/MenuBoardController.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/MenuBoardController.cs/#L46"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Displays the menu board with filtered products based on the search term and organized by categories.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -876,13 +886,15 @@ public IActionResult Index(string? search = null)</code></pre>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>search</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>The search term used to filter products.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
+    <dd><p>The view for the menu board with product information.</p>
+</dd>
   </dl>
 
 
@@ -899,10 +911,11 @@ public IActionResult Index(string? search = null)</code></pre>
 
   <h3 id="WebApp_Controllers_MenuBoardController_ProductDetail_System_Int32_" data-uid="WebApp.Controllers.MenuBoardController.ProductDetail(System.Int32)">
   ProductDetail(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/MenuBoardController.cs/#L127"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/MenuBoardController.cs/#L159"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Displays detailed information about a specific product.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -914,13 +927,15 @@ public IActionResult ProductDetail(int id)</code></pre>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd></dd>
+    <dd><p>The unique identifier of the product.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
+    <dd><p>The view for the product detail page.</p>
+</dd>
   </dl>
 
 
@@ -937,10 +952,11 @@ public IActionResult ProductDetail(int id)</code></pre>
 
   <h3 id="WebApp_Controllers_MenuBoardController_getProducts" data-uid="WebApp.Controllers.MenuBoardController.getProducts">
   getProducts()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/MenuBoardController.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/MenuBoardController.cs/#L101"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the products and their categories in HTML format for use in a view.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -953,7 +969,8 @@ public IActionResult getProducts()</code></pre>
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
+    <dd><p>The HTML string containing product information.</p>
+</dd>
   </dl>
 
 
@@ -970,7 +987,7 @@ public IActionResult getProducts()</code></pre>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/MenuBoardController.cs/#L20" class="edit-link">Edit this page</a>
+          <a href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/MenuBoardController.cs/#L23" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -18,7 +18,7 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/ProductIngredients.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ProductIngredients
     path: Models/UnitOfWork/ProductIngredients.cs
@@ -55,14 +55,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/ProductIngredients.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ProductId
     path: Models/UnitOfWork/ProductIngredients.cs
-    startLine: 12
+    startLine: 15
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the unique identifier of the associated product.
+  example: []
   syntax:
     content: public int ProductId { get; set; }
     parameters: []
@@ -84,14 +86,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/ProductIngredients.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: IngredientIds
     path: Models/UnitOfWork/ProductIngredients.cs
-    startLine: 13
+    startLine: 20
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the list of unique identifiers of the associated ingredients.
+  example: []
   syntax:
     content: public List<int> IngredientIds { get; set; }
     parameters: []
@@ -113,11 +117,11 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/ProductIngredients.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Models/UnitOfWork/ProductIngredients.cs
-    startLine: 20
+    startLine: 27
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork

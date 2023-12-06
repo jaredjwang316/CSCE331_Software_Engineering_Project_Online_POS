@@ -22,14 +22,16 @@ items:
   source:
     remote:
       path: WebApp/Data/InventoryDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: InventoryDao
     path: Data/InventoryDao.cs
-    startLine: 10
+    startLine: 13
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Data Access Object (DAO) for managing Inventory entities.
+  example: []
   syntax:
     content: 'public class InventoryDao : IDao<Inventory>'
     content.vb: Public Class InventoryDao Implements IDao(Of Inventory)
@@ -59,19 +61,22 @@ items:
   source:
     remote:
       path: WebApp/Data/InventoryDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Data/InventoryDao.cs
-    startLine: 14
+    startLine: 21
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Initializes a new instance of the <xref href="WebApp.Data.InventoryDao" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public InventoryDao(CommandHandler commandHandler)
     parameters:
     - id: commandHandler
       type: WebApp.Data.CommandHandler
+      description: The command handler for executing database commands.
     content.vb: Public Sub New(commandHandler As CommandHandler)
   overload: WebApp.Data.InventoryDao.#ctor*
   nameWithType.vb: InventoryDao.New(CommandHandler)
@@ -91,22 +96,25 @@ items:
   source:
     remote:
       path: WebApp/Data/InventoryDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Get
     path: Data/InventoryDao.cs
-    startLine: 18
+    startLine: 26
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves an entity by its unique identifier.
   example: []
   syntax:
     content: public Inventory Get(int id)
     parameters:
     - id: id
       type: System.Int32
+      description: The unique identifier of the entity.
     return:
       type: WebApp.Models.UnitOfWork.Inventory
+      description: The entity with the specified identifier, or a default value if not found.
     content.vb: Public Function [Get](id As Integer) As Inventory
   overload: WebApp.Data.InventoryDao.Get*
   implements:
@@ -128,19 +136,21 @@ items:
   source:
     remote:
       path: WebApp/Data/InventoryDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetAll
     path: Data/InventoryDao.cs
-    startLine: 39
+    startLine: 48
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves all entities of the specified type.
   example: []
   syntax:
     content: public IEnumerable<Inventory> GetAll()
     return:
       type: System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.Inventory}
+      description: An enumerable collection of all entities of the specified type.
     content.vb: Public Function GetAll() As IEnumerable(Of Inventory)
   overload: WebApp.Data.InventoryDao.GetAll*
   implements:
@@ -159,20 +169,22 @@ items:
   source:
     remote:
       path: WebApp/Data/InventoryDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Add
     path: Data/InventoryDao.cs
-    startLine: 58
+    startLine: 68
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Adds a new entity to the data store.
   example: []
   syntax:
     content: public void Add(Inventory t)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.Inventory
+      description: The entity to be added.
     content.vb: Public Sub Add(t As Inventory)
   overload: WebApp.Data.InventoryDao.Add*
   implements:
@@ -191,22 +203,25 @@ items:
   source:
     remote:
       path: WebApp/Data/InventoryDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Update
     path: Data/InventoryDao.cs
-    startLine: 66
+    startLine: 77
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Updates an existing entity in the data store.
   example: []
   syntax:
     content: public void Update(Inventory t, Inventory newT)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.Inventory
+      description: The existing entity to be updated.
     - id: newT
       type: WebApp.Models.UnitOfWork.Inventory
+      description: The new values for the entity.
     content.vb: Public Sub Update(t As Inventory, newT As Inventory)
   overload: WebApp.Data.InventoryDao.Update*
   implements:
@@ -225,20 +240,22 @@ items:
   source:
     remote:
       path: WebApp/Data/InventoryDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Delete
     path: Data/InventoryDao.cs
-    startLine: 78
+    startLine: 90
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Deletes an entity from the data store.
   example: []
   syntax:
     content: public void Delete(Inventory t)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.Inventory
+      description: The entity to be deleted.
     content.vb: Public Sub Delete(t As Inventory)
   overload: WebApp.Data.InventoryDao.Delete*
   implements:
@@ -257,11 +274,11 @@ items:
   source:
     remote:
       path: WebApp/Data/InventoryDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetRecentInventory
     path: Data/InventoryDao.cs
-    startLine: 83
+    startLine: 95
   assemblies:
   - WebApp
   namespace: WebApp.Data
@@ -587,6 +604,13 @@ references:
   - name: " "
   - name: T
   - name: )
+- uid: WebApp.Data.InventoryDao
+  commentId: T:WebApp.Data.InventoryDao
+  parent: WebApp.Data
+  href: WebApp.Data.InventoryDao.html
+  name: InventoryDao
+  nameWithType: InventoryDao
+  fullName: WebApp.Data.InventoryDao
 - uid: WebApp.Data.InventoryDao.#ctor*
   commentId: Overload:WebApp.Data.InventoryDao.#ctor
   href: WebApp.Data.InventoryDao.html#WebApp_Data_InventoryDao__ctor_WebApp_Data_CommandHandler_

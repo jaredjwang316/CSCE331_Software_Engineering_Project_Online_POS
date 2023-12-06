@@ -24,7 +24,7 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Product.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Product
     path: Models/UnitOfWork/Product.cs
@@ -61,14 +61,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Product.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Id
     path: Models/UnitOfWork/Product.cs
-    startLine: 12
+    startLine: 15
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the unique identifier for the product.
+  example: []
   syntax:
     content: public int Id { get; set; }
     parameters: []
@@ -90,14 +92,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Product.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Name
     path: Models/UnitOfWork/Product.cs
-    startLine: 13
+    startLine: 20
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the name of the product.
+  example: []
   syntax:
     content: public string Name { get; set; }
     parameters: []
@@ -119,14 +123,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Product.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Price
     path: Models/UnitOfWork/Product.cs
-    startLine: 14
+    startLine: 25
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the price of the product.
+  example: []
   syntax:
     content: public double Price { get; set; }
     parameters: []
@@ -148,14 +154,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Product.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Series
     path: Models/UnitOfWork/Product.cs
-    startLine: 15
+    startLine: 30
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the series to which the product belongs.
+  example: []
   syntax:
     content: public string Series { get; set; }
     parameters: []
@@ -177,14 +185,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Product.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ImgUrl
     path: Models/UnitOfWork/Product.cs
-    startLine: 16
+    startLine: 35
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the URL of the product's image.
+  example: []
   syntax:
     content: public string ImgUrl { get; set; }
     parameters: []
@@ -206,14 +216,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Product.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Hidden
     path: Models/UnitOfWork/Product.cs
-    startLine: 17
+    startLine: 40
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets a value indicating whether the product is hidden.
+  example: []
   syntax:
     content: public bool Hidden { get; set; }
     parameters: []
@@ -235,14 +247,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Product.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: IsOption
     path: Models/UnitOfWork/Product.cs
-    startLine: 18
+    startLine: 45
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets a value indicating whether the product is an option.
+  example: []
   syntax:
     content: public bool IsOption { get; set; }
     parameters: []
@@ -264,14 +278,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Product.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: IsDrink
     path: Models/UnitOfWork/Product.cs
-    startLine: 19
+    startLine: 50
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets a value indicating whether the product is a drink.
+  example: []
   syntax:
     content: public bool IsDrink { get; set; }
     parameters: []
@@ -293,11 +309,11 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Product.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Models/UnitOfWork/Product.cs
-    startLine: 32
+    startLine: 63
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
@@ -329,6 +345,7 @@ items:
       description: ''
     - id: isDrink
       type: System.Boolean
+      description: ''
     content.vb: Public Sub New(id As Integer, name As String, price As Double, series As String, imgUrl As String, hidden As Boolean, isOption As Boolean, isDrink As Boolean)
   overload: WebApp.Models.UnitOfWork.Product.#ctor*
   nameWithType.vb: Product.New(Integer, String, Double, String, String, Boolean, Boolean, Boolean)

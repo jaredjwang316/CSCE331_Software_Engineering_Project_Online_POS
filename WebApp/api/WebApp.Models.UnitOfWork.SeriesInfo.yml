@@ -22,7 +22,7 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/SeriesInfo.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: SeriesInfo
     path: Models/UnitOfWork/SeriesInfo.cs
@@ -59,14 +59,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/SeriesInfo.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Name
     path: Models/UnitOfWork/SeriesInfo.cs
-    startLine: 12
+    startLine: 15
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the name of the series.
+  example: []
   syntax:
     content: public string Name { get; set; }
     parameters: []
@@ -88,14 +90,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/SeriesInfo.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ImgUrl
     path: Models/UnitOfWork/SeriesInfo.cs
-    startLine: 13
+    startLine: 20
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the URL of the image associated with the series.
+  example: []
   syntax:
     content: public string ImgUrl { get; set; }
     parameters: []
@@ -117,14 +121,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/SeriesInfo.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: MultiSelectable
     path: Models/UnitOfWork/SeriesInfo.cs
-    startLine: 14
+    startLine: 25
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets a value indicating whether the series is multi-selectable.
+  example: []
   syntax:
     content: public bool MultiSelectable { get; set; }
     parameters: []
@@ -146,14 +152,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/SeriesInfo.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: IsProduct
     path: Models/UnitOfWork/SeriesInfo.cs
-    startLine: 15
+    startLine: 30
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets a value indicating whether the series is considered a product.
+  example: []
   syntax:
     content: public bool IsProduct { get; set; }
     parameters: []
@@ -175,14 +183,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/SeriesInfo.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: IsCustomization
     path: Models/UnitOfWork/SeriesInfo.cs
-    startLine: 16
+    startLine: 35
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets a value indicating whether the series is a customization.
+  example: []
   syntax:
     content: public bool IsCustomization { get; set; }
     parameters: []
@@ -204,14 +214,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/SeriesInfo.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: IsHidden
     path: Models/UnitOfWork/SeriesInfo.cs
-    startLine: 17
+    startLine: 40
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets a value indicating whether the series is hidden.
+  example: []
   syntax:
     content: public bool IsHidden { get; set; }
     parameters: []
@@ -233,11 +245,11 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/SeriesInfo.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Models/UnitOfWork/SeriesInfo.cs
-    startLine: 29
+    startLine: 52
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork

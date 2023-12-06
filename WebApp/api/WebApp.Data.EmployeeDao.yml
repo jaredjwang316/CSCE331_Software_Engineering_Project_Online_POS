@@ -21,14 +21,16 @@ items:
   source:
     remote:
       path: WebApp/Data/EmployeeDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: EmployeeDao
     path: Data/EmployeeDao.cs
-    startLine: 9
+    startLine: 12
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Data Access Object (DAO) for managing Employee entities in the database.
+  example: []
   syntax:
     content: 'public class EmployeeDao : IDao<Employee>'
     content.vb: Public Class EmployeeDao Implements IDao(Of Employee)
@@ -58,19 +60,22 @@ items:
   source:
     remote:
       path: WebApp/Data/EmployeeDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Data/EmployeeDao.cs
-    startLine: 12
+    startLine: 19
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Initializes a new instance of the <xref href="WebApp.Data.EmployeeDao" data-throw-if-not-resolved="false"></xref> class with the specified <xref href="WebApp.Data.CommandHandler" data-throw-if-not-resolved="false"></xref>.
+  example: []
   syntax:
     content: public EmployeeDao(CommandHandler commandHandler)
     parameters:
     - id: commandHandler
       type: WebApp.Data.CommandHandler
+      description: The CommandHandler used to execute SQL commands.
     content.vb: Public Sub New(commandHandler As CommandHandler)
   overload: WebApp.Data.EmployeeDao.#ctor*
   nameWithType.vb: EmployeeDao.New(CommandHandler)
@@ -90,22 +95,25 @@ items:
   source:
     remote:
       path: WebApp/Data/EmployeeDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Get
     path: Data/EmployeeDao.cs
-    startLine: 16
+    startLine: 24
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves an entity by its unique identifier.
   example: []
   syntax:
     content: public Employee Get(int id)
     parameters:
     - id: id
       type: System.Int32
+      description: The unique identifier of the entity.
     return:
       type: WebApp.Models.UnitOfWork.Employee
+      description: The entity with the specified identifier, or a default value if not found.
     content.vb: Public Function [Get](id As Integer) As Employee
   overload: WebApp.Data.EmployeeDao.Get*
   implements:
@@ -127,19 +135,21 @@ items:
   source:
     remote:
       path: WebApp/Data/EmployeeDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetAll
     path: Data/EmployeeDao.cs
-    startLine: 37
+    startLine: 46
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves all entities of the specified type.
   example: []
   syntax:
     content: public IEnumerable<Employee> GetAll()
     return:
       type: System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.Employee}
+      description: An enumerable collection of all entities of the specified type.
     content.vb: Public Function GetAll() As IEnumerable(Of Employee)
   overload: WebApp.Data.EmployeeDao.GetAll*
   implements:
@@ -158,20 +168,22 @@ items:
   source:
     remote:
       path: WebApp/Data/EmployeeDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Add
     path: Data/EmployeeDao.cs
-    startLine: 57
+    startLine: 67
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Adds a new entity to the data store.
   example: []
   syntax:
     content: public void Add(Employee t)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.Employee
+      description: The entity to be added.
     content.vb: Public Sub Add(t As Employee)
   overload: WebApp.Data.EmployeeDao.Add*
   implements:
@@ -190,22 +202,25 @@ items:
   source:
     remote:
       path: WebApp/Data/EmployeeDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Update
     path: Data/EmployeeDao.cs
-    startLine: 65
+    startLine: 76
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Updates an existing entity in the data store.
   example: []
   syntax:
     content: public void Update(Employee t, Employee newT)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.Employee
+      description: The existing entity to be updated.
     - id: newT
       type: WebApp.Models.UnitOfWork.Employee
+      description: The new values for the entity.
     content.vb: Public Sub Update(t As Employee, newT As Employee)
   overload: WebApp.Data.EmployeeDao.Update*
   implements:
@@ -224,20 +239,22 @@ items:
   source:
     remote:
       path: WebApp/Data/EmployeeDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Delete
     path: Data/EmployeeDao.cs
-    startLine: 78
+    startLine: 90
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Deletes an entity from the data store.
   example: []
   syntax:
     content: public void Delete(Employee t)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.Employee
+      description: The entity to be deleted.
     content.vb: Public Sub Delete(t As Employee)
   overload: WebApp.Data.EmployeeDao.Delete*
   implements:
@@ -558,6 +575,20 @@ references:
   - name: " "
   - name: T
   - name: )
+- uid: WebApp.Data.EmployeeDao
+  commentId: T:WebApp.Data.EmployeeDao
+  parent: WebApp.Data
+  href: WebApp.Data.EmployeeDao.html
+  name: EmployeeDao
+  nameWithType: EmployeeDao
+  fullName: WebApp.Data.EmployeeDao
+- uid: WebApp.Data.CommandHandler
+  commentId: T:WebApp.Data.CommandHandler
+  parent: WebApp.Data
+  href: WebApp.Data.CommandHandler.html
+  name: CommandHandler
+  nameWithType: CommandHandler
+  fullName: WebApp.Data.CommandHandler
 - uid: WebApp.Data.EmployeeDao.#ctor*
   commentId: Overload:WebApp.Data.EmployeeDao.#ctor
   href: WebApp.Data.EmployeeDao.html#WebApp_Data_EmployeeDao__ctor_WebApp_Data_CommandHandler_
@@ -567,13 +598,6 @@ references:
   nameWithType.vb: EmployeeDao.New
   fullName.vb: WebApp.Data.EmployeeDao.New
   name.vb: New
-- uid: WebApp.Data.CommandHandler
-  commentId: T:WebApp.Data.CommandHandler
-  parent: WebApp.Data
-  href: WebApp.Data.CommandHandler.html
-  name: CommandHandler
-  nameWithType: CommandHandler
-  fullName: WebApp.Data.CommandHandler
 - uid: WebApp.Data.EmployeeDao.Get*
   commentId: Overload:WebApp.Data.EmployeeDao.Get
   href: WebApp.Data.EmployeeDao.html#WebApp_Data_EmployeeDao_Get_System_Int32_

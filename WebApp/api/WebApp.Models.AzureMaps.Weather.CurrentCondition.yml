@@ -18,14 +18,16 @@ items:
   source:
     remote:
       path: WebApp/Models/AzureMaps/Weather/CurrentCondition.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: CurrentCondition
     path: Models/AzureMaps/Weather/CurrentCondition.cs
-    startLine: 3
+    startLine: 6
   assemblies:
   - WebApp
   namespace: WebApp.Models.AzureMaps.Weather
+  summary: Represents the current weather condition, including temperature and icon code.
+  example: []
   syntax:
     content: public class CurrentCondition
     content.vb: Public Class CurrentCondition
@@ -53,14 +55,16 @@ items:
   source:
     remote:
       path: WebApp/Models/AzureMaps/Weather/CurrentCondition.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Temperature
     path: Models/AzureMaps/Weather/CurrentCondition.cs
-    startLine: 4
+    startLine: 10
   assemblies:
   - WebApp
   namespace: WebApp.Models.AzureMaps.Weather
+  summary: Gets or sets the current temperature.
+  example: []
   syntax:
     content: public double? Temperature { get; set; }
     parameters: []
@@ -82,14 +86,16 @@ items:
   source:
     remote:
       path: WebApp/Models/AzureMaps/Weather/CurrentCondition.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: IconCode
     path: Models/AzureMaps/Weather/CurrentCondition.cs
-    startLine: 5
+    startLine: 15
   assemblies:
   - WebApp
   namespace: WebApp.Models.AzureMaps.Weather
+  summary: Gets or sets the icon code representing the weather condition.
+  example: []
   syntax:
     content: public int? IconCode { get; set; }
     parameters: []
@@ -111,21 +117,25 @@ items:
   source:
     remote:
       path: WebApp/Models/AzureMaps/Weather/CurrentCondition.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Models/AzureMaps/Weather/CurrentCondition.cs
-    startLine: 7
+    startLine: 22
   assemblies:
   - WebApp
   namespace: WebApp.Models.AzureMaps.Weather
+  summary: Initializes a new instance of the <xref href="WebApp.Models.AzureMaps.Weather.CurrentCondition" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public CurrentCondition(double? temperature, int? iconCode)
     parameters:
     - id: temperature
       type: System.Nullable{System.Double}
+      description: The current temperature.
     - id: iconCode
       type: System.Nullable{System.Int32}
+      description: The icon code representing the weather condition.
     content.vb: Public Sub New(temperature As Double?, iconCode As Integer?)
   overload: WebApp.Models.AzureMaps.Weather.CurrentCondition.#ctor*
   nameWithType.vb: CurrentCondition.New(Double?, Integer?)
@@ -493,6 +503,12 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.int32
   - name: '?'
+- uid: WebApp.Models.AzureMaps.Weather.CurrentCondition
+  commentId: T:WebApp.Models.AzureMaps.Weather.CurrentCondition
+  href: WebApp.Models.AzureMaps.Weather.CurrentCondition.html
+  name: CurrentCondition
+  nameWithType: CurrentCondition
+  fullName: WebApp.Models.AzureMaps.Weather.CurrentCondition
 - uid: WebApp.Models.AzureMaps.Weather.CurrentCondition.#ctor*
   commentId: Overload:WebApp.Models.AzureMaps.Weather.CurrentCondition.#ctor
   href: WebApp.Models.AzureMaps.Weather.CurrentCondition.html#WebApp_Models_AzureMaps_Weather_CurrentCondition__ctor_System_Nullable_System_Double__System_Nullable_System_Int32__

@@ -20,14 +20,16 @@ items:
   source:
     remote:
       path: WebApp/APIs/GoogleTranslate/GoogleTranslate.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GoogleTranslate
     path: APIs/GoogleTranslate/GoogleTranslate.cs
-    startLine: 25
+    startLine: 29
   assemblies:
   - WebApp
   namespace: WebApp.APIs.GoogleTranslate
+  summary: Provides translation services using the Google Translate API.
+  example: []
   syntax:
     content: public class GoogleTranslate
     content.vb: Public Class GoogleTranslate
@@ -55,14 +57,16 @@ items:
   source:
     remote:
       path: WebApp/APIs/GoogleTranslate/GoogleTranslate.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: CurrentLanguage
     path: APIs/GoogleTranslate/GoogleTranslate.cs
-    startLine: 26
+    startLine: 33
   assemblies:
   - WebApp
   namespace: WebApp.APIs.GoogleTranslate
+  summary: Gets or sets the current language for translation.
+  example: []
   syntax:
     content: public string CurrentLanguage
     return:
@@ -82,14 +86,16 @@ items:
   source:
     remote:
       path: WebApp/APIs/GoogleTranslate/GoogleTranslate.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: APIs/GoogleTranslate/GoogleTranslate.cs
-    startLine: 32
+    startLine: 42
   assemblies:
   - WebApp
   namespace: WebApp.APIs.GoogleTranslate
+  summary: Initializes a new instance of the <xref href="WebApp.APIs.GoogleTranslate.GoogleTranslate" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public GoogleTranslate()
     content.vb: Public Sub New()
@@ -111,21 +117,25 @@ items:
   source:
     remote:
       path: WebApp/APIs/GoogleTranslate/GoogleTranslate.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: TranslateText
     path: APIs/GoogleTranslate/GoogleTranslate.cs
-    startLine: 40
+    startLine: 55
   assemblies:
   - WebApp
   namespace: WebApp.APIs.GoogleTranslate
+  summary: Translates the specified text to the current language.
+  example: []
   syntax:
     content: public Task<string> TranslateText(string text)
     parameters:
     - id: text
       type: System.String
+      description: The text to be translated.
     return:
       type: System.Threading.Tasks.Task{System.String}
+      description: The translated text or the original text if translation fails.
     content.vb: Public Function TranslateText(text As String) As Task(Of String)
   overload: WebApp.APIs.GoogleTranslate.GoogleTranslate.TranslateText*
   nameWithType.vb: GoogleTranslate.TranslateText(String)
@@ -145,18 +155,21 @@ items:
   source:
     remote:
       path: WebApp/APIs/GoogleTranslate/GoogleTranslate.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetPreferredLanguage
     path: APIs/GoogleTranslate/GoogleTranslate.cs
-    startLine: 78
+    startLine: 97
   assemblies:
   - WebApp
   namespace: WebApp.APIs.GoogleTranslate
+  summary: Gets the preferred language from the request headers.
+  example: []
   syntax:
     content: public string GetPreferredLanguage()
     return:
       type: System.String
+      description: The preferred language or "en" if not available.
     content.vb: Public Function GetPreferredLanguage() As String
   overload: WebApp.APIs.GoogleTranslate.GoogleTranslate.GetPreferredLanguage*
 - uid: WebApp.APIs.GoogleTranslate.GoogleTranslate.GetSupportedLanguages
@@ -173,18 +186,21 @@ items:
   source:
     remote:
       path: WebApp/APIs/GoogleTranslate/GoogleTranslate.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetSupportedLanguages
     path: APIs/GoogleTranslate/GoogleTranslate.cs
-    startLine: 84
+    startLine: 107
   assemblies:
   - WebApp
   namespace: WebApp.APIs.GoogleTranslate
+  summary: Gets the list of supported languages and their codes.
+  example: []
   syntax:
     content: public KeyValuePair<string, string>[]? GetSupportedLanguages()
     return:
       type: System.Collections.Generic.KeyValuePair{System.String,System.String}[]
+      description: An array of key-value pairs representing supported languages and their codes.
     content.vb: Public Function GetSupportedLanguages() As KeyValuePair(Of String, String)()
   overload: WebApp.APIs.GoogleTranslate.GoogleTranslate.GetSupportedLanguages*
 references:
@@ -466,6 +482,12 @@ references:
   nameWithType.vb: String
   fullName.vb: String
   name.vb: String
+- uid: WebApp.APIs.GoogleTranslate.GoogleTranslate
+  commentId: T:WebApp.APIs.GoogleTranslate.GoogleTranslate
+  href: WebApp.APIs.GoogleTranslate.GoogleTranslate.html
+  name: GoogleTranslate
+  nameWithType: GoogleTranslate
+  fullName: WebApp.APIs.GoogleTranslate.GoogleTranslate
 - uid: WebApp.APIs.GoogleTranslate.GoogleTranslate.#ctor*
   commentId: Overload:WebApp.APIs.GoogleTranslate.GoogleTranslate.#ctor
   href: WebApp.APIs.GoogleTranslate.GoogleTranslate.html#WebApp_APIs_GoogleTranslate_GoogleTranslate__ctor

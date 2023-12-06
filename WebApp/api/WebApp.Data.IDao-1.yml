@@ -20,18 +20,21 @@ items:
   source:
     remote:
       path: WebApp/Data/IDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: IDao
     path: Data/IDao.cs
-    startLine: 8
+    startLine: 13
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Interface for Data Access Object (DAO) classes responsible for CRUD operations on entities.
+  example: []
   syntax:
     content: public interface IDao<T>
     typeParameters:
     - id: T
+      description: Type of entity for which the DAO is defined.
     content.vb: Public Interface IDao(Of T)
   nameWithType.vb: IDao(Of T)
   fullName.vb: WebApp.Data.IDao(Of T)
@@ -50,21 +53,25 @@ items:
   source:
     remote:
       path: WebApp/Data/IDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Get
     path: Data/IDao.cs
-    startLine: 10
+    startLine: 20
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves an entity by its unique identifier.
+  example: []
   syntax:
     content: T Get(int id)
     parameters:
     - id: id
       type: System.Int32
+      description: The unique identifier of the entity.
     return:
       type: '{T}'
+      description: The entity with the specified identifier, or a default value if not found.
     content.vb: Function [Get](id As Integer) As T
   overload: WebApp.Data.IDao`1.Get*
   nameWithType.vb: IDao(Of T).Get(Integer)
@@ -84,18 +91,21 @@ items:
   source:
     remote:
       path: WebApp/Data/IDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetAll
     path: Data/IDao.cs
-    startLine: 11
+    startLine: 26
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves all entities of the specified type.
+  example: []
   syntax:
     content: IEnumerable<T> GetAll()
     return:
       type: System.Collections.Generic.IEnumerable{{T}}
+      description: An enumerable collection of all entities of the specified type.
     content.vb: Function GetAll() As IEnumerable(Of T)
   overload: WebApp.Data.IDao`1.GetAll*
   nameWithType.vb: IDao(Of T).GetAll()
@@ -114,19 +124,22 @@ items:
   source:
     remote:
       path: WebApp/Data/IDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Add
     path: Data/IDao.cs
-    startLine: 12
+    startLine: 32
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Adds a new entity to the data store.
+  example: []
   syntax:
     content: void Add(T t)
     parameters:
     - id: t
       type: '{T}'
+      description: The entity to be added.
     content.vb: Sub Add(t As T)
   overload: WebApp.Data.IDao`1.Add*
   nameWithType.vb: IDao(Of T).Add(T)
@@ -145,21 +158,25 @@ items:
   source:
     remote:
       path: WebApp/Data/IDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Update
     path: Data/IDao.cs
-    startLine: 13
+    startLine: 39
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Updates an existing entity in the data store.
+  example: []
   syntax:
     content: void Update(T t, T newT)
     parameters:
     - id: t
       type: '{T}'
+      description: The existing entity to be updated.
     - id: newT
       type: '{T}'
+      description: The new values for the entity.
     content.vb: Sub Update(t As T, newT As T)
   overload: WebApp.Data.IDao`1.Update*
   nameWithType.vb: IDao(Of T).Update(T, T)
@@ -178,19 +195,22 @@ items:
   source:
     remote:
       path: WebApp/Data/IDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Delete
     path: Data/IDao.cs
-    startLine: 14
+    startLine: 45
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Deletes an entity from the data store.
+  example: []
   syntax:
     content: void Delete(T t)
     parameters:
     - id: t
       type: '{T}'
+      description: The entity to be deleted.
     content.vb: Sub Delete(t As T)
   overload: WebApp.Data.IDao`1.Delete*
   nameWithType.vb: IDao(Of T).Delete(T)

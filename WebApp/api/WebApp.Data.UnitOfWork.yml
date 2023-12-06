@@ -16,6 +16,8 @@ items:
   - WebApp.Data.UnitOfWork.GetRecentIngredient
   - WebApp.Data.UnitOfWork.GetRecentInventory
   - WebApp.Data.UnitOfWork.GetRecentProduct
+  - WebApp.Data.UnitOfWork.GetSalesReport(System.DateTime,System.DateTime)
+  - WebApp.Data.UnitOfWork.GetSalesTogether(System.DateTime,System.DateTime)
   - WebApp.Data.UnitOfWork.GetSeriesInfo(System.String)
   - WebApp.Data.UnitOfWork.GetUniqueSeries(System.Boolean,System.Boolean,System.Boolean)
   - WebApp.Data.UnitOfWork.GetUser(System.String)
@@ -31,14 +33,16 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: UnitOfWork
     path: Data/UnitOfWork.cs
-    startLine: 12
+    startLine: 13
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Represents the Unit of Work pattern for managing database operations.
+  example: []
   syntax:
     content: public class UnitOfWork
     content.vb: Public Class UnitOfWork
@@ -66,19 +70,22 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Data/UnitOfWork.cs
-    startLine: 18
+    startLine: 23
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Initializes a new instance of the <xref href="WebApp.Data.UnitOfWork" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public UnitOfWork(string databaseName = "")
     parameters:
     - id: databaseName
       type: System.String
+      description: The name of the database to connect to.
     content.vb: Public Sub New(databaseName As String = "")
   overload: WebApp.Data.UnitOfWork.#ctor*
   nameWithType.vb: UnitOfWork.New(String)
@@ -98,21 +105,25 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Add
     path: Data/UnitOfWork.cs
-    startLine: 42
+    startLine: 52
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Adds an entity to the database.
+  example: []
   syntax:
     content: 'public void Add<T>(T t) where T : class'
     parameters:
     - id: t
       type: '{T}'
+      description: The entity to be added.
     typeParameters:
     - id: T
+      description: The type of the entity.
     content.vb: Public Sub Add(Of T As Class)(t As T)
   overload: WebApp.Data.UnitOfWork.Add*
   nameWithType.vb: UnitOfWork.Add(Of T)(T)
@@ -132,23 +143,28 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Update
     path: Data/UnitOfWork.cs
-    startLine: 46
+    startLine: 62
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Updates an entity in the database.
+  example: []
   syntax:
     content: 'public void Update<T>(T t, T newT) where T : class'
     parameters:
     - id: t
       type: '{T}'
+      description: The original entity.
     - id: newT
       type: '{T}'
+      description: The new entity data.
     typeParameters:
     - id: T
+      description: The type of the entity.
     content.vb: Public Sub Update(Of T As Class)(t As T, newT As T)
   overload: WebApp.Data.UnitOfWork.Update*
   nameWithType.vb: UnitOfWork.Update(Of T)(T, T)
@@ -168,21 +184,25 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Delete
     path: Data/UnitOfWork.cs
-    startLine: 50
+    startLine: 71
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Deletes an entity from the database.
+  example: []
   syntax:
     content: 'public void Delete<T>(T t) where T : class'
     parameters:
     - id: t
       type: '{T}'
+      description: The entity to be deleted.
     typeParameters:
     - id: T
+      description: The type of the entity.
     content.vb: Public Sub Delete(Of T As Class)(t As T)
   overload: WebApp.Data.UnitOfWork.Delete*
   nameWithType.vb: UnitOfWork.Delete(Of T)(T)
@@ -202,23 +222,28 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Get
     path: Data/UnitOfWork.cs
-    startLine: 54
+    startLine: 81
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves an entity from the database by its ID.
+  example: []
   syntax:
     content: 'public T Get<T>(int id) where T : class'
     parameters:
     - id: id
       type: System.Int32
+      description: The ID of the entity.
     typeParameters:
     - id: T
+      description: The type of the entity.
     return:
       type: '{T}'
+      description: The retrieved entity.
     content.vb: Public Function [Get](Of T As Class)(id As Integer) As T
   overload: WebApp.Data.UnitOfWork.Get*
   nameWithType.vb: UnitOfWork.Get(Of T)(Integer)
@@ -238,20 +263,24 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetAll
     path: Data/UnitOfWork.cs
-    startLine: 58
+    startLine: 90
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves all entities of a specified type from the database.
+  example: []
   syntax:
     content: 'public IEnumerable<T> GetAll<T>() where T : class'
     typeParameters:
     - id: T
+      description: The type of the entities.
     return:
       type: System.Collections.Generic.IEnumerable{{T}}
+      description: A collection of entities.
     content.vb: Public Function GetAll(Of T As Class)() As IEnumerable(Of T)
   overload: WebApp.Data.UnitOfWork.GetAll*
   nameWithType.vb: UnitOfWork.GetAll(Of T)()
@@ -271,14 +300,16 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: CloseConnection
     path: Data/UnitOfWork.cs
-    startLine: 63
+    startLine: 98
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Closes the connection to the database.
+  example: []
   syntax:
     content: public void CloseConnection()
     content.vb: Public Sub CloseConnection()
@@ -297,21 +328,25 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetProductsBySeries
     path: Data/UnitOfWork.cs
-    startLine: 71
+    startLine: 111
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves a collection of products based on the specified series.
+  example: []
   syntax:
     content: public IEnumerable<Product> GetProductsBySeries(string series)
     parameters:
     - id: series
       type: System.String
+      description: The series to filter products by.
     return:
       type: System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.Product}
+      description: A collection of products belonging to the specified series.
     content.vb: Public Function GetProductsBySeries(series As String) As IEnumerable(Of Product)
   overload: WebApp.Data.UnitOfWork.GetProductsBySeries*
   nameWithType.vb: UnitOfWork.GetProductsBySeries(String)
@@ -331,25 +366,31 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetUniqueSeries
     path: Data/UnitOfWork.cs
-    startLine: 75
+    startLine: 122
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves a collection of unique series based on optional filters.
+  example: []
   syntax:
     content: public IEnumerable<string> GetUniqueSeries(bool includeDrinks = true, bool includeHidden = false, bool includeIsOption = false)
     parameters:
     - id: includeDrinks
       type: System.Boolean
+      description: Include drinks in the result.
     - id: includeHidden
       type: System.Boolean
+      description: Include hidden products in the result.
     - id: includeIsOption
       type: System.Boolean
+      description: Include option products in the result.
     return:
       type: System.Collections.Generic.IEnumerable{System.String}
+      description: A collection of unique series based on the specified filters.
     content.vb: Public Function GetUniqueSeries(includeDrinks As Boolean = True, includeHidden As Boolean = False, includeIsOption As Boolean = False) As IEnumerable(Of String)
   overload: WebApp.Data.UnitOfWork.GetUniqueSeries*
   nameWithType.vb: UnitOfWork.GetUniqueSeries(Boolean, Boolean, Boolean)
@@ -369,21 +410,25 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetBestSellingProducts
     path: Data/UnitOfWork.cs
-    startLine: 83
+    startLine: 135
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves a collection of best-selling products up to the specified limit.
+  example: []
   syntax:
     content: public IEnumerable<Product> GetBestSellingProducts(int limit)
     parameters:
     - id: limit
       type: System.Int32
+      description: The maximum number of best-selling products to retrieve.
     return:
       type: System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.Product}
+      description: A collection of best-selling products.
     content.vb: Public Function GetBestSellingProducts(limit As Integer) As IEnumerable(Of Product)
   overload: WebApp.Data.UnitOfWork.GetBestSellingProducts*
   nameWithType.vb: UnitOfWork.GetBestSellingProducts(Integer)
@@ -403,11 +448,11 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetRecentProduct
     path: Data/UnitOfWork.cs
-    startLine: 87
+    startLine: 139
   assemblies:
   - WebApp
   namespace: WebApp.Data
@@ -431,21 +476,25 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetSeriesInfo
     path: Data/UnitOfWork.cs
-    startLine: 91
+    startLine: 148
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves series information based on the specified series name.
+  example: []
   syntax:
     content: public SeriesInfo GetSeriesInfo(string name)
     parameters:
     - id: name
       type: System.String
+      description: The name of the series to retrieve information for.
     return:
       type: WebApp.Models.UnitOfWork.SeriesInfo
+      description: Series information for the specified series name.
     content.vb: Public Function GetSeriesInfo(name As String) As SeriesInfo
   overload: WebApp.Data.UnitOfWork.GetSeriesInfo*
   nameWithType.vb: UnitOfWork.GetSeriesInfo(String)
@@ -465,54 +514,30 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetUser
     path: Data/UnitOfWork.cs
-    startLine: 95
+    startLine: 157
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves a user based on the specified email address.
+  example: []
   syntax:
     content: public User? GetUser(string email)
     parameters:
     - id: email
       type: System.String
+      description: The email address of the user to retrieve.
     return:
       type: WebApp.Models.UnitOfWork.User
+      description: The user associated with the specified email address, or null if not found.
     content.vb: Public Function GetUser(email As String) As User
   overload: WebApp.Data.UnitOfWork.GetUser*
   nameWithType.vb: UnitOfWork.GetUser(String)
   fullName.vb: WebApp.Data.UnitOfWork.GetUser(String)
   name.vb: GetUser(String)
-- uid: WebApp.Data.UnitOfWork.GetRecentInventory
-  commentId: M:WebApp.Data.UnitOfWork.GetRecentInventory
-  id: GetRecentInventory
-  parent: WebApp.Data.UnitOfWork
-  langs:
-  - csharp
-  - vb
-  name: GetRecentInventory()
-  nameWithType: UnitOfWork.GetRecentInventory()
-  fullName: WebApp.Data.UnitOfWork.GetRecentInventory()
-  type: Method
-  source:
-    remote:
-      path: WebApp/Data/UnitOfWork.cs
-      branch: test
-      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
-    id: GetRecentInventory
-    path: Data/UnitOfWork.cs
-    startLine: 99
-  assemblies:
-  - WebApp
-  namespace: WebApp.Data
-  syntax:
-    content: public Inventory GetRecentInventory()
-    return:
-      type: WebApp.Models.UnitOfWork.Inventory
-    content.vb: Public Function GetRecentInventory() As Inventory
-  overload: WebApp.Data.UnitOfWork.GetRecentInventory*
 - uid: WebApp.Data.UnitOfWork.GetRecentIngredient
   commentId: M:WebApp.Data.UnitOfWork.GetRecentIngredient
   id: GetRecentIngredient
@@ -527,11 +552,11 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetRecentIngredient
     path: Data/UnitOfWork.cs
-    startLine: 103
+    startLine: 161
   assemblies:
   - WebApp
   namespace: WebApp.Data
@@ -541,6 +566,34 @@ items:
       type: WebApp.Models.UnitOfWork.Ingredient
     content.vb: Public Function GetRecentIngredient() As Ingredient
   overload: WebApp.Data.UnitOfWork.GetRecentIngredient*
+- uid: WebApp.Data.UnitOfWork.GetRecentInventory
+  commentId: M:WebApp.Data.UnitOfWork.GetRecentInventory
+  id: GetRecentInventory
+  parent: WebApp.Data.UnitOfWork
+  langs:
+  - csharp
+  - vb
+  name: GetRecentInventory()
+  nameWithType: UnitOfWork.GetRecentInventory()
+  fullName: WebApp.Data.UnitOfWork.GetRecentInventory()
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/UnitOfWork.cs
+      branch: main
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: GetRecentInventory
+    path: Data/UnitOfWork.cs
+    startLine: 165
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: public Inventory GetRecentInventory()
+    return:
+      type: WebApp.Models.UnitOfWork.Inventory
+    content.vb: Public Function GetRecentInventory() As Inventory
+  overload: WebApp.Data.UnitOfWork.GetRecentInventory*
 - uid: WebApp.Data.UnitOfWork.GetOrdersBetween(System.DateTime,System.DateTime)
   commentId: M:WebApp.Data.UnitOfWork.GetOrdersBetween(System.DateTime,System.DateTime)
   id: GetOrdersBetween(System.DateTime,System.DateTime)
@@ -555,11 +608,11 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetOrdersBetween
     path: Data/UnitOfWork.cs
-    startLine: 107
+    startLine: 169
   assemblies:
   - WebApp
   namespace: WebApp.Data
@@ -577,6 +630,78 @@ items:
   nameWithType.vb: UnitOfWork.GetOrdersBetween(Date, Date)
   fullName.vb: WebApp.Data.UnitOfWork.GetOrdersBetween(Date, Date)
   name.vb: GetOrdersBetween(Date, Date)
+- uid: WebApp.Data.UnitOfWork.GetSalesTogether(System.DateTime,System.DateTime)
+  commentId: M:WebApp.Data.UnitOfWork.GetSalesTogether(System.DateTime,System.DateTime)
+  id: GetSalesTogether(System.DateTime,System.DateTime)
+  parent: WebApp.Data.UnitOfWork
+  langs:
+  - csharp
+  - vb
+  name: GetSalesTogether(DateTime, DateTime)
+  nameWithType: UnitOfWork.GetSalesTogether(DateTime, DateTime)
+  fullName: WebApp.Data.UnitOfWork.GetSalesTogether(System.DateTime, System.DateTime)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/UnitOfWork.cs
+      branch: main
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: GetSalesTogether
+    path: Data/UnitOfWork.cs
+    startLine: 173
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: public List<Tuple<string, string, int>> GetSalesTogether(DateTime starttime, DateTime endtime)
+    parameters:
+    - id: starttime
+      type: System.DateTime
+    - id: endtime
+      type: System.DateTime
+    return:
+      type: System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Int32}}
+    content.vb: Public Function GetSalesTogether(starttime As Date, endtime As Date) As List(Of Tuple(Of String, String, Integer))
+  overload: WebApp.Data.UnitOfWork.GetSalesTogether*
+  nameWithType.vb: UnitOfWork.GetSalesTogether(Date, Date)
+  fullName.vb: WebApp.Data.UnitOfWork.GetSalesTogether(Date, Date)
+  name.vb: GetSalesTogether(Date, Date)
+- uid: WebApp.Data.UnitOfWork.GetSalesReport(System.DateTime,System.DateTime)
+  commentId: M:WebApp.Data.UnitOfWork.GetSalesReport(System.DateTime,System.DateTime)
+  id: GetSalesReport(System.DateTime,System.DateTime)
+  parent: WebApp.Data.UnitOfWork
+  langs:
+  - csharp
+  - vb
+  name: GetSalesReport(DateTime, DateTime)
+  nameWithType: UnitOfWork.GetSalesReport(DateTime, DateTime)
+  fullName: WebApp.Data.UnitOfWork.GetSalesReport(System.DateTime, System.DateTime)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/UnitOfWork.cs
+      branch: main
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: GetSalesReport
+    path: Data/UnitOfWork.cs
+    startLine: 177
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: public List<Tuple<int, double>> GetSalesReport(DateTime starttime, DateTime endtime)
+    parameters:
+    - id: starttime
+      type: System.DateTime
+    - id: endtime
+      type: System.DateTime
+    return:
+      type: System.Collections.Generic.List{System.Tuple{System.Int32,System.Double}}
+    content.vb: Public Function GetSalesReport(starttime As Date, endtime As Date) As List(Of Tuple(Of Integer, Double))
+  overload: WebApp.Data.UnitOfWork.GetSalesReport*
+  nameWithType.vb: UnitOfWork.GetSalesReport(Date, Date)
+  fullName.vb: WebApp.Data.UnitOfWork.GetSalesReport(Date, Date)
+  name.vb: GetSalesReport(Date, Date)
 references:
 - uid: WebApp.Data
   commentId: N:WebApp.Data
@@ -837,6 +962,12 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: WebApp.Data.UnitOfWork
+  commentId: T:WebApp.Data.UnitOfWork
+  href: WebApp.Data.UnitOfWork.html
+  name: UnitOfWork
+  nameWithType: UnitOfWork
+  fullName: WebApp.Data.UnitOfWork
 - uid: WebApp.Data.UnitOfWork.#ctor*
   commentId: Overload:WebApp.Data.UnitOfWork.#ctor
   href: WebApp.Data.UnitOfWork.html#WebApp_Data_UnitOfWork__ctor_System_String_
@@ -1174,19 +1305,6 @@ references:
   name: User
   nameWithType: User
   fullName: WebApp.Models.UnitOfWork.User
-- uid: WebApp.Data.UnitOfWork.GetRecentInventory*
-  commentId: Overload:WebApp.Data.UnitOfWork.GetRecentInventory
-  href: WebApp.Data.UnitOfWork.html#WebApp_Data_UnitOfWork_GetRecentInventory
-  name: GetRecentInventory
-  nameWithType: UnitOfWork.GetRecentInventory
-  fullName: WebApp.Data.UnitOfWork.GetRecentInventory
-- uid: WebApp.Models.UnitOfWork.Inventory
-  commentId: T:WebApp.Models.UnitOfWork.Inventory
-  parent: WebApp.Models.UnitOfWork
-  href: WebApp.Models.UnitOfWork.Inventory.html
-  name: Inventory
-  nameWithType: Inventory
-  fullName: WebApp.Models.UnitOfWork.Inventory
 - uid: WebApp.Data.UnitOfWork.GetRecentIngredient*
   commentId: Overload:WebApp.Data.UnitOfWork.GetRecentIngredient
   href: WebApp.Data.UnitOfWork.html#WebApp_Data_UnitOfWork_GetRecentIngredient
@@ -1200,6 +1318,19 @@ references:
   name: Ingredient
   nameWithType: Ingredient
   fullName: WebApp.Models.UnitOfWork.Ingredient
+- uid: WebApp.Data.UnitOfWork.GetRecentInventory*
+  commentId: Overload:WebApp.Data.UnitOfWork.GetRecentInventory
+  href: WebApp.Data.UnitOfWork.html#WebApp_Data_UnitOfWork_GetRecentInventory
+  name: GetRecentInventory
+  nameWithType: UnitOfWork.GetRecentInventory
+  fullName: WebApp.Data.UnitOfWork.GetRecentInventory
+- uid: WebApp.Models.UnitOfWork.Inventory
+  commentId: T:WebApp.Models.UnitOfWork.Inventory
+  parent: WebApp.Models.UnitOfWork
+  href: WebApp.Models.UnitOfWork.Inventory.html
+  name: Inventory
+  nameWithType: Inventory
+  fullName: WebApp.Models.UnitOfWork.Inventory
 - uid: WebApp.Data.UnitOfWork.GetOrdersBetween*
   commentId: Overload:WebApp.Data.UnitOfWork.GetOrdersBetween
   href: WebApp.Data.UnitOfWork.html#WebApp_Data_UnitOfWork_GetOrdersBetween_System_DateTime_System_DateTime_
@@ -1277,4 +1408,150 @@ references:
   - name: Of
   - name: " "
   - name: T
+  - name: )
+- uid: WebApp.Data.UnitOfWork.GetSalesTogether*
+  commentId: Overload:WebApp.Data.UnitOfWork.GetSalesTogether
+  href: WebApp.Data.UnitOfWork.html#WebApp_Data_UnitOfWork_GetSalesTogether_System_DateTime_System_DateTime_
+  name: GetSalesTogether
+  nameWithType: UnitOfWork.GetSalesTogether
+  fullName: WebApp.Data.UnitOfWork.GetSalesTogether
+- uid: System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Int32}}
+  commentId: T:System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Int32}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<Tuple<string, string, int>>
+  nameWithType: List<Tuple<string, string, int>>
+  fullName: System.Collections.Generic.List<System.Tuple<string, string, int>>
+  nameWithType.vb: List(Of Tuple(Of String, String, Integer))
+  fullName.vb: System.Collections.Generic.List(Of System.Tuple(Of String, String, Integer))
+  name.vb: List(Of Tuple(Of String, String, Integer))
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: System.Tuple`3
+    name: Tuple
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.tuple-3
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Tuple`3
+    name: Tuple
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.tuple-3
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  - name: )
+- uid: WebApp.Data.UnitOfWork.GetSalesReport*
+  commentId: Overload:WebApp.Data.UnitOfWork.GetSalesReport
+  href: WebApp.Data.UnitOfWork.html#WebApp_Data_UnitOfWork_GetSalesReport_System_DateTime_System_DateTime_
+  name: GetSalesReport
+  nameWithType: UnitOfWork.GetSalesReport
+  fullName: WebApp.Data.UnitOfWork.GetSalesReport
+- uid: System.Collections.Generic.List{System.Tuple{System.Int32,System.Double}}
+  commentId: T:System.Collections.Generic.List{System.Tuple{System.Int32,System.Double}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<Tuple<int, double>>
+  nameWithType: List<Tuple<int, double>>
+  fullName: System.Collections.Generic.List<System.Tuple<int, double>>
+  nameWithType.vb: List(Of Tuple(Of Integer, Double))
+  fullName.vb: System.Collections.Generic.List(Of System.Tuple(Of Integer, Double))
+  name.vb: List(Of Tuple(Of Integer, Double))
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: System.Tuple`2
+    name: Tuple
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.tuple-2
+  - name: <
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Tuple`2
+    name: Tuple
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.tuple-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
   - name: )

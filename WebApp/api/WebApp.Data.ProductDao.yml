@@ -25,14 +25,16 @@ items:
   source:
     remote:
       path: WebApp/Data/ProductDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ProductDao
     path: Data/ProductDao.cs
-    startLine: 11
+    startLine: 14
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Data Access Object (DAO) for managing Product entities.
+  example: []
   syntax:
     content: 'public class ProductDao : IDao<Product>'
     content.vb: Public Class ProductDao Implements IDao(Of Product)
@@ -62,19 +64,22 @@ items:
   source:
     remote:
       path: WebApp/Data/ProductDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Data/ProductDao.cs
-    startLine: 14
+    startLine: 21
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Initializes a new instance of the <xref href="WebApp.Data.ProductDao" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public ProductDao(CommandHandler commandHandler)
     parameters:
     - id: commandHandler
       type: WebApp.Data.CommandHandler
+      description: The command handler for executing database commands.
     content.vb: Public Sub New(commandHandler As CommandHandler)
   overload: WebApp.Data.ProductDao.#ctor*
   nameWithType.vb: ProductDao.New(CommandHandler)
@@ -94,22 +99,25 @@ items:
   source:
     remote:
       path: WebApp/Data/ProductDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Get
     path: Data/ProductDao.cs
-    startLine: 18
+    startLine: 26
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves an entity by its unique identifier.
   example: []
   syntax:
     content: public Product Get(int id)
     parameters:
     - id: id
       type: System.Int32
+      description: The unique identifier of the entity.
     return:
       type: WebApp.Models.UnitOfWork.Product
+      description: The entity with the specified identifier, or a default value if not found.
     content.vb: Public Function [Get](id As Integer) As Product
   overload: WebApp.Data.ProductDao.Get*
   implements:
@@ -131,19 +139,21 @@ items:
   source:
     remote:
       path: WebApp/Data/ProductDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetAll
     path: Data/ProductDao.cs
-    startLine: 43
+    startLine: 52
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves all entities of the specified type.
   example: []
   syntax:
     content: public IEnumerable<Product> GetAll()
     return:
       type: System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.Product}
+      description: An enumerable collection of all entities of the specified type.
     content.vb: Public Function GetAll() As IEnumerable(Of Product)
   overload: WebApp.Data.ProductDao.GetAll*
   implements:
@@ -162,20 +172,22 @@ items:
   source:
     remote:
       path: WebApp/Data/ProductDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Add
     path: Data/ProductDao.cs
-    startLine: 66
+    startLine: 76
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Adds a new entity to the data store.
   example: []
   syntax:
     content: public void Add(Product t)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.Product
+      description: The entity to be added.
     content.vb: Public Sub Add(t As Product)
   overload: WebApp.Data.ProductDao.Add*
   implements:
@@ -194,22 +206,25 @@ items:
   source:
     remote:
       path: WebApp/Data/ProductDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Update
     path: Data/ProductDao.cs
-    startLine: 81
+    startLine: 92
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Updates an existing entity in the data store.
   example: []
   syntax:
     content: public void Update(Product t, Product newT)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.Product
+      description: The existing entity to be updated.
     - id: newT
       type: WebApp.Models.UnitOfWork.Product
+      description: The new values for the entity.
     content.vb: Public Sub Update(t As Product, newT As Product)
   overload: WebApp.Data.ProductDao.Update*
   implements:
@@ -228,20 +243,22 @@ items:
   source:
     remote:
       path: WebApp/Data/ProductDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Delete
     path: Data/ProductDao.cs
-    startLine: 96
+    startLine: 108
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Deletes an entity from the data store.
   example: []
   syntax:
     content: public void Delete(Product t)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.Product
+      description: The entity to be deleted.
     content.vb: Public Sub Delete(t As Product)
   overload: WebApp.Data.ProductDao.Delete*
   implements:
@@ -260,21 +277,25 @@ items:
   source:
     remote:
       path: WebApp/Data/ProductDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetProductsBySeries
     path: Data/ProductDao.cs
-    startLine: 105
+    startLine: 122
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Gets products by series.
+  example: []
   syntax:
     content: public IEnumerable<Product> GetProductsBySeries(string series)
     parameters:
     - id: series
       type: System.String
+      description: The series of products to retrieve.
     return:
       type: System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.Product}
+      description: The products belonging to the specified series.
     content.vb: Public Function GetProductsBySeries(series As String) As IEnumerable(Of Product)
   overload: WebApp.Data.ProductDao.GetProductsBySeries*
   nameWithType.vb: ProductDao.GetProductsBySeries(String)
@@ -294,25 +315,31 @@ items:
   source:
     remote:
       path: WebApp/Data/ProductDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetUniqueSeries
     path: Data/ProductDao.cs
-    startLine: 128
+    startLine: 152
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Gets unique product series based on specified criteria.
+  example: []
   syntax:
     content: public IEnumerable<string> GetUniqueSeries(bool includeDrinks = true, bool includeHidden = false, bool includeIsOption = false)
     parameters:
     - id: includeDrinks
       type: System.Boolean
+      description: Include drinks in the result.
     - id: includeHidden
       type: System.Boolean
+      description: Include hidden products in the result.
     - id: includeIsOption
       type: System.Boolean
+      description: Include products marked as options in the result.
     return:
       type: System.Collections.Generic.IEnumerable{System.String}
+      description: The unique product series based on the specified criteria.
     content.vb: Public Function GetUniqueSeries(includeDrinks As Boolean = True, includeHidden As Boolean = False, includeIsOption As Boolean = False) As IEnumerable(Of String)
   overload: WebApp.Data.ProductDao.GetUniqueSeries*
   nameWithType.vb: ProductDao.GetUniqueSeries(Boolean, Boolean, Boolean)
@@ -332,21 +359,25 @@ items:
   source:
     remote:
       path: WebApp/Data/ProductDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetBestSellingProducts
     path: Data/ProductDao.cs
-    startLine: 148
+    startLine: 177
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Gets a list of best-selling products based on the specified limit.
+  example: []
   syntax:
     content: public IEnumerable<Product> GetBestSellingProducts(int limit = 5)
     parameters:
     - id: limit
       type: System.Int32
+      description: The maximum number of best-selling products to retrieve (default is 5).
     return:
       type: System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.Product}
+      description: A collection of best-selling products.
     content.vb: Public Function GetBestSellingProducts(limit As Integer = 5) As IEnumerable(Of Product)
   overload: WebApp.Data.ProductDao.GetBestSellingProducts*
   nameWithType.vb: ProductDao.GetBestSellingProducts(Integer)
@@ -366,11 +397,11 @@ items:
   source:
     remote:
       path: WebApp/Data/ProductDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetRecentProduct
     path: Data/ProductDao.cs
-    startLine: 186
+    startLine: 215
   assemblies:
   - WebApp
   namespace: WebApp.Data
@@ -696,6 +727,13 @@ references:
   - name: " "
   - name: T
   - name: )
+- uid: WebApp.Data.ProductDao
+  commentId: T:WebApp.Data.ProductDao
+  parent: WebApp.Data
+  href: WebApp.Data.ProductDao.html
+  name: ProductDao
+  nameWithType: ProductDao
+  fullName: WebApp.Data.ProductDao
 - uid: WebApp.Data.ProductDao.#ctor*
   commentId: Overload:WebApp.Data.ProductDao.#ctor
   href: WebApp.Data.ProductDao.html#WebApp_Data_ProductDao__ctor_WebApp_Data_CommandHandler_

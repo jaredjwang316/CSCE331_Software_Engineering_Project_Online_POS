@@ -23,14 +23,16 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/Cart.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Cart
     path: Models/Cart/Cart.cs
-    startLine: 12
+    startLine: 16
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Represents a shopping cart that stores items added by the user.
+  example: []
   syntax:
     content: public class Cart
     content.vb: Public Class Cart
@@ -58,14 +60,16 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/Cart.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Items
     path: Models/Cart/Cart.cs
-    startLine: 13
+    startLine: 20
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Gets or sets the list of items in the cart.
+  example: []
   syntax:
     content: public List<Item> Items { get; set; }
     parameters: []
@@ -87,14 +91,16 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/Cart.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Total
     path: Models/Cart/Cart.cs
-    startLine: 14
+    startLine: 25
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Gets the total cost of all items in the cart.
+  example: []
   syntax:
     content: public double Total { get; }
     parameters: []
@@ -116,14 +122,16 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/Cart.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Models/Cart/Cart.cs
-    startLine: 17
+    startLine: 32
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Initializes a new instance of the <xref href="WebApp.Models.Cart.Cart" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public Cart()
     content.vb: Public Sub New()
@@ -145,19 +153,25 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/Cart.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: AddItem
     path: Models/Cart/Cart.cs
-    startLine: 19
+    startLine: 39
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: >-
+    Adds an item to the cart. If the same item with the same options exists,
+
+    updates the quantity instead.
+  example: []
   syntax:
     content: public void AddItem(Item item)
     parameters:
     - id: item
       type: WebApp.Models.Cart.Item
+      description: The item to add to the cart.
     content.vb: Public Sub AddItem(item As Item)
   overload: WebApp.Models.Cart.Cart.AddItem*
 - uid: WebApp.Models.Cart.Cart.RemoveItem(WebApp.Models.Cart.Item)
@@ -174,19 +188,22 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/Cart.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: RemoveItem
     path: Models/Cart/Cart.cs
-    startLine: 41
+    startLine: 66
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Removes the specified item from the cart.
+  example: []
   syntax:
     content: public void RemoveItem(Item item)
     parameters:
     - id: item
       type: WebApp.Models.Cart.Item
+      description: The item to remove.
     content.vb: Public Sub RemoveItem(item As Item)
   overload: WebApp.Models.Cart.Cart.RemoveItem*
 - uid: WebApp.Models.Cart.Cart.RemoveItem(System.Int32)
@@ -203,19 +220,22 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/Cart.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: RemoveItem
     path: Models/Cart/Cart.cs
-    startLine: 42
+    startLine: 72
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Removes the item at the specified index from the cart.
+  example: []
   syntax:
     content: public void RemoveItem(int index)
     parameters:
     - id: index
       type: System.Int32
+      description: The index of the item to remove.
     content.vb: Public Sub RemoveItem(index As Integer)
   overload: WebApp.Models.Cart.Cart.RemoveItem*
   nameWithType.vb: Cart.RemoveItem(Integer)
@@ -235,14 +255,16 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/Cart.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Clear
     path: Models/Cart/Cart.cs
-    startLine: 47
+    startLine: 81
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Clears all items from the cart.
+  example: []
   syntax:
     content: public void Clear()
     content.vb: Public Sub Clear()
@@ -261,18 +283,21 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/Cart.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: TotalCost
     path: Models/Cart/Cart.cs
-    startLine: 49
+    startLine: 87
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Calculates and returns the total cost of all items in the cart.
+  example: []
   syntax:
     content: public double TotalCost()
     return:
       type: System.Double
+      description: The total cost of items in the cart.
     content.vb: Public Function TotalCost() As Double
   overload: WebApp.Models.Cart.Cart.TotalCost*
 references:
@@ -664,6 +689,13 @@ references:
   nameWithType.vb: Double
   fullName.vb: Double
   name.vb: Double
+- uid: WebApp.Models.Cart.Cart
+  commentId: T:WebApp.Models.Cart.Cart
+  parent: WebApp.Models.Cart
+  href: WebApp.Models.Cart.Cart.html
+  name: Cart
+  nameWithType: Cart
+  fullName: WebApp.Models.Cart.Cart
 - uid: WebApp.Models.Cart.Cart.#ctor*
   commentId: Overload:WebApp.Models.Cart.Cart.#ctor
   href: WebApp.Models.Cart.Cart.html#WebApp_Models_Cart_Cart__ctor

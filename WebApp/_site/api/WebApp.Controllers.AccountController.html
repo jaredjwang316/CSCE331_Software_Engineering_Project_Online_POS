@@ -17,7 +17,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/new/test/apiSpec/new?filename=WebApp_Controllers_AccountController.md&amp;value=---%0Auid%3A%20WebApp.Controllers.AccountController%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/new/main/apiSpec/new?filename=WebApp_Controllers_AccountController.md&amp;value=---%0Auid%3A%20WebApp.Controllers.AccountController%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -91,7 +91,7 @@
 
   <h1 id="WebApp_Controllers_AccountController" data-uid="WebApp.Controllers.AccountController" class="text-break">
     Class AccountController
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/AccountController.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/AccountController.cs/#L37"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -99,7 +99,8 @@
   <dl><dt>Assembly</dt><dd>WebApp.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Controller responsible for handling user account-related actions, such as login, logout, and user preferences.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -753,10 +754,11 @@ public class AccountController : Controller, IActionFilter, IAsyncActionFilter, 
 
   <h3 id="WebApp_Controllers_AccountController__ctor_Microsoft_Extensions_Logging_ILogger_WebApp_Controllers_AccountController__" data-uid="WebApp.Controllers.AccountController.#ctor(Microsoft.Extensions.Logging.ILogger{WebApp.Controllers.AccountController})">
   AccountController(ILogger&lt;AccountController&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/AccountController.cs/#L39"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/AccountController.cs/#L46"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="WebApp.Controllers.AccountController.html">AccountController</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -766,7 +768,8 @@ public class AccountController : Controller, IActionFilter, IAsyncActionFilter, 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>logger</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="WebApp.Controllers.AccountController.html">AccountController</a>&gt;</dt>
-    <dd></dd>
+    <dd><p>The logger instance.</p>
+</dd>
   </dl>
 
 
@@ -788,10 +791,12 @@ public class AccountController : Controller, IActionFilter, IAsyncActionFilter, 
 
   <h3 id="WebApp_Controllers_AccountController_AccessDenied" data-uid="WebApp.Controllers.AccountController.AccessDenied">
   AccessDenied()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/AccountController.cs/#L134"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/AccountController.cs/#L160"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Handles scenarios where users encounter unauthorized access,
+logging details and redirecting to the configured return URL.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -821,10 +826,11 @@ public IActionResult AccessDenied()</code></pre>
 
   <h3 id="WebApp_Controllers_AccountController_Error" data-uid="WebApp.Controllers.AccountController.Error">
   Error()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/AccountController.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/AccountController.cs/#L177"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Handles scenarios where users encounter errors,</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -855,10 +861,11 @@ public IActionResult Error()</code></pre>
 
   <h3 id="WebApp_Controllers_AccountController_GetEmail" data-uid="WebApp.Controllers.AccountController.GetEmail">
   GetEmail()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/AccountController.cs/#L172"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/AccountController.cs/#L214"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves user email.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -888,10 +895,11 @@ public string GetEmail()</code></pre>
 
   <h3 id="WebApp_Controllers_AccountController_GetName" data-uid="WebApp.Controllers.AccountController.GetName">
   GetName()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/AccountController.cs/#L163"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/AccountController.cs/#L201"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves user name.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -921,10 +929,11 @@ public string GetName()</code></pre>
 
   <h3 id="WebApp_Controllers_AccountController_GetRole" data-uid="WebApp.Controllers.AccountController.GetRole">
   GetRole()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/AccountController.cs/#L154"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/AccountController.cs/#L188"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves user role.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -954,10 +963,11 @@ public string GetRole()</code></pre>
 
   <h3 id="WebApp_Controllers_AccountController_GetUserInfo" data-uid="WebApp.Controllers.AccountController.GetUserInfo">
   GetUserInfo()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/AccountController.cs/#L181"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/AccountController.cs/#L227"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves user name, role, and email in a JSON format.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -983,47 +993,16 @@ public IActionResult GetUserInfo()</code></pre>
 
 
 
-  <a id="WebApp_Controllers_AccountController_Index_" data-uid="WebApp.Controllers.AccountController.Index*"></a>
-
-  <h3 id="WebApp_Controllers_AccountController_Index" data-uid="WebApp.Controllers.AccountController.Index">
-  Index()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/AccountController.cs/#L44"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[HttpGet]
-[Route(&quot;Account/&quot;)]
-public IActionResult Index()</code></pre>
-  </div>
-
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
   <a id="WebApp_Controllers_AccountController_Login_" data-uid="WebApp.Controllers.AccountController.Login*"></a>
 
   <h3 id="WebApp_Controllers_AccountController_Login_System_String_System_String_" data-uid="WebApp.Controllers.AccountController.Login(System.String,System.String)">
   Login(string, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/AccountController.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/AccountController.cs/#L58"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initiates user authentication using a specified provider (defaulting to Google)
+and redirects users to the provider's authentication page.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1060,10 +1039,14 @@ public IActionResult Login(string provider = &quot;Google&quot;, string returnUr
 
   <h3 id="WebApp_Controllers_AccountController_LoginCallback_System_String_" data-uid="WebApp.Controllers.AccountController.LoginCallback(System.String)">
   LoginCallback(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/AccountController.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/AccountController.cs/#L72"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Upon successful authentication, retrieves user information,
+assigns appropriate roles (Manager, Cashier, or Customer),
+sets user preferences, and signs in the user, redirecting to
+the appropriate location based on roles and returnUrl.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1098,10 +1081,11 @@ public Task&lt;IActionResult&gt; LoginCallback(string returnUrl)</code></pre>
 
   <h3 id="WebApp_Controllers_AccountController_Logout_System_String_" data-uid="WebApp.Controllers.AccountController.Logout(System.String)">
   Logout(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/AccountController.cs/#L122"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/AccountController.cs/#L143"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Handles user sign-out, redirecting users to the appropriate location based on their role.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1136,10 +1120,11 @@ public IActionResult Logout(string returnUrl)</code></pre>
 
   <h3 id="WebApp_Controllers_AccountController_ResetPreferencesToDefault" data-uid="WebApp.Controllers.AccountController.ResetPreferencesToDefault">
   ResetPreferencesToDefault()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/AccountController.cs/#L213"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/AccountController.cs/#L271"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Resets user preferences to default values.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1169,10 +1154,11 @@ public IActionResult ResetPreferencesToDefault()</code></pre>
 
   <h3 id="WebApp_Controllers_AccountController_SaveUserPreferences_System_String_System_String_System_String_System_String_" data-uid="WebApp.Controllers.AccountController.SaveUserPreferences(System.String,System.String,System.String,System.String)">
   SaveUserPreferences(string?, string?, string?, string?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/AccountController.cs/#L186"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/AccountController.cs/#L240"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Saves user preferences as cookies and to the database if the user is authenticated.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1213,7 +1199,7 @@ public IActionResult SaveUserPreferences(string? accCursor = null, string? accTe
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/AccountController.cs/#L34" class="edit-link">Edit this page</a>
+          <a href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/AccountController.cs/#L37" class="edit-link">Edit this page</a>
         </div>
 
 

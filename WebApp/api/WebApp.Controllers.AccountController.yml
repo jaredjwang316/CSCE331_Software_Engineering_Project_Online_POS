@@ -12,7 +12,6 @@ items:
   - WebApp.Controllers.AccountController.GetName
   - WebApp.Controllers.AccountController.GetRole
   - WebApp.Controllers.AccountController.GetUserInfo
-  - WebApp.Controllers.AccountController.Index
   - WebApp.Controllers.AccountController.Login(System.String,System.String)
   - WebApp.Controllers.AccountController.LoginCallback(System.String)
   - WebApp.Controllers.AccountController.Logout(System.String)
@@ -28,14 +27,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AccountController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: AccountController
     path: Controllers/AccountController.cs
-    startLine: 33
+    startLine: 36
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Controller responsible for handling user account-related actions, such as login, logout, and user preferences.
+  example: []
   syntax:
     content: >-
       [AllowAnonymous]
@@ -281,71 +282,27 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AccountController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Controllers/AccountController.cs
-    startLine: 38
+    startLine: 45
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Initializes a new instance of the <xref href="WebApp.Controllers.AccountController" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public AccountController(ILogger<AccountController> logger)
     parameters:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger{WebApp.Controllers.AccountController}
+      description: The logger instance.
     content.vb: Public Sub New(logger As ILogger(Of AccountController))
   overload: WebApp.Controllers.AccountController.#ctor*
   nameWithType.vb: AccountController.New(ILogger(Of AccountController))
   fullName.vb: WebApp.Controllers.AccountController.New(Microsoft.Extensions.Logging.ILogger(Of WebApp.Controllers.AccountController))
   name.vb: New(ILogger(Of AccountController))
-- uid: WebApp.Controllers.AccountController.Index
-  commentId: M:WebApp.Controllers.AccountController.Index
-  id: Index
-  parent: WebApp.Controllers.AccountController
-  langs:
-  - csharp
-  - vb
-  name: Index()
-  nameWithType: AccountController.Index()
-  fullName: WebApp.Controllers.AccountController.Index()
-  type: Method
-  source:
-    remote:
-      path: WebApp/Controllers/AccountController.cs
-      branch: test
-      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
-    id: Index
-    path: Controllers/AccountController.cs
-    startLine: 43
-  assemblies:
-  - WebApp
-  namespace: WebApp.Controllers
-  syntax:
-    content: >-
-      [HttpGet]
-
-      [Route("Account/")]
-
-      public IActionResult Index()
-    return:
-      type: Microsoft.AspNetCore.Mvc.IActionResult
-    content.vb: >-
-      <HttpGet>
-
-      <Route("Account/")>
-
-      Public Function Index() As IActionResult
-  overload: WebApp.Controllers.AccountController.Index*
-  attributes:
-  - type: Microsoft.AspNetCore.Mvc.HttpGetAttribute
-    ctor: Microsoft.AspNetCore.Mvc.HttpGetAttribute.#ctor
-    arguments: []
-  - type: Microsoft.AspNetCore.Mvc.RouteAttribute
-    ctor: Microsoft.AspNetCore.Mvc.RouteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Account/
 - uid: WebApp.Controllers.AccountController.Login(System.String,System.String)
   commentId: M:WebApp.Controllers.AccountController.Login(System.String,System.String)
   id: Login(System.String,System.String)
@@ -360,14 +317,19 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AccountController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Login
     path: Controllers/AccountController.cs
-    startLine: 49
+    startLine: 57
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: >-
+    Initiates user authentication using a specified provider (defaulting to Google)
+
+    and redirects users to the provider's authentication page.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -378,10 +340,13 @@ items:
     parameters:
     - id: provider
       type: System.String
+      description: ''
     - id: returnUrl
       type: System.String
+      description: ''
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -415,14 +380,23 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AccountController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: LoginCallback
     path: Controllers/AccountController.cs
-    startLine: 55
+    startLine: 71
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: >-
+    Upon successful authentication, retrieves user information,
+
+    assigns appropriate roles (Manager, Cashier, or Customer),
+
+    sets user preferences, and signs in the user, redirecting to
+
+    the appropriate location based on roles and returnUrl.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -433,8 +407,10 @@ items:
     parameters:
     - id: returnUrl
       type: System.String
+      description: ''
     return:
       type: System.Threading.Tasks.Task{Microsoft.AspNetCore.Mvc.IActionResult}
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -468,14 +444,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AccountController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Logout
     path: Controllers/AccountController.cs
-    startLine: 121
+    startLine: 142
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Handles user sign-out, redirecting users to the appropriate location based on their role.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -486,8 +464,10 @@ items:
     parameters:
     - id: returnUrl
       type: System.String
+      description: ''
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -521,14 +501,19 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AccountController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: AccessDenied
     path: Controllers/AccountController.cs
-    startLine: 133
+    startLine: 159
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: >-
+    Handles scenarios where users encounter unauthorized access,
+
+    logging details and redirecting to the configured return URL.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -538,6 +523,7 @@ items:
       public IActionResult AccessDenied()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -568,14 +554,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AccountController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Error
     path: Controllers/AccountController.cs
-    startLine: 146
+    startLine: 176
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Handles scenarios where users encounter errors,
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -587,6 +575,7 @@ items:
       public IActionResult Error()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -632,14 +621,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AccountController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetRole
     path: Controllers/AccountController.cs
-    startLine: 153
+    startLine: 187
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Retrieves user role.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -649,6 +640,7 @@ items:
       public string GetRole()
     return:
       type: System.String
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -679,14 +671,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AccountController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetName
     path: Controllers/AccountController.cs
-    startLine: 162
+    startLine: 200
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Retrieves user name.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -696,6 +690,7 @@ items:
       public string GetName()
     return:
       type: System.String
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -726,14 +721,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AccountController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetEmail
     path: Controllers/AccountController.cs
-    startLine: 171
+    startLine: 213
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Retrieves user email.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -743,6 +740,7 @@ items:
       public string GetEmail()
     return:
       type: System.String
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -773,14 +771,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AccountController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetUserInfo
     path: Controllers/AccountController.cs
-    startLine: 180
+    startLine: 226
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Retrieves user name, role, and email in a JSON format.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -790,6 +790,7 @@ items:
       public IActionResult GetUserInfo()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -820,14 +821,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AccountController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: SaveUserPreferences
     path: Controllers/AccountController.cs
-    startLine: 185
+    startLine: 239
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Saves user preferences as cookies and to the database if the user is authenticated.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -838,14 +841,19 @@ items:
     parameters:
     - id: accCursor
       type: System.String
+      description: ''
     - id: accTextSize
       type: System.String
+      description: ''
     - id: accContrast
       type: System.String
+      description: ''
     - id: accLanguage
       type: System.String
+      description: ''
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpPost>
 
@@ -879,14 +887,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AccountController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ResetPreferencesToDefault
     path: Controllers/AccountController.cs
-    startLine: 212
+    startLine: 270
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Resets user preferences to default values.
+  example: []
   syntax:
     content: >-
       [HttpDelete]
@@ -896,6 +906,7 @@ items:
       public IActionResult ResetPreferencesToDefault()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpDelete>
 
@@ -10643,6 +10654,12 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
   - name: )
+- uid: WebApp.Controllers.AccountController
+  commentId: T:WebApp.Controllers.AccountController
+  href: WebApp.Controllers.AccountController.html
+  name: AccountController
+  nameWithType: AccountController
+  fullName: WebApp.Controllers.AccountController
 - uid: WebApp.Controllers.AccountController.#ctor*
   commentId: Overload:WebApp.Controllers.AccountController.#ctor
   href: WebApp.Controllers.AccountController.html#WebApp_Controllers_AccountController__ctor_Microsoft_Extensions_Logging_ILogger_WebApp_Controllers_AccountController__
@@ -10750,20 +10767,6 @@ references:
     name: Logging
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging
-- uid: WebApp.Controllers.AccountController.Index*
-  commentId: Overload:WebApp.Controllers.AccountController.Index
-  href: WebApp.Controllers.AccountController.html#WebApp_Controllers_AccountController_Index
-  name: Index
-  nameWithType: AccountController.Index
-  fullName: WebApp.Controllers.AccountController.Index
-- uid: Microsoft.AspNetCore.Mvc.IActionResult
-  commentId: T:Microsoft.AspNetCore.Mvc.IActionResult
-  parent: Microsoft.AspNetCore.Mvc
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult
-  name: IActionResult
-  nameWithType: IActionResult
-  fullName: Microsoft.AspNetCore.Mvc.IActionResult
 - uid: WebApp.Controllers.AccountController.Login*
   commentId: Overload:WebApp.Controllers.AccountController.Login
   href: WebApp.Controllers.AccountController.html#WebApp_Controllers_AccountController_Login_System_String_System_String_
@@ -10781,6 +10784,14 @@ references:
   nameWithType.vb: String
   fullName.vb: String
   name.vb: String
+- uid: Microsoft.AspNetCore.Mvc.IActionResult
+  commentId: T:Microsoft.AspNetCore.Mvc.IActionResult
+  parent: Microsoft.AspNetCore.Mvc
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult
+  name: IActionResult
+  nameWithType: IActionResult
+  fullName: Microsoft.AspNetCore.Mvc.IActionResult
 - uid: WebApp.Controllers.AccountController.LoginCallback*
   commentId: Overload:WebApp.Controllers.AccountController.LoginCallback
   href: WebApp.Controllers.AccountController.html#WebApp_Controllers_AccountController_LoginCallback_System_String_
