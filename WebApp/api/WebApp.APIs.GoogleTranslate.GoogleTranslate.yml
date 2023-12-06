@@ -1,0 +1,644 @@
+### YamlMime:ManagedReference
+items:
+- uid: WebApp.APIs.GoogleTranslate.GoogleTranslate
+  commentId: T:WebApp.APIs.GoogleTranslate.GoogleTranslate
+  id: GoogleTranslate
+  parent: WebApp.APIs.GoogleTranslate
+  children:
+  - WebApp.APIs.GoogleTranslate.GoogleTranslate.#ctor
+  - WebApp.APIs.GoogleTranslate.GoogleTranslate.CurrentLanguage
+  - WebApp.APIs.GoogleTranslate.GoogleTranslate.GetPreferredLanguage
+  - WebApp.APIs.GoogleTranslate.GoogleTranslate.GetSupportedLanguages
+  - WebApp.APIs.GoogleTranslate.GoogleTranslate.TranslateText(System.String)
+  langs:
+  - csharp
+  - vb
+  name: GoogleTranslate
+  nameWithType: GoogleTranslate
+  fullName: WebApp.APIs.GoogleTranslate.GoogleTranslate
+  type: Class
+  source:
+    remote:
+      path: WebApp/APIs/GoogleTranslate/GoogleTranslate.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: GoogleTranslate
+    path: APIs/GoogleTranslate/GoogleTranslate.cs
+    startLine: 25
+  assemblies:
+  - WebApp
+  namespace: WebApp.APIs.GoogleTranslate
+  syntax:
+    content: public class GoogleTranslate
+    content.vb: Public Class GoogleTranslate
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: WebApp.APIs.GoogleTranslate.GoogleTranslate.CurrentLanguage
+  commentId: F:WebApp.APIs.GoogleTranslate.GoogleTranslate.CurrentLanguage
+  id: CurrentLanguage
+  parent: WebApp.APIs.GoogleTranslate.GoogleTranslate
+  langs:
+  - csharp
+  - vb
+  name: CurrentLanguage
+  nameWithType: GoogleTranslate.CurrentLanguage
+  fullName: WebApp.APIs.GoogleTranslate.GoogleTranslate.CurrentLanguage
+  type: Field
+  source:
+    remote:
+      path: WebApp/APIs/GoogleTranslate/GoogleTranslate.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: CurrentLanguage
+    path: APIs/GoogleTranslate/GoogleTranslate.cs
+    startLine: 26
+  assemblies:
+  - WebApp
+  namespace: WebApp.APIs.GoogleTranslate
+  syntax:
+    content: public string CurrentLanguage
+    return:
+      type: System.String
+    content.vb: Public CurrentLanguage As String
+- uid: WebApp.APIs.GoogleTranslate.GoogleTranslate.#ctor
+  commentId: M:WebApp.APIs.GoogleTranslate.GoogleTranslate.#ctor
+  id: '#ctor'
+  parent: WebApp.APIs.GoogleTranslate.GoogleTranslate
+  langs:
+  - csharp
+  - vb
+  name: GoogleTranslate()
+  nameWithType: GoogleTranslate.GoogleTranslate()
+  fullName: WebApp.APIs.GoogleTranslate.GoogleTranslate.GoogleTranslate()
+  type: Constructor
+  source:
+    remote:
+      path: WebApp/APIs/GoogleTranslate/GoogleTranslate.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: .ctor
+    path: APIs/GoogleTranslate/GoogleTranslate.cs
+    startLine: 32
+  assemblies:
+  - WebApp
+  namespace: WebApp.APIs.GoogleTranslate
+  syntax:
+    content: public GoogleTranslate()
+    content.vb: Public Sub New()
+  overload: WebApp.APIs.GoogleTranslate.GoogleTranslate.#ctor*
+  nameWithType.vb: GoogleTranslate.New()
+  fullName.vb: WebApp.APIs.GoogleTranslate.GoogleTranslate.New()
+  name.vb: New()
+- uid: WebApp.APIs.GoogleTranslate.GoogleTranslate.TranslateText(System.String)
+  commentId: M:WebApp.APIs.GoogleTranslate.GoogleTranslate.TranslateText(System.String)
+  id: TranslateText(System.String)
+  parent: WebApp.APIs.GoogleTranslate.GoogleTranslate
+  langs:
+  - csharp
+  - vb
+  name: TranslateText(string)
+  nameWithType: GoogleTranslate.TranslateText(string)
+  fullName: WebApp.APIs.GoogleTranslate.GoogleTranslate.TranslateText(string)
+  type: Method
+  source:
+    remote:
+      path: WebApp/APIs/GoogleTranslate/GoogleTranslate.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: TranslateText
+    path: APIs/GoogleTranslate/GoogleTranslate.cs
+    startLine: 40
+  assemblies:
+  - WebApp
+  namespace: WebApp.APIs.GoogleTranslate
+  syntax:
+    content: public Task<string> TranslateText(string text)
+    parameters:
+    - id: text
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task{System.String}
+    content.vb: Public Function TranslateText(text As String) As Task(Of String)
+  overload: WebApp.APIs.GoogleTranslate.GoogleTranslate.TranslateText*
+  nameWithType.vb: GoogleTranslate.TranslateText(String)
+  fullName.vb: WebApp.APIs.GoogleTranslate.GoogleTranslate.TranslateText(String)
+  name.vb: TranslateText(String)
+- uid: WebApp.APIs.GoogleTranslate.GoogleTranslate.GetPreferredLanguage
+  commentId: M:WebApp.APIs.GoogleTranslate.GoogleTranslate.GetPreferredLanguage
+  id: GetPreferredLanguage
+  parent: WebApp.APIs.GoogleTranslate.GoogleTranslate
+  langs:
+  - csharp
+  - vb
+  name: GetPreferredLanguage()
+  nameWithType: GoogleTranslate.GetPreferredLanguage()
+  fullName: WebApp.APIs.GoogleTranslate.GoogleTranslate.GetPreferredLanguage()
+  type: Method
+  source:
+    remote:
+      path: WebApp/APIs/GoogleTranslate/GoogleTranslate.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: GetPreferredLanguage
+    path: APIs/GoogleTranslate/GoogleTranslate.cs
+    startLine: 78
+  assemblies:
+  - WebApp
+  namespace: WebApp.APIs.GoogleTranslate
+  syntax:
+    content: public string GetPreferredLanguage()
+    return:
+      type: System.String
+    content.vb: Public Function GetPreferredLanguage() As String
+  overload: WebApp.APIs.GoogleTranslate.GoogleTranslate.GetPreferredLanguage*
+- uid: WebApp.APIs.GoogleTranslate.GoogleTranslate.GetSupportedLanguages
+  commentId: M:WebApp.APIs.GoogleTranslate.GoogleTranslate.GetSupportedLanguages
+  id: GetSupportedLanguages
+  parent: WebApp.APIs.GoogleTranslate.GoogleTranslate
+  langs:
+  - csharp
+  - vb
+  name: GetSupportedLanguages()
+  nameWithType: GoogleTranslate.GetSupportedLanguages()
+  fullName: WebApp.APIs.GoogleTranslate.GoogleTranslate.GetSupportedLanguages()
+  type: Method
+  source:
+    remote:
+      path: WebApp/APIs/GoogleTranslate/GoogleTranslate.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: GetSupportedLanguages
+    path: APIs/GoogleTranslate/GoogleTranslate.cs
+    startLine: 84
+  assemblies:
+  - WebApp
+  namespace: WebApp.APIs.GoogleTranslate
+  syntax:
+    content: public KeyValuePair<string, string>[]? GetSupportedLanguages()
+    return:
+      type: System.Collections.Generic.KeyValuePair{System.String,System.String}[]
+    content.vb: Public Function GetSupportedLanguages() As KeyValuePair(Of String, String)()
+  overload: WebApp.APIs.GoogleTranslate.GoogleTranslate.GetSupportedLanguages*
+references:
+- uid: WebApp.APIs.GoogleTranslate
+  commentId: N:WebApp.APIs.GoogleTranslate
+  href: WebApp.html
+  name: WebApp.APIs.GoogleTranslate
+  nameWithType: WebApp.APIs.GoogleTranslate
+  fullName: WebApp.APIs.GoogleTranslate
+  spec.csharp:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.APIs
+    name: APIs
+    href: WebApp.APIs.html
+  - name: .
+  - uid: WebApp.APIs.GoogleTranslate
+    name: GoogleTranslate
+    href: WebApp.APIs.GoogleTranslate.html
+  spec.vb:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.APIs
+    name: APIs
+    href: WebApp.APIs.html
+  - name: .
+  - uid: WebApp.APIs.GoogleTranslate
+    name: GoogleTranslate
+    href: WebApp.APIs.GoogleTranslate.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: WebApp.APIs.GoogleTranslate.GoogleTranslate.#ctor*
+  commentId: Overload:WebApp.APIs.GoogleTranslate.GoogleTranslate.#ctor
+  href: WebApp.APIs.GoogleTranslate.GoogleTranslate.html#WebApp_APIs_GoogleTranslate_GoogleTranslate__ctor
+  name: GoogleTranslate
+  nameWithType: GoogleTranslate.GoogleTranslate
+  fullName: WebApp.APIs.GoogleTranslate.GoogleTranslate.GoogleTranslate
+  nameWithType.vb: GoogleTranslate.New
+  fullName.vb: WebApp.APIs.GoogleTranslate.GoogleTranslate.New
+  name.vb: New
+- uid: WebApp.APIs.GoogleTranslate.GoogleTranslate.TranslateText*
+  commentId: Overload:WebApp.APIs.GoogleTranslate.GoogleTranslate.TranslateText
+  href: WebApp.APIs.GoogleTranslate.GoogleTranslate.html#WebApp_APIs_GoogleTranslate_GoogleTranslate_TranslateText_System_String_
+  name: TranslateText
+  nameWithType: GoogleTranslate.TranslateText
+  fullName: WebApp.APIs.GoogleTranslate.GoogleTranslate.TranslateText
+- uid: System.Threading.Tasks.Task{System.String}
+  commentId: T:System.Threading.Tasks.Task{System.String}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<string>
+  nameWithType: Task<string>
+  fullName: System.Threading.Tasks.Task<string>
+  nameWithType.vb: Task(Of String)
+  fullName.vb: System.Threading.Tasks.Task(Of String)
+  name.vb: Task(Of String)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: WebApp.APIs.GoogleTranslate.GoogleTranslate.GetPreferredLanguage*
+  commentId: Overload:WebApp.APIs.GoogleTranslate.GoogleTranslate.GetPreferredLanguage
+  href: WebApp.APIs.GoogleTranslate.GoogleTranslate.html#WebApp_APIs_GoogleTranslate_GoogleTranslate_GetPreferredLanguage
+  name: GetPreferredLanguage
+  nameWithType: GoogleTranslate.GetPreferredLanguage
+  fullName: WebApp.APIs.GoogleTranslate.GoogleTranslate.GetPreferredLanguage
+- uid: WebApp.APIs.GoogleTranslate.GoogleTranslate.GetSupportedLanguages*
+  commentId: Overload:WebApp.APIs.GoogleTranslate.GoogleTranslate.GetSupportedLanguages
+  href: WebApp.APIs.GoogleTranslate.GoogleTranslate.html#WebApp_APIs_GoogleTranslate_GoogleTranslate_GetSupportedLanguages
+  name: GetSupportedLanguages
+  nameWithType: GoogleTranslate.GetSupportedLanguages
+  fullName: WebApp.APIs.GoogleTranslate.GoogleTranslate.GetSupportedLanguages
+- uid: System.Collections.Generic.KeyValuePair{System.String,System.String}[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  name: KeyValuePair<string, string>[]
+  nameWithType: KeyValuePair<string, string>[]
+  fullName: System.Collections.Generic.KeyValuePair<string, string>[]
+  nameWithType.vb: KeyValuePair(Of String, String)()
+  fullName.vb: System.Collections.Generic.KeyValuePair(Of String, String)()
+  name.vb: KeyValuePair(Of String, String)()
+  spec.csharp:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: (
+  - name: )

@@ -1,0 +1,471 @@
+### YamlMime:ManagedReference
+items:
+- uid: WebApp.Models.Cart.CartService
+  commentId: T:WebApp.Models.Cart.CartService
+  id: CartService
+  parent: WebApp.Models.Cart
+  children:
+  - WebApp.Models.Cart.CartService.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)
+  - WebApp.Models.Cart.CartService.GetCartFromSession
+  - WebApp.Models.Cart.CartService.SetCartInSession(WebApp.Models.Cart.Cart)
+  langs:
+  - csharp
+  - vb
+  name: CartService
+  nameWithType: CartService
+  fullName: WebApp.Models.Cart.CartService
+  type: Class
+  source:
+    remote:
+      path: WebApp/Models/Cart/CartService.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: CartService
+    path: Models/Cart/CartService.cs
+    startLine: 12
+  assemblies:
+  - WebApp
+  namespace: WebApp.Models.Cart
+  syntax:
+    content: public class CartService
+    content.vb: Public Class CartService
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: WebApp.Models.Cart.CartService.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)
+  commentId: M:WebApp.Models.Cart.CartService.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)
+  id: '#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)'
+  parent: WebApp.Models.Cart.CartService
+  langs:
+  - csharp
+  - vb
+  name: CartService(IHttpContextAccessor)
+  nameWithType: CartService.CartService(IHttpContextAccessor)
+  fullName: WebApp.Models.Cart.CartService.CartService(Microsoft.AspNetCore.Http.IHttpContextAccessor)
+  type: Constructor
+  source:
+    remote:
+      path: WebApp/Models/Cart/CartService.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: .ctor
+    path: Models/Cart/CartService.cs
+    startLine: 15
+  assemblies:
+  - WebApp
+  namespace: WebApp.Models.Cart
+  syntax:
+    content: public CartService(IHttpContextAccessor httpContextAccessor)
+    parameters:
+    - id: httpContextAccessor
+      type: Microsoft.AspNetCore.Http.IHttpContextAccessor
+    content.vb: Public Sub New(httpContextAccessor As IHttpContextAccessor)
+  overload: WebApp.Models.Cart.CartService.#ctor*
+  nameWithType.vb: CartService.New(IHttpContextAccessor)
+  fullName.vb: WebApp.Models.Cart.CartService.New(Microsoft.AspNetCore.Http.IHttpContextAccessor)
+  name.vb: New(IHttpContextAccessor)
+- uid: WebApp.Models.Cart.CartService.GetCartFromSession
+  commentId: M:WebApp.Models.Cart.CartService.GetCartFromSession
+  id: GetCartFromSession
+  parent: WebApp.Models.Cart.CartService
+  langs:
+  - csharp
+  - vb
+  name: GetCartFromSession()
+  nameWithType: CartService.GetCartFromSession()
+  fullName: WebApp.Models.Cart.CartService.GetCartFromSession()
+  type: Method
+  source:
+    remote:
+      path: WebApp/Models/Cart/CartService.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: GetCartFromSession
+    path: Models/Cart/CartService.cs
+    startLine: 19
+  assemblies:
+  - WebApp
+  namespace: WebApp.Models.Cart
+  syntax:
+    content: public Cart GetCartFromSession()
+    return:
+      type: WebApp.Models.Cart.Cart
+    content.vb: Public Function GetCartFromSession() As Cart
+  overload: WebApp.Models.Cart.CartService.GetCartFromSession*
+- uid: WebApp.Models.Cart.CartService.SetCartInSession(WebApp.Models.Cart.Cart)
+  commentId: M:WebApp.Models.Cart.CartService.SetCartInSession(WebApp.Models.Cart.Cart)
+  id: SetCartInSession(WebApp.Models.Cart.Cart)
+  parent: WebApp.Models.Cart.CartService
+  langs:
+  - csharp
+  - vb
+  name: SetCartInSession(Cart)
+  nameWithType: CartService.SetCartInSession(Cart)
+  fullName: WebApp.Models.Cart.CartService.SetCartInSession(WebApp.Models.Cart.Cart)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Models/Cart/CartService.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: SetCartInSession
+    path: Models/Cart/CartService.cs
+    startLine: 30
+  assemblies:
+  - WebApp
+  namespace: WebApp.Models.Cart
+  syntax:
+    content: public void SetCartInSession(Cart cart)
+    parameters:
+    - id: cart
+      type: WebApp.Models.Cart.Cart
+    content.vb: Public Sub SetCartInSession(cart As Cart)
+  overload: WebApp.Models.Cart.CartService.SetCartInSession*
+references:
+- uid: WebApp.Models.Cart
+  commentId: N:WebApp.Models.Cart
+  href: WebApp.html
+  name: WebApp.Models.Cart
+  nameWithType: WebApp.Models.Cart
+  fullName: WebApp.Models.Cart
+  spec.csharp:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Models
+    name: Models
+    href: WebApp.Models.html
+  - name: .
+  - uid: WebApp.Models.Cart
+    name: Cart
+    href: WebApp.Models.Cart.html
+  spec.vb:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Models
+    name: Models
+    href: WebApp.Models.html
+  - name: .
+  - uid: WebApp.Models.Cart
+    name: Cart
+    href: WebApp.Models.Cart.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: WebApp.Models.Cart.CartService.#ctor*
+  commentId: Overload:WebApp.Models.Cart.CartService.#ctor
+  href: WebApp.Models.Cart.CartService.html#WebApp_Models_Cart_CartService__ctor_Microsoft_AspNetCore_Http_IHttpContextAccessor_
+  name: CartService
+  nameWithType: CartService.CartService
+  fullName: WebApp.Models.Cart.CartService.CartService
+  nameWithType.vb: CartService.New
+  fullName.vb: WebApp.Models.Cart.CartService.New
+  name.vb: New
+- uid: Microsoft.AspNetCore.Http.IHttpContextAccessor
+  commentId: T:Microsoft.AspNetCore.Http.IHttpContextAccessor
+  parent: Microsoft.AspNetCore.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.http.ihttpcontextaccessor
+  name: IHttpContextAccessor
+  nameWithType: IHttpContextAccessor
+  fullName: Microsoft.AspNetCore.Http.IHttpContextAccessor
+- uid: Microsoft.AspNetCore.Http
+  commentId: N:Microsoft.AspNetCore.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.AspNetCore.Http
+  nameWithType: Microsoft.AspNetCore.Http
+  fullName: Microsoft.AspNetCore.Http
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.http
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.http
+- uid: WebApp.Models.Cart.CartService.GetCartFromSession*
+  commentId: Overload:WebApp.Models.Cart.CartService.GetCartFromSession
+  href: WebApp.Models.Cart.CartService.html#WebApp_Models_Cart_CartService_GetCartFromSession
+  name: GetCartFromSession
+  nameWithType: CartService.GetCartFromSession
+  fullName: WebApp.Models.Cart.CartService.GetCartFromSession
+- uid: WebApp.Models.Cart.Cart
+  commentId: T:WebApp.Models.Cart.Cart
+  parent: WebApp.Models.Cart
+  href: WebApp.Models.Cart.Cart.html
+  name: Cart
+  nameWithType: Cart
+  fullName: WebApp.Models.Cart.Cart
+- uid: WebApp.Models.Cart.CartService.SetCartInSession*
+  commentId: Overload:WebApp.Models.Cart.CartService.SetCartInSession
+  href: WebApp.Models.Cart.CartService.html#WebApp_Models_Cart_CartService_SetCartInSession_WebApp_Models_Cart_Cart_
+  name: SetCartInSession
+  nameWithType: CartService.SetCartInSession
+  fullName: WebApp.Models.Cart.CartService.SetCartInSession

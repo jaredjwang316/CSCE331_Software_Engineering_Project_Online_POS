@@ -1,0 +1,382 @@
+### YamlMime:ManagedReference
+items:
+- uid: WebApp.Data.IDao`1
+  commentId: T:WebApp.Data.IDao`1
+  id: IDao`1
+  parent: WebApp.Data
+  children:
+  - WebApp.Data.IDao`1.Add(`0)
+  - WebApp.Data.IDao`1.Delete(`0)
+  - WebApp.Data.IDao`1.Get(System.Int32)
+  - WebApp.Data.IDao`1.GetAll
+  - WebApp.Data.IDao`1.Update(`0,`0)
+  langs:
+  - csharp
+  - vb
+  name: IDao<T>
+  nameWithType: IDao<T>
+  fullName: WebApp.Data.IDao<T>
+  type: Interface
+  source:
+    remote:
+      path: WebApp/Data/IDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: IDao
+    path: Data/IDao.cs
+    startLine: 8
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: public interface IDao<T>
+    typeParameters:
+    - id: T
+    content.vb: Public Interface IDao(Of T)
+  nameWithType.vb: IDao(Of T)
+  fullName.vb: WebApp.Data.IDao(Of T)
+  name.vb: IDao(Of T)
+- uid: WebApp.Data.IDao`1.Get(System.Int32)
+  commentId: M:WebApp.Data.IDao`1.Get(System.Int32)
+  id: Get(System.Int32)
+  parent: WebApp.Data.IDao`1
+  langs:
+  - csharp
+  - vb
+  name: Get(int)
+  nameWithType: IDao<T>.Get(int)
+  fullName: WebApp.Data.IDao<T>.Get(int)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/IDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: Get
+    path: Data/IDao.cs
+    startLine: 10
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: T Get(int id)
+    parameters:
+    - id: id
+      type: System.Int32
+    return:
+      type: '{T}'
+    content.vb: Function [Get](id As Integer) As T
+  overload: WebApp.Data.IDao`1.Get*
+  nameWithType.vb: IDao(Of T).Get(Integer)
+  fullName.vb: WebApp.Data.IDao(Of T).Get(Integer)
+  name.vb: Get(Integer)
+- uid: WebApp.Data.IDao`1.GetAll
+  commentId: M:WebApp.Data.IDao`1.GetAll
+  id: GetAll
+  parent: WebApp.Data.IDao`1
+  langs:
+  - csharp
+  - vb
+  name: GetAll()
+  nameWithType: IDao<T>.GetAll()
+  fullName: WebApp.Data.IDao<T>.GetAll()
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/IDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: GetAll
+    path: Data/IDao.cs
+    startLine: 11
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: IEnumerable<T> GetAll()
+    return:
+      type: System.Collections.Generic.IEnumerable{{T}}
+    content.vb: Function GetAll() As IEnumerable(Of T)
+  overload: WebApp.Data.IDao`1.GetAll*
+  nameWithType.vb: IDao(Of T).GetAll()
+  fullName.vb: WebApp.Data.IDao(Of T).GetAll()
+- uid: WebApp.Data.IDao`1.Add(`0)
+  commentId: M:WebApp.Data.IDao`1.Add(`0)
+  id: Add(`0)
+  parent: WebApp.Data.IDao`1
+  langs:
+  - csharp
+  - vb
+  name: Add(T)
+  nameWithType: IDao<T>.Add(T)
+  fullName: WebApp.Data.IDao<T>.Add(T)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/IDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: Add
+    path: Data/IDao.cs
+    startLine: 12
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: void Add(T t)
+    parameters:
+    - id: t
+      type: '{T}'
+    content.vb: Sub Add(t As T)
+  overload: WebApp.Data.IDao`1.Add*
+  nameWithType.vb: IDao(Of T).Add(T)
+  fullName.vb: WebApp.Data.IDao(Of T).Add(T)
+- uid: WebApp.Data.IDao`1.Update(`0,`0)
+  commentId: M:WebApp.Data.IDao`1.Update(`0,`0)
+  id: Update(`0,`0)
+  parent: WebApp.Data.IDao`1
+  langs:
+  - csharp
+  - vb
+  name: Update(T, T)
+  nameWithType: IDao<T>.Update(T, T)
+  fullName: WebApp.Data.IDao<T>.Update(T, T)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/IDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: Update
+    path: Data/IDao.cs
+    startLine: 13
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: void Update(T t, T newT)
+    parameters:
+    - id: t
+      type: '{T}'
+    - id: newT
+      type: '{T}'
+    content.vb: Sub Update(t As T, newT As T)
+  overload: WebApp.Data.IDao`1.Update*
+  nameWithType.vb: IDao(Of T).Update(T, T)
+  fullName.vb: WebApp.Data.IDao(Of T).Update(T, T)
+- uid: WebApp.Data.IDao`1.Delete(`0)
+  commentId: M:WebApp.Data.IDao`1.Delete(`0)
+  id: Delete(`0)
+  parent: WebApp.Data.IDao`1
+  langs:
+  - csharp
+  - vb
+  name: Delete(T)
+  nameWithType: IDao<T>.Delete(T)
+  fullName: WebApp.Data.IDao<T>.Delete(T)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/IDao.cs
+      branch: test
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: Delete
+    path: Data/IDao.cs
+    startLine: 14
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: void Delete(T t)
+    parameters:
+    - id: t
+      type: '{T}'
+    content.vb: Sub Delete(t As T)
+  overload: WebApp.Data.IDao`1.Delete*
+  nameWithType.vb: IDao(Of T).Delete(T)
+  fullName.vb: WebApp.Data.IDao(Of T).Delete(T)
+references:
+- uid: WebApp.Data
+  commentId: N:WebApp.Data
+  href: WebApp.html
+  name: WebApp.Data
+  nameWithType: WebApp.Data
+  fullName: WebApp.Data
+  spec.csharp:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Data
+    name: Data
+    href: WebApp.Data.html
+  spec.vb:
+  - uid: WebApp
+    name: WebApp
+    href: WebApp.html
+  - name: .
+  - uid: WebApp.Data
+    name: Data
+    href: WebApp.Data.html
+- uid: WebApp.Data.IDao`1.Get*
+  commentId: Overload:WebApp.Data.IDao`1.Get
+  href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Get_System_Int32_
+  name: Get
+  nameWithType: IDao<T>.Get
+  fullName: WebApp.Data.IDao<T>.Get
+  nameWithType.vb: IDao(Of T).Get
+  fullName.vb: WebApp.Data.IDao(Of T).Get
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: WebApp.Data.IDao`1.GetAll*
+  commentId: Overload:WebApp.Data.IDao`1.GetAll
+  href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_GetAll
+  name: GetAll
+  nameWithType: IDao<T>.GetAll
+  fullName: WebApp.Data.IDao<T>.GetAll
+  nameWithType.vb: IDao(Of T).GetAll
+  fullName.vb: WebApp.Data.IDao(Of T).GetAll
+- uid: System.Collections.Generic.IEnumerable{{T}}
+  commentId: T:System.Collections.Generic.IEnumerable{`0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: WebApp.Data.IDao`1.Add*
+  commentId: Overload:WebApp.Data.IDao`1.Add
+  href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Add__0_
+  name: Add
+  nameWithType: IDao<T>.Add
+  fullName: WebApp.Data.IDao<T>.Add
+  nameWithType.vb: IDao(Of T).Add
+  fullName.vb: WebApp.Data.IDao(Of T).Add
+- uid: WebApp.Data.IDao`1.Update*
+  commentId: Overload:WebApp.Data.IDao`1.Update
+  href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Update__0__0_
+  name: Update
+  nameWithType: IDao<T>.Update
+  fullName: WebApp.Data.IDao<T>.Update
+  nameWithType.vb: IDao(Of T).Update
+  fullName.vb: WebApp.Data.IDao(Of T).Update
+- uid: WebApp.Data.IDao`1.Delete*
+  commentId: Overload:WebApp.Data.IDao`1.Delete
+  href: WebApp.Data.IDao-1.html#WebApp_Data_IDao_1_Delete__0_
+  name: Delete
+  nameWithType: IDao<T>.Delete
+  fullName: WebApp.Data.IDao<T>.Delete
+  nameWithType.vb: IDao(Of T).Delete
+  fullName.vb: WebApp.Data.IDao(Of T).Delete
