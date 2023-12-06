@@ -8,13 +8,21 @@ using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Data;
 
+/// <summary>
+/// Data Access Object (DAO) for managing Order entities.
+/// </summary>
 public class OrderDao : IDao<Order> {
     private readonly CommandHandler commandHandler;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="OrderDao"/> class.
+    /// </summary>
+    /// <param name="commandHandler">The command handler for executing database commands.</param>
     public OrderDao(CommandHandler commandHandler) {
         this.commandHandler = commandHandler;
     }
 
+    /// <inheritdoc/>
     public Order Get(int id) {
         var query = $"SELECT * FROM orders_final WHERE order_id = {id}";
         var reader = commandHandler.ExecuteReader(query);
@@ -37,6 +45,7 @@ public class OrderDao : IDao<Order> {
         return order;
     }
 
+    /// <inheritdoc/>
     public IEnumerable<Order> GetAll() {
         var query = "SELECT * FROM orders_final";
         var reader = commandHandler.ExecuteReader(query);
@@ -58,6 +67,7 @@ public class OrderDao : IDao<Order> {
         return orders;
     }
 
+    /// <inheritdoc/>
     public void Add(Order t) {
         // foreach (int id in t.ItemIds) {
         //      string q = (
@@ -141,6 +151,7 @@ public class OrderDao : IDao<Order> {
         commandHandler.ExecuteNonQuery(statement);
     }
 
+    /// <inheritdoc/>
     public void Update(Order t, Order newT) {
         string statement = (
             $"UPDATE orders_final SET " +
@@ -155,6 +166,7 @@ public class OrderDao : IDao<Order> {
         commandHandler.ExecuteNonQuery(statement);
     }
 
+    /// <inheritdoc/>
     public void Delete(Order t) {
         string statement = $"DELETE FROM orders_final WHERE order_id = {t.Id}";
         commandHandler.ExecuteNonQuery(statement);

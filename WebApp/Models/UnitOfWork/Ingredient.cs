@@ -10,7 +10,14 @@ namespace WebApp.Models.UnitOfWork;
 /// This class is used to represent a row in the Ingredient table.
 /// </summary>
 public class Ingredient {
+    /// <summary>
+    /// Gets or sets the unique identifier for the inventory item.
+    /// </summary>
     public int Id { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the identifier of the associated ingredient.
+    /// </summary>
     public string Name { get; set; }
 
     /// <summary>

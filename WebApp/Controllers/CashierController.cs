@@ -27,19 +27,33 @@ using System.Security.Claims;
 
 namespace WebApp.Controllers;
 
+/// <summary>
+/// Controller responsible for managing cashier-related operations, including product categories, best sellers, favorites, and customizations.
+/// </summary>
 [Authorize(Roles = "Cashier, Manager"), ApiController]
 public class CashierController : Controller
 {
     private readonly ILogger<CashierController> _logger;
     private readonly IMemoryCache cache;
     private readonly CartService cartService;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CashierController"/> class.
+    /// </summary>
+    /// <param name="logger">The logger instance.</param>
+    /// <param name="cache">The memory cache instance.</param>
+    /// <param name="cartService">The service responsible for cart operations.</param>
     public CashierController(ILogger<CashierController> logger, IMemoryCache cache, CartService cartService)
     {
         _logger = logger;
         this.cache = cache;
         this.cartService = cartService;
     }
-
+    
+    /// <summary>
+    /// Displays the default view for the cashier controller.
+    /// </summary>
+    /// <returns>The default view.</returns>
     [HttpGet, Route("Cashier/")]
     public IActionResult Index()
     {
@@ -49,6 +63,10 @@ public class CashierController : Controller
         return View();
     }
 
+    /// <summary>
+    /// Displays the error view.
+    /// </summary>
+    /// <returns>The error view.</returns>
     [HttpGet, Route("Cashier/Error")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
@@ -56,6 +74,10 @@ public class CashierController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    /// <summary>
+    /// Loads and returns the product categories from the cache or database.
+    /// </summary>
+    /// <returns>The partial view containing the loaded product categories.</returns>
     [HttpGet, Route("Cashier/LoadCategories")]
     public IActionResult LoadCategories() {
         UnitOfWork unit = new();
@@ -72,6 +94,11 @@ public class CashierController : Controller
     }
 
 
+    /// <summary>
+    /// Loads and returns products based on the specified series name.
+    /// </summary>
+    /// <param name="arg">The series name.</param>
+    /// <returns>The partial view containing the loaded products.</returns>
     [HttpGet, Route("Cashier/LoadProductsBySeries")]
     public IActionResult LoadProductsBySeries(string arg) {
         UnitOfWork unit = new();
@@ -80,6 +107,11 @@ public class CashierController : Controller
         return PartialView("_ProductsPartial", model);
     }
 
+    /// <summary>
+    /// Loads and returns customizations for a selected product.
+    /// </summary>
+    /// <param name="arg">The ID of the selected product.</param>
+    /// <returns>The partial view containing the loaded customizations.</returns>
     [HttpGet, Route("Cashier/LoadCustomizations")]
     public IActionResult LoadCustomizations(string arg) {
         UnitOfWork unit = new();
@@ -100,5 +132,6 @@ public class CashierController : Controller
         
         return PartialView("_CustomizationsPartial", model);
     }
+
 
 }

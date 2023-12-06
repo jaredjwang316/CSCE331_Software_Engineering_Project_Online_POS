@@ -18,6 +18,11 @@ public class AIController : Controller
         _logger = logger;
     }
 
+    /// <summary>
+    /// Queries the AI for a response to the given input.
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
     [HttpPost, Route("AI/GetResponse/{input}")]
     public async Task<IActionResult> GetResponse(string input) {
         string response = "";
@@ -38,6 +43,10 @@ public class AIController : Controller
         return Ok(translatedResponse);
     }
 
+    /// <summary>
+    /// Gets the chatbot history from the session.
+    /// </summary>
+    /// <returns></returns>
     [HttpGet, Route("AI/GetHistory")]
     public string GetHistory() {
         string? history;
@@ -46,6 +55,10 @@ public class AIController : Controller
         return history;
     }
 
+    /// <summary>
+    /// Gets the chatbot history from the session and splits it into an array.
+    /// </summary>
+    /// <returns></returns>
     [HttpGet, Route("AI/GetHistorySplit")]
     public IActionResult GetHistorySplit() {
         string? history = GetHistory();
@@ -76,11 +89,19 @@ public class AIController : Controller
         return Ok(translatedHistory);
     }
 
+    /// <summary>
+    /// Sets the chatbot history in the session.
+    /// </summary>
+    /// <param name="history"></param>
     [HttpPost, Route("AI/SetHistory")]
     public void SetHistory(string history) {
         HttpContext.Session.SetString("chatbotHistory", history);
     }
 
+    /// <summary>
+    /// Clears the chatbot history in the session.
+    /// </summary>
+    /// <returns></returns>
     [HttpDelete, Route("AI/ClearHistory")]
     public IActionResult ClearHistory() {
         HttpContext.Session.SetString("chatbotHistory", "");

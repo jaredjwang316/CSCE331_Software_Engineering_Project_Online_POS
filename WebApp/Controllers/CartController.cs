@@ -13,6 +13,9 @@ using WebApp.Models.UnitOfWork;
 using WebApp.Models.JsonModels;
 
 namespace WebApp.Controllers;
+/// <summary>
+/// Controller responsible for managing shopping cart operations, including adding, removing, and editing items.
+/// </summary>
 
 /* The `CartController.cs` manages the functionality associated with the shopping cart within the web application. 
 Primarily responsible for handling cart interactions, this controller orchestrates operations such as adding, 
@@ -30,12 +33,21 @@ public class CartController : Controller
     private readonly ILogger<CartController> _logger;
     private readonly CartService cartService;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CartController"/> class.
+    /// </summary>
+    /// <param name="logger">The logger instance.</param>
+    /// <param name="cartService">The service responsible for cart operations.</param>
     public CartController(ILogger<CartController> logger, CartService cartService)
     {
         _logger = logger;
         this.cartService = cartService;
     }
 
+    /// <summary>
+    /// Displays the shopping cart contents along with the total number of items.
+    /// </summary>
+    /// <returns>The view containing the shopping cart information.</returns>
     [HttpGet, Route("/Cart")]
     public IActionResult Index()
     {
@@ -46,16 +58,35 @@ public class CartController : Controller
         return View(cart);
     }
 
+    /// <summary>
+    /// Finds a product in the list of products with the specified ID.
+    /// </summary>
+    /// <param name="products"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpGet, Route("/Cart/FindProduct")]
     static Product? FindProduct(List<Product> products, int id) {
         return products.FirstOrDefault(p => p.Id == id);
     }
 
+    /// <summary>
+    /// Finds a list of products in the list of products with the specified IDs.
+    /// </summary>
+    /// <param name="products"></param>
+    /// <param name="ids"></param>
+    /// <returns></returns>
     [HttpGet, Route("/Cart/FindCustomizations")]
     static List<Product> FindCustomizations(List<Product> products, List<int> ids) {
         return products.Where(p => ids.Contains(p.Id)).ToList();
     }
 
+    /// <summary>
+    /// Adds an item to the shopping cart with the specified product ID and customization IDs.
+    /// </summary>
+    /// <param name="model">
+    /// The model containing the product ID and customization IDs.
+    /// </param>
+    /// <returns></returns>
     [HttpPost, Route("/Cart/AddItem")]
     public IActionResult AddItem([FromBody] AddItemModel model) {
         UnitOfWork unit = new();
@@ -80,6 +111,11 @@ public class CartController : Controller
         return Ok();
     }
 
+    /// <summary>
+    /// Removes an item from the shopping cart at the specified index.
+    /// </summary>
+    /// <param name="index">The index of the item to remove.</param>
+    /// <returns>An HTTP result indicating the success of the operation.</returns>
     [HttpPost, Route("/Cart/RemoveItem")]
     public IActionResult RemoveItem(int index) {
         Cart cart = cartService.GetCartFromSession();
@@ -88,6 +124,13 @@ public class CartController : Controller
         return Ok();
     }
 
+    /// <summary>
+    /// Edits the quantity of an item in the shopping cart at the specified index.
+    /// </summary>
+    /// <param name="model">
+    /// The model containing the index of the item to edit and whether to increment or decrement the quantity.
+    /// </param>
+    /// <returns></returns>
     [HttpPost, Route("/Cart/EditCount")]
     public IActionResult EditCount([FromBody] EditCountModel model) {
         Cart cart = cartService.GetCartFromSession();
@@ -105,6 +148,13 @@ public class CartController : Controller
         return Ok();
     }
 
+    /// <summary>
+    /// Clears the shopping cart.
+    /// </summary>
+    /// <param name="model">
+    /// The model containing user information.
+    /// </param>
+    /// <returns></returns>
     [HttpPost, Route("/Cart/Checkout")]
     public IActionResult Checkout([FromBody] CheckoutModel model) {
         Cart cart = cartService.GetCartFromSession();
@@ -137,16 +187,28 @@ public class CartController : Controller
         return Ok();
     }
 
+    /// <summary>
+    /// Retrieves the shopping cart from the session.
+    /// </summary>
+    /// <returns>The current shopping cart.</returns>
     [HttpGet, Route("/Cart/GetCartFromSession")]
     public Cart GetCartFromSession() {
         return cartService.GetCartFromSession();
     }
 
+    /// <summary>
+    /// Sets the provided shopping cart in the session.
+    /// </summary>
+    /// <param name="cart">The shopping cart to set in the session.</param>
     [HttpPost, Route("/Cart/SetCartInSession")]
     public void SetCartInSession(Cart cart) {
         cartService.SetCartInSession(cart);
     }
 
+    /// <summary>
+    /// Displays the error view.
+    /// </summary>
+    /// <returns>The error view.</returns>
     [HttpGet, Route("/Cart/GetCartSize")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
