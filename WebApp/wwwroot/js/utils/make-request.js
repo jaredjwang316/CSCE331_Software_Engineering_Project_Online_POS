@@ -7,7 +7,8 @@ export function makeRequest(url, method, data, successCallback, errorCallback, r
     $.ajax({
         url: url,
         method: method,
-        data: data,
+        contentType: "application/json",
+        data: JSON.stringify(data),
         success: successCallback,
         error: function (jqXHR, textStatus, errorThrown) {
             if (retries > 0) {
