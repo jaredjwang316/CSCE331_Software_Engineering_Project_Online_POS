@@ -54,8 +54,8 @@
                 <th>Price</th>
                 <th>Series</th>
                 <th>Image Url</th>
-                <th>Delete</th>
                 <th>Product Ingredients</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -66,8 +66,8 @@
                     <td contenteditable="true">@product.Price</td>
                     <td contenteditable="true">@product.Series</td>
                     <td contenteditable="true">@product.ImgUrl</td>
-                    <td><input type="button" value="Delete" onclick="deleteRowProd(this)"/></td>
                     <td><input type="button" value="Edit Product Ingredients" onclick="editProductIngredients(this)"/></td>
+                    <td><input type="button" value="Delete" onclick="deleteRowProd(this)"/></td>
                 </tr>
             }
         </tbody>
@@ -111,20 +111,21 @@
 } else {
     <p>No products found.</p>
 }
+
 <button id="saveButtonInv" class="save-button" style="display:none">Save</button>
 <button id="addButtonInv" class="add-button" style="display:none">Add</button>
 
 @if (Model.Item4 != null && Model.Item4.Count > 0) {
-    @foreach (var productingredient in Model.Item4) {
-        @foreach (var pingredient in productingredient.IngredientIds) {
-            @foreach (var ingredient in Model.Item3) {
-
-            }
+    <form id="proding" style="display:none">
+        @foreach (var ingredient in Model.Item3) {
+            <input type="checkbox" class="ingredients" id="@ingredient.Name" value="@ingredient.Name"/>
+            <label for="@ingredient.Name"> @ingredient.Name</label><br>
         }
-    }
+    </form>
 }
 
-
+<button id="confirm" class="save-button" style="display:none">Confirm</button>
+<button id="cancel" class="save-button" style="display:none">Cancel</button>
 
 <button id="salesReport" class="table-button" style="display:inline-block">Sales Report</button>
 <button id="excessReport" class="table-button" style="display:inline-block">Excess Report</button>
@@ -180,7 +181,7 @@
 
 <br>
 <label for="starttime" id="slabel" style="display:inline-block"> Enter Start Time: </label><br>
-<input type="date" id="starttime" value="2023-01-01" style="display:inline-block"><br>
+<input type="date" id="starttime" value="2023-07-01" style="display:inline-block"><br>
 
 <label for="endtime" id = "elabel" style="display:inline-block"> Enter End Time: </label><br>
 <input type="date" id="endtime" value="2023-12-31" style="display:inline-block"><br>
@@ -291,9 +292,9 @@
         cell4.setAttribute("contenteditable", true);
         cell5.setAttribute("contenteditable", true);
         var cell6 = row.insertCell(5);
-        cell6.innerHTML = '<input type="button" value="Delete" onclick="deleteRowProd(this)"/>';
-        var cell7 = row.insertCell(5);
-        cell7.innerHTML = '<input type="button" value="Edit Product Ingredients" onclick="editProductIngredients(this)"/>';
+        cell6.innerHTML = '<input type="button" value="Edit Product Ingredients" onclick="editProductIngredients(this)"/>';
+        var cell7 = row.insertCell(6);
+        cell7.innerHTML = '<input type="button" value="Delete" onclick="deleteRowProd(this)"/>';
         cell2.addEventListener('input', function() {
                 console.log('Cell changed');
                 cell2.classList.add('edited');
@@ -517,10 +518,73 @@
             }
         });
     }
+    var pid = 0;
     function editProductIngredients(btn) {
         ShowProductIngredients();
         var row = btn.parentNode.parentNode;
         id = parseInt(row.querySelector('td:first-child').innerText);
-        console.log(id);
+        pid = id;
+        var input = document.getElementsByClassName('ingredients');
+        $.ajax({
+            url: "/Manager/GetProductIngredients/" + id,
+            type: "GET",
+            contentType: "application/json",
+            data: "",
+            success: function (response) {
+                for(var i = 0; input[i]; ++i) {
+                    for(var name of response) {
+                        if (input[i].value == name) {                            
+                            document.getElementById(input[i].value).checked = true;
+                        }
+                    }
+                }
+                document.getElementById("saveSuccess").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveSuccess').fadeOut('fast');
+                    }, 5000);
+                console.log("Success getting product ingredients");
+            },
+            error: function () {
+                document.getElementById("saveFail").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveFail').fadeOut('fast');
+                    }, 5000);
+                console.log("Error getting product ingredients");
+            }
+        });
     }
+    document.getElementById('cancel').addEventListener('click', function() {
+        ShowProductPage();
+    });
+    document.getElementById('confirm').addEventListener('click', function() {
+        var input = document.getElementsByClassName('ingredients');
+        var output = [];
+        output.push(pid.toString());
+        for(var i = 0; input[i]; ++i) {
+            if (input[i].checked) {
+                output.push(input[i].value);
+            }
+        }
+        $.ajax({
+            url: "/Manager/EditProductIngredients",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(output),
+            success: function (response) {
+                document.getElementById("saveSuccess").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveSuccess').fadeOut('fast');
+                    }, 5000);
+                console.log("Success editing product ingredients");
+            },
+            error: function () {
+                document.getElementById("saveFail").style.display = 'block';
+                    setTimeout(function() {
+                        $('#saveFail').fadeOut('fast');
+                    }, 5000);
+                console.log("Error editing product ingredients");
+            }
+        });
+        ShowProductPage();
+    });
 </script> 

@@ -28,7 +28,8 @@ public class ProductIngredientsDao : IDao<ProductIngredients> {
         var query = $"SELECT * FROM product_ingredients WHERE product_id = {id}";
         var reader = commandHandler.ExecuteReader(query);
 
-        if (reader == null) {
+        if (reader == null || !reader.HasRows) {
+            reader?.Close();
             return new ProductIngredients(-1, new List<int>());
         }
 
