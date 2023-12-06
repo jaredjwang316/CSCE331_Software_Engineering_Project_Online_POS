@@ -19,14 +19,16 @@ items:
   source:
     remote:
       path: WebApp/Models/ViewModels/EditViewModel.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: EditViewModel
     path: Models/ViewModels/EditViewModel.cs
-    startLine: 4
+    startLine: 8
   assemblies:
   - WebApp
   namespace: WebApp.Models.ViewModels
+  summary: Represents a view model for editing cart-related views.
+  example: []
   syntax:
     content: public class EditViewModel
     content.vb: Public Class EditViewModel
@@ -54,14 +56,16 @@ items:
   source:
     remote:
       path: WebApp/Models/ViewModels/EditViewModel.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Cart
     path: Models/ViewModels/EditViewModel.cs
-    startLine: 5
+    startLine: 12
   assemblies:
   - WebApp
   namespace: WebApp.Models.ViewModels
+  summary: Gets or sets the cart to be edited.
+  example: []
   syntax:
     content: public Cart? Cart { get; set; }
     parameters: []
@@ -83,14 +87,16 @@ items:
   source:
     remote:
       path: WebApp/Models/ViewModels/EditViewModel.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Index
     path: Models/ViewModels/EditViewModel.cs
-    startLine: 6
+    startLine: 17
   assemblies:
   - WebApp
   namespace: WebApp.Models.ViewModels
+  summary: Gets or sets the index of the cart item to be edited.
+  example: []
   syntax:
     content: public int Index { get; set; }
     parameters: []
@@ -112,14 +118,16 @@ items:
   source:
     remote:
       path: WebApp/Models/ViewModels/EditViewModel.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: SeriesInformation
     path: Models/ViewModels/EditViewModel.cs
-    startLine: 7
+    startLine: 22
   assemblies:
   - WebApp
   namespace: WebApp.Models.ViewModels
+  summary: Gets or sets the list of series information for customization.
+  example: []
   syntax:
     content: public List<SeriesInfo>? SeriesInformation { get; set; }
     parameters: []
@@ -141,14 +149,16 @@ items:
   source:
     remote:
       path: WebApp/Models/ViewModels/EditViewModel.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Products
     path: Models/ViewModels/EditViewModel.cs
-    startLine: 8
+    startLine: 27
   assemblies:
   - WebApp
   namespace: WebApp.Models.ViewModels
+  summary: Gets or sets the list of products for customization.
+  example: []
   syntax:
     content: public List<Product>? Products { get; set; }
     parameters: []

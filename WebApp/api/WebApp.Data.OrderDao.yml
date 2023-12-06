@@ -11,6 +11,8 @@ items:
   - WebApp.Data.OrderDao.Get(System.Int32)
   - WebApp.Data.OrderDao.GetAll
   - WebApp.Data.OrderDao.GetOrdersBetween(System.DateTime,System.DateTime)
+  - WebApp.Data.OrderDao.GetSalesReport(System.DateTime,System.DateTime)
+  - WebApp.Data.OrderDao.GetSalesTogether(System.DateTime,System.DateTime)
   - WebApp.Data.OrderDao.Update(WebApp.Models.UnitOfWork.Order,WebApp.Models.UnitOfWork.Order)
   langs:
   - csharp
@@ -22,14 +24,16 @@ items:
   source:
     remote:
       path: WebApp/Data/OrderDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: OrderDao
     path: Data/OrderDao.cs
-    startLine: 10
+    startLine: 13
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Data Access Object (DAO) for managing Order entities.
+  example: []
   syntax:
     content: 'public class OrderDao : IDao<Order>'
     content.vb: Public Class OrderDao Implements IDao(Of Order)
@@ -59,19 +63,22 @@ items:
   source:
     remote:
       path: WebApp/Data/OrderDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Data/OrderDao.cs
-    startLine: 13
+    startLine: 20
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Initializes a new instance of the <xref href="WebApp.Data.OrderDao" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public OrderDao(CommandHandler commandHandler)
     parameters:
     - id: commandHandler
       type: WebApp.Data.CommandHandler
+      description: The command handler for executing database commands.
     content.vb: Public Sub New(commandHandler As CommandHandler)
   overload: WebApp.Data.OrderDao.#ctor*
   nameWithType.vb: OrderDao.New(CommandHandler)
@@ -91,22 +98,25 @@ items:
   source:
     remote:
       path: WebApp/Data/OrderDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Get
     path: Data/OrderDao.cs
-    startLine: 17
+    startLine: 25
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves an entity by its unique identifier.
   example: []
   syntax:
     content: public Order Get(int id)
     parameters:
     - id: id
       type: System.Int32
+      description: The unique identifier of the entity.
     return:
       type: WebApp.Models.UnitOfWork.Order
+      description: The entity with the specified identifier, or a default value if not found.
     content.vb: Public Function [Get](id As Integer) As Order
   overload: WebApp.Data.OrderDao.Get*
   implements:
@@ -128,19 +138,21 @@ items:
   source:
     remote:
       path: WebApp/Data/OrderDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetAll
     path: Data/OrderDao.cs
-    startLine: 39
+    startLine: 48
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves all entities of the specified type.
   example: []
   syntax:
     content: public IEnumerable<Order> GetAll()
     return:
       type: System.Collections.Generic.IEnumerable{WebApp.Models.UnitOfWork.Order}
+      description: An enumerable collection of all entities of the specified type.
     content.vb: Public Function GetAll() As IEnumerable(Of Order)
   overload: WebApp.Data.OrderDao.GetAll*
   implements:
@@ -159,20 +171,22 @@ items:
   source:
     remote:
       path: WebApp/Data/OrderDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Add
     path: Data/OrderDao.cs
-    startLine: 60
+    startLine: 70
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Adds a new entity to the data store.
   example: []
   syntax:
     content: public void Add(Order t)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.Order
+      description: The entity to be added.
     content.vb: Public Sub Add(t As Order)
   overload: WebApp.Data.OrderDao.Add*
   implements:
@@ -191,22 +205,25 @@ items:
   source:
     remote:
       path: WebApp/Data/OrderDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Update
     path: Data/OrderDao.cs
-    startLine: 143
+    startLine: 154
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Updates an existing entity in the data store.
   example: []
   syntax:
     content: public void Update(Order t, Order newT)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.Order
+      description: The existing entity to be updated.
     - id: newT
       type: WebApp.Models.UnitOfWork.Order
+      description: The new values for the entity.
     content.vb: Public Sub Update(t As Order, newT As Order)
   overload: WebApp.Data.OrderDao.Update*
   implements:
@@ -225,20 +242,22 @@ items:
   source:
     remote:
       path: WebApp/Data/OrderDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Delete
     path: Data/OrderDao.cs
-    startLine: 157
+    startLine: 169
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Deletes an entity from the data store.
   example: []
   syntax:
     content: public void Delete(Order t)
     parameters:
     - id: t
       type: WebApp.Models.UnitOfWork.Order
+      description: The entity to be deleted.
     content.vb: Public Sub Delete(t As Order)
   overload: WebApp.Data.OrderDao.Delete*
   implements:
@@ -257,11 +276,11 @@ items:
   source:
     remote:
       path: WebApp/Data/OrderDao.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetOrdersBetween
     path: Data/OrderDao.cs
-    startLine: 162
+    startLine: 174
   assemblies:
   - WebApp
   namespace: WebApp.Data
@@ -279,6 +298,78 @@ items:
   nameWithType.vb: OrderDao.GetOrdersBetween(Date, Date)
   fullName.vb: WebApp.Data.OrderDao.GetOrdersBetween(Date, Date)
   name.vb: GetOrdersBetween(Date, Date)
+- uid: WebApp.Data.OrderDao.GetSalesTogether(System.DateTime,System.DateTime)
+  commentId: M:WebApp.Data.OrderDao.GetSalesTogether(System.DateTime,System.DateTime)
+  id: GetSalesTogether(System.DateTime,System.DateTime)
+  parent: WebApp.Data.OrderDao
+  langs:
+  - csharp
+  - vb
+  name: GetSalesTogether(DateTime, DateTime)
+  nameWithType: OrderDao.GetSalesTogether(DateTime, DateTime)
+  fullName: WebApp.Data.OrderDao.GetSalesTogether(System.DateTime, System.DateTime)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/OrderDao.cs
+      branch: main
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: GetSalesTogether
+    path: Data/OrderDao.cs
+    startLine: 200
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: public List<Tuple<string, string, int>> GetSalesTogether(DateTime start_date, DateTime end_date)
+    parameters:
+    - id: start_date
+      type: System.DateTime
+    - id: end_date
+      type: System.DateTime
+    return:
+      type: System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Int32}}
+    content.vb: Public Function GetSalesTogether(start_date As Date, end_date As Date) As List(Of Tuple(Of String, String, Integer))
+  overload: WebApp.Data.OrderDao.GetSalesTogether*
+  nameWithType.vb: OrderDao.GetSalesTogether(Date, Date)
+  fullName.vb: WebApp.Data.OrderDao.GetSalesTogether(Date, Date)
+  name.vb: GetSalesTogether(Date, Date)
+- uid: WebApp.Data.OrderDao.GetSalesReport(System.DateTime,System.DateTime)
+  commentId: M:WebApp.Data.OrderDao.GetSalesReport(System.DateTime,System.DateTime)
+  id: GetSalesReport(System.DateTime,System.DateTime)
+  parent: WebApp.Data.OrderDao
+  langs:
+  - csharp
+  - vb
+  name: GetSalesReport(DateTime, DateTime)
+  nameWithType: OrderDao.GetSalesReport(DateTime, DateTime)
+  fullName: WebApp.Data.OrderDao.GetSalesReport(System.DateTime, System.DateTime)
+  type: Method
+  source:
+    remote:
+      path: WebApp/Data/OrderDao.cs
+      branch: main
+      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
+    id: GetSalesReport
+    path: Data/OrderDao.cs
+    startLine: 247
+  assemblies:
+  - WebApp
+  namespace: WebApp.Data
+  syntax:
+    content: public List<Tuple<int, double>> GetSalesReport(DateTime start_time, DateTime end_time)
+    parameters:
+    - id: start_time
+      type: System.DateTime
+    - id: end_time
+      type: System.DateTime
+    return:
+      type: System.Collections.Generic.List{System.Tuple{System.Int32,System.Double}}
+    content.vb: Public Function GetSalesReport(start_time As Date, end_time As Date) As List(Of Tuple(Of Integer, Double))
+  overload: WebApp.Data.OrderDao.GetSalesReport*
+  nameWithType.vb: OrderDao.GetSalesReport(Date, Date)
+  fullName.vb: WebApp.Data.OrderDao.GetSalesReport(Date, Date)
+  name.vb: GetSalesReport(Date, Date)
 references:
 - uid: WebApp.Data
   commentId: N:WebApp.Data
@@ -595,6 +686,13 @@ references:
   - name: " "
   - name: T
   - name: )
+- uid: WebApp.Data.OrderDao
+  commentId: T:WebApp.Data.OrderDao
+  parent: WebApp.Data
+  href: WebApp.Data.OrderDao.html
+  name: OrderDao
+  nameWithType: OrderDao
+  fullName: WebApp.Data.OrderDao
 - uid: WebApp.Data.OrderDao.#ctor*
   commentId: Overload:WebApp.Data.OrderDao.#ctor
   href: WebApp.Data.OrderDao.html#WebApp_Data_OrderDao__ctor_WebApp_Data_CommandHandler_
@@ -1133,4 +1231,150 @@ references:
   - name: Of
   - name: " "
   - name: T
+  - name: )
+- uid: WebApp.Data.OrderDao.GetSalesTogether*
+  commentId: Overload:WebApp.Data.OrderDao.GetSalesTogether
+  href: WebApp.Data.OrderDao.html#WebApp_Data_OrderDao_GetSalesTogether_System_DateTime_System_DateTime_
+  name: GetSalesTogether
+  nameWithType: OrderDao.GetSalesTogether
+  fullName: WebApp.Data.OrderDao.GetSalesTogether
+- uid: System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Int32}}
+  commentId: T:System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Int32}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<Tuple<string, string, int>>
+  nameWithType: List<Tuple<string, string, int>>
+  fullName: System.Collections.Generic.List<System.Tuple<string, string, int>>
+  nameWithType.vb: List(Of Tuple(Of String, String, Integer))
+  fullName.vb: System.Collections.Generic.List(Of System.Tuple(Of String, String, Integer))
+  name.vb: List(Of Tuple(Of String, String, Integer))
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: System.Tuple`3
+    name: Tuple
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.tuple-3
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Tuple`3
+    name: Tuple
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.tuple-3
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  - name: )
+- uid: WebApp.Data.OrderDao.GetSalesReport*
+  commentId: Overload:WebApp.Data.OrderDao.GetSalesReport
+  href: WebApp.Data.OrderDao.html#WebApp_Data_OrderDao_GetSalesReport_System_DateTime_System_DateTime_
+  name: GetSalesReport
+  nameWithType: OrderDao.GetSalesReport
+  fullName: WebApp.Data.OrderDao.GetSalesReport
+- uid: System.Collections.Generic.List{System.Tuple{System.Int32,System.Double}}
+  commentId: T:System.Collections.Generic.List{System.Tuple{System.Int32,System.Double}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<Tuple<int, double>>
+  nameWithType: List<Tuple<int, double>>
+  fullName: System.Collections.Generic.List<System.Tuple<int, double>>
+  nameWithType.vb: List(Of Tuple(Of Integer, Double))
+  fullName.vb: System.Collections.Generic.List(Of System.Tuple(Of Integer, Double))
+  name.vb: List(Of Tuple(Of Integer, Double))
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: System.Tuple`2
+    name: Tuple
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.tuple-2
+  - name: <
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Tuple`2
+    name: Tuple
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.tuple-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
   - name: )

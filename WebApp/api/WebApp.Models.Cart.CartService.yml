@@ -18,14 +18,16 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/CartService.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: CartService
     path: Models/Cart/CartService.cs
-    startLine: 12
+    startLine: 15
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Provides functionality to interact with the user's shopping cart stored in the session.
+  example: []
   syntax:
     content: public class CartService
     content.vb: Public Class CartService
@@ -53,19 +55,22 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/CartService.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Models/Cart/CartService.cs
-    startLine: 15
+    startLine: 22
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Initializes a new instance of the <xref href="WebApp.Models.Cart.CartService" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public CartService(IHttpContextAccessor httpContextAccessor)
     parameters:
     - id: httpContextAccessor
       type: Microsoft.AspNetCore.Http.IHttpContextAccessor
+      description: The HTTP context accessor.
     content.vb: Public Sub New(httpContextAccessor As IHttpContextAccessor)
   overload: WebApp.Models.Cart.CartService.#ctor*
   nameWithType.vb: CartService.New(IHttpContextAccessor)
@@ -85,18 +90,24 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/CartService.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetCartFromSession
     path: Models/Cart/CartService.cs
-    startLine: 19
+    startLine: 31
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: >-
+    Retrieves the user's shopping cart from the session.
+
+    If the cart is not found, a new cart is created and stored in the session.
+  example: []
   syntax:
     content: public Cart GetCartFromSession()
     return:
       type: WebApp.Models.Cart.Cart
+      description: The user's shopping cart.
     content.vb: Public Function GetCartFromSession() As Cart
   overload: WebApp.Models.Cart.CartService.GetCartFromSession*
 - uid: WebApp.Models.Cart.CartService.SetCartInSession(WebApp.Models.Cart.Cart)
@@ -113,19 +124,22 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/CartService.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: SetCartInSession
     path: Models/Cart/CartService.cs
-    startLine: 30
+    startLine: 46
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Sets the specified shopping cart in the session.
+  example: []
   syntax:
     content: public void SetCartInSession(Cart cart)
     parameters:
     - id: cart
       type: WebApp.Models.Cart.Cart
+      description: The shopping cart to store in the session.
     content.vb: Public Sub SetCartInSession(cart As Cart)
   overload: WebApp.Models.Cart.CartService.SetCartInSession*
 references:
@@ -396,6 +410,13 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: WebApp.Models.Cart.CartService
+  commentId: T:WebApp.Models.Cart.CartService
+  parent: WebApp.Models.Cart
+  href: WebApp.Models.Cart.CartService.html
+  name: CartService
+  nameWithType: CartService
+  fullName: WebApp.Models.Cart.CartService
 - uid: WebApp.Models.Cart.CartService.#ctor*
   commentId: Overload:WebApp.Models.Cart.CartService.#ctor
   href: WebApp.Models.Cart.CartService.html#WebApp_Models_Cart_CartService__ctor_Microsoft_AspNetCore_Http_IHttpContextAccessor_

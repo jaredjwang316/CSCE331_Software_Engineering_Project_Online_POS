@@ -20,14 +20,16 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/Item.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Item
     path: Models/Cart/Item.cs
-    startLine: 13
+    startLine: 17
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Represents an item in the user's shopping cart.
+  example: []
   syntax:
     content: public class Item
     content.vb: Public Class Item
@@ -55,14 +57,16 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/Item.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Product
     path: Models/Cart/Item.cs
-    startLine: 14
+    startLine: 21
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Gets or sets the product associated with the item.
+  example: []
   syntax:
     content: public Product Product { get; set; }
     parameters: []
@@ -84,14 +88,16 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/Item.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Options
     path: Models/Cart/Item.cs
-    startLine: 15
+    startLine: 26
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Gets or sets the list of product options associated with the item.
+  example: []
   syntax:
     content: public List<Product> Options { get; set; }
     parameters: []
@@ -113,14 +119,16 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/Item.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Quantity
     path: Models/Cart/Item.cs
-    startLine: 16
+    startLine: 31
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Gets or sets the quantity of the item.
+  example: []
   syntax:
     content: public int Quantity { get; set; }
     parameters: []
@@ -142,23 +150,28 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/Item.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Models/Cart/Item.cs
-    startLine: 18
+    startLine: 39
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Initializes a new instance of the <xref href="WebApp.Models.Cart.Item" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public Item(Product product, List<Product> options, int quantity)
     parameters:
     - id: product
       type: WebApp.Models.UnitOfWork.Product
+      description: The main product associated with the item.
     - id: options
       type: System.Collections.Generic.List{WebApp.Models.UnitOfWork.Product}
+      description: The list of product options associated with the item.
     - id: quantity
       type: System.Int32
+      description: The quantity of the item.
     content.vb: Public Sub New(product As Product, options As List(Of Product), quantity As Integer)
   overload: WebApp.Models.Cart.Item.#ctor*
   nameWithType.vb: Item.New(Product, List(Of Product), Integer)
@@ -178,18 +191,21 @@ items:
   source:
     remote:
       path: WebApp/Models/Cart/Item.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Price
     path: Models/Cart/Item.cs
-    startLine: 24
+    startLine: 49
   assemblies:
   - WebApp
   namespace: WebApp.Models.Cart
+  summary: Calculates and returns the total price of the item.
+  example: []
   syntax:
     content: public double Price()
     return:
       type: System.Double
+      description: The total price of the item.
     content.vb: Public Function Price() As Double
   overload: WebApp.Models.Cart.Item.Price*
 references:
@@ -624,6 +640,13 @@ references:
   nameWithType.vb: Integer
   fullName.vb: Integer
   name.vb: Integer
+- uid: WebApp.Models.Cart.Item
+  commentId: T:WebApp.Models.Cart.Item
+  parent: WebApp.Models.Cart
+  href: WebApp.Models.Cart.Item.html
+  name: Item
+  nameWithType: Item
+  fullName: WebApp.Models.Cart.Item
 - uid: WebApp.Models.Cart.Item.#ctor*
   commentId: Overload:WebApp.Models.Cart.Item.#ctor
   href: WebApp.Models.Cart.Item.html#WebApp_Models_Cart_Item__ctor_WebApp_Models_UnitOfWork_Product_System_Collections_Generic_List_WebApp_Models_UnitOfWork_Product__System_Int32_

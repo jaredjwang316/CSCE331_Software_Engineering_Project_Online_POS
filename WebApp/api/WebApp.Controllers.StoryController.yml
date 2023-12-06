@@ -18,7 +18,7 @@ items:
   source:
     remote:
       path: WebApp/Controllers/StoryController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: StoryController
     path: Controllers/StoryController.cs
@@ -264,7 +264,7 @@ items:
   source:
     remote:
       path: WebApp/Controllers/StoryController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Controllers/StoryController.cs
@@ -296,14 +296,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/StoryController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Index
     path: Controllers/StoryController.cs
-    startLine: 16
+    startLine: 20
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the default view for the story controller.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -313,6 +315,7 @@ items:
       public IActionResult Index()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -343,14 +346,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/StoryController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Error
     path: Controllers/StoryController.cs
-    startLine: 22
+    startLine: 30
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the error view.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -362,6 +367,7 @@ items:
       public IActionResult Error()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpGet>
 

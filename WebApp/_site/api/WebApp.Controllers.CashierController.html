@@ -17,7 +17,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/new/test/apiSpec/new?filename=WebApp_Controllers_CashierController.md&amp;value=---%0Auid%3A%20WebApp.Controllers.CashierController%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/new/main/apiSpec/new?filename=WebApp_Controllers_CashierController.md&amp;value=---%0Auid%3A%20WebApp.Controllers.CashierController%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -91,7 +91,7 @@
 
   <h1 id="WebApp_Controllers_CashierController" data-uid="WebApp.Controllers.CashierController" class="text-break">
     Class CashierController
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CashierController.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CashierController.cs/#L33"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -99,7 +99,8 @@
   <dl><dt>Assembly</dt><dd>WebApp.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Controller responsible for managing cashier-related operations, including product categories, best sellers, favorites, and customizations.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -753,10 +754,11 @@ public class CashierController : Controller, IActionFilter, IAsyncActionFilter, 
 
   <h3 id="WebApp_Controllers_CashierController__ctor_Microsoft_Extensions_Logging_ILogger_WebApp_Controllers_CashierController__Microsoft_Extensions_Caching_Memory_IMemoryCache_WebApp_Models_Cart_CartService_" data-uid="WebApp.Controllers.CashierController.#ctor(Microsoft.Extensions.Logging.ILogger{WebApp.Controllers.CashierController},Microsoft.Extensions.Caching.Memory.IMemoryCache,WebApp.Models.Cart.CartService)">
   CashierController(ILogger&lt;CashierController&gt;, IMemoryCache, CartService)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CashierController.cs/#L36"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CashierController.cs/#L46"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="WebApp.Controllers.CashierController.html">CashierController</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -766,11 +768,14 @@ public class CashierController : Controller, IActionFilter, IAsyncActionFilter, 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>logger</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="WebApp.Controllers.CashierController.html">CashierController</a>&gt;</dt>
-    <dd></dd>
+    <dd><p>The logger instance.</p>
+</dd>
     <dt><code>cache</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.caching.memory.imemorycache">IMemoryCache</a></dt>
-    <dd></dd>
+    <dd><p>The memory cache instance.</p>
+</dd>
     <dt><code>cartService</code> <a class="xref" href="WebApp.Models.Cart.CartService.html">CartService</a></dt>
-    <dd></dd>
+    <dd><p>The service responsible for cart operations.</p>
+</dd>
   </dl>
 
 
@@ -788,52 +793,15 @@ public class CashierController : Controller, IActionFilter, IAsyncActionFilter, 
 </h2>
 
 
-  <a id="WebApp_Controllers_CashierController_AddFavorite_" data-uid="WebApp.Controllers.CashierController.AddFavorite*"></a>
-
-  <h3 id="WebApp_Controllers_CashierController_AddFavorite_System_Int32_" data-uid="WebApp.Controllers.CashierController.AddFavorite(System.Int32)">
-  AddFavorite(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CashierController.cs/#L141"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[HttpPost]
-[Route(&quot;Cashier/AddFavorite&quot;)]
-public IActionResult AddFavorite(int productID)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>productID</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd></dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
   <a id="WebApp_Controllers_CashierController_Error_" data-uid="WebApp.Controllers.CashierController.Error*"></a>
 
   <h3 id="WebApp_Controllers_CashierController_Error" data-uid="WebApp.Controllers.CashierController.Error">
   Error()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CashierController.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CashierController.cs/#L70"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Displays the error view.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -847,7 +815,8 @@ public IActionResult Error()</code></pre>
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
+    <dd><p>The error view.</p>
+</dd>
   </dl>
 
 
@@ -864,10 +833,11 @@ public IActionResult Error()</code></pre>
 
   <h3 id="WebApp_Controllers_CashierController_Index" data-uid="WebApp.Controllers.CashierController.Index">
   Index()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CashierController.cs/#L43"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CashierController.cs/#L57"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Displays the default view for the cashier controller.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -880,40 +850,8 @@ public IActionResult Index()</code></pre>
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-  <a id="WebApp_Controllers_CashierController_LoadBestSellers_" data-uid="WebApp.Controllers.CashierController.LoadBestSellers*"></a>
-
-  <h3 id="WebApp_Controllers_CashierController_LoadBestSellers" data-uid="WebApp.Controllers.CashierController.LoadBestSellers">
-  LoadBestSellers()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CashierController.cs/#L74"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[HttpGet]
-[Route(&quot;Cashier/LoadBestSellers&quot;)]
-public IActionResult LoadBestSellers()</code></pre>
-  </div>
-
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
+    <dd><p>The default view.</p>
+</dd>
   </dl>
 
 
@@ -930,10 +868,11 @@ public IActionResult LoadBestSellers()</code></pre>
 
   <h3 id="WebApp_Controllers_CashierController_LoadCategories" data-uid="WebApp.Controllers.CashierController.LoadCategories">
   LoadCategories()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CashierController.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CashierController.cs/#L81"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Loads and returns the product categories from the cache or database.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -946,7 +885,8 @@ public IActionResult LoadCategories()</code></pre>
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
+    <dd><p>The partial view containing the loaded product categories.</p>
+</dd>
   </dl>
 
 
@@ -963,10 +903,11 @@ public IActionResult LoadCategories()</code></pre>
 
   <h3 id="WebApp_Controllers_CashierController_LoadCustomizations_System_String_" data-uid="WebApp.Controllers.CashierController.LoadCustomizations(System.String)">
   LoadCustomizations(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CashierController.cs/#L120"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CashierController.cs/#L115"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Loads and returns customizations for a selected product.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -978,46 +919,15 @@ public IActionResult LoadCustomizations(string arg)</code></pre>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>arg</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>The ID of the selected product.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-  <a id="WebApp_Controllers_CashierController_LoadFavorites_" data-uid="WebApp.Controllers.CashierController.LoadFavorites*"></a>
-
-  <h3 id="WebApp_Controllers_CashierController_LoadFavorites" data-uid="WebApp.Controllers.CashierController.LoadFavorites">
-  LoadFavorites()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CashierController.cs/#L87"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[HttpGet]
-[Route(&quot;Cashier/LoadFavorites&quot;)]
-public IActionResult LoadFavorites()</code></pre>
-  </div>
-
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
+    <dd><p>The partial view containing the loaded customizations.</p>
+</dd>
   </dl>
 
 
@@ -1034,10 +944,11 @@ public IActionResult LoadFavorites()</code></pre>
 
   <h3 id="WebApp_Controllers_CashierController_LoadProductsBySeries_System_String_" data-uid="WebApp.Controllers.CashierController.LoadProductsBySeries(System.String)">
   LoadProductsBySeries(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CashierController.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CashierController.cs/#L102"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Loads and returns products based on the specified series name.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1049,51 +960,15 @@ public IActionResult LoadProductsBySeries(string arg)</code></pre>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>arg</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>The series name.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-  <a id="WebApp_Controllers_CashierController_RemoveFavorite_" data-uid="WebApp.Controllers.CashierController.RemoveFavorite*"></a>
-
-  <h3 id="WebApp_Controllers_CashierController_RemoveFavorite_System_Int32_" data-uid="WebApp.Controllers.CashierController.RemoveFavorite(System.Int32)">
-  RemoveFavorite(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CashierController.cs/#L172"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[HttpDelete]
-[Route(&quot;Cashier/RemoveFavorite&quot;)]
-public IActionResult RemoveFavorite(int productID)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>productID</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd></dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a></dt>
-    <dd></dd>
+    <dd><p>The partial view containing the loaded products.</p>
+</dd>
   </dl>
 
 
@@ -1110,7 +985,7 @@ public IActionResult RemoveFavorite(int productID)</code></pre>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/CashierController.cs/#L30" class="edit-link">Edit this page</a>
+          <a href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/CashierController.cs/#L33" class="edit-link">Edit this page</a>
         </div>
 
 

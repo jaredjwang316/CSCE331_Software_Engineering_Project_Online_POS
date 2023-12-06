@@ -19,14 +19,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/HomeController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: HomeController
     path: Controllers/HomeController.cs
-    startLine: 18
+    startLine: 21
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Controller responsible for handling requests related to the home page and basic site navigation.
+  example: []
   syntax:
     content: >-
       [ApiController]
@@ -265,19 +267,22 @@ items:
   source:
     remote:
       path: WebApp/Controllers/HomeController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Controllers/HomeController.cs
-    startLine: 23
+    startLine: 30
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Initializes a new instance of the <xref href="WebApp.Controllers.HomeController" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public HomeController(ILogger<HomeController> logger)
     parameters:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger{WebApp.Controllers.HomeController}
+      description: The logger for HomeController.
     content.vb: Public Sub New(logger As ILogger(Of HomeController))
   overload: WebApp.Controllers.HomeController.#ctor*
   nameWithType.vb: HomeController.New(ILogger(Of HomeController))
@@ -297,14 +302,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/HomeController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Index
     path: Controllers/HomeController.cs
-    startLine: 28
+    startLine: 40
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the home page and redirects to specific pages based on user roles.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -315,8 +322,10 @@ items:
     parameters:
     - id: autoRedirect
       type: System.Boolean
+      description: Flag indicating whether to automatically redirect users based on their roles.
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The view for the home page or a redirect to a specific page based on user roles.
     content.vb: >-
       <HttpGet>
 
@@ -350,14 +359,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/HomeController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetPreferredLanguage
     path: Controllers/HomeController.cs
-    startLine: 40
+    startLine: 56
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Gets the user's preferred language based on the 'Accept-Language' header in the HTTP request.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -367,6 +378,7 @@ items:
       public string GetPreferredLanguage()
     return:
       type: System.String
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -397,14 +409,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/HomeController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Error
     path: Controllers/HomeController.cs
-    startLine: 47
+    startLine: 67
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Handles errors and displays the error view.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -416,6 +430,7 @@ items:
       public IActionResult Error()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The view for the error page.
     content.vb: >-
       <HttpGet>
 
@@ -10178,6 +10193,12 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
   - name: )
+- uid: WebApp.Controllers.HomeController
+  commentId: T:WebApp.Controllers.HomeController
+  href: WebApp.Controllers.HomeController.html
+  name: HomeController
+  nameWithType: HomeController
+  fullName: WebApp.Controllers.HomeController
 - uid: WebApp.Controllers.HomeController.#ctor*
   commentId: Overload:WebApp.Controllers.HomeController.#ctor
   href: WebApp.Controllers.HomeController.html#WebApp_Controllers_HomeController__ctor_Microsoft_Extensions_Logging_ILogger_WebApp_Controllers_HomeController__

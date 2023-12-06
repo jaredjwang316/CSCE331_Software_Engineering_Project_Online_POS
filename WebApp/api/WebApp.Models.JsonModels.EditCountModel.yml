@@ -17,7 +17,7 @@ items:
   source:
     remote:
       path: WebApp/Models/JsonModels/EditCountModel.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: EditCountModel
     path: Models/JsonModels/EditCountModel.cs
@@ -52,7 +52,7 @@ items:
   source:
     remote:
       path: WebApp/Models/JsonModels/EditCountModel.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Index
     path: Models/JsonModels/EditCountModel.cs
@@ -81,7 +81,7 @@ items:
   source:
     remote:
       path: WebApp/Models/JsonModels/EditCountModel.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: IsIncrement
     path: Models/JsonModels/EditCountModel.cs

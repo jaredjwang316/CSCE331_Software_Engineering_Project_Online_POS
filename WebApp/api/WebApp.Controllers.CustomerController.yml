@@ -24,14 +24,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CustomerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: CustomerController
     path: Controllers/CustomerController.cs
-    startLine: 22
+    startLine: 25
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Controller responsible for managing customer-related operations, including viewing products, categories, best sellers, and favorites.
+  example: []
   syntax:
     content: >-
       [ApiController]
@@ -270,21 +272,25 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CustomerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Controllers/CustomerController.cs
-    startLine: 27
+    startLine: 35
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Initializes a new instance of the <xref href="WebApp.Controllers.CustomerController" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public CustomerController(CartService cartService, IMemoryCache cache)
     parameters:
     - id: cartService
       type: WebApp.Models.Cart.CartService
+      description: The cart service instance.
     - id: cache
       type: Microsoft.Extensions.Caching.Memory.IMemoryCache
+      description: The memory cache instance.
     content.vb: Public Sub New(cartService As CartService, cache As IMemoryCache)
   overload: WebApp.Controllers.CustomerController.#ctor*
   nameWithType.vb: CustomerController.New(CartService, IMemoryCache)
@@ -304,14 +310,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CustomerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Index
     path: Controllers/CustomerController.cs
-    startLine: 32
+    startLine: 44
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the default view for the customer controller, showing the cart items count.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -321,6 +329,7 @@ items:
       public IActionResult Index()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The default view.
     content.vb: >-
       <HttpGet>
 
@@ -351,14 +360,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CustomerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: LoadCategories
     path: Controllers/CustomerController.cs
-    startLine: 41
+    startLine: 57
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Loads and returns the product categories from the cache or database.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -368,6 +379,7 @@ items:
       public IActionResult LoadCategories()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The partial view containing the loaded product categories.
     content.vb: >-
       <HttpGet>
 
@@ -398,14 +410,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CustomerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: LoadBestSellers
     path: Controllers/CustomerController.cs
-    startLine: 56
+    startLine: 76
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Loads and returns the best-selling products from the cache or database.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -415,6 +429,7 @@ items:
       public IActionResult LoadBestSellers()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The partial view containing the loaded best-selling products.
     content.vb: >-
       <HttpGet>
 
@@ -445,14 +460,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CustomerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: LoadFavorites
     path: Controllers/CustomerController.cs
-    startLine: 69
+    startLine: 93
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Loads and returns the user's favorite products.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -462,6 +479,7 @@ items:
       public IActionResult LoadFavorites()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The partial view containing the loaded favorite products.
     content.vb: >-
       <HttpGet>
 
@@ -492,14 +510,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CustomerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: LoadProductsBySeries
     path: Controllers/CustomerController.cs
-    startLine: 94
+    startLine: 123
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Loads and returns products based on the specified series name.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -510,8 +530,10 @@ items:
     parameters:
     - id: arg
       type: System.String
+      description: The series name.
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The partial view containing the loaded products.
     content.vb: >-
       <HttpGet>
 
@@ -545,14 +567,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CustomerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: LoadCustomizations
     path: Controllers/CustomerController.cs
-    startLine: 102
+    startLine: 136
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Loads and returns customizations for a selected product.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -563,8 +587,10 @@ items:
     parameters:
     - id: arg
       type: System.String
+      description: The ID of the selected product.
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The partial view containing the loaded customizations.
     content.vb: >-
       <HttpGet>
 
@@ -598,14 +624,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CustomerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: AddFavorite
     path: Controllers/CustomerController.cs
-    startLine: 123
+    startLine: 162
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Adds a product to the user's favorites.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -616,8 +644,10 @@ items:
     parameters:
     - id: productID
       type: System.Int32
+      description: The ID of the product to be added to favorites.
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The result of the operation.
     content.vb: >-
       <HttpPost>
 
@@ -651,14 +681,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CustomerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: RemoveFavorite
     path: Controllers/CustomerController.cs
-    startLine: 154
+    startLine: 198
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Controller action for removing a product from the user's favorites.
+  example: []
   syntax:
     content: >-
       [HttpDelete]
@@ -669,8 +701,10 @@ items:
     parameters:
     - id: productID
       type: System.Int32
+      description: The ID of the product to be removed from favorites.
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The result of the operation and an error if it can't be executed.
     content.vb: >-
       <HttpDelete>
 
@@ -10421,6 +10455,12 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
   - name: )
+- uid: WebApp.Controllers.CustomerController
+  commentId: T:WebApp.Controllers.CustomerController
+  href: WebApp.Controllers.CustomerController.html
+  name: CustomerController
+  nameWithType: CustomerController
+  fullName: WebApp.Controllers.CustomerController
 - uid: WebApp.Controllers.CustomerController.#ctor*
   commentId: Overload:WebApp.Controllers.CustomerController.#ctor
   href: WebApp.Controllers.CustomerController.html#WebApp_Controllers_CustomerController__ctor_WebApp_Models_Cart_CartService_Microsoft_Extensions_Caching_Memory_IMemoryCache_

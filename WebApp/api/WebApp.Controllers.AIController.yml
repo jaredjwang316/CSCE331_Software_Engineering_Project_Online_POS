@@ -21,7 +21,7 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AIController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: AIController
     path: Controllers/AIController.cs
@@ -267,7 +267,7 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AIController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Controllers/AIController.cs
@@ -299,14 +299,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AIController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetResponse
     path: Controllers/AIController.cs
-    startLine: 20
+    startLine: 25
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Queries the AI for a response to the given input.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -317,8 +319,10 @@ items:
     parameters:
     - id: input
       type: System.String
+      description: ''
     return:
       type: System.Threading.Tasks.Task{Microsoft.AspNetCore.Mvc.IActionResult}
+      description: ''
     content.vb: >-
       <HttpPost>
 
@@ -352,14 +356,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AIController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetHistory
     path: Controllers/AIController.cs
-    startLine: 40
+    startLine: 49
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Gets the chatbot history from the session.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -369,6 +375,7 @@ items:
       public string GetHistory()
     return:
       type: System.String
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -399,14 +406,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AIController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetHistorySplit
     path: Controllers/AIController.cs
-    startLine: 48
+    startLine: 61
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Gets the chatbot history from the session and splits it into an array.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -416,6 +425,7 @@ items:
       public IActionResult GetHistorySplit()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -446,14 +456,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AIController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: SetHistory
     path: Controllers/AIController.cs
-    startLine: 78
+    startLine: 95
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Sets the chatbot history in the session.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -464,6 +476,7 @@ items:
     parameters:
     - id: history
       type: System.String
+      description: ''
     content.vb: >-
       <HttpPost>
 
@@ -497,14 +510,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/AIController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ClearHistory
     path: Controllers/AIController.cs
-    startLine: 83
+    startLine: 104
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Clears the chatbot history in the session.
+  example: []
   syntax:
     content: >-
       [HttpDelete]
@@ -514,6 +529,7 @@ items:
       public IActionResult ClearHistory()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpDelete>
 

@@ -17,7 +17,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/new/test/apiSpec/new?filename=WebApp_Controllers_ManagerController.md&amp;value=---%0Auid%3A%20WebApp.Controllers.ManagerController%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/new/main/apiSpec/new?filename=WebApp_Controllers_ManagerController.md&amp;value=---%0Auid%3A%20WebApp.Controllers.ManagerController%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -91,7 +91,7 @@
 
   <h1 id="WebApp_Controllers_ManagerController" data-uid="WebApp.Controllers.ManagerController" class="text-break">
     Class ManagerController
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L13"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -753,10 +753,11 @@ public class ManagerController : Controller, IActionFilter, IAsyncActionFilter, 
 
   <h3 id="WebApp_Controllers_ManagerController__ctor_Microsoft_Extensions_Logging_ILogger_WebApp_Controllers_ManagerController__WebApp_Models_Cart_CartService_Microsoft_Extensions_Caching_Memory_IMemoryCache_" data-uid="WebApp.Controllers.ManagerController.#ctor(Microsoft.Extensions.Logging.ILogger{WebApp.Controllers.ManagerController},WebApp.Models.Cart.CartService,Microsoft.Extensions.Caching.Memory.IMemoryCache)">
   ManagerController(ILogger&lt;ManagerController&gt;, CartService, IMemoryCache)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L26"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="WebApp.Controllers.ManagerController.html">ManagerController</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -766,11 +767,14 @@ public class ManagerController : Controller, IActionFilter, IAsyncActionFilter, 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>logger</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="WebApp.Controllers.ManagerController.html">ManagerController</a>&gt;</dt>
-    <dd></dd>
+    <dd><p>The logger for ManagerController.</p>
+</dd>
     <dt><code>cartService</code> <a class="xref" href="WebApp.Models.Cart.CartService.html">CartService</a></dt>
-    <dd></dd>
+    <dd><p>The service for managing the shopping cart.</p>
+</dd>
     <dt><code>cache</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.caching.memory.imemorycache">IMemoryCache</a></dt>
-    <dd></dd>
+    <dd><p>The cache for storing and retrieving data.</p>
+</dd>
   </dl>
 
 
@@ -792,10 +796,11 @@ public class ManagerController : Controller, IActionFilter, IAsyncActionFilter, 
 
   <h3 id="WebApp_Controllers_ManagerController_AddInventory" data-uid="WebApp.Controllers.ManagerController.AddInventory">
   AddInventory()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L228"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds a new inventory item to the database.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -825,10 +830,11 @@ public IActionResult AddInventory()</code></pre>
 
   <h3 id="WebApp_Controllers_ManagerController_AddProduct" data-uid="WebApp.Controllers.ManagerController.AddProduct">
   AddProduct()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L135"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds a new product to the database.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -858,10 +864,11 @@ public IActionResult AddProduct()</code></pre>
 
   <h3 id="WebApp_Controllers_ManagerController_ClearCache" data-uid="WebApp.Controllers.ManagerController.ClearCache">
   ClearCache()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L210"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L268"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Clears the cache for categories and best sellers.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -891,10 +898,11 @@ public IActionResult ClearCache()</code></pre>
 
   <h3 id="WebApp_Controllers_ManagerController_DeleteInventory_System_Int32_" data-uid="WebApp.Controllers.ManagerController.DeleteInventory(System.Int32)">
   DeleteInventory(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L198"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L252"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Deletes an inventory item from the database.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -929,10 +937,11 @@ public IActionResult DeleteInventory(int inv)</code></pre>
 
   <h3 id="WebApp_Controllers_ManagerController_DeleteProduct_System_Int32_" data-uid="WebApp.Controllers.ManagerController.DeleteProduct(System.Int32)">
   DeleteProduct(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L154"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Deletes a product from the database.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -967,10 +976,11 @@ public IActionResult DeleteProduct(int prod)</code></pre>
 
   <h3 id="WebApp_Controllers_ManagerController_Error" data-uid="WebApp.Controllers.ManagerController.Error">
   Error()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L96"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Displays the error view.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1001,10 +1011,11 @@ public IActionResult Error()</code></pre>
 
   <h3 id="WebApp_Controllers_ManagerController_Index" data-uid="WebApp.Controllers.ManagerController.Index">
   Index()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L37"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Displays the default view for the manager controller.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1034,10 +1045,11 @@ public IActionResult Index()</code></pre>
 
   <h3 id="WebApp_Controllers_ManagerController_SaveInventory_System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="WebApp.Controllers.ManagerController.SaveInventory(System.Collections.Generic.Dictionary{System.String,System.String})">
   SaveInventory(Dictionary&lt;string, string&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L123"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L168"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Saves a list of inventory changes to the database.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1072,10 +1084,11 @@ public IActionResult SaveInventory(Dictionary&lt;string, string&gt; payload)</co
 
   <h3 id="WebApp_Controllers_ManagerController_SaveProducts_System_Collections_Generic_List_WebApp_Models_UnitOfWork_Product__" data-uid="WebApp.Controllers.ManagerController.SaveProducts(System.Collections.Generic.List{WebApp.Models.UnitOfWork.Product})">
   SaveProducts(List&lt;Product&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L108"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Saves a list of products changes to the database.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1110,10 +1123,11 @@ public IActionResult SaveProducts(List&lt;Product&gt; data)</code></pre>
 
   <h3 id="WebApp_Controllers_ManagerController_ShowExcessReport_System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="WebApp.Controllers.ManagerController.ShowExcessReport(System.Collections.Generic.Dictionary{System.String,System.String})">
   ShowExcessReport(Dictionary&lt;string, string&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L230"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L308"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Displays the excess report.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1148,10 +1162,11 @@ public IActionResult ShowExcessReport(Dictionary&lt;string, string&gt; payload)<
 
   <h3 id="WebApp_Controllers_ManagerController_ShowInventory" data-uid="WebApp.Controllers.ManagerController.ShowInventory">
   ShowInventory()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L87"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Not implemented.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1181,10 +1196,11 @@ public IActionResult ShowInventory()</code></pre>
 
   <h3 id="WebApp_Controllers_ManagerController_ShowManager" data-uid="WebApp.Controllers.ManagerController.ShowManager">
   ShowManager()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L69"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Not implemented.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1214,10 +1230,11 @@ public IActionResult ShowManager()</code></pre>
 
   <h3 id="WebApp_Controllers_ManagerController_ShowPopularityAnalysis_System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="WebApp.Controllers.ManagerController.ShowPopularityAnalysis(System.Collections.Generic.Dictionary{System.String,System.String})">
   ShowPopularityAnalysis(Dictionary&lt;string, string&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L301"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L400"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Displays the popularity analysis report.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1252,10 +1269,11 @@ public IActionResult ShowPopularityAnalysis(Dictionary&lt;string, string&gt; pay
 
   <h3 id="WebApp_Controllers_ManagerController_ShowProducts" data-uid="WebApp.Controllers.ManagerController.ShowProducts">
   ShowProducts()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L78"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Not implemented.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1283,25 +1301,21 @@ public IActionResult ShowProducts()</code></pre>
 
   <a id="WebApp_Controllers_ManagerController_ShowRestockReport_" data-uid="WebApp.Controllers.ManagerController.ShowRestockReport*"></a>
 
-  <h3 id="WebApp_Controllers_ManagerController_ShowRestockReport_System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="WebApp.Controllers.ManagerController.ShowRestockReport(System.Collections.Generic.Dictionary{System.String,System.String})">
-  ShowRestockReport(Dictionary&lt;string, string&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L275"><i class="bi bi-code-slash"></i></a>
+  <h3 id="WebApp_Controllers_ManagerController_ShowRestockReport" data-uid="WebApp.Controllers.ManagerController.ShowRestockReport">
+  ShowRestockReport()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L357"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Displays the restock report.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
 [Route(&quot;Manager/ShowRestockReport&quot;)]
-public IActionResult ShowRestockReport(Dictionary&lt;string, string&gt; payload)</code></pre>
+public IActionResult ShowRestockReport()</code></pre>
   </div>
 
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>payload</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
-    <dd></dd>
-  </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
@@ -1323,10 +1337,11 @@ public IActionResult ShowRestockReport(Dictionary&lt;string, string&gt; payload)
 
   <h3 id="WebApp_Controllers_ManagerController_ShowSalesReport_System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="WebApp.Controllers.ManagerController.ShowSalesReport(System.Collections.Generic.Dictionary{System.String,System.String})">
   ShowSalesReport(Dictionary&lt;string, string&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L217"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L280"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Displays the sales report.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1361,10 +1376,11 @@ public IActionResult ShowSalesReport(Dictionary&lt;string, string&gt; payload)</
 
   <h3 id="WebApp_Controllers_ManagerController_ShowSalesTogether_System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="WebApp.Controllers.ManagerController.ShowSalesTogether(System.Collections.Generic.Dictionary{System.String,System.String})">
   ShowSalesTogether(Dictionary&lt;string, string&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L288"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L381"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Displays the sales together report.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1399,7 +1415,7 @@ public IActionResult ShowSalesTogether(Dictionary&lt;string, string&gt; payload)
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Controllers/ManagerController.cs/#L13" class="edit-link">Edit this page</a>
+          <a href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Controllers/ManagerController.cs/#L13" class="edit-link">Edit this page</a>
         </div>
 
 

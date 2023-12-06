@@ -18,14 +18,16 @@ items:
   source:
     remote:
       path: WebApp/Models/ViewModels/CustomizationViewModel.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: CustomizationViewModel
     path: Models/ViewModels/CustomizationViewModel.cs
-    startLine: 3
+    startLine: 7
   assemblies:
   - WebApp
   namespace: WebApp.Models.ViewModels
+  summary: Represents a view model for customization-related views.
+  example: []
   syntax:
     content: public class CustomizationViewModel
     content.vb: Public Class CustomizationViewModel
@@ -53,14 +55,16 @@ items:
   source:
     remote:
       path: WebApp/Models/ViewModels/CustomizationViewModel.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: SelectedProduct
     path: Models/ViewModels/CustomizationViewModel.cs
-    startLine: 4
+    startLine: 11
   assemblies:
   - WebApp
   namespace: WebApp.Models.ViewModels
+  summary: Gets or sets the selected product for customization.
+  example: []
   syntax:
     content: public Product? SelectedProduct { get; set; }
     parameters: []
@@ -82,14 +86,16 @@ items:
   source:
     remote:
       path: WebApp/Models/ViewModels/CustomizationViewModel.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: SeriesInformation
     path: Models/ViewModels/CustomizationViewModel.cs
-    startLine: 5
+    startLine: 16
   assemblies:
   - WebApp
   namespace: WebApp.Models.ViewModels
+  summary: Gets or sets the list of series information for customization.
+  example: []
   syntax:
     content: public List<SeriesInfo>? SeriesInformation { get; set; }
     parameters: []
@@ -111,14 +117,16 @@ items:
   source:
     remote:
       path: WebApp/Models/ViewModels/CustomizationViewModel.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Products
     path: Models/ViewModels/CustomizationViewModel.cs
-    startLine: 6
+    startLine: 21
   assemblies:
   - WebApp
   namespace: WebApp.Models.ViewModels
+  summary: Gets or sets the list of products for customization.
+  example: []
   syntax:
     content: public List<Product>? Products { get; set; }
     parameters: []

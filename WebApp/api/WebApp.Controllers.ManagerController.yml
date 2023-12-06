@@ -20,7 +20,7 @@ items:
   - WebApp.Controllers.ManagerController.ShowManager
   - WebApp.Controllers.ManagerController.ShowPopularityAnalysis(System.Collections.Generic.Dictionary{System.String,System.String})
   - WebApp.Controllers.ManagerController.ShowProducts
-  - WebApp.Controllers.ManagerController.ShowRestockReport(System.Collections.Generic.Dictionary{System.String,System.String})
+  - WebApp.Controllers.ManagerController.ShowRestockReport
   - WebApp.Controllers.ManagerController.ShowSalesReport(System.Collections.Generic.Dictionary{System.String,System.String})
   - WebApp.Controllers.ManagerController.ShowSalesTogether(System.Collections.Generic.Dictionary{System.String,System.String})
   langs:
@@ -33,7 +33,7 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ManagerController
     path: Controllers/ManagerController.cs
@@ -290,23 +290,28 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Controllers/ManagerController.cs
-    startLine: 19
+    startLine: 25
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Initializes a new instance of the <xref href="WebApp.Controllers.ManagerController" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public ManagerController(ILogger<ManagerController> logger, CartService cartService, IMemoryCache cache)
     parameters:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger{WebApp.Controllers.ManagerController}
+      description: The logger for ManagerController.
     - id: cartService
       type: WebApp.Models.Cart.CartService
+      description: The service for managing the shopping cart.
     - id: cache
       type: Microsoft.Extensions.Caching.Memory.IMemoryCache
+      description: The cache for storing and retrieving data.
     content.vb: Public Sub New(logger As ILogger(Of ManagerController), cartService As CartService, cache As IMemoryCache)
   overload: WebApp.Controllers.ManagerController.#ctor*
   nameWithType.vb: ManagerController.New(ILogger(Of ManagerController), CartService, IMemoryCache)
@@ -326,14 +331,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Index
     path: Controllers/ManagerController.cs
-    startLine: 26
+    startLine: 36
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the default view for the manager controller.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -343,6 +350,7 @@ items:
       public IActionResult Index()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -373,14 +381,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ShowManager
     path: Controllers/ManagerController.cs
-    startLine: 54
+    startLine: 68
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Not implemented.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -390,6 +400,7 @@ items:
       public IActionResult ShowManager()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -420,14 +431,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ShowProducts
     path: Controllers/ManagerController.cs
-    startLine: 59
+    startLine: 77
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Not implemented.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -437,6 +450,7 @@ items:
       public IActionResult ShowProducts()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -467,14 +481,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ShowInventory
     path: Controllers/ManagerController.cs
-    startLine: 64
+    startLine: 86
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Not implemented.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -484,6 +500,7 @@ items:
       public IActionResult ShowInventory()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -514,14 +531,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Error
     path: Controllers/ManagerController.cs
-    startLine: 69
+    startLine: 95
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the error view.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -533,6 +552,7 @@ items:
       public IActionResult Error()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpGet>
 
@@ -578,14 +598,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: SaveProducts
     path: Controllers/ManagerController.cs
-    startLine: 76
+    startLine: 107
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Saves a list of products changes to the database.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -596,12 +618,14 @@ items:
     parameters:
     - id: data
       type: System.Collections.Generic.List{WebApp.Models.UnitOfWork.Product}
+      description: ''
       attributes:
       - type: Microsoft.AspNetCore.Mvc.FromBodyAttribute
         ctor: Microsoft.AspNetCore.Mvc.FromBodyAttribute.#ctor
         arguments: []
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpPost>
 
@@ -635,14 +659,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: AddProduct
     path: Controllers/ManagerController.cs
-    startLine: 99
+    startLine: 134
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Adds a new product to the database.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -652,6 +678,7 @@ items:
       public IActionResult AddProduct()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpPost>
 
@@ -682,14 +709,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: DeleteProduct
     path: Controllers/ManagerController.cs
-    startLine: 113
+    startLine: 153
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Deletes a product from the database.
+  example: []
   syntax:
     content: >-
       [HttpDelete]
@@ -700,8 +729,10 @@ items:
     parameters:
     - id: prod
       type: System.Int32
+      description: ''
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpDelete>
 
@@ -735,14 +766,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: SaveInventory
     path: Controllers/ManagerController.cs
-    startLine: 122
+    startLine: 167
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Saves a list of inventory changes to the database.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -753,12 +786,14 @@ items:
     parameters:
     - id: payload
       type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: ''
       attributes:
       - type: Microsoft.AspNetCore.Mvc.FromBodyAttribute
         ctor: Microsoft.AspNetCore.Mvc.FromBodyAttribute.#ctor
         arguments: []
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpPost>
 
@@ -792,14 +827,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: AddInventory
     path: Controllers/ManagerController.cs
-    startLine: 178
+    startLine: 227
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Adds a new inventory item to the database.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -809,6 +846,7 @@ items:
       public IActionResult AddInventory()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpPost>
 
@@ -839,14 +877,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: DeleteInventory
     path: Controllers/ManagerController.cs
-    startLine: 197
+    startLine: 251
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Deletes an inventory item from the database.
+  example: []
   syntax:
     content: >-
       [HttpDelete]
@@ -857,8 +897,10 @@ items:
     parameters:
     - id: inv
       type: System.Int32
+      description: ''
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpDelete>
 
@@ -892,14 +934,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ClearCache
     path: Controllers/ManagerController.cs
-    startLine: 209
+    startLine: 267
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Clears the cache for categories and best sellers.
+  example: []
   syntax:
     content: >-
       [HttpDelete]
@@ -909,6 +953,7 @@ items:
       public IActionResult ClearCache()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpDelete>
 
@@ -939,14 +984,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ShowSalesReport
     path: Controllers/ManagerController.cs
-    startLine: 216
+    startLine: 279
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the sales report.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -957,12 +1004,14 @@ items:
     parameters:
     - id: payload
       type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: ''
       attributes:
       - type: Microsoft.AspNetCore.Mvc.FromBodyAttribute
         ctor: Microsoft.AspNetCore.Mvc.FromBodyAttribute.#ctor
         arguments: []
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpPost>
 
@@ -996,14 +1045,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ShowExcessReport
     path: Controllers/ManagerController.cs
-    startLine: 229
+    startLine: 307
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the excess report.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -1014,12 +1065,14 @@ items:
     parameters:
     - id: payload
       type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: ''
       attributes:
       - type: Microsoft.AspNetCore.Mvc.FromBodyAttribute
         ctor: Microsoft.AspNetCore.Mvc.FromBodyAttribute.#ctor
         arguments: []
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpPost>
 
@@ -1039,50 +1092,46 @@ items:
   nameWithType.vb: ManagerController.ShowExcessReport(Dictionary(Of String, String))
   fullName.vb: WebApp.Controllers.ManagerController.ShowExcessReport(System.Collections.Generic.Dictionary(Of String, String))
   name.vb: ShowExcessReport(Dictionary(Of String, String))
-- uid: WebApp.Controllers.ManagerController.ShowRestockReport(System.Collections.Generic.Dictionary{System.String,System.String})
-  commentId: M:WebApp.Controllers.ManagerController.ShowRestockReport(System.Collections.Generic.Dictionary{System.String,System.String})
-  id: ShowRestockReport(System.Collections.Generic.Dictionary{System.String,System.String})
+- uid: WebApp.Controllers.ManagerController.ShowRestockReport
+  commentId: M:WebApp.Controllers.ManagerController.ShowRestockReport
+  id: ShowRestockReport
   parent: WebApp.Controllers.ManagerController
   langs:
   - csharp
   - vb
-  name: ShowRestockReport(Dictionary<string, string>)
-  nameWithType: ManagerController.ShowRestockReport(Dictionary<string, string>)
-  fullName: WebApp.Controllers.ManagerController.ShowRestockReport(System.Collections.Generic.Dictionary<string, string>)
+  name: ShowRestockReport()
+  nameWithType: ManagerController.ShowRestockReport()
+  fullName: WebApp.Controllers.ManagerController.ShowRestockReport()
   type: Method
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ShowRestockReport
     path: Controllers/ManagerController.cs
-    startLine: 274
+    startLine: 356
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the restock report.
+  example: []
   syntax:
     content: >-
       [HttpPost]
 
       [Route("Manager/ShowRestockReport")]
 
-      public IActionResult ShowRestockReport(Dictionary<string, string> payload)
-    parameters:
-    - id: payload
-      type: System.Collections.Generic.Dictionary{System.String,System.String}
-      attributes:
-      - type: Microsoft.AspNetCore.Mvc.FromBodyAttribute
-        ctor: Microsoft.AspNetCore.Mvc.FromBodyAttribute.#ctor
-        arguments: []
+      public IActionResult ShowRestockReport()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpPost>
 
       <Route("Manager/ShowRestockReport")>
 
-      Public Function ShowRestockReport(payload As Dictionary(Of String, String)) As IActionResult
+      Public Function ShowRestockReport() As IActionResult
   overload: WebApp.Controllers.ManagerController.ShowRestockReport*
   attributes:
   - type: Microsoft.AspNetCore.Mvc.HttpPostAttribute
@@ -1093,9 +1142,6 @@ items:
     arguments:
     - type: System.String
       value: Manager/ShowRestockReport
-  nameWithType.vb: ManagerController.ShowRestockReport(Dictionary(Of String, String))
-  fullName.vb: WebApp.Controllers.ManagerController.ShowRestockReport(System.Collections.Generic.Dictionary(Of String, String))
-  name.vb: ShowRestockReport(Dictionary(Of String, String))
 - uid: WebApp.Controllers.ManagerController.ShowSalesTogether(System.Collections.Generic.Dictionary{System.String,System.String})
   commentId: M:WebApp.Controllers.ManagerController.ShowSalesTogether(System.Collections.Generic.Dictionary{System.String,System.String})
   id: ShowSalesTogether(System.Collections.Generic.Dictionary{System.String,System.String})
@@ -1110,14 +1156,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ShowSalesTogether
     path: Controllers/ManagerController.cs
-    startLine: 287
+    startLine: 380
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the sales together report.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -1128,12 +1176,14 @@ items:
     parameters:
     - id: payload
       type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: ''
       attributes:
       - type: Microsoft.AspNetCore.Mvc.FromBodyAttribute
         ctor: Microsoft.AspNetCore.Mvc.FromBodyAttribute.#ctor
         arguments: []
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpPost>
 
@@ -1167,14 +1217,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/ManagerController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ShowPopularityAnalysis
     path: Controllers/ManagerController.cs
-    startLine: 300
+    startLine: 399
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the popularity analysis report.
+  example: []
   syntax:
     content: >-
       [HttpPost]
@@ -1185,12 +1237,14 @@ items:
     parameters:
     - id: payload
       type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: ''
       attributes:
       - type: Microsoft.AspNetCore.Mvc.FromBodyAttribute
         ctor: Microsoft.AspNetCore.Mvc.FromBodyAttribute.#ctor
         arguments: []
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: ''
     content.vb: >-
       <HttpPost>
 
@@ -10941,6 +10995,12 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
   - name: )
+- uid: WebApp.Controllers.ManagerController
+  commentId: T:WebApp.Controllers.ManagerController
+  href: WebApp.Controllers.ManagerController.html
+  name: ManagerController
+  nameWithType: ManagerController
+  fullName: WebApp.Controllers.ManagerController
 - uid: WebApp.Controllers.ManagerController.#ctor*
   commentId: Overload:WebApp.Controllers.ManagerController.#ctor
   href: WebApp.Controllers.ManagerController.html#WebApp_Controllers_ManagerController__ctor_Microsoft_Extensions_Logging_ILogger_WebApp_Controllers_ManagerController__WebApp_Models_Cart_CartService_Microsoft_Extensions_Caching_Memory_IMemoryCache_
@@ -11424,7 +11484,7 @@ references:
   fullName: WebApp.Controllers.ManagerController.ShowExcessReport
 - uid: WebApp.Controllers.ManagerController.ShowRestockReport*
   commentId: Overload:WebApp.Controllers.ManagerController.ShowRestockReport
-  href: WebApp.Controllers.ManagerController.html#WebApp_Controllers_ManagerController_ShowRestockReport_System_Collections_Generic_Dictionary_System_String_System_String__
+  href: WebApp.Controllers.ManagerController.html#WebApp_Controllers_ManagerController_ShowRestockReport
   name: ShowRestockReport
   nameWithType: ManagerController.ShowRestockReport
   fullName: WebApp.Controllers.ManagerController.ShowRestockReport

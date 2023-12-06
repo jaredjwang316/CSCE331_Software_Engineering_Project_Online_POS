@@ -21,14 +21,16 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: EntityServices
     path: Data/UnitOfWork.cs
-    startLine: 205
+    startLine: 341
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Provides services for basic CRUD (Create, Read, Update, Delete) operations on entities.
+  example: []
   syntax:
     content: public class EntityServices
     content.vb: Public Class EntityServices
@@ -56,19 +58,22 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Data/UnitOfWork.cs
-    startLine: 208
+    startLine: 348
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Initializes a new instance of the <xref href="WebApp.Data.EntityServices" data-throw-if-not-resolved="false"></xref> class with a specified <xref href="WebApp.Data.DaoTypeContainer" data-throw-if-not-resolved="false"></xref>.
+  example: []
   syntax:
     content: public EntityServices(DaoTypeContainer daoTypeContainer)
     parameters:
     - id: daoTypeContainer
       type: WebApp.Data.DaoTypeContainer
+      description: The container providing access to Data Access Objects (DAOs).
     content.vb: Public Sub New(daoTypeContainer As DaoTypeContainer)
   overload: WebApp.Data.EntityServices.#ctor*
   nameWithType.vb: EntityServices.New(DaoTypeContainer)
@@ -88,21 +93,25 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Add
     path: Data/UnitOfWork.cs
-    startLine: 212
+    startLine: 357
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Adds a new entity of type <code class="typeparamref">T</code>.
+  example: []
   syntax:
     content: 'public void Add<T>(T t) where T : class'
     parameters:
     - id: t
       type: '{T}'
+      description: The entity to be added.
     typeParameters:
     - id: T
+      description: The type of the entity.
     content.vb: Public Sub Add(Of T As Class)(t As T)
   overload: WebApp.Data.EntityServices.Add*
   nameWithType.vb: EntityServices.Add(Of T)(T)
@@ -122,23 +131,28 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Update
     path: Data/UnitOfWork.cs
-    startLine: 217
+    startLine: 368
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Updates an existing entity of type <code class="typeparamref">T</code> with a new entity.
+  example: []
   syntax:
     content: 'public void Update<T>(T t, T newT) where T : class'
     parameters:
     - id: t
       type: '{T}'
+      description: The existing entity to be updated.
     - id: newT
       type: '{T}'
+      description: The new entity data.
     typeParameters:
     - id: T
+      description: The type of the entity.
     content.vb: Public Sub Update(Of T As Class)(t As T, newT As T)
   overload: WebApp.Data.EntityServices.Update*
   nameWithType.vb: EntityServices.Update(Of T)(T, T)
@@ -158,21 +172,25 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Delete
     path: Data/UnitOfWork.cs
-    startLine: 222
+    startLine: 378
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Deletes an entity of type <code class="typeparamref">T</code>.
+  example: []
   syntax:
     content: 'public void Delete<T>(T t) where T : class'
     parameters:
     - id: t
       type: '{T}'
+      description: The entity to be deleted.
     typeParameters:
     - id: T
+      description: The type of the entity.
     content.vb: Public Sub Delete(Of T As Class)(t As T)
   overload: WebApp.Data.EntityServices.Delete*
   nameWithType.vb: EntityServices.Delete(Of T)(T)
@@ -192,23 +210,28 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Get
     path: Data/UnitOfWork.cs
-    startLine: 227
+    startLine: 389
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves an entity of type <code class="typeparamref">T</code> by its unique identifier.
+  example: []
   syntax:
     content: 'public T Get<T>(int id) where T : class'
     parameters:
     - id: id
       type: System.Int32
+      description: The unique identifier of the entity.
     typeParameters:
     - id: T
+      description: The type of the entity.
     return:
       type: '{T}'
+      description: The entity with the specified identifier, or null if not found.
     content.vb: Public Function [Get](Of T As Class)(id As Integer) As T
   overload: WebApp.Data.EntityServices.Get*
   nameWithType.vb: EntityServices.Get(Of T)(Integer)
@@ -228,20 +251,24 @@ items:
   source:
     remote:
       path: WebApp/Data/UnitOfWork.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: GetAll
     path: Data/UnitOfWork.cs
-    startLine: 232
+    startLine: 399
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Retrieves all entities of type <code class="typeparamref">T</code>.
+  example: []
   syntax:
     content: 'public IEnumerable<T> GetAll<T>() where T : class'
     typeParameters:
     - id: T
+      description: The type of the entity.
     return:
       type: System.Collections.Generic.IEnumerable{{T}}
+      description: An enumerable collection of entities of the specified type.
     content.vb: Public Function GetAll(Of T As Class)() As IEnumerable(Of T)
   overload: WebApp.Data.EntityServices.GetAll*
   nameWithType.vb: EntityServices.GetAll(Of T)()
@@ -507,6 +534,19 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: WebApp.Data.EntityServices
+  commentId: T:WebApp.Data.EntityServices
+  href: WebApp.Data.EntityServices.html
+  name: EntityServices
+  nameWithType: EntityServices
+  fullName: WebApp.Data.EntityServices
+- uid: WebApp.Data.DaoTypeContainer
+  commentId: T:WebApp.Data.DaoTypeContainer
+  parent: WebApp.Data
+  href: WebApp.Data.DaoTypeContainer.html
+  name: DaoTypeContainer
+  nameWithType: DaoTypeContainer
+  fullName: WebApp.Data.DaoTypeContainer
 - uid: WebApp.Data.EntityServices.#ctor*
   commentId: Overload:WebApp.Data.EntityServices.#ctor
   href: WebApp.Data.EntityServices.html#WebApp_Data_EntityServices__ctor_WebApp_Data_DaoTypeContainer_
@@ -516,13 +556,6 @@ references:
   nameWithType.vb: EntityServices.New
   fullName.vb: WebApp.Data.EntityServices.New
   name.vb: New
-- uid: WebApp.Data.DaoTypeContainer
-  commentId: T:WebApp.Data.DaoTypeContainer
-  parent: WebApp.Data
-  href: WebApp.Data.DaoTypeContainer.html
-  name: DaoTypeContainer
-  nameWithType: DaoTypeContainer
-  fullName: WebApp.Data.DaoTypeContainer
 - uid: WebApp.Data.EntityServices.Add*
   commentId: Overload:WebApp.Data.EntityServices.Add
   href: WebApp.Data.EntityServices.html#WebApp_Data_EntityServices_Add__1___0_

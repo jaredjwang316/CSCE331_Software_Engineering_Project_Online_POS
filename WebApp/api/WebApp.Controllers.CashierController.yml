@@ -6,15 +6,11 @@ items:
   parent: WebApp.Controllers
   children:
   - WebApp.Controllers.CashierController.#ctor(Microsoft.Extensions.Logging.ILogger{WebApp.Controllers.CashierController},Microsoft.Extensions.Caching.Memory.IMemoryCache,WebApp.Models.Cart.CartService)
-  - WebApp.Controllers.CashierController.AddFavorite(System.Int32)
   - WebApp.Controllers.CashierController.Error
   - WebApp.Controllers.CashierController.Index
-  - WebApp.Controllers.CashierController.LoadBestSellers
   - WebApp.Controllers.CashierController.LoadCategories
   - WebApp.Controllers.CashierController.LoadCustomizations(System.String)
-  - WebApp.Controllers.CashierController.LoadFavorites
   - WebApp.Controllers.CashierController.LoadProductsBySeries(System.String)
-  - WebApp.Controllers.CashierController.RemoveFavorite(System.Int32)
   langs:
   - csharp
   - vb
@@ -25,14 +21,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CashierController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: CashierController
     path: Controllers/CashierController.cs
-    startLine: 29
+    startLine: 32
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Controller responsible for managing cashier-related operations, including product categories, best sellers, favorites, and customizations.
+  example: []
   syntax:
     content: >-
       [Authorize(Roles = "Cashier, Manager")]
@@ -282,23 +280,28 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CashierController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Controllers/CashierController.cs
-    startLine: 35
+    startLine: 45
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Initializes a new instance of the <xref href="WebApp.Controllers.CashierController" data-throw-if-not-resolved="false"></xref> class.
+  example: []
   syntax:
     content: public CashierController(ILogger<CashierController> logger, IMemoryCache cache, CartService cartService)
     parameters:
     - id: logger
       type: Microsoft.Extensions.Logging.ILogger{WebApp.Controllers.CashierController}
+      description: The logger instance.
     - id: cache
       type: Microsoft.Extensions.Caching.Memory.IMemoryCache
+      description: The memory cache instance.
     - id: cartService
       type: WebApp.Models.Cart.CartService
+      description: The service responsible for cart operations.
     content.vb: Public Sub New(logger As ILogger(Of CashierController), cache As IMemoryCache, cartService As CartService)
   overload: WebApp.Controllers.CashierController.#ctor*
   nameWithType.vb: CashierController.New(ILogger(Of CashierController), IMemoryCache, CartService)
@@ -318,14 +321,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CashierController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Index
     path: Controllers/CashierController.cs
-    startLine: 42
+    startLine: 56
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the default view for the cashier controller.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -335,6 +340,7 @@ items:
       public IActionResult Index()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The default view.
     content.vb: >-
       <HttpGet>
 
@@ -365,14 +371,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CashierController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Error
     path: Controllers/CashierController.cs
-    startLine: 51
+    startLine: 69
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Displays the error view.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -384,6 +392,7 @@ items:
       public IActionResult Error()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The error view.
     content.vb: >-
       <HttpGet>
 
@@ -429,14 +438,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CashierController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: LoadCategories
     path: Controllers/CashierController.cs
-    startLine: 58
+    startLine: 80
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Loads and returns the product categories from the cache or database.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -446,6 +457,7 @@ items:
       public IActionResult LoadCategories()
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The partial view containing the loaded product categories.
     content.vb: >-
       <HttpGet>
 
@@ -462,100 +474,6 @@ items:
     arguments:
     - type: System.String
       value: Cashier/LoadCategories
-- uid: WebApp.Controllers.CashierController.LoadBestSellers
-  commentId: M:WebApp.Controllers.CashierController.LoadBestSellers
-  id: LoadBestSellers
-  parent: WebApp.Controllers.CashierController
-  langs:
-  - csharp
-  - vb
-  name: LoadBestSellers()
-  nameWithType: CashierController.LoadBestSellers()
-  fullName: WebApp.Controllers.CashierController.LoadBestSellers()
-  type: Method
-  source:
-    remote:
-      path: WebApp/Controllers/CashierController.cs
-      branch: test
-      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
-    id: LoadBestSellers
-    path: Controllers/CashierController.cs
-    startLine: 73
-  assemblies:
-  - WebApp
-  namespace: WebApp.Controllers
-  syntax:
-    content: >-
-      [HttpGet]
-
-      [Route("Cashier/LoadBestSellers")]
-
-      public IActionResult LoadBestSellers()
-    return:
-      type: Microsoft.AspNetCore.Mvc.IActionResult
-    content.vb: >-
-      <HttpGet>
-
-      <Route("Cashier/LoadBestSellers")>
-
-      Public Function LoadBestSellers() As IActionResult
-  overload: WebApp.Controllers.CashierController.LoadBestSellers*
-  attributes:
-  - type: Microsoft.AspNetCore.Mvc.HttpGetAttribute
-    ctor: Microsoft.AspNetCore.Mvc.HttpGetAttribute.#ctor
-    arguments: []
-  - type: Microsoft.AspNetCore.Mvc.RouteAttribute
-    ctor: Microsoft.AspNetCore.Mvc.RouteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Cashier/LoadBestSellers
-- uid: WebApp.Controllers.CashierController.LoadFavorites
-  commentId: M:WebApp.Controllers.CashierController.LoadFavorites
-  id: LoadFavorites
-  parent: WebApp.Controllers.CashierController
-  langs:
-  - csharp
-  - vb
-  name: LoadFavorites()
-  nameWithType: CashierController.LoadFavorites()
-  fullName: WebApp.Controllers.CashierController.LoadFavorites()
-  type: Method
-  source:
-    remote:
-      path: WebApp/Controllers/CashierController.cs
-      branch: test
-      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
-    id: LoadFavorites
-    path: Controllers/CashierController.cs
-    startLine: 86
-  assemblies:
-  - WebApp
-  namespace: WebApp.Controllers
-  syntax:
-    content: >-
-      [HttpGet]
-
-      [Route("Cashier/LoadFavorites")]
-
-      public IActionResult LoadFavorites()
-    return:
-      type: Microsoft.AspNetCore.Mvc.IActionResult
-    content.vb: >-
-      <HttpGet>
-
-      <Route("Cashier/LoadFavorites")>
-
-      Public Function LoadFavorites() As IActionResult
-  overload: WebApp.Controllers.CashierController.LoadFavorites*
-  attributes:
-  - type: Microsoft.AspNetCore.Mvc.HttpGetAttribute
-    ctor: Microsoft.AspNetCore.Mvc.HttpGetAttribute.#ctor
-    arguments: []
-  - type: Microsoft.AspNetCore.Mvc.RouteAttribute
-    ctor: Microsoft.AspNetCore.Mvc.RouteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Cashier/LoadFavorites
 - uid: WebApp.Controllers.CashierController.LoadProductsBySeries(System.String)
   commentId: M:WebApp.Controllers.CashierController.LoadProductsBySeries(System.String)
   id: LoadProductsBySeries(System.String)
@@ -570,14 +488,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CashierController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: LoadProductsBySeries
     path: Controllers/CashierController.cs
-    startLine: 111
+    startLine: 101
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Loads and returns products based on the specified series name.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -588,8 +508,10 @@ items:
     parameters:
     - id: arg
       type: System.String
+      description: The series name.
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The partial view containing the loaded products.
     content.vb: >-
       <HttpGet>
 
@@ -623,14 +545,16 @@ items:
   source:
     remote:
       path: WebApp/Controllers/CashierController.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: LoadCustomizations
     path: Controllers/CashierController.cs
-    startLine: 119
+    startLine: 114
   assemblies:
   - WebApp
   namespace: WebApp.Controllers
+  summary: Loads and returns customizations for a selected product.
+  example: []
   syntax:
     content: >-
       [HttpGet]
@@ -641,8 +565,10 @@ items:
     parameters:
     - id: arg
       type: System.String
+      description: The ID of the selected product.
     return:
       type: Microsoft.AspNetCore.Mvc.IActionResult
+      description: The partial view containing the loaded customizations.
     content.vb: >-
       <HttpGet>
 
@@ -662,112 +588,6 @@ items:
   nameWithType.vb: CashierController.LoadCustomizations(String)
   fullName.vb: WebApp.Controllers.CashierController.LoadCustomizations(String)
   name.vb: LoadCustomizations(String)
-- uid: WebApp.Controllers.CashierController.AddFavorite(System.Int32)
-  commentId: M:WebApp.Controllers.CashierController.AddFavorite(System.Int32)
-  id: AddFavorite(System.Int32)
-  parent: WebApp.Controllers.CashierController
-  langs:
-  - csharp
-  - vb
-  name: AddFavorite(int)
-  nameWithType: CashierController.AddFavorite(int)
-  fullName: WebApp.Controllers.CashierController.AddFavorite(int)
-  type: Method
-  source:
-    remote:
-      path: WebApp/Controllers/CashierController.cs
-      branch: test
-      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
-    id: AddFavorite
-    path: Controllers/CashierController.cs
-    startLine: 140
-  assemblies:
-  - WebApp
-  namespace: WebApp.Controllers
-  syntax:
-    content: >-
-      [HttpPost]
-
-      [Route("Cashier/AddFavorite")]
-
-      public IActionResult AddFavorite(int productID)
-    parameters:
-    - id: productID
-      type: System.Int32
-    return:
-      type: Microsoft.AspNetCore.Mvc.IActionResult
-    content.vb: >-
-      <HttpPost>
-
-      <Route("Cashier/AddFavorite")>
-
-      Public Function AddFavorite(productID As Integer) As IActionResult
-  overload: WebApp.Controllers.CashierController.AddFavorite*
-  attributes:
-  - type: Microsoft.AspNetCore.Mvc.HttpPostAttribute
-    ctor: Microsoft.AspNetCore.Mvc.HttpPostAttribute.#ctor
-    arguments: []
-  - type: Microsoft.AspNetCore.Mvc.RouteAttribute
-    ctor: Microsoft.AspNetCore.Mvc.RouteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Cashier/AddFavorite
-  nameWithType.vb: CashierController.AddFavorite(Integer)
-  fullName.vb: WebApp.Controllers.CashierController.AddFavorite(Integer)
-  name.vb: AddFavorite(Integer)
-- uid: WebApp.Controllers.CashierController.RemoveFavorite(System.Int32)
-  commentId: M:WebApp.Controllers.CashierController.RemoveFavorite(System.Int32)
-  id: RemoveFavorite(System.Int32)
-  parent: WebApp.Controllers.CashierController
-  langs:
-  - csharp
-  - vb
-  name: RemoveFavorite(int)
-  nameWithType: CashierController.RemoveFavorite(int)
-  fullName: WebApp.Controllers.CashierController.RemoveFavorite(int)
-  type: Method
-  source:
-    remote:
-      path: WebApp/Controllers/CashierController.cs
-      branch: test
-      repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
-    id: RemoveFavorite
-    path: Controllers/CashierController.cs
-    startLine: 171
-  assemblies:
-  - WebApp
-  namespace: WebApp.Controllers
-  syntax:
-    content: >-
-      [HttpDelete]
-
-      [Route("Cashier/RemoveFavorite")]
-
-      public IActionResult RemoveFavorite(int productID)
-    parameters:
-    - id: productID
-      type: System.Int32
-    return:
-      type: Microsoft.AspNetCore.Mvc.IActionResult
-    content.vb: >-
-      <HttpDelete>
-
-      <Route("Cashier/RemoveFavorite")>
-
-      Public Function RemoveFavorite(productID As Integer) As IActionResult
-  overload: WebApp.Controllers.CashierController.RemoveFavorite*
-  attributes:
-  - type: Microsoft.AspNetCore.Mvc.HttpDeleteAttribute
-    ctor: Microsoft.AspNetCore.Mvc.HttpDeleteAttribute.#ctor
-    arguments: []
-  - type: Microsoft.AspNetCore.Mvc.RouteAttribute
-    ctor: Microsoft.AspNetCore.Mvc.RouteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Cashier/RemoveFavorite
-  nameWithType.vb: CashierController.RemoveFavorite(Integer)
-  fullName.vb: WebApp.Controllers.CashierController.RemoveFavorite(Integer)
-  name.vb: RemoveFavorite(Integer)
 references:
 - uid: WebApp.Controllers
   commentId: N:WebApp.Controllers
@@ -10499,6 +10319,12 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
   - name: )
+- uid: WebApp.Controllers.CashierController
+  commentId: T:WebApp.Controllers.CashierController
+  href: WebApp.Controllers.CashierController.html
+  name: CashierController
+  nameWithType: CashierController
+  fullName: WebApp.Controllers.CashierController
 - uid: WebApp.Controllers.CashierController.#ctor*
   commentId: Overload:WebApp.Controllers.CashierController.#ctor
   href: WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController__ctor_Microsoft_Extensions_Logging_ILogger_WebApp_Controllers_CashierController__Microsoft_Extensions_Caching_Memory_IMemoryCache_WebApp_Models_Cart_CartService_
@@ -10724,18 +10550,6 @@ references:
   name: LoadCategories
   nameWithType: CashierController.LoadCategories
   fullName: WebApp.Controllers.CashierController.LoadCategories
-- uid: WebApp.Controllers.CashierController.LoadBestSellers*
-  commentId: Overload:WebApp.Controllers.CashierController.LoadBestSellers
-  href: WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_LoadBestSellers
-  name: LoadBestSellers
-  nameWithType: CashierController.LoadBestSellers
-  fullName: WebApp.Controllers.CashierController.LoadBestSellers
-- uid: WebApp.Controllers.CashierController.LoadFavorites*
-  commentId: Overload:WebApp.Controllers.CashierController.LoadFavorites
-  href: WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_LoadFavorites
-  name: LoadFavorites
-  nameWithType: CashierController.LoadFavorites
-  fullName: WebApp.Controllers.CashierController.LoadFavorites
 - uid: WebApp.Controllers.CashierController.LoadProductsBySeries*
   commentId: Overload:WebApp.Controllers.CashierController.LoadProductsBySeries
   href: WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_LoadProductsBySeries_System_String_
@@ -10759,26 +10573,3 @@ references:
   name: LoadCustomizations
   nameWithType: CashierController.LoadCustomizations
   fullName: WebApp.Controllers.CashierController.LoadCustomizations
-- uid: WebApp.Controllers.CashierController.AddFavorite*
-  commentId: Overload:WebApp.Controllers.CashierController.AddFavorite
-  href: WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_AddFavorite_System_Int32_
-  name: AddFavorite
-  nameWithType: CashierController.AddFavorite
-  fullName: WebApp.Controllers.CashierController.AddFavorite
-- uid: System.Int32
-  commentId: T:System.Int32
-  parent: System
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.int32
-  name: int
-  nameWithType: int
-  fullName: int
-  nameWithType.vb: Integer
-  fullName.vb: Integer
-  name.vb: Integer
-- uid: WebApp.Controllers.CashierController.RemoveFavorite*
-  commentId: Overload:WebApp.Controllers.CashierController.RemoveFavorite
-  href: WebApp.Controllers.CashierController.html#WebApp_Controllers_CashierController_RemoveFavorite_System_Int32_
-  name: RemoveFavorite
-  nameWithType: CashierController.RemoveFavorite
-  fullName: WebApp.Controllers.CashierController.RemoveFavorite

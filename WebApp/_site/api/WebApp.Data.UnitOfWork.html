@@ -17,7 +17,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/new/test/apiSpec/new?filename=WebApp_Data_UnitOfWork.md&amp;value=---%0Auid%3A%20WebApp.Data.UnitOfWork%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/new/main/apiSpec/new?filename=WebApp_Data_UnitOfWork.md&amp;value=---%0Auid%3A%20WebApp.Data.UnitOfWork%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -91,7 +91,7 @@
 
   <h1 id="WebApp_Data_UnitOfWork" data-uid="WebApp.Data.UnitOfWork" class="text-break">
     Class UnitOfWork
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -99,7 +99,8 @@
   <dl><dt>Assembly</dt><dd>WebApp.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Represents the Unit of Work pattern for managing database operations.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -158,10 +159,11 @@
 
   <h3 id="WebApp_Data_UnitOfWork__ctor_System_String_" data-uid="WebApp.Data.UnitOfWork.#ctor(System.String)">
   UnitOfWork(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L24"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="WebApp.Data.UnitOfWork.html">UnitOfWork</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -171,7 +173,8 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>databaseName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>The name of the database to connect to.</p>
+</dd>
   </dl>
 
 
@@ -193,10 +196,11 @@
 
   <h3 id="WebApp_Data_UnitOfWork_Add__1___0_" data-uid="WebApp.Data.UnitOfWork.Add``1(``0)">
   Add&lt;T&gt;(T)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L43"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L53"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds an entity to the database.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -206,14 +210,16 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>t</code> <span class="xref">T</span></dt>
-    <dd></dd>
+    <dd><p>The entity to be added.</p>
+</dd>
   </dl>
 
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>T</code></dt>
-    <dd></dd>
+    <dd><p>The type of the entity.</p>
+</dd>
   </dl>
 
 
@@ -229,10 +235,11 @@
 
   <h3 id="WebApp_Data_UnitOfWork_CloseConnection" data-uid="WebApp.Data.UnitOfWork.CloseConnection">
   CloseConnection()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L99"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Closes the connection to the database.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -255,10 +262,11 @@
 
   <h3 id="WebApp_Data_UnitOfWork_Delete__1___0_" data-uid="WebApp.Data.UnitOfWork.Delete``1(``0)">
   Delete&lt;T&gt;(T)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L72"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Deletes an entity from the database.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -268,14 +276,16 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>t</code> <span class="xref">T</span></dt>
-    <dd></dd>
+    <dd><p>The entity to be deleted.</p>
+</dd>
   </dl>
 
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>T</code></dt>
-    <dd></dd>
+    <dd><p>The type of the entity.</p>
+</dd>
   </dl>
 
 
@@ -291,10 +301,11 @@
 
   <h3 id="WebApp_Data_UnitOfWork_GetAll__1" data-uid="WebApp.Data.UnitOfWork.GetAll``1">
   GetAll&lt;T&gt;()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L91"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves all entities of a specified type from the database.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -305,13 +316,15 @@
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</dt>
-    <dd></dd>
+    <dd><p>A collection of entities.</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>T</code></dt>
-    <dd></dd>
+    <dd><p>The type of the entities.</p>
+</dd>
   </dl>
 
 
@@ -327,10 +340,11 @@
 
   <h3 id="WebApp_Data_UnitOfWork_GetBestSellingProducts_System_Int32_" data-uid="WebApp.Data.UnitOfWork.GetBestSellingProducts(System.Int32)">
   GetBestSellingProducts(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L136"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves a collection of best-selling products up to the specified limit.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -340,13 +354,15 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>limit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd></dd>
+    <dd><p>The maximum number of best-selling products to retrieve.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="WebApp.Models.UnitOfWork.Product.html">Product</a>&gt;</dt>
-    <dd></dd>
+    <dd><p>A collection of best-selling products.</p>
+</dd>
   </dl>
 
 
@@ -363,7 +379,7 @@
 
   <h3 id="WebApp_Data_UnitOfWork_GetOrdersBetween_System_DateTime_System_DateTime_" data-uid="WebApp.Data.UnitOfWork.GetOrdersBetween(System.DateTime,System.DateTime)">
   GetOrdersBetween(DateTime, DateTime)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L170"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -401,10 +417,11 @@
 
   <h3 id="WebApp_Data_UnitOfWork_GetProductsBySeries_System_String_" data-uid="WebApp.Data.UnitOfWork.GetProductsBySeries(System.String)">
   GetProductsBySeries(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L112"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves a collection of products based on the specified series.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -414,13 +431,15 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>series</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>The series to filter products by.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="WebApp.Models.UnitOfWork.Product.html">Product</a>&gt;</dt>
-    <dd></dd>
+    <dd><p>A collection of products belonging to the specified series.</p>
+</dd>
   </dl>
 
 
@@ -437,7 +456,7 @@
 
   <h3 id="WebApp_Data_UnitOfWork_GetRecentIngredient" data-uid="WebApp.Data.UnitOfWork.GetRecentIngredient">
   GetRecentIngredient()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L104"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L162"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -468,7 +487,7 @@
 
   <h3 id="WebApp_Data_UnitOfWork_GetRecentInventory" data-uid="WebApp.Data.UnitOfWork.GetRecentInventory">
   GetRecentInventory()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L166"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -499,7 +518,7 @@
 
   <h3 id="WebApp_Data_UnitOfWork_GetRecentProduct" data-uid="WebApp.Data.UnitOfWork.GetRecentProduct">
   GetRecentProduct()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L140"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -526,14 +545,91 @@
 
 
 
+  <a id="WebApp_Data_UnitOfWork_GetSalesReport_" data-uid="WebApp.Data.UnitOfWork.GetSalesReport*"></a>
+
+  <h3 id="WebApp_Data_UnitOfWork_GetSalesReport_System_DateTime_System_DateTime_" data-uid="WebApp.Data.UnitOfWork.GetSalesReport(System.DateTime,System.DateTime)">
+  GetSalesReport(DateTime, DateTime)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L178"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Tuple&lt;int, double&gt;&gt; GetSalesReport(DateTime starttime, DateTime endtime)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>starttime</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a></dt>
+    <dd></dd>
+    <dt><code>endtime</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.tuple-2">Tuple</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="WebApp_Data_UnitOfWork_GetSalesTogether_" data-uid="WebApp.Data.UnitOfWork.GetSalesTogether*"></a>
+
+  <h3 id="WebApp_Data_UnitOfWork_GetSalesTogether_System_DateTime_System_DateTime_" data-uid="WebApp.Data.UnitOfWork.GetSalesTogether(System.DateTime,System.DateTime)">
+  GetSalesTogether(DateTime, DateTime)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L174"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Tuple&lt;string, string, int&gt;&gt; GetSalesTogether(DateTime starttime, DateTime endtime)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>starttime</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a></dt>
+    <dd></dd>
+    <dt><code>endtime</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.tuple-3">Tuple</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="WebApp_Data_UnitOfWork_GetSeriesInfo_" data-uid="WebApp.Data.UnitOfWork.GetSeriesInfo*"></a>
 
   <h3 id="WebApp_Data_UnitOfWork_GetSeriesInfo_System_String_" data-uid="WebApp.Data.UnitOfWork.GetSeriesInfo(System.String)">
   GetSeriesInfo(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L149"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves series information based on the specified series name.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -543,13 +639,15 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>The name of the series to retrieve information for.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="WebApp.Models.UnitOfWork.SeriesInfo.html">SeriesInfo</a></dt>
-    <dd></dd>
+    <dd><p>Series information for the specified series name.</p>
+</dd>
   </dl>
 
 
@@ -566,10 +664,11 @@
 
   <h3 id="WebApp_Data_UnitOfWork_GetUniqueSeries_System_Boolean_System_Boolean_System_Boolean_" data-uid="WebApp.Data.UnitOfWork.GetUniqueSeries(System.Boolean,System.Boolean,System.Boolean)">
   GetUniqueSeries(bool, bool, bool)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L123"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves a collection of unique series based on optional filters.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -579,17 +678,21 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>includeDrinks</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd></dd>
+    <dd><p>Include drinks in the result.</p>
+</dd>
     <dt><code>includeHidden</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd></dd>
+    <dd><p>Include hidden products in the result.</p>
+</dd>
     <dt><code>includeIsOption</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd></dd>
+    <dd><p>Include option products in the result.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
-    <dd></dd>
+    <dd><p>A collection of unique series based on the specified filters.</p>
+</dd>
   </dl>
 
 
@@ -606,10 +709,11 @@
 
   <h3 id="WebApp_Data_UnitOfWork_GetUser_System_String_" data-uid="WebApp.Data.UnitOfWork.GetUser(System.String)">
   GetUser(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L158"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves a user based on the specified email address.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -619,13 +723,15 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>email</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>The email address of the user to retrieve.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="WebApp.Models.UnitOfWork.User.html">User</a></dt>
-    <dd></dd>
+    <dd><p>The user associated with the specified email address, or null if not found.</p>
+</dd>
   </dl>
 
 
@@ -642,10 +748,11 @@
 
   <h3 id="WebApp_Data_UnitOfWork_Get__1_System_Int32_" data-uid="WebApp.Data.UnitOfWork.Get``1(System.Int32)">
   Get&lt;T&gt;(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L82"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves an entity from the database by its ID.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -655,19 +762,22 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd></dd>
+    <dd><p>The ID of the entity.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><span class="xref">T</span></dt>
-    <dd></dd>
+    <dd><p>The retrieved entity.</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>T</code></dt>
-    <dd></dd>
+    <dd><p>The type of the entity.</p>
+</dd>
   </dl>
 
 
@@ -683,10 +793,11 @@
 
   <h3 id="WebApp_Data_UnitOfWork_Update__1___0___0_" data-uid="WebApp.Data.UnitOfWork.Update``1(``0,``0)">
   Update&lt;T&gt;(T, T)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L63"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Updates an entity in the database.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -696,16 +807,19 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>t</code> <span class="xref">T</span></dt>
-    <dd></dd>
+    <dd><p>The original entity.</p>
+</dd>
     <dt><code>newT</code> <span class="xref">T</span></dt>
-    <dd></dd>
+    <dd><p>The new entity data.</p>
+</dd>
   </dl>
 
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>T</code></dt>
-    <dd></dd>
+    <dd><p>The type of the entity.</p>
+</dd>
   </dl>
 
 
@@ -721,7 +835,7 @@
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L13" class="edit-link">Edit this page</a>
+          <a href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L14" class="edit-link">Edit this page</a>
         </div>
 
 

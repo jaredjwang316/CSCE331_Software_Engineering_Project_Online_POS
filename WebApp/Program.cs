@@ -8,6 +8,7 @@
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.Extensions.FileProviders;
 using WebApp;
 using WebApp.Models.Cart;
 
@@ -52,6 +53,13 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions {
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "_site")),
+    RequestPath = "/Docs"
+});
+
+Console.WriteLine("PATH: " + Path.Combine(Directory.GetCurrentDirectory(), "_site"));
 
 app.UseRouting();
 

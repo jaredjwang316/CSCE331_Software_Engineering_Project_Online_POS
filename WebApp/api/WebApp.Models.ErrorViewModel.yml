@@ -17,14 +17,16 @@ items:
   source:
     remote:
       path: WebApp/Models/ErrorViewModel.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ErrorViewModel
     path: Models/ErrorViewModel.cs
-    startLine: 2
+    startLine: 5
   assemblies:
   - WebApp
   namespace: WebApp.Models
+  summary: Represents a model for handling errors in the application.
+  example: []
   syntax:
     content: public class ErrorViewModel
     content.vb: Public Class ErrorViewModel
@@ -52,14 +54,16 @@ items:
   source:
     remote:
       path: WebApp/Models/ErrorViewModel.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: RequestId
     path: Models/ErrorViewModel.cs
-    startLine: 4
+    startLine: 10
   assemblies:
   - WebApp
   namespace: WebApp.Models
+  summary: Gets or sets the unique identifier for the current request.
+  example: []
   syntax:
     content: public string? RequestId { get; set; }
     parameters: []
@@ -81,14 +85,16 @@ items:
   source:
     remote:
       path: WebApp/Models/ErrorViewModel.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ShowRequestId
     path: Models/ErrorViewModel.cs
-    startLine: 6
+    startLine: 15
   assemblies:
   - WebApp
   namespace: WebApp.Models
+  summary: Gets a value indicating whether to show the request ID.
+  example: []
   syntax:
     content: public bool ShowRequestId { get; }
     parameters: []

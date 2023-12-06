@@ -22,7 +22,7 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Order.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Order
     path: Models/UnitOfWork/Order.cs
@@ -59,14 +59,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Order.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Id
     path: Models/UnitOfWork/Order.cs
-    startLine: 12
+    startLine: 15
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the unique identifier for the order.
+  example: []
   syntax:
     content: public int Id { get; set; }
     parameters: []
@@ -88,14 +90,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Order.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: EmployeeId
     path: Models/UnitOfWork/Order.cs
-    startLine: 13
+    startLine: 20
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the identifier of the employee associated with the order.
+  example: []
   syntax:
     content: public int EmployeeId { get; set; }
     parameters: []
@@ -117,14 +121,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Order.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: CustomerName
     path: Models/UnitOfWork/Order.cs
-    startLine: 14
+    startLine: 25
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the name of the customer placing the order.
+  example: []
   syntax:
     content: public string CustomerName { get; set; }
     parameters: []
@@ -146,14 +152,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Order.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: OrderDate
     path: Models/UnitOfWork/Order.cs
-    startLine: 15
+    startLine: 30
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the date and time when the order was placed.
+  example: []
   syntax:
     content: public DateTime OrderDate { get; set; }
     parameters: []
@@ -175,14 +183,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Order.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: TotalPrice
     path: Models/UnitOfWork/Order.cs
-    startLine: 16
+    startLine: 35
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the total price of the order.
+  example: []
   syntax:
     content: public double TotalPrice { get; set; }
     parameters: []
@@ -204,14 +214,16 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Order.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ItemIds
     path: Models/UnitOfWork/Order.cs
-    startLine: 17
+    startLine: 40
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
+  summary: Gets or sets the list of item identifiers associated with the order.
+  example: []
   syntax:
     content: public List<int> ItemIds { get; set; }
     parameters: []
@@ -233,11 +245,11 @@ items:
   source:
     remote:
       path: WebApp/Models/UnitOfWork/Order.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Models/UnitOfWork/Order.cs
-    startLine: 27
+    startLine: 51
   assemblies:
   - WebApp
   namespace: WebApp.Models.UnitOfWork
@@ -260,6 +272,7 @@ items:
       description: ''
     - id: totalPrice
       type: System.Double
+      description: ''
     - id: itemIds
       type: System.Collections.Generic.List{System.Int32}
       description: ''

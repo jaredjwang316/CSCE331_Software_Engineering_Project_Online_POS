@@ -17,7 +17,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/new/test/apiSpec/new?filename=WebApp_Data_EntityServices.md&amp;value=---%0Auid%3A%20WebApp.Data.EntityServices%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/new/main/apiSpec/new?filename=WebApp_Data_EntityServices.md&amp;value=---%0Auid%3A%20WebApp.Data.EntityServices%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -91,7 +91,7 @@
 
   <h1 id="WebApp_Data_EntityServices" data-uid="WebApp.Data.EntityServices" class="text-break">
     Class EntityServices
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L206"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L342"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -99,7 +99,8 @@
   <dl><dt>Assembly</dt><dd>WebApp.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Provides services for basic CRUD (Create, Read, Update, Delete) operations on entities.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -158,10 +159,11 @@
 
   <h3 id="WebApp_Data_EntityServices__ctor_WebApp_Data_DaoTypeContainer_" data-uid="WebApp.Data.EntityServices.#ctor(WebApp.Data.DaoTypeContainer)">
   EntityServices(DaoTypeContainer)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L209"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L349"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="WebApp.Data.EntityServices.html">EntityServices</a> class with a specified <a class="xref" href="WebApp.Data.DaoTypeContainer.html">DaoTypeContainer</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -171,7 +173,8 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>daoTypeContainer</code> <a class="xref" href="WebApp.Data.DaoTypeContainer.html">DaoTypeContainer</a></dt>
-    <dd></dd>
+    <dd><p>The container providing access to Data Access Objects (DAOs).</p>
+</dd>
   </dl>
 
 
@@ -193,10 +196,11 @@
 
   <h3 id="WebApp_Data_EntityServices_Add__1___0_" data-uid="WebApp.Data.EntityServices.Add``1(``0)">
   Add&lt;T&gt;(T)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L213"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L358"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds a new entity of type <code class="typeparamref">T</code>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -206,14 +210,16 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>t</code> <span class="xref">T</span></dt>
-    <dd></dd>
+    <dd><p>The entity to be added.</p>
+</dd>
   </dl>
 
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>T</code></dt>
-    <dd></dd>
+    <dd><p>The type of the entity.</p>
+</dd>
   </dl>
 
 
@@ -229,10 +235,11 @@
 
   <h3 id="WebApp_Data_EntityServices_Delete__1___0_" data-uid="WebApp.Data.EntityServices.Delete``1(``0)">
   Delete&lt;T&gt;(T)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L223"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L379"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Deletes an entity of type <code class="typeparamref">T</code>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -242,14 +249,16 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>t</code> <span class="xref">T</span></dt>
-    <dd></dd>
+    <dd><p>The entity to be deleted.</p>
+</dd>
   </dl>
 
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>T</code></dt>
-    <dd></dd>
+    <dd><p>The type of the entity.</p>
+</dd>
   </dl>
 
 
@@ -265,10 +274,11 @@
 
   <h3 id="WebApp_Data_EntityServices_GetAll__1" data-uid="WebApp.Data.EntityServices.GetAll``1">
   GetAll&lt;T&gt;()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L233"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L400"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves all entities of type <code class="typeparamref">T</code>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -279,13 +289,15 @@
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</dt>
-    <dd></dd>
+    <dd><p>An enumerable collection of entities of the specified type.</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>T</code></dt>
-    <dd></dd>
+    <dd><p>The type of the entity.</p>
+</dd>
   </dl>
 
 
@@ -301,10 +313,11 @@
 
   <h3 id="WebApp_Data_EntityServices_Get__1_System_Int32_" data-uid="WebApp.Data.EntityServices.Get``1(System.Int32)">
   Get&lt;T&gt;(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L228"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L390"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves an entity of type <code class="typeparamref">T</code> by its unique identifier.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -314,19 +327,22 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd></dd>
+    <dd><p>The unique identifier of the entity.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><span class="xref">T</span></dt>
-    <dd></dd>
+    <dd><p>The entity with the specified identifier, or null if not found.</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>T</code></dt>
-    <dd></dd>
+    <dd><p>The type of the entity.</p>
+</dd>
   </dl>
 
 
@@ -342,10 +358,11 @@
 
   <h3 id="WebApp_Data_EntityServices_Update__1___0___0_" data-uid="WebApp.Data.EntityServices.Update``1(``0,``0)">
   Update&lt;T&gt;(T, T)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L218"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L369"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Updates an existing entity of type <code class="typeparamref">T</code> with a new entity.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -355,16 +372,19 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>t</code> <span class="xref">T</span></dt>
-    <dd></dd>
+    <dd><p>The existing entity to be updated.</p>
+</dd>
     <dt><code>newT</code> <span class="xref">T</span></dt>
-    <dd></dd>
+    <dd><p>The new entity data.</p>
+</dd>
   </dl>
 
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>T</code></dt>
-    <dd></dd>
+    <dd><p>The type of the entity.</p>
+</dd>
   </dl>
 
 
@@ -380,7 +400,7 @@
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/test/WebApp/Data/UnitOfWork.cs/#L206" class="edit-link">Edit this page</a>
+          <a href="https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha/blob/main/WebApp/Data/UnitOfWork.cs/#L342" class="edit-link">Edit this page</a>
         </div>
 
 

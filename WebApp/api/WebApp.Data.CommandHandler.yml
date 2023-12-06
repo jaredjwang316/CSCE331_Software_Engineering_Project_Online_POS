@@ -18,14 +18,16 @@ items:
   source:
     remote:
       path: WebApp/Data/CommandHandler.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: CommandHandler
     path: Data/CommandHandler.cs
-    startLine: 9
+    startLine: 12
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Handles the execution of database commands using Npgsql.
+  example: []
   syntax:
     content: public class CommandHandler
     content.vb: Public Class CommandHandler
@@ -53,19 +55,22 @@ items:
   source:
     remote:
       path: WebApp/Data/CommandHandler.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: Data/CommandHandler.cs
-    startLine: 12
+    startLine: 19
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Initializes a new instance of the <xref href="WebApp.Data.CommandHandler" data-throw-if-not-resolved="false"></xref> class with the specified NpgsqlConnection.
+  example: []
   syntax:
     content: public CommandHandler(NpgsqlConnection connection)
     parameters:
     - id: connection
       type: Npgsql.NpgsqlConnection
+      description: The NpgsqlConnection used for executing commands.
     content.vb: Public Sub New(connection As NpgsqlConnection)
   overload: WebApp.Data.CommandHandler.#ctor*
   nameWithType.vb: CommandHandler.New(NpgsqlConnection)
@@ -85,21 +90,25 @@ items:
   source:
     remote:
       path: WebApp/Data/CommandHandler.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ExecuteReader
     path: Data/CommandHandler.cs
-    startLine: 16
+    startLine: 28
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Executes a database query that returns a data reader.
+  example: []
   syntax:
     content: public NpgsqlDataReader? ExecuteReader(string query)
     parameters:
     - id: query
       type: System.String
+      description: The SQL query string to be executed.
     return:
       type: Npgsql.NpgsqlDataReader
+      description: A NpgsqlDataReader containing the result of the query, or null in case of an error.
     content.vb: Public Function ExecuteReader(query As String) As NpgsqlDataReader
   overload: WebApp.Data.CommandHandler.ExecuteReader*
   nameWithType.vb: CommandHandler.ExecuteReader(String)
@@ -119,19 +128,22 @@ items:
   source:
     remote:
       path: WebApp/Data/CommandHandler.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: ExecuteNonQuery
     path: Data/CommandHandler.cs
-    startLine: 29
+    startLine: 45
   assemblies:
   - WebApp
   namespace: WebApp.Data
+  summary: Executes a non-query SQL statement, such as an INSERT, UPDATE, or DELETE statement.
+  example: []
   syntax:
     content: public void ExecuteNonQuery(string statement)
     parameters:
     - id: statement
       type: System.String
+      description: The SQL statement to be executed.
     content.vb: Public Sub ExecuteNonQuery(statement As String)
   overload: WebApp.Data.CommandHandler.ExecuteNonQuery*
   nameWithType.vb: CommandHandler.ExecuteNonQuery(String)
@@ -397,6 +409,13 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: WebApp.Data.CommandHandler
+  commentId: T:WebApp.Data.CommandHandler
+  parent: WebApp.Data
+  href: WebApp.Data.CommandHandler.html
+  name: CommandHandler
+  nameWithType: CommandHandler
+  fullName: WebApp.Data.CommandHandler
 - uid: WebApp.Data.CommandHandler.#ctor*
   commentId: Overload:WebApp.Data.CommandHandler.#ctor
   href: WebApp.Data.CommandHandler.html#WebApp_Data_CommandHandler__ctor_Npgsql_NpgsqlConnection_

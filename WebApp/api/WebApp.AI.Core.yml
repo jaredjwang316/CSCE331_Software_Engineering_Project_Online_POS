@@ -20,7 +20,7 @@ items:
   source:
     remote:
       path: WebApp/AI/Core.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Core
     path: AI/Core.cs
@@ -57,7 +57,7 @@ items:
   source:
     remote:
       path: WebApp/AI/Core.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: _systemPrompt
     path: AI/Core.cs
@@ -84,7 +84,7 @@ items:
   source:
     remote:
       path: WebApp/AI/Core.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: _client
     path: AI/Core.cs
@@ -111,7 +111,7 @@ items:
   source:
     remote:
       path: WebApp/AI/Core.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: _options
     path: AI/Core.cs
@@ -140,7 +140,7 @@ items:
   source:
     remote:
       path: WebApp/AI/Core.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: .ctor
     path: AI/Core.cs
@@ -176,7 +176,7 @@ items:
   source:
     remote:
       path: WebApp/AI/Core.cs
-      branch: test
+      branch: main
       repo: https://github.com/csce-315-331-2023c/project-3-csce331-970_07r-gong-cha.git
     id: Run
     path: AI/Core.cs
