@@ -1,29 +1,6 @@
-import { makeRequest } from './utils/request.js';
-
 // Path for back button
 var path = [];
 
-//onclick="toggleFavorite(this)" onkeypress="toggleFavorite(this)"
-// window.toggleFavorite = function(element) {
-//     $(element).toggleClass("favorite");
-//     if ($(element).hasClass("favorite")) {
-//         $(element).attr("src", "/img/favorite-heart1.png");
-//         var productButton = $(element).closest(".product-btn");
-//         makeRequest("/Customer/AddFavorite", "POST", { productID: productButton.attr("id") }, null, null);
-//     } else {
-//         $(element).attr("src", "/img/favorite-default-heart.png");
-//         var productButton = $(element).closest(".product-btn");
-//         makeRequest("/Customer/RemoveFavorite", "POST", { productID: productButton.attr("id") }, null, null);
-//     }
-// }
-
-
-// window.showFavoriteButton = function(element) {
-//     $(element).find(".favorite-icon").show();
-// }
-// window.hideFavoriteButton = function(element) {
-//     $(element).find(".favorite-icon").hide();
-// }
 window.disableProductButton = function(element) {
     var productButton = $(element).closest(".product-btn");
     productButton.attr("disabled", true);
@@ -43,7 +20,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         $(this).addClass("active");
 
         path = [];
-    
+
         loadData($(this).attr("endpoint"));
     });
 
@@ -76,7 +53,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
         var totalPrice = parseFloat($("#total-price").attr("drink-price")) + cost;
         $("#total-price").html("$" + totalPrice.toFixed(2));
-        
+
     });
 
     // Click event for back button
@@ -87,7 +64,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         var endpoint = split_path[0];
         var argument = split_path[1];
         var element = split_path[2];
-        
+
         loadData(endpoint, argument, element);
     });
 
