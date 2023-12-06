@@ -20,6 +20,7 @@ using WebApp.Models.Cart;
 using System.Security.Claims;
 
 namespace WebApp.Controllers;
+[ApiController]
 public class CustomerController : Controller {
     private readonly CartService cartService;
     private readonly IMemoryCache cache;
@@ -29,6 +30,7 @@ public class CustomerController : Controller {
         this.cache = cache;
     }
 
+    [HttpGet, Route("Customer/")]
     public IActionResult Index() {
         Cart cart = cartService.GetCartFromSession();
         int itemsInCart = cart!.Items.Sum(i => i.Quantity);
@@ -37,6 +39,7 @@ public class CustomerController : Controller {
         return View();
     }
 
+    [HttpGet, Route("Customer/LoadCategories")]
     public IActionResult LoadCategories() {
         UnitOfWork unit = new();
         List<SeriesInfo> model = cache.GetOrCreate("Categories", entry => {
@@ -51,6 +54,7 @@ public class CustomerController : Controller {
         return PartialView("_CategoriesPartial", model);
     }
 
+    [HttpGet, Route("Customer/LoadBestSellers")]
     public IActionResult LoadBestSellers() {
         UnitOfWork unit = new();
         List<Product> model = cache.GetOrCreate("BestSellers", entry => {
@@ -63,6 +67,7 @@ public class CustomerController : Controller {
         return PartialView("_ProductsPartial", model);
     }
 
+    [HttpGet, Route("Customer/LoadFavorites")]
     public IActionResult LoadFavorites() {
         // Use _ProductsPartial when favorites are implemented
 
@@ -87,6 +92,7 @@ public class CustomerController : Controller {
         return PartialView("_ProductsPartial", model);
     }
 
+    [HttpGet, Route("Customer/LoadProductsBySeries")]
     public IActionResult LoadProductsBySeries(string arg) {
         UnitOfWork unit = new();
         List<Product> model = unit.GetProductsBySeries(arg).ToList();
@@ -94,6 +100,7 @@ public class CustomerController : Controller {
         return PartialView("_ProductsPartial", model);
     }
 
+    [HttpGet, Route("Customer/LoadCustomizations")]
     public IActionResult LoadCustomizations(string arg) {
         UnitOfWork unit = new();
         Product selectedProduct = unit.Get<Product>(int.Parse(arg));
@@ -114,6 +121,7 @@ public class CustomerController : Controller {
         return PartialView("_CustomizationsPartial", model);
     }
 
+    [HttpPost, Route("Customer/AddFavorite/{productID}")]
     public IActionResult AddFavorite(int productID) {
         if (!User.Identity!.IsAuthenticated) {
             return BadRequest("You must be logged in to add favorites.");
@@ -143,6 +151,8 @@ public class CustomerController : Controller {
 
         return Ok();
     }
+
+    [HttpDelete, Route("Customer/RemoveFavorite/{productID}")]
     public IActionResult RemoveFavorite(int productID) {
         if (!User.Identity!.IsAuthenticated) {
             return BadRequest("You must be logged in to remove favorites.");

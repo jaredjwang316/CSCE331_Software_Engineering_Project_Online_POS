@@ -17,6 +17,7 @@ product information through the 'ProductDetail' method. Overall, this controller
 database and the user interface, facilitating the effective presentation and interaction with menu items within the 
 POS system. */
 
+[ApiController]
 public class MenuBoardController : Controller
 {
     private readonly ILogger<MenuBoardController> _logger;
@@ -27,10 +28,10 @@ public class MenuBoardController : Controller
         _logger = logger;
         this.cartService = cartService;
     }
- 
-    public IActionResult Index(string search)
+    
+    [HttpGet, Route("MenuBoard/")]
+    public IActionResult Index(string? search = null)
     {
-
         Cart cart = cartService.GetCartFromSession();
         int itemsInCart = cart!.Items.Sum(i => i.Quantity);
         ViewBag.itemsInCart = itemsInCart;
@@ -68,12 +69,14 @@ public class MenuBoardController : Controller
         return View((products, prodIngredients, productCategories));
     }
 
+    [HttpGet, Route("MenuBoard/Error")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
-    {
+    {   
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    [HttpGet, Route("MenuBoard/getProducts")]
     public IActionResult getProducts()
     {
         string html = "<div class=\"customization-menu\">";    
@@ -109,6 +112,7 @@ public class MenuBoardController : Controller
         return Content(html);   //return the string html
     }
 
+    [HttpGet, Route("MenuBoard/GetProductsByCategory")]
     public IActionResult GetProductsByCategory(string category)
     {
         UnitOfWork uok = new UnitOfWork(Config.AWS_DB_NAME);
@@ -120,9 +124,9 @@ public class MenuBoardController : Controller
         return PartialView("_ProductNamesPartial", productNames);
     }
 
+    [HttpGet, Route("MenuBoard/ProductDetail")]
     public IActionResult ProductDetail(int id)
     {
-
         Cart cart = cartService.GetCartFromSession();
         int itemsInCart = cart!.Items.Sum(i => i.Quantity);
         ViewBag.itemsInCart = itemsInCart;

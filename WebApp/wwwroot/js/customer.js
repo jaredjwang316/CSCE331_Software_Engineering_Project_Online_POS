@@ -7,7 +7,7 @@
         a button is clicked.
 */
 
-import { makeRequest } from './utils/request.js';
+import { makeRequest } from './utils/make-request.js';
 
 // Path for back button
 var path = [];
@@ -15,14 +15,17 @@ var path = [];
 //onclick="toggleFavorite(this)" onkeypress="toggleFavorite(this)"
 window.toggleFavorite = function(element) {
     $(element).toggleClass("favorite");
+    var productButton = $(element).closest(".product-btn");
+    var productID = parseInt(productButton.attr("id"));
+
     if ($(element).hasClass("favorite")) {
         $(element).attr("src", "/img/favorite-heart1.png");
-        var productButton = $(element).closest(".product-btn");
-        makeRequest("/Customer/AddFavorite", "POST", { productID: productButton.attr("id") }, null, null);
+        
+        makeRequest("/Customer/AddFavorite/" + productID, "POST", null, null, null);
     } else {
         $(element).attr("src", "/img/favorite-default-heart.png");
-        var productButton = $(element).closest(".product-btn");
-        makeRequest("/Customer/RemoveFavorite", "POST", { productID: productButton.attr("id") }, null, null);
+        
+        makeRequest("/Customer/RemoveFavorite/" + productID, "DELETE", null, null, null);
     }
 }
 

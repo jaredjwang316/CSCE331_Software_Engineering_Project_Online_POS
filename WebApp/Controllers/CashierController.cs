@@ -27,7 +27,7 @@ using System.Security.Claims;
 
 namespace WebApp.Controllers;
 
-[Authorize(Roles = "Cashier, Manager")]
+[Authorize(Roles = "Cashier, Manager"), ApiController]
 public class CashierController : Controller
 {
     private readonly ILogger<CashierController> _logger;
@@ -39,6 +39,8 @@ public class CashierController : Controller
         this.cache = cache;
         this.cartService = cartService;
     }
+
+    [HttpGet, Route("Cashier/")]
     public IActionResult Index()
     {
         Cart cart = cartService.GetCartFromSession();
@@ -47,12 +49,14 @@ public class CashierController : Controller
         return View();
     }
 
+    [HttpGet, Route("Cashier/Error")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    [HttpGet, Route("Cashier/LoadCategories")]
     public IActionResult LoadCategories() {
         UnitOfWork unit = new();
         List<SeriesInfo> model = cache.GetOrCreate("Categories", entry => {
@@ -68,6 +72,7 @@ public class CashierController : Controller
     }
 
 
+    [HttpGet, Route("Cashier/LoadProductsBySeries")]
     public IActionResult LoadProductsBySeries(string arg) {
         UnitOfWork unit = new();
         List<Product> model = unit.GetProductsBySeries(arg).ToList();
@@ -75,6 +80,7 @@ public class CashierController : Controller
         return PartialView("_ProductsPartial", model);
     }
 
+    [HttpGet, Route("Cashier/LoadCustomizations")]
     public IActionResult LoadCustomizations(string arg) {
         UnitOfWork unit = new();
         Product selectedProduct = unit.Get<Product>(int.Parse(arg));

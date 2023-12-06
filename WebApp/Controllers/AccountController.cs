@@ -31,7 +31,7 @@ using WebApp.APIs.GoogleTranslate;
 
 namespace WebApp.Controllers;
 
-[AllowAnonymous]
+[AllowAnonymous, ApiController]
 public class AccountController : Controller
 {
     private readonly ILogger<AccountController> _logger;
@@ -41,16 +41,19 @@ public class AccountController : Controller
         _logger = logger;
     }
 
+    [HttpGet, Route("Account/")]
     public IActionResult Index()
     {
         return View();
     }
 
+    [HttpGet, Route("Account/Login")]
     public IActionResult Login(string provider = "Google", string returnUrl = "/")
     {
         return Challenge(new AuthenticationProperties() { RedirectUri = Url.Action("LoginCallback", new { returnUrl }) }, provider);
     }
 
+    [HttpGet, Route("Account/LoginCallback")]
     public async Task<IActionResult> LoginCallback(string returnUrl)
     {
         UnitOfWork unit = new();
@@ -116,6 +119,7 @@ public class AccountController : Controller
         return Redirect(Config.returnUrl);
     }
 
+    [HttpGet, Route("Account/Logout")]
     public IActionResult Logout(string returnUrl)
     {
         bool isManagerOrCashier = GetRole() == "Manager" || GetRole() == "Cashier";
@@ -127,6 +131,7 @@ public class AccountController : Controller
         return SignOut(new AuthenticationProperties() { RedirectUri = returnUrl }, CookieAuthenticationDefaults.AuthenticationScheme);
     }
 
+    [HttpGet, Route("Account/AccessDenied")]
     public IActionResult AccessDenied()
     {
         Claim? roleClaim = User.FindFirst(ClaimTypes.Role);
@@ -139,12 +144,14 @@ public class AccountController : Controller
         return Redirect(Config.returnUrl);
     }
 
+    [HttpGet, Route("Account/Error")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    [HttpGet, Route("Account/GetRole")]
     public string GetRole() {
         Claim? roleClaim = User.FindFirst(ClaimTypes.Role);
         if (roleClaim != null) {
@@ -153,6 +160,7 @@ public class AccountController : Controller
         return "Customer";
     }
 
+    [HttpGet, Route("Account/GetName")]
     public string GetName() {
         Claim? nameClaim = User.FindFirst(ClaimTypes.Name);
         if (nameClaim != null) {
@@ -161,6 +169,7 @@ public class AccountController : Controller
         return "Guest";
     }
 
+    [HttpGet, Route("Account/GetEmail")]
     public string GetEmail() {
         Claim? emailClaim = User.FindFirst(ClaimTypes.Email);
         if (emailClaim != null) {
@@ -169,10 +178,12 @@ public class AccountController : Controller
         return "";
     }
 
+    [HttpGet, Route("Account/GetUserInfo")]
     public IActionResult GetUserInfo() {
         return Json(new { name = GetName(), role = GetRole(), email = GetEmail() });
     }
 
+    [HttpPost, Route("Account/SaveUserPreferences")]
     public IActionResult SaveUserPreferences(
         string? accCursor = null,
         string? accTextSize = null,
@@ -199,6 +210,7 @@ public class AccountController : Controller
         return Json(new { success = true });
     }
 
+    [HttpDelete, Route("Account/ResetPreferencesToDefault")]
     public IActionResult ResetPreferencesToDefault() {
         HttpContext.Response.Cookies.Append("Grayscale", "false");
         HttpContext.Response.Cookies.Append("Invert", "false");

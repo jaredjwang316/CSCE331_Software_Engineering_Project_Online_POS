@@ -4,6 +4,7 @@
     Date: November 5, 2023
 */
 
+using System.ComponentModel.DataAnnotations;
 using Npgsql;
 using WebApp.Models.UnitOfWork;
 
@@ -84,6 +85,10 @@ public class UnitOfWork {
         return daoTypeContainer.GetProductDao().GetBestSellingProducts(limit);
     }
 
+    public Product GetRecentProduct() {
+        return daoTypeContainer.GetProductDao().GetRecentProduct();
+    }
+
     public SeriesInfo GetSeriesInfo(string name) {
         return daoTypeContainer.GetSeriesInfoDao().Get(name);
     }
@@ -91,6 +96,19 @@ public class UnitOfWork {
     public User? GetUser(string email) {
         return daoTypeContainer.GetUserDao().Get(email);
     }
+
+    public Inventory GetRecentInventory() {
+        return daoTypeContainer.GetInventoryDao().GetRecentInventory();
+    }
+
+    public Ingredient GetRecentIngredient() {
+        return daoTypeContainer.GetIngredientDao().GetRecentIngredient();
+    }
+
+    public List<Order> GetOrdersBetween(DateTime starttime, DateTime endtime) {
+        return daoTypeContainer.GetOrderDao().GetOrdersBetween(starttime, endtime);
+    }
+
 }
 
 public class DaoTypeContainer {

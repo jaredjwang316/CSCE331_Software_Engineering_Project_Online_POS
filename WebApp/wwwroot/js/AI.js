@@ -1,4 +1,4 @@
-import { makeRequest } from './utils/request.js';
+import { makeRequest } from './utils/make-request.js';
 
 window.toggleSidebarAI = function() {
     var sidebar = document.querySelector(".sidebar-robot");
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 window.clearHistory = function() {
-    makeRequest("/AI/ClearHistory", "GET", null, function(response) {
+    makeRequest("/AI/ClearHistory", "DELETE", null, function(response) {
         $(".sidebar-output-text").html("");
     }, error);
 }
@@ -57,7 +57,7 @@ window.sendInput = function() {
     $(".sidebar-output").scrollTop($(".sidebar-output")[0].scrollHeight);
     
 
-    makeRequest("/AI/GetResponse", "POST", { input: input }, function(response) {
+    makeRequest("/AI/GetResponse/" + input, "POST", null, function(response) {
         var responseContainer = createAIResponseContainer();
         $(".sidebar-output-text").append(responseContainer);
         var responseText = responseContainer.querySelector(".response-text");

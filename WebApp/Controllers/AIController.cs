@@ -7,6 +7,7 @@ using WebApp.APIs.GoogleTranslate;
 
 namespace WebApp.Controllers;
 
+[ApiController]
 public class AIController : Controller
 {
     private readonly ILogger<AIController> _logger;
@@ -17,7 +18,7 @@ public class AIController : Controller
         _logger = logger;
     }
 
-    [HttpPost]
+    [HttpPost, Route("AI/GetResponse/{input}")]
     public async Task<IActionResult> GetResponse(string input) {
         string response = "";
         string history = GetHistory();
@@ -37,12 +38,15 @@ public class AIController : Controller
         return Ok(translatedResponse);
     }
 
+    [HttpGet, Route("AI/GetHistory")]
     public string GetHistory() {
         string? history;
         history = HttpContext.Session.GetString("chatbotHistory") ?? "";
 
         return history;
     }
+
+    [HttpGet, Route("AI/GetHistorySplit")]
     public IActionResult GetHistorySplit() {
         string? history = GetHistory();
         string[] splitHistory = history.Split("\n");
@@ -71,10 +75,13 @@ public class AIController : Controller
 
         return Ok(translatedHistory);
     }
+
+    [HttpPost, Route("AI/SetHistory")]
     public void SetHistory(string history) {
         HttpContext.Session.SetString("chatbotHistory", history);
     }
 
+    [HttpDelete, Route("AI/ClearHistory")]
     public IActionResult ClearHistory() {
         HttpContext.Session.SetString("chatbotHistory", "");
         return Ok();

@@ -20,7 +20,7 @@
 
 <link rel="stylesheet" href="~/css/cart.css" />
 
-<form method="post" asp-controller="Customer" asp-action="Index">
+<form method="get" asp-controller="Customer" asp-action="Index">
     <button class="cartlayout-back contrast" hidden type="submit">@await translator.TranslateText("Continue Shopping")</button>
 </form>
 <div class="cart-container contrast" hidden>
@@ -35,7 +35,7 @@
     <h1>@await translator.TranslateText("Your cart is empty!")</h1>
     <p>@await translator.TranslateText("Looks like you haven't added anything to your cart yet.")</p>
     <p>@await translator.TranslateText("Click the button below to begin shopping.")</p>
-    <form method="post" asp-controller="Customer" asp-action="Index">
+    <form method="get" asp-controller="Customer" asp-action="Index">
         <button class="cartlayout-back1" type="submit">@await translator.TranslateText("Order Now")</button>
     </form>
 </div>
@@ -44,7 +44,7 @@
     <h1>@await translator.TranslateText("Your order has been placed")</h1>
     <p>@await translator.TranslateText("Thank you for shopping with us!")</p>
     <p>@await translator.TranslateText("Click the button below to begin a new order")</p>
-    <form method="post" asp-controller="Customer" asp-action="Index">
+    <form method="get" asp-controller="Customer" asp-action="Index">
         <button class="cartlayout-back2" type="submit">@await translator.TranslateText("New Order")</button>
     </form>
 </div>
