@@ -254,8 +254,8 @@ public class ManagerController : Controller
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         Inventory inventory = unit.Get<Inventory>(inv);
         Ingredient ingredient = unit.Get<Ingredient>(inventory.IngredientId);
-        //unit.Delete<Inventory>(inventory);
-       // unit.Delete<Ingredient>(ingredient);
+        unit.Delete<Inventory>(inventory);
+        unit.Delete<Ingredient>(ingredient);
         Console.WriteLine("Can Delete Id: " + inventory.Id + " " + ingredient.Id);
         unit.CloseConnection();
         return Ok();
@@ -286,8 +286,18 @@ public class ManagerController : Controller
         DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
+        List<Tuple<int,double>> input = unit.GetSalesReport(start_time, end_time);
+        List<Product> products = unit.GetAll<Product>().ToList();
+        List<Tuple<string, double>> output = new();
+        foreach (var outp in input) {
+            foreach (Product product in products) {
+                if (product.Id == outp.Item1) {
+                    output.Add(new Tuple<string, double>(product.Name, outp.Item2));
+                }
+            }
+        }
         unit.CloseConnection();
-        return Ok();
+        return Ok(output);
     }
 
     /// <summary>
@@ -343,19 +353,24 @@ public class ManagerController : Controller
     /// <summary>
     /// Displays the restock report.
     /// </summary>
-    /// <param name="payload"></param>
     /// <returns></returns>
     [HttpPost, Route("Manager/ShowRestockReport")]
-    public IActionResult ShowRestockReport([FromBody] Dictionary<string, string> payload) {
+    public IActionResult ShowRestockReport() {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
-        string data = payload["data"];
-        string data2 = payload["data2"];
-        DateTime start_time = JsonConvert.DeserializeObject<DateTime>(data);
-        DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
-        Console.WriteLine(start_time);
-        Console.WriteLine(end_time);
+        List<Inventory> inventory = unit.GetAll<Inventory>().ToList();
+        List<Ingredient> ingredients = unit.GetAll<Ingredient>().ToList();
+        List<Ingredient> output = new();
+        foreach (Inventory ing in inventory) {
+            if (ing.Quantity < 0.2*ing.FillLevel) {
+                foreach (Ingredient ingredient in ingredients) {
+                    if (ingredient.Id == ing.IngredientId) {
+                        output.Add(ingredient);
+                    }
+                }
+            }
+        }
         unit.CloseConnection();
-        return Ok();
+        return Ok(output);
     }
 
     /// <summary>
@@ -372,8 +387,9 @@ public class ManagerController : Controller
         DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
+        List<Tuple<string,string,int>> output = unit.GetSalesTogether(start_time, end_time);
         unit.CloseConnection();
-        return Ok();
+        return Ok(output);
     }
 
     /// <summary>

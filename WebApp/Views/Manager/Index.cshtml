@@ -292,6 +292,8 @@
         cell5.setAttribute("contenteditable", true);
         var cell6 = row.insertCell(5);
         cell6.innerHTML = '<input type="button" value="Delete" onclick="deleteRowProd(this)"/>';
+        var cell7 = row.insertCell(5);
+        cell7.innerHTML = '<input type="button" value="Edit Product Ingredients" onclick="editProductIngredients(this)"/>';
         cell2.addEventListener('input', function() {
                 console.log('Cell changed');
                 cell2.classList.add('edited');
