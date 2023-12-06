@@ -30,6 +30,8 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddSwaggerGen(c => {
     c.SwaggerDoc("v1", new() { Title = "WebApp", Version = "v1" });
+    var filePath = Path.Combine(System.AppContext.BaseDirectory, "WebApp.xml");
+    c.IncludeXmlComments(filePath);
 });
 
 builder.Services.AddSingleton(Config.returnUrl);

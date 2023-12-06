@@ -24,6 +24,7 @@ public class Order {
     /// <param name="employeeId"></param>
     /// <param name="customerName"></param>
     /// <param name="orderDate"></param>
+    /// <param name="totalPrice"></param>
     /// <param name="itemIds"></param>
     public Order(int id, int employeeId, String customerName, DateTime orderDate, double totalPrice, List<int> itemIds) {
         Id = id;
