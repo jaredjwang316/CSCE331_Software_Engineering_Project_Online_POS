@@ -218,8 +218,18 @@ public class ManagerController : Controller
         DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
+        List<Tuple<int,double>> input = unit.GetSalesReport(start_time, end_time);
+        List<Product> products = unit.GetAll<Product>().ToList();
+        List<Tuple<string, double>> output = new();
+        foreach (var outp in input) {
+            foreach (Product product in products) {
+                if (product.Id == outp.Item1) {
+                    output.Add(new Tuple<string, double>(product.Name, outp.Item2));
+                }
+            }
+        }
         unit.CloseConnection();
-        return Ok();
+        return Ok(output);
     }
 
     public IActionResult ShowExcessReport([FromBody] Dictionary<string, string> payload) {
@@ -292,12 +302,7 @@ public class ManagerController : Controller
         DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
-        List<(string,string,int)> orders = unit.GetSalesTogether(start_time, end_time);
-        List<Tuple<string,string,int>> output = new();
-
-        foreach (var order in orders) {
-            output.Add(new Tuple<string, string,int>(order.Item1, order.Item2, order.Item3));
-        }
+        List<Tuple<string,string,int>> output = unit.GetSalesTogether(start_time, end_time);
         unit.CloseConnection();
         return Ok(output);
     }

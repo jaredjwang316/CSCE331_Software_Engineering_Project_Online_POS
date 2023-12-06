@@ -60,6 +60,16 @@ document.addEventListener("DOMContentLoaded", function () {
             contentType: "application/json",
             data: JSON.stringify(output),
             success: function (response) {
+                var table = document.getElementById("salesReportTable");
+                console.log(response);
+                for (var ing of response) {
+                    console.log(ing);
+                    var row = table.insertRow(-1);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    cell1.innerHTML = ing.item1;
+                    cell2.innerHTML = ing.item2;
+                }
                 document.getElementById("saveSuccess").style.display = 'block';
                     setTimeout(function() {
                         $('#saveSuccess').fadeOut('fast');
@@ -280,11 +290,11 @@ function ClearView() {
     document.getElementById('salesTogetherTable').style.display = 'none';
     document.getElementById('popularityAnalysisTable').style.display = 'none';
 
-    $('#salesReportTable').find("tr").remove();
-    $('#excessReportTable').find("tr").remove();
-    $('#restockReportTable').find("tr").remove();
-    $('#salesTogetherTable').find("tr").remove();
-    $('#popularityAnalysisTable').find("tr").remove();
+    $('#salesReportTable').find("tr:not(:first)").remove();
+    $('#excessReportTable').find("tr:not(:first)").remove();
+    $('#restockReportTable').find("tr:not(:first)").remove();
+    $('#salesTogetherTable').find("tr:not(:first)").remove();
+    $('#popularityAnalysisTable').find("tr:not(:first)").remove();
 
     document.getElementById('starttime').style.display = 'none';
     document.getElementById('endtime').style.display = 'none';

@@ -109,8 +109,12 @@ public class UnitOfWork {
         return daoTypeContainer.GetOrderDao().GetOrdersBetween(starttime, endtime);
     }
 
-    public List<(string, string, int)> GetSalesTogether(DateTime starttime, DateTime endtime) {
+    public List<Tuple<string, string,int>> GetSalesTogether(DateTime starttime, DateTime endtime) {
         return daoTypeContainer.GetOrderDao().GetSalesTogether(starttime, endtime);
+    }
+
+    public List<Tuple<int, double>> GetSalesReport(DateTime starttime, DateTime endtime){
+        return daoTypeContainer.GetOrderDao().GetSalesReport(starttime, endtime);
     }
 
 }

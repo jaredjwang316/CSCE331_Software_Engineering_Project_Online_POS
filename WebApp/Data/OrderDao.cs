@@ -186,8 +186,8 @@ public class OrderDao : IDao<Order> {
         return orders;
         
     }
-    public List<(string, string, int)> GetSalesTogether(DateTime start_date, DateTime end_date) {
-        List<(string,string, int)> orders = new();
+    public List<Tuple<string, string,int>> GetSalesTogether(DateTime start_date, DateTime end_date) {
+        List<Tuple<string, string,int>> orders = new();
         var query = $"WITH ItemPairs AS (\n" +
             $"  SELECT\n" +
             $"    a.item_id AS item1," +
@@ -226,7 +226,38 @@ public class OrderDao : IDao<Order> {
 
 
         while (reader?.Read() == true) {
-            orders.Add((reader.GetString(0), reader.GetString(1), reader.GetInt32(2)));
+            orders.Add(new Tuple<string, string, int>(reader.GetString(0), reader.GetString(1), reader.GetInt32(2)));
+        }
+
+        reader?.Close();
+        return orders;
+    }
+
+    public List<Tuple<int, double>> GetSalesReport(DateTime start_time, DateTime end_time){
+        List<Tuple<int, double>> orders = new();
+        String query = $"SELECT\n" +
+            $"unnested_item_id AS item_id,\n" +
+            $"SUM(total_order) AS total_sold\n" +
+            $"FROM\n" +
+            $"orders_final,\n" +
+            $"unnest(item_ids) AS unnested_item_id\n" +
+            $"WHERE\n" +
+            $"order_date BETWEEN '{start_time}' AND '{end_time}'\n" +
+            $"AND unnested_item_id BETWEEN 1 AND 73\n" +
+            $"GROUP BY\n" +
+            $"unnested_item_id\n" +
+            $"ORDER BY\n" +
+            $"unnested_item_id;";
+
+        var reader = commandHandler.ExecuteReader(query);
+
+        if (reader == null) {
+            return orders;
+        }
+
+
+        while (reader?.Read() == true) {
+            orders.Add(new Tuple<int,double>(reader.GetInt32(0), reader.GetDouble(1)));
         }
 
         reader?.Close();
