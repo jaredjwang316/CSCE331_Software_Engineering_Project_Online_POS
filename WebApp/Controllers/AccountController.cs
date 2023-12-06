@@ -31,26 +31,45 @@ using WebApp.APIs.GoogleTranslate;
 
 namespace WebApp.Controllers;
 
-[AllowAnonymous]
+/// <summary>
+/// Controller responsible for handling user account-related actions, such as login, logout, and user preferences.
+/// </summary>
+[AllowAnonymous, ApiController]
 public class AccountController : Controller
 {
     private readonly ILogger<AccountController> _logger;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AccountController"/> class.
+    /// </summary>
+    /// <param name="logger">The logger instance.</param>
     public AccountController(ILogger<AccountController> logger)
     {
         _logger = logger;
     }
 
-    public IActionResult Index()
-    {
-        return View();
-    }
-
+    /// <summary>
+    /// Initiates user authentication using a specified provider (defaulting to Google)
+    /// and redirects users to the provider's authentication page.
+    /// </summary>
+    /// <param name="provider"></param>
+    /// <param name="returnUrl"></param>
+    /// <returns></returns>
+    [HttpGet, Route("Account/Login")]
     public IActionResult Login(string provider = "Google", string returnUrl = "/")
     {
         return Challenge(new AuthenticationProperties() { RedirectUri = Url.Action("LoginCallback", new { returnUrl }) }, provider);
     }
 
+    /// <summary>
+    /// Upon successful authentication, retrieves user information,
+    /// assigns appropriate roles (Manager, Cashier, or Customer),
+    /// sets user preferences, and signs in the user, redirecting to
+    /// the appropriate location based on roles and returnUrl.
+    /// </summary>
+    /// <param name="returnUrl"></param>
+    /// <returns></returns>
+    [HttpGet, Route("Account/LoginCallback")]
     public async Task<IActionResult> LoginCallback(string returnUrl)
     {
         UnitOfWork unit = new();
@@ -116,6 +135,12 @@ public class AccountController : Controller
         return Redirect(Config.returnUrl);
     }
 
+    /// <summary>
+    /// Handles user sign-out, redirecting users to the appropriate location based on their role.
+    /// </summary>
+    /// <param name="returnUrl"></param>
+    /// <returns></returns>
+    [HttpGet, Route("Account/Logout")]
     public IActionResult Logout(string returnUrl)
     {
         bool isManagerOrCashier = GetRole() == "Manager" || GetRole() == "Cashier";
@@ -127,6 +152,12 @@ public class AccountController : Controller
         return SignOut(new AuthenticationProperties() { RedirectUri = returnUrl }, CookieAuthenticationDefaults.AuthenticationScheme);
     }
 
+    /// <summary>
+    /// Handles scenarios where users encounter unauthorized access,
+    /// logging details and redirecting to the configured return URL.
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet, Route("Account/AccessDenied")]
     public IActionResult AccessDenied()
     {
         Claim? roleClaim = User.FindFirst(ClaimTypes.Role);
@@ -139,12 +170,22 @@ public class AccountController : Controller
         return Redirect(Config.returnUrl);
     }
 
+    /// <summary>
+    /// Handles scenarios where users encounter errors,
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet, Route("Account/Error")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    /// <summary>
+    /// Retrieves user role.
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet, Route("Account/GetRole")]
     public string GetRole() {
         Claim? roleClaim = User.FindFirst(ClaimTypes.Role);
         if (roleClaim != null) {
@@ -153,6 +194,11 @@ public class AccountController : Controller
         return "Customer";
     }
 
+    /// <summary>
+    /// Retrieves user name.
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet, Route("Account/GetName")]
     public string GetName() {
         Claim? nameClaim = User.FindFirst(ClaimTypes.Name);
         if (nameClaim != null) {
@@ -161,6 +207,11 @@ public class AccountController : Controller
         return "Guest";
     }
 
+    /// <summary>
+    /// Retrieves user email.
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet, Route("Account/GetEmail")]
     public string GetEmail() {
         Claim? emailClaim = User.FindFirst(ClaimTypes.Email);
         if (emailClaim != null) {
@@ -169,10 +220,24 @@ public class AccountController : Controller
         return "";
     }
 
+    /// <summary>
+    /// Retrieves user name, role, and email in a JSON format.
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet, Route("Account/GetUserInfo")]
     public IActionResult GetUserInfo() {
         return Json(new { name = GetName(), role = GetRole(), email = GetEmail() });
     }
 
+    /// <summary>
+    /// Saves user preferences as cookies and to the database if the user is authenticated.
+    /// </summary> 
+    /// <param name="accCursor"></param>
+    /// <param name="accTextSize"></param>
+    /// <param name="accContrast"></param>
+    /// <param name="accLanguage"></param>
+    /// <returns></returns>
+    [HttpPost, Route("Account/SaveUserPreferences")]
     public IActionResult SaveUserPreferences(
         string? accCursor = null,
         string? accTextSize = null,
@@ -199,6 +264,11 @@ public class AccountController : Controller
         return Json(new { success = true });
     }
 
+    /// <summary>
+    /// Resets user preferences to default values.
+    /// </summary>
+    /// <returns></returns>
+    [HttpDelete, Route("Account/ResetPreferencesToDefault")]
     public IActionResult ResetPreferencesToDefault() {
         HttpContext.Response.Cookies.Append("Grayscale", "false");
         HttpContext.Response.Cookies.Append("Invert", "false");

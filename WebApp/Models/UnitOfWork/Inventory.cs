@@ -10,9 +10,24 @@ namespace WebApp.Models.UnitOfWork;
 /// This class is used to represent a row in the Inventory table.
 /// </summary>
 public class Inventory {
+    /// <summary>
+    /// Gets or sets the unique identifier for the inventory item.
+    /// </summary>
     public int Id { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the identifier of the associated ingredient.
+    /// </summary>
     public int IngredientId { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the quantity of the ingredient in the inventory.
+    /// </summary>
     public int Quantity { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the fill level of the inventory.
+    /// </summary>
     public int FillLevel { get; set; }
 
     /// <summary>

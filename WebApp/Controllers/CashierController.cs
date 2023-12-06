@@ -27,18 +27,34 @@ using System.Security.Claims;
 
 namespace WebApp.Controllers;
 
-[Authorize(Roles = "Cashier, Manager")]
+/// <summary>
+/// Controller responsible for managing cashier-related operations, including product categories, best sellers, favorites, and customizations.
+/// </summary>
+[Authorize(Roles = "Cashier, Manager"), ApiController]
 public class CashierController : Controller
 {
     private readonly ILogger<CashierController> _logger;
     private readonly IMemoryCache cache;
     private readonly CartService cartService;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CashierController"/> class.
+    /// </summary>
+    /// <param name="logger">The logger instance.</param>
+    /// <param name="cache">The memory cache instance.</param>
+    /// <param name="cartService">The service responsible for cart operations.</param>
     public CashierController(ILogger<CashierController> logger, IMemoryCache cache, CartService cartService)
     {
         _logger = logger;
         this.cache = cache;
         this.cartService = cartService;
     }
+    
+    /// <summary>
+    /// Displays the default view for the cashier controller.
+    /// </summary>
+    /// <returns>The default view.</returns>
+    [HttpGet, Route("Cashier/")]
     public IActionResult Index()
     {
         Cart cart = cartService.GetCartFromSession();
@@ -47,12 +63,22 @@ public class CashierController : Controller
         return View();
     }
 
+    /// <summary>
+    /// Displays the error view.
+    /// </summary>
+    /// <returns>The error view.</returns>
+    [HttpGet, Route("Cashier/Error")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    /// <summary>
+    /// Loads and returns the product categories from the cache or database.
+    /// </summary>
+    /// <returns>The partial view containing the loaded product categories.</returns>
+    [HttpGet, Route("Cashier/LoadCategories")]
     public IActionResult LoadCategories() {
         UnitOfWork unit = new();
         List<SeriesInfo> model = cache.GetOrCreate("Categories", entry => {
@@ -67,6 +93,11 @@ public class CashierController : Controller
         return PartialView("_CategoriesPartial", model);
     }
 
+    /// <summary>
+    /// Loads and returns the best-selling products from the cache or database.
+    /// </summary>
+    /// <returns>The partial view containing the loaded best-selling products.</returns>
+    [HttpGet, Route("Cashier/LoadBestSellers")]
     public IActionResult LoadBestSellers() {
         UnitOfWork unit = new();
         List<Product> model = cache.GetOrCreate("BestSellers", entry => {
@@ -79,6 +110,11 @@ public class CashierController : Controller
         return PartialView("_ProductsPartial", model);
     }
 
+    /// <summary>
+    /// Placeholder method for loading favorites (not yet implemented).
+    /// </summary>
+    /// <returns>A content result indicating that the feature is not implemented.</returns>
+    [HttpGet, Route("Cashier/LoadFavorites")]
     public IActionResult LoadFavorites() {
         // Use _ProductsPartial when favorites are implemented
 
@@ -103,6 +139,12 @@ public class CashierController : Controller
         return PartialView("_ProductsPartial", model);
     }
 
+    /// <summary>
+    /// Loads and returns products based on the specified series name.
+    /// </summary>
+    /// <param name="arg">The series name.</param>
+    /// <returns>The partial view containing the loaded products.</returns>
+    [HttpGet, Route("Cashier/LoadProductsBySeries")]
     public IActionResult LoadProductsBySeries(string arg) {
         UnitOfWork unit = new();
         List<Product> model = unit.GetProductsBySeries(arg).ToList();
@@ -110,6 +152,12 @@ public class CashierController : Controller
         return PartialView("_ProductsPartial", model);
     }
 
+    /// <summary>
+    /// Loads and returns customizations for a selected product.
+    /// </summary>
+    /// <param name="arg">The ID of the selected product.</param>
+    /// <returns>The partial view containing the loaded customizations.</returns>
+    [HttpGet, Route("Cashier/LoadCustomizations")]
     public IActionResult LoadCustomizations(string arg) {
         UnitOfWork unit = new();
         Product selectedProduct = unit.Get<Product>(int.Parse(arg));
@@ -129,7 +177,13 @@ public class CashierController : Controller
         
         return PartialView("_CustomizationsPartial", model);
     }
-
+    
+    /// <summary>
+    /// Adds the specified product to the user's favorites.
+    /// </summary>
+    /// <param name="productID">The ID of the product to be added to favorites.</param>
+    /// <returns>An IActionResult indicating the success or failure of the operation.</returns>
+    [HttpPost, Route("Cashier/AddFavorite")]
     public IActionResult AddFavorite(int productID) {
         if (!User.Identity!.IsAuthenticated) {
             return BadRequest("You must be logged in to add favorites.");
@@ -159,6 +213,14 @@ public class CashierController : Controller
 
         return Ok();
     }
+    
+    /// <summary>
+    /// Removes the specified product from the user's favorites.
+    /// </summary>
+    /// <param name="productID">The ID of the product to be removed from favorites.</param>
+    /// <returns>An IActionResult indicating the success or failure of the operation.</returns>
+
+    [HttpDelete, Route("Cashier/RemoveFavorite")]
     public IActionResult RemoveFavorite(int productID) {
         if (!User.Identity!.IsAuthenticated) {
             return BadRequest("You must be logged in to remove favorites.");

@@ -1,18 +1,10 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using WebApp.Models.UnitOfWork;
 using WebApp.Models;
-using WebApp.Data;
-
-using Google.Cloud.Translation.V2;
-using System.Text.Json;
-
-using WebApp.APIs.AzureMaps;
-using WebApp.Models.AzureMaps.Weather;
-using WebApp.APIs.GoogleTranslate;
 
 namespace WebApp.Controllers;
 
+[ApiController]
 public class StoryController : Controller
 {
     private readonly ILogger<StoryController> _logger;
@@ -22,22 +14,21 @@ public class StoryController : Controller
         _logger = logger;
     }
 
+    /// <summary>
+    /// Displays the default view for the story controller.
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet, Route("Story/")]
     public IActionResult Index()
     {
         return View();
     }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    public string GetPreferredLanguage()
-    {
-        var preferredLanguage = HttpContext.Request.Headers["Accept-Language"].ToString().Split(',')[0];
-        return preferredLanguage;
-    }
-
+    /// <summary>
+    /// Displays the error view.
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet, Route("Story/Error")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

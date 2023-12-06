@@ -7,13 +7,21 @@
 using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Data;
+/// <summary>
+/// Data Access Object (DAO) for managing Employee entities in the database.
+/// </summary>
 public class EmployeeDao : IDao<Employee> {
     private readonly CommandHandler commandHandler;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EmployeeDao"/> class with the specified <see cref="CommandHandler"/>.
+    /// </summary>
+    /// <param name="commandHandler">The CommandHandler used to execute SQL commands.</param>
     public EmployeeDao(CommandHandler commandHandler) {
         this.commandHandler = commandHandler;
     }
 
+    /// <inheritdoc/>
     public Employee Get(int id) {
         var query = $"SELECT * FROM employees WHERE id = {id}";
         var reader = commandHandler.ExecuteReader(query);
@@ -35,6 +43,7 @@ public class EmployeeDao : IDao<Employee> {
         return employee;
     }
 
+    /// <inheritdoc/>
     public IEnumerable<Employee> GetAll() {
         var query = "SELECT * FROM employees";
         var reader = commandHandler.ExecuteReader(query);
@@ -55,6 +64,7 @@ public class EmployeeDao : IDao<Employee> {
         return employees;
     }
 
+    /// <inheritdoc/>
     public void Add(Employee t) {
         string sattement = (
             $"INSERT INTO employees (name, password, isManager, email) " +
@@ -63,6 +73,7 @@ public class EmployeeDao : IDao<Employee> {
         commandHandler.ExecuteNonQuery(sattement);
     }
 
+    /// <inheritdoc/>
     public void Update(Employee t, Employee newT) {
         string statement = (
             $"UPDATE employees SET " +
@@ -76,6 +87,7 @@ public class EmployeeDao : IDao<Employee> {
         commandHandler.ExecuteNonQuery(statement);
     }
 
+    /// <inheritdoc/>
     public void Delete(Employee t) {
         string statement = $"DELETE FROM employees WHERE id = {t.Id}";
         commandHandler.ExecuteNonQuery(statement);

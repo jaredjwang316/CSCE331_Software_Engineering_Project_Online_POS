@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/Manager.css" asp-append-version="true" />
 <script src="~/js/manager.js" asp-append-version="true"></script>
-<script src="~/js/loading-screen.js"></script>
+<script src="~/js/loading-screen.js" asp-append-version="true"></script>
 
 </head>
 <body>
@@ -469,10 +469,10 @@
         row.parentNode.removeChild(row);
         console.log(id);
         $.ajax({
-            url: "/Manager/DeleteProduct",
-            type: "POST",
+            url: "/Manager/DeleteProduct/" + id,
+            type: "DELETE",
             contentType: "application/json",
-            data: JSON.stringify(id),
+            data: "",
             success: function (response) {
                 document.getElementById("saveSuccess").style.display = 'block';
                     setTimeout(function() {
@@ -495,10 +495,10 @@
         row.parentNode.removeChild(row);
         console.log(id);
         $.ajax({
-            url: "/Manager/DeleteInventory",
-            type: "POST",
+            url: "/Manager/DeleteInventory/" + id,
+            type: "DELETE",
             contentType: "application/json",
-            data: JSON.stringify(id),
+            data: "",
             success: function (response) {
                 document.getElementById("saveSuccess").style.display = 'block';
                     setTimeout(function() {
