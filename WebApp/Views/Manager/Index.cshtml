@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/Manager.css" asp-append-version="true" />
-<script src="~/js/manager.js"></script>
+<script src="~/js/manager.js" asp-append-version="true"></script>
 <script src="~/js/loading-screen.js"></script>
 
 </head>
@@ -516,7 +516,7 @@
         });
     }
     function editProductIngredients(btn) {
-        showProductIngredients();
+        ShowProductIngredients();
         var row = btn.parentNode.parentNode;
         id = parseInt(row.querySelector('td:first-child').innerText);
         console.log(id);

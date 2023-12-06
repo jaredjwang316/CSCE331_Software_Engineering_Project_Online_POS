@@ -206,6 +206,7 @@ public class ManagerController : Controller
         //unit.Delete<Inventory>(inventory);
        // unit.Delete<Ingredient>(ingredient);
         Console.WriteLine("Can Delete Id: " + inventory.Id + " " + ingredient.Id);
+        unit.CloseConnection();
         return Ok();
     }
 
@@ -217,6 +218,7 @@ public class ManagerController : Controller
         DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
+        unit.CloseConnection();
         return Ok();
     }
 
@@ -260,7 +262,7 @@ public class ManagerController : Controller
                 excess_ingredients.Add(ingredient);
             }
         }
-
+        unit.CloseConnection();
         return Ok(excess_ingredients);
     }
 
@@ -272,6 +274,7 @@ public class ManagerController : Controller
         DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
+        unit.CloseConnection();
         return Ok();
     }
 
@@ -283,6 +286,7 @@ public class ManagerController : Controller
         DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
+        unit.CloseConnection();
         return Ok();
     }
 
@@ -294,6 +298,7 @@ public class ManagerController : Controller
         DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
+        unit.CloseConnection();
         return Ok();
     }
 
