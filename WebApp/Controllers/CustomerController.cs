@@ -20,16 +20,28 @@ using WebApp.Models.Cart;
 using System.Security.Claims;
 
 namespace WebApp.Controllers;
+/// <summary>
+/// Controller responsible for managing customer-related operations, including viewing products, categories, best sellers, and favorites.
+/// </summary>
 [ApiController]
 public class CustomerController : Controller {
     private readonly CartService cartService;
     private readonly IMemoryCache cache;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CustomerController"/> class.
+    /// </summary>
+    /// <param name="cartService">The cart service instance.</param>
+    /// <param name="cache">The memory cache instance.</param>
     public CustomerController(CartService cartService, IMemoryCache cache) {
         this.cartService = cartService;
         this.cache = cache;
     }
 
+    /// <summary>
+    /// Displays the default view for the customer controller, showing the cart items count.
+    /// </summary>
+    /// <returns>The default view.</returns>
     [HttpGet, Route("Customer/")]
     public IActionResult Index() {
         Cart cart = cartService.GetCartFromSession();
@@ -39,6 +51,10 @@ public class CustomerController : Controller {
         return View();
     }
 
+    /// <summary>
+    /// Loads and returns the product categories from the cache or database.
+    /// </summary>
+    /// <returns>The partial view containing the loaded product categories.</returns>
     [HttpGet, Route("Customer/LoadCategories")]
     public IActionResult LoadCategories() {
         UnitOfWork unit = new();
@@ -54,6 +70,10 @@ public class CustomerController : Controller {
         return PartialView("_CategoriesPartial", model);
     }
 
+    /// <summary>
+    /// Loads and returns the best-selling products from the cache or database.
+    /// </summary>
+    /// <returns>The partial view containing the loaded best-selling products.</returns>
     [HttpGet, Route("Customer/LoadBestSellers")]
     public IActionResult LoadBestSellers() {
         UnitOfWork unit = new();
@@ -67,6 +87,10 @@ public class CustomerController : Controller {
         return PartialView("_ProductsPartial", model);
     }
 
+    /// <summary>
+    /// Loads and returns the user's favorite products.
+    /// </summary>
+    /// <returns>The partial view containing the loaded favorite products.</returns>
     [HttpGet, Route("Customer/LoadFavorites")]
     public IActionResult LoadFavorites() {
         // Use _ProductsPartial when favorites are implemented
@@ -92,6 +116,11 @@ public class CustomerController : Controller {
         return PartialView("_ProductsPartial", model);
     }
 
+    /// <summary>
+    /// Loads and returns products based on the specified series name.
+    /// </summary>
+    /// <param name="arg">The series name.</param>
+    /// <returns>The partial view containing the loaded products.</returns>
     [HttpGet, Route("Customer/LoadProductsBySeries")]
     public IActionResult LoadProductsBySeries(string arg) {
         UnitOfWork unit = new();
@@ -100,6 +129,11 @@ public class CustomerController : Controller {
         return PartialView("_ProductsPartial", model);
     }
 
+    /// <summary>
+    /// Loads and returns customizations for a selected product.
+    /// </summary>
+    /// <param name="arg">The ID of the selected product.</param>
+    /// <returns>The partial view containing the loaded customizations.</returns>
     [HttpGet, Route("Customer/LoadCustomizations")]
     public IActionResult LoadCustomizations(string arg) {
         UnitOfWork unit = new();
@@ -121,6 +155,11 @@ public class CustomerController : Controller {
         return PartialView("_CustomizationsPartial", model);
     }
 
+    /// <summary>
+    /// Adds a product to the user's favorites.
+    /// </summary>
+    /// <param name="productID">The ID of the product to be added to favorites.</param>
+    /// <returns>The result of the operation.</returns>
     [HttpPost, Route("Customer/AddFavorite/{productID}")]
     public IActionResult AddFavorite(int productID) {
         if (!User.Identity!.IsAuthenticated) {
@@ -151,6 +190,11 @@ public class CustomerController : Controller {
 
         return Ok();
     }
+    /// <summary>
+    /// Controller action for removing a product from the user's favorites.
+    /// </summary>
+    /// <param name="productID">The ID of the product to be removed from favorites.</param>
+    /// <returns>The result of the operation and an error if it can't be executed.</returns>
 
     [HttpDelete, Route("Customer/RemoveFavorite/{productID}")]
     public IActionResult RemoveFavorite(int productID) {

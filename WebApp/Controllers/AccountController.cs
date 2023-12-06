@@ -31,11 +31,18 @@ using WebApp.APIs.GoogleTranslate;
 
 namespace WebApp.Controllers;
 
+/// <summary>
+/// Controller responsible for handling user account-related actions, such as login, logout, and user preferences.
+/// </summary>
 [AllowAnonymous, ApiController]
 public class AccountController : Controller
 {
     private readonly ILogger<AccountController> _logger;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AccountController"/> class.
+    /// </summary>
+    /// <param name="logger">The logger instance.</param>
     public AccountController(ILogger<AccountController> logger)
     {
         _logger = logger;
