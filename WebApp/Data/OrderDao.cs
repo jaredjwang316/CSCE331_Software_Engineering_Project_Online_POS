@@ -8,13 +8,21 @@ using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Data;
 
+/// <summary>
+/// Data Access Object (DAO) for managing Order entities.
+/// </summary>
 public class OrderDao : IDao<Order> {
     private readonly CommandHandler commandHandler;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="OrderDao"/> class.
+    /// </summary>
+    /// <param name="commandHandler">The command handler for executing database commands.</param>
     public OrderDao(CommandHandler commandHandler) {
         this.commandHandler = commandHandler;
     }
 
+    /// <inheritdoc/>
     public Order Get(int id) {
         var query = $"SELECT * FROM orders_final WHERE order_id = {id}";
         var reader = commandHandler.ExecuteReader(query);
@@ -37,6 +45,7 @@ public class OrderDao : IDao<Order> {
         return order;
     }
 
+    /// <inheritdoc/>
     public IEnumerable<Order> GetAll() {
         var query = "SELECT * FROM orders_final";
         var reader = commandHandler.ExecuteReader(query);
@@ -58,6 +67,7 @@ public class OrderDao : IDao<Order> {
         return orders;
     }
 
+    /// <inheritdoc/>
     public void Add(Order t) {
         // foreach (int id in t.ItemIds) {
         //      string q = (
@@ -141,6 +151,7 @@ public class OrderDao : IDao<Order> {
         commandHandler.ExecuteNonQuery(statement);
     }
 
+    /// <inheritdoc/>
     public void Update(Order t, Order newT) {
         string statement = (
             $"UPDATE orders_final SET " +
@@ -155,6 +166,7 @@ public class OrderDao : IDao<Order> {
         commandHandler.ExecuteNonQuery(statement);
     }
 
+    /// <inheritdoc/>
     public void Delete(Order t) {
         string statement = $"DELETE FROM orders_final WHERE order_id = {t.Id}";
         commandHandler.ExecuteNonQuery(statement);
@@ -185,5 +197,82 @@ public class OrderDao : IDao<Order> {
         reader?.Close();
         return orders;
         
+    }
+    public List<Tuple<string, string,int>> GetSalesTogether(DateTime start_date, DateTime end_date) {
+        List<Tuple<string, string,int>> orders = new();
+        var query = $"WITH ItemPairs AS (\n" +
+            $"  SELECT\n" +
+            $"    a.item_id AS item1," +
+            $"    b.item_id AS item2\n" +
+            $"  FROM\n" +
+            $"    orders_final,\n" +
+            $"    UNNEST(item_ids) AS a(item_id),\n" +
+            $"    UNNEST(item_ids) AS b(item_id)\n" +
+            $"  WHERE\n" +
+            $"    a.item_id < b.item_id\n" +
+            $"    AND a.item_id >= 1 AND a.item_id <= 71\n" +
+            $"    AND b.item_id >= 1 AND b.item_id <= 71\n" +
+            $"    AND order_date >= '{ start_date }' AND order_date < '{ end_date }'\n" +
+            $")\n" +
+            $"SELECT\n" +
+            $"  p1.name AS item1_name,\n" + 
+            $"  p2.name AS item2_name,\n" + 
+            $"  COUNT(*) AS frequency\n" +
+            $"FROM\n" + 
+            $"  ItemPairs\n" + 
+            $"JOIN\n" + 
+            $"  products AS p1 ON ItemPairs.item1 = p1.id\n" + 
+            $"JOIN\n" + 
+            $"  products AS p2 ON ItemPairs.item2 = p2.id\n" +
+            $"GROUP BY\n" +
+            $"  p1.name,\n" + 
+            $"  p2.name\n" +
+            $"ORDER BY\n" + 
+            $"  frequency DESC;";
+        
+        var reader = commandHandler.ExecuteReader(query);
+
+        if (reader == null) {
+            return orders;
+        }
+
+
+        while (reader?.Read() == true) {
+            orders.Add(new Tuple<string, string, int>(reader.GetString(0), reader.GetString(1), reader.GetInt32(2)));
+        }
+
+        reader?.Close();
+        return orders;
+    }
+
+    public List<Tuple<int, double>> GetSalesReport(DateTime start_time, DateTime end_time){
+        List<Tuple<int, double>> orders = new();
+        String query = $"SELECT\n" +
+            $"unnested_item_id AS item_id,\n" +
+            $"SUM(total_order) AS total_sold\n" +
+            $"FROM\n" +
+            $"orders_final,\n" +
+            $"unnest(item_ids) AS unnested_item_id\n" +
+            $"WHERE\n" +
+            $"order_date BETWEEN '{start_time}' AND '{end_time}'\n" +
+            $"AND unnested_item_id BETWEEN 1 AND 73\n" +
+            $"GROUP BY\n" +
+            $"unnested_item_id\n" +
+            $"ORDER BY\n" +
+            $"unnested_item_id;";
+
+        var reader = commandHandler.ExecuteReader(query);
+
+        if (reader == null) {
+            return orders;
+        }
+
+
+        while (reader?.Read() == true) {
+            orders.Add(new Tuple<int,double>(reader.GetInt32(0), reader.GetDouble(1)));
+        }
+
+        reader?.Close();
+        return orders;
     }
 }

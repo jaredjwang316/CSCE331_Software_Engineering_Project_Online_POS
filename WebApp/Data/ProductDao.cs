@@ -9,13 +9,21 @@ using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Data;
 
+/// <summary>
+/// Data Access Object (DAO) for managing Product entities.
+/// </summary>
 public class ProductDao : IDao<Product> {
     private readonly CommandHandler commandHandler;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ProductDao"/> class.
+    /// </summary>
+    /// <param name="commandHandler">The command handler for executing database commands.</param>
     public ProductDao(CommandHandler commandHandler) {
         this.commandHandler = commandHandler;
     }
 
+    /// <inheritdoc/>
     public Product Get(int id) {
         var query = $"SELECT * FROM products WHERE id IN ({id})";
         var reader = commandHandler.ExecuteReader(query);
@@ -41,6 +49,7 @@ public class ProductDao : IDao<Product> {
         return product;
     }
 
+    /// <inheritdoc/>
     public IEnumerable<Product> GetAll() {
         var query = "SELECT * FROM products ORDER BY series, name";
         var reader = commandHandler.ExecuteReader(query);
@@ -64,6 +73,7 @@ public class ProductDao : IDao<Product> {
         return products;
     }
 
+    /// <inheritdoc/>
     public void Add(Product t) {
         string statement = (
             $"INSERT INTO products (name, price, series, img_url, hidden, is_option, is_drink) " +
@@ -79,6 +89,7 @@ public class ProductDao : IDao<Product> {
         commandHandler.ExecuteNonQuery(statement);
     }
 
+    /// <inheritdoc/>
     public void Update(Product t, Product newT) {
         string statement = (
             $"UPDATE products SET " +
@@ -94,6 +105,7 @@ public class ProductDao : IDao<Product> {
         commandHandler.ExecuteNonQuery(statement);
     }
 
+    /// <inheritdoc/>
     public void Delete(Product t) {
         string statement = $"DELETE FROM products WHERE id = {t.Id}";
         commandHandler.ExecuteNonQuery(statement);
@@ -103,6 +115,11 @@ public class ProductDao : IDao<Product> {
     // Custom Queries for the database
     //====================================================================================================
 
+    /// <summary>
+    /// Gets products by series.
+    /// </summary>
+    /// <param name="series">The series of products to retrieve.</param>
+    /// <returns>The products belonging to the specified series.</returns>
     public IEnumerable<Product> GetProductsBySeries(string series) {
         string query = $"SELECT * FROM products WHERE series = '{series}' ORDER BY name";
         var reader = commandHandler.ExecuteReader(query);
@@ -126,6 +143,13 @@ public class ProductDao : IDao<Product> {
         return products;
     }
 
+    /// <summary>
+    /// Gets unique product series based on specified criteria.
+    /// </summary>
+    /// <param name="includeDrinks">Include drinks in the result.</param>
+    /// <param name="includeHidden">Include hidden products in the result.</param>
+    /// <param name="includeIsOption">Include products marked as options in the result.</param>
+    /// <returns>The unique product series based on the specified criteria.</returns>
     public IEnumerable<string> GetUniqueSeries(bool includeDrinks = true, bool includeHidden = false, bool includeIsOption = false) {
         
         string query = $"SELECT DISTINCT series FROM products WHERE " +
@@ -146,6 +170,11 @@ public class ProductDao : IDao<Product> {
         return series;
     }
 
+    /// <summary>
+    /// Gets a list of best-selling products based on the specified limit.
+    /// </summary>
+    /// <param name="limit">The maximum number of best-selling products to retrieve (default is 5).</param>
+    /// <returns>A collection of best-selling products.</returns>
     public IEnumerable<Product> GetBestSellingProducts(int limit = 5) {
         string query = 
             $"SELECT item_id, COUNT(item_id) AS item_count " +

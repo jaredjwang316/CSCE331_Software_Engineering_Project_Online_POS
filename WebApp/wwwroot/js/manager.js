@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Load data when category button is clicked
     $(".category-btn").click(function () {
         $(".category-btn").removeClass("active");
+        $(".table-button").removeClass("active");
         $(this).addClass("active");
 
         // manager_path = [$(this).attr("id") + "/null/" + $(this).attr("data-to")];
@@ -59,6 +60,16 @@ document.addEventListener("DOMContentLoaded", function () {
             contentType: "application/json",
             data: JSON.stringify(output),
             success: function (response) {
+                var table = document.getElementById("salesReportTable");
+                console.log(response);
+                for (var ing of response) {
+                    console.log(ing);
+                    var row = table.insertRow(-1);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    cell1.innerHTML = ing.item1;
+                    cell2.innerHTML = ing.item2;
+                }
                 document.getElementById("saveSuccess").style.display = 'block';
                     setTimeout(function() {
                         $('#saveSuccess').fadeOut('fast');
@@ -79,20 +90,22 @@ document.addEventListener("DOMContentLoaded", function () {
         ShowManagerPage();
         ClearDates();
         document.getElementById('restockReportTable').style.display = 'inline-table';
-        var Data = document.getElementById('starttime').value;
-        var Data2 = document.getElementById('endtime').value;
-        console.log(Data);
-        console.log(Data2);
-        var output = {
-            data: JSON.stringify(Data),
-            data2: JSON.stringify(Data2)
-        };
+
         $.ajax({
             url: "/Manager/ShowRestockReport",
             type: "POST",
             contentType: "application/json",
-            data: JSON.stringify(output),
             success: function (response) {
+                var table = document.getElementById("restockReportTable");
+                console.log(response);
+                for (var ing of response) {
+                    console.log(ing);
+                    var row = table.insertRow(-1);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    cell1.innerHTML = ing.id;
+                    cell2.innerHTML = ing.name;
+                }
                 document.getElementById("saveSuccess").style.display = 'block';
                     setTimeout(function() {
                         $('#saveSuccess').fadeOut('fast');
@@ -171,6 +184,17 @@ document.addEventListener("DOMContentLoaded", function () {
             contentType: "application/json",
             data: JSON.stringify(output),
             success: function (response) {
+                var table = document.getElementById("salesTogetherTable");
+                console.log(response);
+                for (var ing of response) {
+                    var row = table.insertRow(-1);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
+                    cell1.innerHTML = ing.item1;
+                    cell2.innerHTML = ing.item2;
+                    cell3.innerHTML = ing.item3.toString();
+                }
                 document.getElementById("saveSuccess").style.display = 'block';
                     setTimeout(function() {
                         $('#saveSuccess').fadeOut('fast');
@@ -265,6 +289,12 @@ function ClearView() {
     document.getElementById('restockReportTable').style.display = 'none';
     document.getElementById('salesTogetherTable').style.display = 'none';
     document.getElementById('popularityAnalysisTable').style.display = 'none';
+
+    $('#salesReportTable').find("tr:not(:first)").remove();
+    $('#excessReportTable').find("tr:not(:first)").remove();
+    $('#restockReportTable').find("tr:not(:first)").remove();
+    $('#salesTogetherTable').find("tr:not(:first)").remove();
+    $('#popularityAnalysisTable').find("tr:not(:first)").remove();
 
     document.getElementById('starttime').style.display = 'none';
     document.getElementById('endtime').style.display = 'none';

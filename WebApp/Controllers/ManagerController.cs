@@ -17,6 +17,12 @@ public class ManagerController : Controller
     private readonly IMemoryCache cache;
     private readonly CartService cartService;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ManagerController"/> class.
+    /// </summary>
+    /// <param name="logger">The logger for ManagerController.</param>
+    /// <param name="cartService">The service for managing the shopping cart.</param>
+    /// <param name="cache">The cache for storing and retrieving data.</param>
     public ManagerController(ILogger<ManagerController> logger,  CartService cartService, IMemoryCache cache)
     {
         _logger = logger;
@@ -24,6 +30,10 @@ public class ManagerController : Controller
         this.cartService = cartService;
     }
 
+    /// <summary>
+    /// Displays the default view for the manager controller.
+    /// </summary>
+    /// <returns></returns>
     [HttpGet, Route("Manager/")]
     public IActionResult Index()
     {
@@ -52,21 +62,37 @@ public class ManagerController : Controller
         }
     }
 
+    /// <summary>
+    /// Not implemented.
+    /// </summary>
+    /// <returns></returns>
     [HttpGet, Route("Manager/ShowManager")]
     public IActionResult ShowManager() {
         return Content("Not Implemented");
     }
 
+    /// <summary>
+    /// Not implemented.
+    /// </summary>
+    /// <returns></returns>
     [HttpGet, Route("Manager/ShowProducts")]
     public IActionResult ShowProducts() {
         return Content("Not Implemented");
     }
 
+    /// <summary>
+    /// Not implemented.
+    /// </summary>
+    /// <returns></returns>
     [HttpGet, Route("Manager/ShowInventory")]
     public IActionResult ShowInventory() {
         return Content("Not Implemented");
     }
 
+    /// <summary>
+    /// Displays the error view.
+    /// </summary>
+    /// <returns></returns>
     [HttpGet, Route("Manager/Error")]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
@@ -74,6 +100,11 @@ public class ManagerController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    /// <summary>
+    /// Saves a list of products changes to the database.
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
     [HttpPost, Route("Manager/SaveProducts")]
     public IActionResult SaveProducts([FromBody]List<Product> data) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
@@ -97,6 +128,10 @@ public class ManagerController : Controller
         return Ok();
     }
     
+    /// <summary>
+    /// Adds a new product to the database.
+    /// </summary>
+    /// <returns></returns>
     [HttpPost, Route("Manager/AddProduct")]
     public IActionResult AddProduct() {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
@@ -111,6 +146,11 @@ public class ManagerController : Controller
         return Ok(product.Id);
     }
 
+    /// <summary>
+    /// Deletes a product from the database.
+    /// </summary>
+    /// <param name="prod"></param>
+    /// <returns></returns>
     [HttpDelete, Route("Manager/DeleteProduct/{prod}")]
     public IActionResult DeleteProduct(int prod) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
@@ -120,6 +160,11 @@ public class ManagerController : Controller
         return Ok();
     }
 
+    /// <summary>
+    /// Saves a list of inventory changes to the database.
+    /// </summary>
+    /// <param name="payload"></param>
+    /// <returns></returns>
     [HttpPost, Route("Manager/SaveInventory")]
     public IActionResult SaveInventory([FromBody] Dictionary<string, string> payload) {
         string data = payload["data"];
@@ -176,6 +221,10 @@ public class ManagerController : Controller
         return Ok();
     }
 
+    /// <summary>
+    /// Adds a new inventory item to the database.
+    /// </summary>
+    /// <returns></returns>
     [HttpPost, Route("Manager/AddInventory")]
     public IActionResult AddInventory() {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
@@ -195,18 +244,27 @@ public class ManagerController : Controller
         return Ok(inventory.Id);
     }
 
+    /// <summary>
+    /// Deletes an inventory item from the database.
+    /// </summary>
+    /// <param name="inv"></param>
+    /// <returns></returns>
     [HttpDelete, Route("Manager/DeleteInventory/{inv}")]
     public IActionResult DeleteInventory(int inv) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
         Inventory inventory = unit.Get<Inventory>(inv);
         Ingredient ingredient = unit.Get<Ingredient>(inventory.IngredientId);
-        //unit.Delete<Inventory>(inventory);
-       // unit.Delete<Ingredient>(ingredient);
+        unit.Delete<Inventory>(inventory);
+        unit.Delete<Ingredient>(ingredient);
         Console.WriteLine("Can Delete Id: " + inventory.Id + " " + ingredient.Id);
         unit.CloseConnection();
         return Ok();
     }
 
+    /// <summary>
+    /// Clears the cache for categories and best sellers.
+    /// </summary>
+    /// <returns></returns>
     [HttpDelete, Route("Manager/ClearCache")]
     public IActionResult ClearCache() {
         cache.Remove("Categories");
@@ -214,6 +272,11 @@ public class ManagerController : Controller
         return Ok();
     }
 
+    /// <summary>
+    /// Displays the sales report.
+    /// </summary>
+    /// <param name="payload"></param>
+    /// <returns></returns>
     [HttpPost, Route("Manager/ShowSalesReport")]
     public IActionResult ShowSalesReport([FromBody] Dictionary<string, string> payload) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
@@ -223,10 +286,25 @@ public class ManagerController : Controller
         DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
+        List<Tuple<int,double>> input = unit.GetSalesReport(start_time, end_time);
+        List<Product> products = unit.GetAll<Product>().ToList();
+        List<Tuple<string, double>> output = new();
+        foreach (var outp in input) {
+            foreach (Product product in products) {
+                if (product.Id == outp.Item1) {
+                    output.Add(new Tuple<string, double>(product.Name, outp.Item2));
+                }
+            }
+        }
         unit.CloseConnection();
-        return Ok();
+        return Ok(output);
     }
 
+    /// <summary>
+    /// Displays the excess report.
+    /// </summary>
+    /// <param name="payload"></param>
+    /// <returns></returns>
     [HttpPost, Route("Manager/ShowExcessReport")]
     public IActionResult ShowExcessReport([FromBody] Dictionary<string, string> payload) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
@@ -272,19 +350,34 @@ public class ManagerController : Controller
         return Ok(excess_ingredients);
     }
 
+    /// <summary>
+    /// Displays the restock report.
+    /// </summary>
+    /// <returns></returns>
     [HttpPost, Route("Manager/ShowRestockReport")]
-    public IActionResult ShowRestockReport([FromBody] Dictionary<string, string> payload) {
+    public IActionResult ShowRestockReport() {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
-        string data = payload["data"];
-        string data2 = payload["data2"];
-        DateTime start_time = JsonConvert.DeserializeObject<DateTime>(data);
-        DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
-        Console.WriteLine(start_time);
-        Console.WriteLine(end_time);
+        List<Inventory> inventory = unit.GetAll<Inventory>().ToList();
+        List<Ingredient> ingredients = unit.GetAll<Ingredient>().ToList();
+        List<Ingredient> output = new();
+        foreach (Inventory ing in inventory) {
+            if (ing.Quantity < 0.2*ing.FillLevel) {
+                foreach (Ingredient ingredient in ingredients) {
+                    if (ingredient.Id == ing.IngredientId) {
+                        output.Add(ingredient);
+                    }
+                }
+            }
+        }
         unit.CloseConnection();
-        return Ok();
+        return Ok(output);
     }
 
+    /// <summary>
+    /// Displays the sales together report.
+    /// </summary>
+    /// <param name="payload"></param>
+    /// <returns></returns>
     [HttpPost, Route("Manager/ShowSalesTogether")]
     public IActionResult ShowSalesTogether([FromBody] Dictionary<string, string> payload) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
@@ -294,10 +387,16 @@ public class ManagerController : Controller
         DateTime end_time = JsonConvert.DeserializeObject<DateTime>(data2);
         Console.WriteLine(start_time);
         Console.WriteLine(end_time);
+        List<Tuple<string,string,int>> output = unit.GetSalesTogether(start_time, end_time);
         unit.CloseConnection();
-        return Ok();
+        return Ok(output);
     }
 
+    /// <summary>
+    /// Displays the popularity analysis report.
+    /// </summary>
+    /// <param name="payload"></param>
+    /// <returns></returns>
     [HttpPost, Route("Manager/ShowPopularityAnalysis")]
     public IActionResult ShowPopularityAnalysis([FromBody] Dictionary<string, string> payload) {
         UnitOfWork unit = new(Config.AWS_DB_NAME);
