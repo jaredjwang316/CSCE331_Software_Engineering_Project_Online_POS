@@ -4,7 +4,7 @@
 }
 
 <link rel="stylesheet" href="~/css/customer.css" asp-append-version="true" />
-<script type="module" src="~/js/customer.js" asp-append-version="true"></script>
+<script type="module" src="~/js/cashier.js" asp-append-version="true"></script>
 <script type="module" src="~/js/cart.js" asp-append-version="true"></script>
 
 @using WebApp.APIs.GoogleTranslate
@@ -17,8 +17,6 @@
 <!-- Category bar -->
 <div class="text-center contrast" style="display: flex; justify-content: space-around;">
     <button endpoint="LoadCategories" class="category-btn active">@await translator.TranslateText("Categories")</button>
-    <button endpoint="LoadBestSellers" class="category-btn">@await translator.TranslateText("Best Sellers")</button>
-    <button endpoint="LoadFavorites" class="category-btn">@await translator.TranslateText("Favorites")</button>
 </div>
 
 <div class="content-container contrast">

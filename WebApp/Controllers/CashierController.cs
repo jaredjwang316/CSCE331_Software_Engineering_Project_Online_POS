@@ -67,41 +67,41 @@ public class CashierController : Controller
         return PartialView("_CategoriesPartial", model);
     }
 
-    public IActionResult LoadBestSellers() {
-        UnitOfWork unit = new();
-        List<Product> model = cache.GetOrCreate("BestSellers", entry => {
-            entry.SlidingExpiration = TimeSpan.FromMinutes(10);
-            return unit.GetBestSellingProducts(10).ToList();
-        })!;
+    // public IActionResult LoadBestSellers() {
+    //     UnitOfWork unit = new();
+    //     List<Product> model = cache.GetOrCreate("BestSellers", entry => {
+    //         entry.SlidingExpiration = TimeSpan.FromMinutes(10);
+    //         return unit.GetBestSellingProducts(10).ToList();
+    //     })!;
 
-        unit.CloseConnection();
+    //     unit.CloseConnection();
 
-        return PartialView("_ProductsPartial", model);
-    }
+    //     return PartialView("_ProductsPartial", model);
+    // }
 
-    public IActionResult LoadFavorites() {
-        // Use _ProductsPartial when favorites are implemented
+    // public IActionResult LoadFavorites() {
+    //     // Use _ProductsPartial when favorites are implemented
 
-        if (!User.Identity!.IsAuthenticated) {
-            return Content("You must be logged in to view favorites.");
-        }
+    //     if (!User.Identity!.IsAuthenticated) {
+    //         return Content("You must be logged in to view favorites.");
+    //     }
 
-        UnitOfWork unit = new();
-        string email = User.FindFirstValue(ClaimTypes.Email)!;
-        User? user = unit.GetUser(email);
-        if (user == null) {
-            unit.CloseConnection();
-            return Content("User not found.");
-        }
+    //     UnitOfWork unit = new();
+    //     string email = User.FindFirstValue(ClaimTypes.Email)!;
+    //     User? user = unit.GetUser(email);
+    //     if (user == null) {
+    //         unit.CloseConnection();
+    //         return Content("User not found.");
+    //     }
 
-        List<Product> model = unit.GetAll<Product>()
-            .Where(product => user.Favorites.Any(favorite => favorite == product.Id))
-            .ToList();
+    //     List<Product> model = unit.GetAll<Product>()
+    //         .Where(product => user.Favorites.Any(favorite => favorite == product.Id))
+    //         .ToList();
         
-        unit.CloseConnection();
+    //     unit.CloseConnection();
 
-        return PartialView("_ProductsPartial", model);
-    }
+    //     return PartialView("_ProductsPartial", model);
+    // }
 
     public IActionResult LoadProductsBySeries(string arg) {
         UnitOfWork unit = new();
@@ -130,62 +130,62 @@ public class CashierController : Controller
         return PartialView("_CustomizationsPartial", model);
     }
 
-    public IActionResult AddFavorite(int productID) {
-        if (!User.Identity!.IsAuthenticated) {
-            return BadRequest("You must be logged in to add favorites.");
-        }
+    // public IActionResult AddFavorite(int productID) {
+    //     if (!User.Identity!.IsAuthenticated) {
+    //         return BadRequest("You must be logged in to add favorites.");
+    //     }
 
-        string email = User.FindFirstValue(ClaimTypes.Email)!;
-        if (email == null) {
-            return BadRequest("No email found for user.");
-        }
+    //     string email = User.FindFirstValue(ClaimTypes.Email)!;
+    //     if (email == null) {
+    //         return BadRequest("No email found for user.");
+    //     }
 
-        UnitOfWork unit = new();
-        User? user = unit.GetUser(email);
-        if (user == null) {
-            unit.CloseConnection();
-            return BadRequest("User not found.");
-        }
+    //     UnitOfWork unit = new();
+    //     User? user = unit.GetUser(email);
+    //     if (user == null) {
+    //         unit.CloseConnection();
+    //         return BadRequest("User not found.");
+    //     }
 
-        if (user.Favorites.Any(favorite => favorite == productID)) {
-            unit.CloseConnection();
-            return Ok();
-        }
+    //     if (user.Favorites.Any(favorite => favorite == productID)) {
+    //         unit.CloseConnection();
+    //         return Ok();
+    //     }
 
-        int[] favorites = user.Favorites.Append(productID).ToArray();
-        User newUser = new(user.Name, user.Email, favorites);
-        unit.Update(user, newUser);
-        unit.CloseConnection();
+    //     int[] favorites = user.Favorites.Append(productID).ToArray();
+    //     User newUser = new(user.Name, user.Email, favorites);
+    //     unit.Update(user, newUser);
+    //     unit.CloseConnection();
 
-        return Ok();
-    }
-    public IActionResult RemoveFavorite(int productID) {
-        if (!User.Identity!.IsAuthenticated) {
-            return BadRequest("You must be logged in to remove favorites.");
-        }
+    //     return Ok();
+    // }
+    // public IActionResult RemoveFavorite(int productID) {
+    //     if (!User.Identity!.IsAuthenticated) {
+    //         return BadRequest("You must be logged in to remove favorites.");
+    //     }
 
-        string email = User.FindFirstValue(ClaimTypes.Email)!;
-        if (email == null) {
-            return BadRequest("No email found for user.");
-        }
+    //     string email = User.FindFirstValue(ClaimTypes.Email)!;
+    //     if (email == null) {
+    //         return BadRequest("No email found for user.");
+    //     }
 
-        UnitOfWork unit = new();
-        User? user = unit.GetUser(email);
-        if (user == null) {
-            unit.CloseConnection();
-            return BadRequest("User not found.");
-        }
+    //     UnitOfWork unit = new();
+    //     User? user = unit.GetUser(email);
+    //     if (user == null) {
+    //         unit.CloseConnection();
+    //         return BadRequest("User not found.");
+    //     }
 
-        if (!user.Favorites.Any(favorite => favorite == productID)) {
-            unit.CloseConnection();
-            return Ok();
-        }
+    //     if (!user.Favorites.Any(favorite => favorite == productID)) {
+    //         unit.CloseConnection();
+    //         return Ok();
+    //     }
 
-        int[] favorites = user.Favorites.Where(favorite => favorite != productID).ToArray();
-        User newUser = new(user.Name, user.Email, favorites);
-        unit.Update(user, newUser);
-        unit.CloseConnection();
+    //     int[] favorites = user.Favorites.Where(favorite => favorite != productID).ToArray();
+    //     User newUser = new(user.Name, user.Email, favorites);
+    //     unit.Update(user, newUser);
+    //     unit.CloseConnection();
 
-        return Ok();
-    }
+    //     return Ok();
+    // }
 }
