@@ -8,13 +8,21 @@ using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Data;
 
+/// <summary>
+/// Data Access Object (DAO) for managing Ingredient entities.
+/// </summary>
 public class IngredientDao : IDao<Ingredient> {
     private readonly CommandHandler commandHandler;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="IngredientDao"/> class.
+    /// </summary>
+    /// <param name="commandHandler">The command handler for executing database commands.</param>
     public IngredientDao(CommandHandler commandHandler) {
         this.commandHandler = commandHandler;
     }
 
+    /// <inheritdoc/>
     public Ingredient Get(int id) {
         var query = $"SELECT * FROM ingredients WHERE id = {id}";
         var reader = commandHandler.ExecuteReader(query);
@@ -35,6 +43,7 @@ public class IngredientDao : IDao<Ingredient> {
         return ingredient;
     }
 
+    /// <inheritdoc/>
     public IEnumerable<Ingredient> GetAll() {
         var query = "SELECT * FROM ingredients";
         var reader = commandHandler.ExecuteReader(query);
@@ -52,6 +61,7 @@ public class IngredientDao : IDao<Ingredient> {
         return ingredients;
     }
 
+    /// <inheritdoc/>
     public void Add(Ingredient t) {
         string sattement = (
             $"INSERT INTO ingredients (name) " +
@@ -60,6 +70,7 @@ public class IngredientDao : IDao<Ingredient> {
         commandHandler.ExecuteNonQuery(sattement);
     }
 
+    /// <inheritdoc/>
     public void Update(Ingredient t, Ingredient newT) {
         string statement = (
             $"UPDATE ingredients SET " +
@@ -70,6 +81,7 @@ public class IngredientDao : IDao<Ingredient> {
         commandHandler.ExecuteNonQuery(statement);
     }
 
+    /// <inheritdoc/>
     public void Delete(Ingredient t) {
         string statement = $"DELETE FROM ingredients WHERE id = {t.Id}";
         commandHandler.ExecuteNonQuery(statement);

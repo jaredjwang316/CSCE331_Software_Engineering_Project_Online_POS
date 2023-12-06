@@ -8,17 +8,34 @@ using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Data;
 
+/// <summary>
+/// Data Access Object (DAO) for managing user entities in the database.
+/// </summary>
 public class UserDao : IDao<User> {
     private readonly CommandHandler commandHandler;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="UserDao"/> class.
+    /// </summary>
+    /// <param name="commandHandler">The command handler for executing database queries.</param>
     public UserDao(CommandHandler commandHandler) {
         this.commandHandler = commandHandler;
     }
 
+    /// <summary>
+    /// Not supported for user entities. Throws a <see cref="NotSupportedException"/>.
+    /// </summary>
+    /// <param name="id">The unique identifier of the user.</param>
+    /// <returns>Throws a <see cref="NotSupportedException"/>.</returns>
     public User Get(int id) {
         throw new NotSupportedException();
     }
 
+    /// <summary>
+    /// Gets a user entity by email.
+    /// </summary>
+    /// <param name="email">The email address of the user.</param>
+    /// <returns>The user entity with the specified email, or null if not found.</returns>
     public User? Get(string email) {
         var query = $"SELECT * FROM users WHERE email = '{email}'";
         var reader = commandHandler.ExecuteReader(query);
@@ -43,6 +60,10 @@ public class UserDao : IDao<User> {
         return user;
     }
 
+    /// <summary>
+    /// Gets all user entities from the database.
+    /// </summary>
+    /// <returns>An enumerable collection of all user entities.</returns>
     public IEnumerable<User> GetAll() {
         var query = "SELECT * FROM users";
         var reader = commandHandler.ExecuteReader(query);
@@ -65,6 +86,10 @@ public class UserDao : IDao<User> {
         return users;
     }
 
+    /// <summary>
+    /// Adds a new user entity to the database.
+    /// </summary>
+    /// <param name="t">The user entity to be added.</param>
     public void Add(User t) {
         string favorites = t.Favorites != null ? string.Join(",", t.Favorites) : string.Join(",", Array.Empty<int>());
         string statement = (
@@ -74,6 +99,11 @@ public class UserDao : IDao<User> {
         commandHandler.ExecuteNonQuery(statement);
     }
 
+    /// <summary>
+    /// Updates an existing user entity in the database.
+    /// </summary>
+    /// <param name="t">The existing user entity to be updated.</param>
+    /// <param name="newT">The new data for the user entity.</param>
     public void Update(User t, User newT) {
         string favorites = newT.Favorites != null ? string.Join(",", newT.Favorites) : string.Join(",", Array.Empty<int>());
         string statement = (
@@ -91,6 +121,10 @@ public class UserDao : IDao<User> {
         commandHandler.ExecuteNonQuery(statement);
     }
 
+    /// <summary>
+    /// Deletes a user entity from the database.
+    /// </summary>
+    /// <param name="t">The user entity to be deleted.</param>
     public void Delete(User t) {
         string statement = $"DELETE FROM users WHERE email = {t.Email}";
         commandHandler.ExecuteNonQuery(statement);

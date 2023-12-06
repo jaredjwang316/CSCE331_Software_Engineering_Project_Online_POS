@@ -8,13 +8,22 @@ using WebApp.Models.UnitOfWork;
 
 namespace WebApp.Data;
 
+/// <summary>
+/// Data Access Object (DAO) for handling operations related to <see cref="ProductIngredients"/>.
+/// </summary>
+/// <seealso cref="IDao{ProductIngredients}"/>
 public class ProductIngredientsDao : IDao<ProductIngredients> {
     private readonly CommandHandler commandHandler;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ProductIngredientsDao"/> class.
+    /// </summary>
+    /// <param name="commandHandler">The command handler used for database operations.</param>
     public ProductIngredientsDao(CommandHandler commandHandler) {
         this.commandHandler = commandHandler;
     }
 
+    /// <inheritdoc/>
     public ProductIngredients Get(int id) {
         var query = $"SELECT * FROM product_ingredients WHERE product_id = {id}";
         var reader = commandHandler.ExecuteReader(query);
@@ -33,6 +42,7 @@ public class ProductIngredientsDao : IDao<ProductIngredients> {
         return productIngredients;
     }
 
+    /// <inheritdoc/>
     public IEnumerable<ProductIngredients> GetAll() {
         var query = "SELECT * FROM product_ingredients";
         var reader = commandHandler.ExecuteReader(query);
@@ -50,6 +60,7 @@ public class ProductIngredientsDao : IDao<ProductIngredients> {
         return productIngredients;
     }
 
+    /// <inheritdoc/>
     public void Add(ProductIngredients t) {
         string sattement = (
             $"INSERT INTO product_ingredients (product_id, ingredient_ids) " +
@@ -58,6 +69,7 @@ public class ProductIngredientsDao : IDao<ProductIngredients> {
         commandHandler.ExecuteNonQuery(sattement);
     }
 
+    /// <inheritdoc/>
     public void Update(ProductIngredients t, ProductIngredients newT) {
         string sattement = (
             $"UPDATE product_ingredients SET " +
@@ -67,6 +79,7 @@ public class ProductIngredientsDao : IDao<ProductIngredients> {
         commandHandler.ExecuteNonQuery(sattement);
     }
 
+    /// <inheritdoc/>
     public void Delete(ProductIngredients t) {
         string statement = $"DELETE FROM product_ingredients WHERE product_id = {t.ProductId}";
         commandHandler.ExecuteNonQuery(statement);
