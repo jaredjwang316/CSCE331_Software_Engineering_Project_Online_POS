@@ -32,15 +32,24 @@
     <div class="story-container">
         <div class="story-column">
             <!-- Content for the first child div -->
-            <p class="red-text">Founded in 2006 in Kaohsiung, Taiwan; Gong Cha, which translates to “tribute tea for the emperor” opened its doors to the bubble tea market.</h2>
-            <p>Gong cha’s success in Taiwan launched our stores all over the globe with customers loving our premium quality tea, products & services:</p>
-            <ul>
-                <li>Fresh Tea brewed throughout the day</li>
-                <li>Pearls (bubbles) freshly prepared to perfection continuously through the day</li>
-                <li>Tea sourced from the finest tea estates in Taiwan</li>
-                <li>Strict quality controls for all ingredients</li>
-            </ul>
-            <p>Gong cha is known across the world for its signature Milk Foam. Its creamy, sweet and savory flavor balance and whipped texture make it the perfect complement to our freshly brewed teas. Our delicious milk foam is hand-crafted for each customer and made from the freshest milk and highest quality, signature ingredients.</p>
+            @{
+                string text2 = "Founded in 2006 in Kaohsiung, Taiwan; Gong Cha, which translates to “tribute tea for the emperor” opened its doors to the bubble tea market.";
+                string text3 = "Gong cha’s success in Taiwan launched our stores all over the globe with customers loving our premium quality tea, products & services:";
+                string bul1 = "Fresh Tea brewed throughout the day";
+                string bul2 = "Pearls (bubbles) freshly prepared to perfection continuously through the day";
+                string bul3 = "Tea sourced from the finest tea estates in Taiwan";
+                string bul4 = "Strict quality controls for all ingredients";
+                string text4 = "Gong cha is known across the world for its signature Milk Foam. Its creamy, sweet and savory flavor balance and whipped texture make it the perfect complement to our freshly brewed teas. Our delicious milk foam is hand-crafted for each customer and made from the freshest milk and highest quality, signature ingredients.";
+                <p class="red-text">@await translator.TranslateText(text2)</p>
+                <p>@await translator.TranslateText(text3)</p>
+                <ul>
+                <li>@await translator.TranslateText(bul1)</li>
+                <li>@await translator.TranslateText(bul2)</li>
+                <li>@await translator.TranslateText(bul3)</li>
+                <li>@await translator.TranslateText(bul4)</li>
+                </ul>
+            <p>@await translator.TranslateText(text4)</p>
+            }
         </div>
         
         <div class="story-column">
