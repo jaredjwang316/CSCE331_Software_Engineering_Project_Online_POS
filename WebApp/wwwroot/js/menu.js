@@ -11,6 +11,7 @@ function loadProducts() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+    document.dispatchEvent(new Event("HideLoadingScreen"));
     // Load default data
     loadProducts();
 
