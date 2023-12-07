@@ -60,7 +60,12 @@ public class CashierController : Controller
         Cart cart = cartService.GetCartFromSession();
         int itemsInCart = cart!.Items.Sum(i => i.Quantity);
         ViewBag.itemsInCart = itemsInCart;
-        return View();
+        UnitOfWork unit = new();
+        List<Product> model= unit.GetAll<Product>()
+                .Where(product => product.IsDrink && !product.Hidden && !product.IsOption)
+                .ToList();
+        unit.CloseConnection();
+        return View(model);
     }
 
     /// <summary>
@@ -73,26 +78,6 @@ public class CashierController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-
-    /// <summary>
-    /// Loads and returns the product categories from the cache or database.
-    /// </summary>
-    /// <returns>The partial view containing the loaded product categories.</returns>
-    [HttpGet, Route("Cashier/LoadCategories")]
-    public IActionResult LoadCategories() {
-        UnitOfWork unit = new();
-        List<SeriesInfo> model = cache.GetOrCreate("Categories", entry => {
-            entry.SlidingExpiration = TimeSpan.FromMinutes(10);
-            return unit.GetAll<SeriesInfo>()
-            .Where(series => !series.IsHidden && series.IsProduct)
-            .ToList();
-        })!;
-
-        unit.CloseConnection();
-        
-        return PartialView("_CategoriesPartial", model);
-    }
-
 
     /// <summary>
     /// Loads and returns products based on the specified series name.
