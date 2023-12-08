@@ -54,6 +54,9 @@ public class GoogleTranslate {
     /// <param name="text">The text to be translated.</param>
     /// <returns>The translated text or the original text if translation fails.</returns>
     public async Task<string> TranslateText(string text) {
+        return await Translate(text);
+    }
+    public async Task<string> Translate(string text) {
         string source = "en";
         if (source == CurrentLanguage) return text;
 
@@ -89,6 +92,19 @@ public class GoogleTranslate {
         }
 
         return translatedText ?? text;
+    }
+
+    /// <summary>
+    /// Translates a collection of texts concurrently.
+    /// </summary>
+    /// <param name="texts"></param>
+    /// <returns>
+    /// A queue of translated texts. The queue contains untranslated texts if translation fails.
+    /// </returns>
+    public async Task<Queue<string>> Translate(IEnumerable<string> texts) {
+        var translationTasks = texts.Select(Translate);
+        var translations = await Task.WhenAll(translationTasks);
+        return new Queue<string>(translations);
     }
 
     /// <summary>

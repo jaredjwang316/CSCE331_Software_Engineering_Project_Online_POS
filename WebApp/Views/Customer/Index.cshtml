@@ -18,19 +18,21 @@
 @using WebApp.APIs.GoogleTranslate
 @{
     var translator = new GoogleTranslate();
+    var texts = new List<string> { "Menu", "Categories", "Best Sellers", "Favorites", "Back", "Item added to cart", "View Cart", "Continue Shopping" };
+    var translations = await translator.Translate(texts);
 }
 
-<h2 class="contrast">@await translator.TranslateText("Menu")</h2>
+<h2 class="contrast">@translations.Dequeue()</h2>
             
 <!-- Category bar -->
 <div class="text-center contrast" style="display: flex; justify-content: space-around;">
-    <button endpoint="LoadCategories" class="category-btn active">@await translator.TranslateText("Categories")</button>
-    <button endpoint="LoadBestSellers" class="category-btn">@await translator.TranslateText("Best Sellers")</button>
-    <button endpoint="LoadFavorites" class="category-btn">@await translator.TranslateText("Favorites")</button>
+    <button endpoint="LoadCategories" class="category-btn active">@translations.Dequeue()</button>
+    <button endpoint="LoadBestSellers" class="category-btn">@translations.Dequeue()</button>
+    <button endpoint="LoadFavorites" class="category-btn">@translations.Dequeue()</button>
 </div>
 
 <div class="content-container contrast">
-    <button class="back-btn">@await translator.TranslateText("Back")</button>
+    <button class="back-btn">@translations.Dequeue()</button>
     <div class="data-container"></div>
     <div class="customization-menu"></div>
 </div>
@@ -38,11 +40,11 @@
 <div class="cart-msg contrast" style="display: none;">
     <div class="cart-msg-container">
         <div class="cart-msg-text">
-            <p>@await translator.TranslateText("Item added to cart")</p>
+            <p>@translations.Dequeue()</p>
         </div>
         <div class="cart-msg-btns">
-            <button class="cart-msg-btn" action="View Cart">@await translator.TranslateText("View Cart")</button>
-            <button class="cart-msg-btn" action="Continue Shopping">@await translator.TranslateText("Continue Shopping")</button>
+            <button class="cart-msg-btn" action="View Cart">@translations.Dequeue()</button>
+            <button class="cart-msg-btn" action="Continue Shopping">@translations.Dequeue()</button>
         </div>
     </div>
 </div>
