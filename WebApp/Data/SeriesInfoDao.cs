@@ -34,7 +34,8 @@ public class SeriesInfoDao : IDao<SeriesInfo> {
         var query = $"SELECT * FROM series_info WHERE name = '{name}'";
         var reader = commandHandler.ExecuteReader(query);
 
-        if (reader == null) {
+        if (reader == null || !reader.HasRows) {
+            reader?.Close();
             return new SeriesInfo("", "", false, false, false, false);
         }
 
@@ -77,8 +78,8 @@ public class SeriesInfoDao : IDao<SeriesInfo> {
     /// <inheritdoc/>
     public void Add(SeriesInfo t) {
         string sattement = (
-            $"INSERT INTO series_info (name, series_image_url, multi_selectable, is_product, is_customization, is_hidden) " +
-            $"VALUES ({t.Name}, {t.ImgUrl}, {t.MultiSelectable}, {t.IsProduct}, {t.IsCustomization}, {t.IsHidden})"
+            $"INSERT INTO series_info (name, series_img_url, multi_selectable, is_product, is_customization, is_hidden) " +
+            $"VALUES ('{t.Name}', '{t.ImgUrl}', {t.MultiSelectable}, {t.IsProduct}, {t.IsCustomization}, {t.IsHidden})"
         );
         commandHandler.ExecuteNonQuery(sattement);
     }
@@ -88,7 +89,7 @@ public class SeriesInfoDao : IDao<SeriesInfo> {
         string statement = (
             $"UPDATE series_info SET " +
             $"name = {newT.Name}, " +
-            $"series_image_url = {newT.ImgUrl}, " +
+            $"series_img_url = {newT.ImgUrl}, " +
             $"multi_selectable = {newT.MultiSelectable}, " +
             $"is_product = {newT.IsProduct}, " +
             $"is_customization = {newT.IsCustomization}, " +

@@ -73,8 +73,12 @@ body {
   font-size: 0.8rem;
 }
 
-.big-text, .big-text a, .big-text h2, .big-text h3, .big-text .category-btn, .big-text .price {
+.big-text, .big-text a, .big-text h2, .big-text h3, .big-text .category-btn, .big-text .price, .big-text .table-button, .big-text .save-button {
   font-size: 1.5em;
+}
+
+.big-text h1 {
+  font-size: 3em;
 }
 
 /* .contrast {

@@ -58,10 +58,11 @@ public class CustomerController : Controller {
     [HttpGet, Route("Customer/LoadCategories")]
     public IActionResult LoadCategories() {
         UnitOfWork unit = new();
+        List<Product> products = unit.GetAll<Product>().ToList();
         List<SeriesInfo> model = cache.GetOrCreate("Categories", entry => {
             entry.SlidingExpiration = TimeSpan.FromMinutes(10);
             return unit.GetAll<SeriesInfo>()
-            .Where(series => !series.IsHidden && series.IsProduct)
+            .Where(series => !series.IsHidden && series.IsProduct && products.Any(product => product.Series == series.Name))
             .ToList();
         })!;
 
@@ -93,8 +94,6 @@ public class CustomerController : Controller {
     /// <returns>The partial view containing the loaded favorite products.</returns>
     [HttpGet, Route("Customer/LoadFavorites")]
     public IActionResult LoadFavorites() {
-        // Use _ProductsPartial when favorites are implemented
-
         if (!User.Identity!.IsAuthenticated) {
             return Content("You must be logged in to view favorites.");
         }
