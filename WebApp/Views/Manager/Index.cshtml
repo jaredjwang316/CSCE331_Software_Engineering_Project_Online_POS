@@ -126,7 +126,7 @@
     <form id="proding" style="display:none">
         @foreach (var ingredient in Model.Item3) {
             <input type="checkbox" class="ingredients" id="@ingredient.Name" value="@ingredient.Name"/>
-            <label for="@ingredient.Name"> @ingredient.Name</label><br>
+            <label for="@ingredient.Name" id="for @ingredient.Name"> @ingredient.Name</label><br id="br @ingredient.Name">
         }
     </form>
 }
@@ -379,6 +379,40 @@
                 Id: parseInt(_ingredientId, 10),
                 Name: getCellValue(cell.parentElement, 3) || "N/A"
             });
+            var ing = document.getElementById(getCellValue(cell.parentElement, 3).trim());
+            var ing2 = document.getElementById("for " + getCellValue(cell.parentElement, 3).trim());
+            var ing3 = document.getElementById("br " + getCellValue(cell.parentElement, 3).trim());
+            console.log(getCellValue(cell.parentElement, 3).trim());
+            if (ing != null) {
+                ing.parentNode.removeChild(ing);
+                ing2.parentNode.removeChild(ing2);
+                ing3.parentNode.removeChild(ing3);
+            }
+            var input = document.getElementsByClassName('ingredients');
+            var found = false;
+            var proding = document.getElementById("proding");
+            for(var i = 0; input[i]; ++i) {
+                if (input[i].value == getCellValue(cell.parentElement, 3)) {
+                    found = true;
+                }
+            }
+            if (found == false) {
+                var element = document.createElement("input");
+                element.type = "checkbox";
+                element.class = "ingredients";
+                element.id = getCellValue(cell.parentElement, 3);
+                element.value = getCellValue(cell.parentElement, 3);
+                var element2 = document.createElement("label");
+                element2.for = getCellValue(cell.parentElement, 3);
+                element2.innerHTML = " " + getCellValue(cell.parentElement, 3);
+                element2.id = "for " + getCellValue(cell.parentElement, 3);
+                element2.setAttribute('style', 'white-space: pre;');
+                var element3 = document.createElement("br");
+                element3.id = "br " + getCellValue(cell.parentElement, 3);
+                proding.appendChild(element);
+                proding.appendChild(element2);
+                proding.appendChild(element3);
+            }
         });
 
 
@@ -398,6 +432,16 @@
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(output),
             success: function (data) {
+                for (var name of data) {
+                    var ing = document.getElementById(name.trim());
+                    var ing2 = document.getElementById("for " + name.trim());
+                    var ing3 = document.getElementById("br " + name.trim());
+                    if (ing != null) {
+                        ing.parentNode.removeChild(ing);
+                        ing2.parentNode.removeChild(ing2);
+                        ing3.parentNode.removeChild(ing3);
+                    }   
+                }
                 if (fail == true) {
                     document.getElementById("saveFail2").style.display = 'block';
                     setTimeout(function() {
@@ -503,7 +547,12 @@
         var row = btn.parentNode.parentNode;
         id = parseInt(row.querySelector('td:first-child').innerText);
         row.parentNode.removeChild(row);
-        console.log(id);
+        var ing = document.getElementById(row.querySelector('td:nth-child(3)').innerText.trim());
+        var ing2 = document.getElementById("for " + row.querySelector('td:nth-child(3)').innerText.trim());
+        var ing3 = document.getElementById("br " + row.querySelector('td:nth-child(3)').innerText.trim());
+        ing.parentNode.removeChild(ing);
+        ing2.parentNode.removeChild(ing2);
+        ing3.parentNode.removeChild(ing3);
         $.ajax({
             url: "/Manager/DeleteInventory/" + id,
             type: "DELETE",

@@ -283,6 +283,7 @@ public class ManagerController : Controller
         }
         List<Inventory>? item1 = JsonConvert.DeserializeObject<List<Inventory>>(data);
         List<Ingredient>? item2 = JsonConvert.DeserializeObject<List<Ingredient>>(data2);
+        List<string> output = new();
 
         if (item1 is not null) {
             foreach (Inventory inventory in item1) {
@@ -300,6 +301,7 @@ public class ManagerController : Controller
                 try {
                     Ingredient initial_ingredient = unit.Get<Ingredient>(ingredient.Id);
                     unit.Update<Ingredient>(initial_ingredient, ingredient);
+                    output.Add(initial_ingredient.Name);
                 } catch {
                     continue;
                 }
@@ -310,7 +312,7 @@ public class ManagerController : Controller
 
         ClearCache();
 
-        return Ok();
+        return Ok(output);
     }
 
     /// <summary>
