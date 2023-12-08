@@ -115,6 +115,22 @@ public class ManagerController : Controller
                 product.Hidden = initial_product.Hidden;
                 product.IsOption = initial_product.IsOption;
                 unit.Update<Product>(initial_product, product);
+
+                // Check if series is in seriesInfo
+                IEnumerable<SeriesInfo> seriesInfo = unit.GetAll<SeriesInfo>();
+                bool found = false;
+                foreach (SeriesInfo series in seriesInfo) {
+                    if (series.Name == product.Series) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                // If not, add it
+                if (!found) {
+                    SeriesInfo newSeries = new(product.Series, product.ImgUrl ?? "FILLER", true, true, false, false);
+                    unit.Add<SeriesInfo>(newSeries);
+                }
             } catch {
                 continue;
             }
