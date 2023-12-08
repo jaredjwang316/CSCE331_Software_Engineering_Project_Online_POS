@@ -19,12 +19,22 @@
         "Total Price",
         "Add to Cart"
     };
+    Model.SeriesInformation!.Reverse();
+    Model.Products = Model.Products!.OrderBy(p => p.Series).ToList();
+    Model.Products.Reverse();
+    
     var seriesInfoNames = Model.SeriesInformation!.Select(s => s.Name);
     var productNames = Model.Products!.Select(p => p.Name);
 
-    var staticTextTranslations = await translator.Translate(staticText);
-    var seriesInfoTranslations = await translator.Translate(seriesInfoNames);
-    var productTranslations = await translator.Translate(productNames);
+    var staticTextTask = translator.Translate(staticText);
+    var seriesInfoTask = translator.Translate(seriesInfoNames);
+    var productTask = translator.Translate(productNames);
+
+    await Task.WhenAll(staticTextTask, seriesInfoTask, productTask);
+
+    var staticTextTranslations = new Queue<string>(staticTextTask.Result);
+    var seriesInfoTranslations = new Queue<string>(seriesInfoTask.Result);
+    var productTranslations = new Queue<string>(productTask.Result);
 }
 
 <div class="customization-img-container">
@@ -32,7 +42,7 @@
     <p>@staticTextTranslations.Dequeue()</p>
 </div>
 @{
-    Model.SeriesInformation!.Reverse();
+    
     List<string> seriesNames = new List<string>();
     double cost = 0;
 }

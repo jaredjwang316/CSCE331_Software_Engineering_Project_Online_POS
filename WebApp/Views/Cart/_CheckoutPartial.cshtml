@@ -9,13 +9,15 @@
 @using WebApp.APIs.GoogleTranslate
 @{
     var translator = new GoogleTranslate();
+    var staticText = new List<string> { "Total", "Checkout" };
+    var translatedText = await translator.Translate(staticText);
 }
 @model string
 
 <div class="checkout-container">
     <div class="subtotal">
-        <p>@await translator.TranslateText("Total")</p>
-        <p class="subtotal-value">@await translator.TranslateText(Model)</p>
+        <p>@translatedText.Dequeue()</p>
+        <p class="subtotal-value">@Model</p>
     </div>
-    <button class="checkout-btn">@await translator.TranslateText("Checkout")</button>
+    <button class="checkout-btn">@translatedText.Dequeue()</button>
 </div>

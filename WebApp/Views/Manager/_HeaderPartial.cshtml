@@ -1,0 +1,20 @@
+@using WebApp.APIs.GoogleTranslate
+@{
+    var translator = new GoogleTranslate();
+    var text = new List<string> { "Welcome", "Manager", "Products", "Inventory" };
+    var translatedText = await translator.TranslateAsDict(text);
+}
+
+<div class="container contrast">
+    <main role="main" class="pb-3">
+        <div class="text-center">
+            <h1 class="display-4">@translatedText["Welcome"], @User.Identity!.Name!.Split(" ")[0]!</h1>
+        </div>
+
+        <div class="text-center" style="display: flex; justify-content: space-around;">
+            <button id="ShowManager" class="category-btn active">@translatedText["Manager"]</button>
+            <button id="ShowProducts" class="category-btn">@translatedText["Products"]</button>
+            <button id="ShowInventory" class="category-btn">@translatedText["Inventory"]</button>
+        </div>
+    </main>
+</div>

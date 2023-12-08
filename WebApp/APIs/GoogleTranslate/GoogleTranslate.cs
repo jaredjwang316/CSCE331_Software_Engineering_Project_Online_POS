@@ -64,34 +64,46 @@ public class GoogleTranslate {
         string url = $"{URL_BASE}?key={apiKey}&source={source}&target={CurrentLanguage}&q={encodedText}";
 
         using HttpClient client = new();
-        HttpResponseMessage response = await client.GetAsync(url);
-        if (!response.IsSuccessStatusCode)
-        {
-            return text;
+
+        for (int i = 0; i < 3; i++) {
+            HttpResponseMessage? response;
+            try {
+                response = await client.GetAsync(url);
+            } catch  {
+                // Retry
+                await Task.Delay(2000);
+                continue;
+            }
+
+            if (response is null || !response.IsSuccessStatusCode) {
+                break;
+            }
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            JsonDocument json;
+            try {
+                json = JsonDocument.Parse(responseBody);
+            }
+            catch {
+                break;
+            }
+
+            string? translatedText;
+            try {
+                translatedText = json.RootElement
+                    .GetProperty("data")
+                    .GetProperty("translations")[0]
+                    .GetProperty("translatedText")
+                    .GetString();
+            }
+            catch {
+                translatedText = null;
+            }
+
+            return translatedText ?? text;
         }
 
-        string responseBody = await response.Content.ReadAsStringAsync();
-        JsonDocument json;
-        try {
-            json = JsonDocument.Parse(responseBody);
-        }
-        catch {
-            return text;
-        }
-
-        string? translatedText;
-        try {
-            translatedText = json.RootElement
-                .GetProperty("data")
-                .GetProperty("translations")[0]
-                .GetProperty("translatedText")
-                .GetString();
-        }
-        catch {
-            translatedText = null;
-        }
-
-        return translatedText ?? text;
+        return text;
     }
 
     /// <summary>
@@ -105,6 +117,13 @@ public class GoogleTranslate {
         var translationTasks = texts.Select(Translate);
         var translations = await Task.WhenAll(translationTasks);
         return new Queue<string>(translations);
+    }
+
+    public async Task<Dictionary<string, string>> TranslateAsDict(IEnumerable<string> texts) {
+        var translationTasks = texts.Select(Translate);
+        var translations = await Task.WhenAll(translationTasks);
+        return texts.Zip(translations, (text, translation) => new { text, translation })
+            .ToDictionary(x => x.text, x => x.translation);
     }
 
     /// <summary>

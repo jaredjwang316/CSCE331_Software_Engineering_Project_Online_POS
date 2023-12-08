@@ -4,13 +4,26 @@
 @using WebApp.APIs.GoogleTranslate
 @{
     var translator = new GoogleTranslate();
+
+    var staicText = new List<string> {
+        "Explore your accessibility options",
+        "Toggle big cursor",
+        "Cursor",
+        "Toggle text size",
+        "Text Size",
+        "Toggle contrast",
+        "Contrast",
+        "Language"
+    };
+
+    var translatedText = await translator.Translate(staicText);
 }
 
 <div class="sidebar-image contrast">
     <img class="toggle-accessibility" src="~/img/accessibility1.png" alt="Accessibility"
         onclick="toggleSidebar()"
         onkeydown="if(event.keyCode == 13) toggleSidebar()"
-        title=@await translator.TranslateText("Explore your accessibility options")
+        title=@translatedText.Dequeue()
         tabindex="0"
     />
 </div>
@@ -21,33 +34,33 @@
             @* Big Cursor *@
             <button
                 class="acc-btn toggle-big-cursor-btn"
-                title="@await translator.TranslateText("Toggle big cursor")"
+                title="@translatedText.Dequeue()"
                 tabindex="0"
-            >@await translator.TranslateText("Cursor")
+            >@translatedText.Dequeue()
             </button>
         </div>
         <div class="option">
             @* Text Size *@
             <button
                 class="acc-btn toggle-text-size-btn"
-                title="@await translator.TranslateText("Toggle text size")"
+                title="@translatedText.Dequeue()"
                 tabindex="0"
-            >@await translator.TranslateText("Text Size")
+            >@translatedText.Dequeue()
             </button>
         </div>
         <div class="option">
             @* Contrast *@
             <button
                 class="acc-btn toggle-contrast-btn"
-                title="@await translator.TranslateText("Toggle contrast")"
+                title="@translatedText.Dequeue()"
                 tabindex="0"
-            >@await translator.TranslateText("Contrast")
+            >@translatedText.Dequeue()
             </button>
         </div>
 
         @* Language *@
         <div class="option">
-            <label for="language">@await translator.TranslateText("Language")</label>
+            <label for="language">@translatedText.Dequeue()</label>
             <select id="language">
                 @{
                     var languages = translator.GetSupportedLanguages();

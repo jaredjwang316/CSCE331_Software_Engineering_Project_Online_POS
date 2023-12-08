@@ -7,6 +7,20 @@
 @{
     var translator = new GoogleTranslate();
     int itemsInCart = ViewBag.ItemsInCart;
+
+    var staticText = new List<string> {
+        "Quick Access",
+        "Home",
+        "Manager",
+        "Cashier",
+        "Customer",
+        "Menu Board",
+        "Our Story",
+        "Log out",
+        "Log in",
+    };
+
+    var translatedText = await translator.Translate(staticText);
 }
 
 <!DOCTYPE html>
@@ -57,29 +71,29 @@
                         @if (isManager || isCashier)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark">Quick Access: </a>
+                                <a class="nav-link text-dark">@translatedText.Dequeue(): </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" asp-route-autoRedirect="false">Home</a>
-                            </li>
-                            if (isManager) {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Manager" asp-action="Index">Manager</a>
-                                </li>
-                            }
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Cashier" asp-action="Index">Cashier</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" asp-route-autoRedirect="false">@translatedText.Dequeue()</a>
                             </li>
                             if (isManager) {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Customer</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Manager" asp-action="Index">@translatedText.Dequeue()</a>
                                 </li>
                             }
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="MenuBoard" asp-action="Index">Menu Board</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cashier" asp-action="Index">@translatedText.Dequeue()</a>
+                            </li>
+                            if (isManager) {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">@translatedText.Dequeue()</a>
+                                </li>
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="MenuBoard" asp-action="Index">@translatedText.Dequeue()</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Story" asp-action="Index">Our Story</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Story" asp-action="Index">@translatedText.Dequeue()</a>
                             </li>
                         }
                     </ul>
@@ -102,14 +116,14 @@
                                 string name = User.Identity.Name ?? "";
                                 string currentUrl = Context.Request.Path;
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@currentUrl">
-                                    @name | @await translator.TranslateText("Log out") | 
+                                    @name | @translatedText.Dequeue() | 
                                 </a>
                             }
                             else
                             {
                                 string currentUrl = Context.Request.Path;
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@currentUrl">
-                                    @await translator.TranslateText("Log in") | 
+                                    @translatedText.Dequeue() | 
                                 </a>
                             }
                         </li>

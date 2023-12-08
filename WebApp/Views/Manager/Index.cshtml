@@ -1,143 +1,65 @@
+@using WebApp.Models.UnitOfWork
+@using WebApp.APIs.GoogleTranslate
+@model (List<Product>, List<Inventory>, List<Ingredient>, List<ProductIngredients>)
+
 @{
     ViewData["Title"] = "Manager Page";
+    var translator = new GoogleTranslate();
+
+    var staticText = new List<string> {
+        "ID",
+        "Sales Report",
+        "Excess Report",
+        "Restock Report",
+        "Sales Together",
+        "Menu Items Popularity Analysis",
+        "Product Name",
+        "Sales",
+        "Ingredient Name",
+        "Item 1 Name",
+        "Item 2 Name",
+        "Frequency",
+        "Enter Start Time",
+        "Enter End Time",
+        "Successful",
+        "Fail",
+        "Invalid Data Type"
+    };
+
+    var translatedText = await translator.TranslateAsDict(staticText);
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>@ViewData["Title"] - WebApp</title>
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
+
 <link rel="stylesheet" href="~/css/Manager.css" asp-append-version="true" />
 <script src="~/js/manager.js" asp-append-version="true"></script>
 <script src="~/js/loading-screen.js" asp-append-version="true"></script>
 
-</head>
-<body>
-    <div class="container contrast">
-        <main role="main" class="pb-3">
-            @if (User.Identity!.IsAuthenticated) {
-                <div class="text-center">
-                    <h1 class="display-4">Welcome, @User.Identity.Name!.Split(" ")[0]!</h1>
-                </div>
-            }
-            @* Will never be unauthenticated *@
-            @* else {   
-                <div class="text-center">
-                    <h1 class="display-4">Welcome!</h1>
-                </div>
-            } *@
 
-            <!-- Category bar -->
-            <div class="text-center" style="display: flex; justify-content: space-around;">
-                <button id="ShowManager" class="category-btn active" data-to="item-container">Manager</button>
-                <button id="ShowProducts" class="category-btn" data-to="item-container">Products</button>
-                <button id="ShowInventory" class="category-btn" data-to="item-container">Inventory</button>
-            </div>
-        </main>
-    </div>
-</body>
-</html>
 
-@using WebApp.Data
-@using WebApp.Models.UnitOfWork
-@using WebApp
-@model (List<Product>, List<Inventory>, List<Ingredient>, List<ProductIngredients>)
-@if (Model.Item1 != null && Model.Item1.Count > 0) {
-    <table id="prod-table" class="table contrast" style="display:none">
-        <thead>
-            <tr>
-                <th>Product ID</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Series</th>
-                <th>Image Url</th>
-                <th>Product Ingredients</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in Model.Item1) {
-                <tr>
-                    <td>@product.Id</td>
-                    <td contenteditable="true">@product.Name</td>
-                    <td contenteditable="true">@product.Price</td>
-                    <td contenteditable="true">@product.Series</td>
-                    <td contenteditable="true">@product.ImgUrl</td>
-                    <td><input type="button" value="Edit Product Ingredients" onclick="editProductIngredients(this)"/></td>
-                    <td><input type="button" value="Delete" onclick="deleteRowProd(this)"/></td>
-                </tr>
-            }
-        </tbody>
-    </table>
-} else {
-    <p>No products found.</p>
-}
-<button id="saveButtonProd" class="save-button" style="display:none">Save</button>
-<button id="addButtonProd" class="add-button" style="display:none">Add</button>
+@{
+    var headerPartialTask = Html.PartialAsync("_HeaderPartial");
+    var productTablePartialTask = Html.PartialAsync("_ProductTablePartial", Model.Item1);
+    var inventoryTablePartialTask = Html.PartialAsync("_InventoryTablePartial", (Model.Item2, Model.Item3));
+    var prodIngredPartialTask = Html.PartialAsync("_ProdIngredPartial", (Model.Item3, Model.Item4));
 
-@if (Model.Item2 != null && Model.Item2.Count > 0) {
-    <table id="inv-table" class="table contrast" style="display:none">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Ingredient ID</th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Fill Level</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var inventory in Model.Item2) {
-                <tr>
-                    <td>@inventory.Id</td>
-                    <td>@inventory.IngredientId</td>
-                    <td contenteditable="true">
-                        @foreach (var ingredient in Model.Item3) {
-                            @if(ingredient.Id == inventory.IngredientId) {
-                                @ingredient.Name
-                            }
-                        }</td>
-                    <td contenteditable="true"> @inventory.Quantity</td>
-                    <td contenteditable="true"> @inventory.FillLevel</td>
-                    <td><input type="button" value="Delete" onclick="deleteRowInv(this)"/></td>
-                </tr>
-            }
-        </tbody>
-    </table>
-} else {
-    <p>No products found.</p>
+    await Task.WhenAll(headerPartialTask, productTablePartialTask, inventoryTablePartialTask, prodIngredPartialTask);
 }
 
-<button id="saveButtonInv" class="save-button" style="display:none">Save</button>
-<button id="addButtonInv" class="add-button" style="display:none">Add</button>
+@headerPartialTask.Result
+@productTablePartialTask.Result
+@inventoryTablePartialTask.Result
+@prodIngredPartialTask.Result
 
-@if (Model.Item4 != null && Model.Item4.Count > 0) {
-    <form id="proding" style="display:none">
-        @foreach (var ingredient in Model.Item3) {
-            <input type="checkbox" class="ingredients" id="@ingredient.Name" value="@ingredient.Name"/>
-            <label for="@ingredient.Name"> @ingredient.Name</label><br>
-        }
-    </form>
-}
-
-<button id="confirm" class="save-button" style="display:none">Confirm</button>
-<button id="cancel" class="save-button" style="display:none">Cancel</button>
-
-<button id="salesReport" class="table-button" style="display:inline-block">Sales Report</button>
-<button id="excessReport" class="table-button" style="display:inline-block">Excess Report</button>
-<button id="restockReport" class="table-button" style="display:inline-block">Restock Report</button>
-<button id="salesTogether" class="table-button" style="display:inline-block">Sales Together</button>
-<button id="popularityAnalysis" class="table-button" style="display:inline-block">Menu Items Popularity Analysis</button>
+<button id="salesReport" class="table-button" style="display:inline-block">@translatedText["Sales Report"]</button>
+<button id="excessReport" class="table-button" style="display:inline-block">@translatedText["Excess Report"]</button>
+<button id="restockReport" class="table-button" style="display:inline-block">@translatedText["Restock Report"]</button>
+<button id="salesTogether" class="table-button" style="display:inline-block">@translatedText["Sales Together"]</button>
+<button id="popularityAnalysis" class="table-button" style="display:inline-block">@translatedText["Menu Items Popularity Analysis"]</button>
 
 <table id="salesReportTable" class="table contrast" style="display:none">
     <thead>
         <tr>
-            <th>Product Name</th>
-            <th>Sales</th>
+            <th>@translatedText["Product Name"]</th>
+            <th>@translatedText["Sales"]</th>
         </tr>
     </thead>
 </table>
@@ -145,8 +67,8 @@
 <table id="excessReportTable" class="table contrast" style="display:none">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Ingredient Name</th>
+            <th>@translatedText["ID"]</th>
+            <th>@translatedText["Ingredient Name"]</th>
         </tr>
     </thead>
 </table>
@@ -154,8 +76,8 @@
 <table id="restockReportTable" class="table contrast" style="display:none">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Ingredient Name</th>
+            <th>@translatedText["ID"]</th>
+            <th>@translatedText["Ingredient Name"]</th>
         </tr>
     </thead>
 </table>
@@ -164,9 +86,9 @@
 <table id="salesTogetherTable" class="table contrast" style="display:none">
     <thead>
         <tr>
-            <th>Item 1 Name</th>
-            <th>Item 2 Name</th>
-            <th>Frequency</th>
+            <th>@translatedText["Item 1 Name"]</th>
+            <th>@translatedText["Item 2 Name"]</th>
+            <th>@translatedText["Frequency"]</th>
         </tr>
     </thead>
 </table>
@@ -180,16 +102,16 @@
 </table>
 
 <br>
-<label for="starttime" id="slabel" style="display:inline-block"> Enter Start Time: </label><br>
+<label for="starttime" id="slabel" style="display:inline-block">@translatedText["Enter Start Time"]: </label><br>
 <input type="date" id="starttime" value="2023-07-01" style="display:inline-block"><br>
 
-<label for="endtime" id = "elabel" style="display:inline-block"> Enter End Time: </label><br>
+<label for="endtime" id = "elabel" style="display:inline-block">@translatedText["Enter End Time"]: </label><br>
 <input type="date" id="endtime" value="2023-12-31" style="display:inline-block"><br>
 
 
-<h2 id="saveSuccess" style="display:none">Successful</h2>
-<h2 id="saveFail" style="display:none">Fail</h2>
-<h2 id="saveFail2" style="display:none">Invalid Data Type</h2>
+<h2 id="saveSuccess" style="display:none">@translatedText["Successful"]</h2>
+<h2 id="saveFail" style="display:none">@translatedText["Fail"]</h2>
+<h2 id="saveFail2" style="display:none">@translatedText["Invalid Data Type"]</h2>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -212,7 +134,7 @@
                 cell.parentElement.querySelector('td:nth-child(4)').innerText = "N/A";
             }
             if (cell.parentElement.querySelector('td:nth-child(5)').innerText == "") {
-                cell.parentElement.querySelector('td:nth-child(5)').innerText = "FILLER";
+                cell.parentElement.querySelector('td:nth-child(5)').innerText = "https://gongchausa.s3.us-east-2.amazonaws.com/menu_pic/16344036541583579741616b05461df51.jpg";
             }
 
             if (isNaN(parseFloat(cell.parentElement.querySelector('td:nth-child(3)').innerText))) {

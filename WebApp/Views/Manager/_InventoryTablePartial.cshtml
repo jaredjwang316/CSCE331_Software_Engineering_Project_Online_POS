@@ -1,0 +1,76 @@
+@using WebApp.Data
+@using WebApp.Models.UnitOfWork
+@using WebApp.APIs.GoogleTranslate
+@model (List<Inventory>, List<Ingredient>)
+@{
+
+    var sortedInventory = Model.Item1.OrderBy(x => x.IngredientId).ToList();
+    var sortedIngredient = Model.Item2.OrderBy(x => x.Id).ToList();
+
+    var translator = new GoogleTranslate();
+    var text = new List<string>() {
+        "ID",
+        "Ingredient ID",
+        "Name",
+        "Quantity",
+        "Fill Level",
+        "Delete",
+        "No products found.",
+        "Save",
+        "Add"
+    };
+    var inventoryText = sortedInventory.SelectMany(x => new List<string>() {
+        x.Id.ToString(),
+        x.IngredientId.ToString(),
+        x.Quantity.ToString(),
+        x.FillLevel.ToString()
+    }).ToList();
+    var ingredientText = sortedIngredient.Select(x => x.Name).ToList();
+
+    var translatedTextTask = translator.TranslateAsDict(text);
+    var translatedInventoryTextTask = translator.Translate(inventoryText);
+    var translatedIngredientTextTask = translator.Translate(ingredientText);
+
+    await Task.WhenAll(translatedTextTask, translatedInventoryTextTask, translatedIngredientTextTask);
+
+    var translatedText = translatedTextTask.Result;
+    var translatedInventoryText = translatedInventoryTextTask.Result;
+    var translatedIngredientText = translatedIngredientTextTask.Result;
+}
+
+@if (Model.Item1 != null && Model.Item1.Count > 0) {
+    <table id="inv-table" class="table contrast" style="display:none">
+        <thead>
+            <tr>
+                <th>@translatedText["ID"]</th>
+                <th>@translatedText["Ingredient ID"]</th>
+                <th>@translatedText["Name"]</th>
+                <th>@translatedText["Quantity"]</th>
+                <th>@translatedText["Fill Level"]</th>
+                <th>@translatedText["Delete"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var inventory in sortedInventory) {
+                <tr>
+                    <td>@translatedInventoryText.Dequeue()</td>
+                    <td>@translatedInventoryText.Dequeue()</td>
+                    <td contenteditable="true">
+                        @foreach (var ingredient in sortedIngredient) {
+                            if(ingredient.Id == inventory.IngredientId) {
+                                @translatedIngredientText.Dequeue();
+                            }
+                        }</td>
+                    <td contenteditable="true">@translatedInventoryText.Dequeue()</td>
+                    <td contenteditable="true">@translatedInventoryText.Dequeue()</td>
+                    <td><input type="button" value="@translatedText["Delete"]" onclick="deleteRowInv(this)"/></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else {
+    <p>@translatedText["No products found."]</p>
+}
+
+<button id="saveButtonInv" class="save-button" style="display:none">@translatedText["Save"]</button>
+<button id="addButtonInv" class="add-button" style="display:none">@translatedText["Add"]</button>

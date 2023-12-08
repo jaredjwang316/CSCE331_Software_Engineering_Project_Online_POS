@@ -20,101 +20,56 @@
 @model (List<Product> products, List<ProductIngredients> prodIngredients, List<string> productCategories)
 @{
     var translate = new GoogleTranslate();
+
+    var staticText = new List<string>() {
+        "Menu Board Page",
+        "Product Categories",
+        "Search Products",
+        "Search",
+        "Products",
+        "Product ID",
+        "Name",
+        "Price",
+        "Series",
+        "No products found.",
+    };
+
+    var staticTextTask = translate.TranslateAsDict(staticText);
+    var productCategories = Model.productCategories;
+    var productCategoryNames = Model.Item1!.Select(p => p.Name);
+    var productSeries = Model.Item1!.Select(p => p.Series);
+
+    var productCategoriesTask = translate.Translate(productCategories);
+    var productCategoryNamesTask = translate.Translate(productCategoryNames);
+    var productSeriesTask = translate.Translate(productSeries);
+
+    await Task.WhenAll(staticTextTask, productCategoriesTask, productCategoryNamesTask, productSeriesTask);
+
+    var staticTextTranslations = staticTextTask.Result;
+    var productCategoriesTranslations = productCategoriesTask.Result;
+    var productCategoryNamesTranslations = productCategoryNamesTask.Result;
+    var productSeriesTranslations = productSeriesTask.Result;
+
+    var productCategoryNamesTranslationsCopy = new Queue<string>(productCategoryNamesTranslations);
 }
 
 <div class="text-center">
-    <h1 class="display-4 contrast">@await translate.TranslateText("Menu Board Page")</h1>
+    <h1 class="display-4 contrast">@staticTextTranslations["Menu Board Page"]</h1>
 </div>
-
-<div class="row contrast">
-    <div class="col-md-6">
-        <form method="get" class="mb-3">
-            <div class="input-group">
-                <input type="text" class="form-control" name="search" placeholder="@await translate.TranslateText("Search Products")">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">@await translate.TranslateText("Search")</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-@if (Model.Item1 != null && Model.Item1.Count > 0)
-{
-    <h2 class="contrast">@await translate.TranslateText("Products")</h2>
-    <table class="table contrast">
-        <thead>
-            <tr>
-                <th>@await translate.TranslateText("Product ID")</th>
-                <th>@await translate.TranslateText("Name")</th>
-                <th>@await translate.TranslateText("Price")</th>
-                <th>@await translate.TranslateText("Series")</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in Model.Item1)
-            {
-                <tr class="product-row" data-category="@product.Series">
-                    <td>@product.Id</td>
-                    <td>
-                        <a href="@Url.Action("ProductDetail", "MenuBoard", new { id = product.Id })">@await translate.TranslateText(product.Name)</a>
-                    </td>
-                    <td>@product.Price.ToString("C")</td>
-                    <td>@await translate.TranslateText(product.Series)</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>@await translate.TranslateText("No products found.")</p>
-}
-
-@if (Model.Item2 != null && Model.Item2.Count > 0)
-{
-    <h2 class="contrast">@await translate.TranslateText("Product Ingredients")</h2>
-    <table class="table contrast">
-        <thead>
-            <tr>
-                <th>@await translate.TranslateText("Product Ingredient ID")</th>
-                <th>@await translate.TranslateText("Ingredients")</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var pingredient in Model.Item2)
-            {
-                <tr>
-                    <td>@pingredient.ProductId</td>
-                    <td>
-                        @foreach (var ingredientId in pingredient.IngredientIds)
-                        {
-                            <div>@ingredientId</div>
-                        }
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p class="contrast">@await translate.TranslateText("No products ingredients found.")</p>
-}
 
 @if (Model.productCategories != null && Model.productCategories.Count > 0)
 {
-    <h2 class="contrast">@await translate.TranslateText("Product Categories")</h2>
+    <h2 class="contrast">@staticTextTranslations["Product Categories"]</h2>
     <div class="category-buttons contrast">
         @foreach (var category in Model.productCategories)
         {
-            <button class="btn btn-primary category-button" data-category="@category">@await translate.TranslateText(category)</button>
+            <button class="btn btn-primary category-button" data-category="@category">@productCategoriesTranslations.Dequeue()</button>
             <div class="product-list-for-category" data-category="@category" style="display: none;">
                 @foreach (var product in Model.Item1!)
                 {
                     if (product.Series == category)
                     {
-                        <p>@await translate.TranslateText(product.Name)</p>
+                        <p>@productCategoryNamesTranslations.Dequeue()</p>
                         <!-- Display other product details as needed -->
                     }
                 }
@@ -123,10 +78,54 @@ else
     </div>
 }
 
+<div class="row contrast">
+    <div class="col-md-6">
+        <form method="get" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search" placeholder="@staticTextTranslations["Search Products"]">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">@staticTextTranslations["Search"]</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (Model.Item1 != null && Model.Item1.Count > 0)
+{
+    <h2 class="contrast">@staticTextTranslations["Products"]</h2>
+    <table class="table contrast">
+        <thead>
+            <tr>
+                <th>@staticTextTranslations["Product ID"]</th>
+                <th>@staticTextTranslations["Name"]</th>
+                <th>@staticTextTranslations["Price"]</th>
+                <th>@staticTextTranslations["Series"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Item1)
+            {
+                <tr class="product-row" data-category="@product.Series">
+                    <td>@product.Id</td>
+                    <td>
+                        <a href="@Url.Action("ProductDetail", "MenuBoard", new { id = product.Id })">@productCategoryNamesTranslationsCopy.Dequeue()</a>
+                    </td>
+                    <td>@product.Price.ToString("C")</td>
+                    <td>@productSeriesTranslations.Dequeue()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>@staticTextTranslations["No products found."]</p>
+}
+
 <!-- Ensure jQuery is included -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- JavaScript to handle button click -->
 <script>
     $('.category-button').on('click', function() {
         var category = $(this).data('category');
@@ -138,4 +137,3 @@ else
         $('.product-list-for-category[data-category="' + category + '"]').show();
     });
 </script>
-
