@@ -13,31 +13,53 @@
 @using WebApp.APIs.GoogleTranslate
 @{
     var translator = new GoogleTranslate();
+
+    var staticText = new List<string>() {
+        Model.SelectedProduct!.Name,
+        "Total Price",
+        "Add to Cart"
+    };
+    Model.SeriesInformation!.Reverse();
+    Model.Products = Model.Products!.OrderBy(p => p.Series).ToList();
+    Model.Products.Reverse();
+    
+    var seriesInfoNames = Model.SeriesInformation!.Select(s => s.Name);
+    var productNames = Model.Products!.Select(p => p.Name);
+
+    var staticTextTask = translator.Translate(staticText);
+    var seriesInfoTask = translator.Translate(seriesInfoNames);
+    var productTask = translator.Translate(productNames);
+
+    await Task.WhenAll(staticTextTask, seriesInfoTask, productTask);
+
+    var staticTextTranslations = new Queue<string>(staticTextTask.Result);
+    var seriesInfoTranslations = new Queue<string>(seriesInfoTask.Result);
+    var productTranslations = new Queue<string>(productTask.Result);
 }
 
 <div class="customization-img-container">
     <img src="@Model.SelectedProduct!.ImgUrl" />
-    <p>@await translator.TranslateText(Model.SelectedProduct!.Name)</p> <!-- Product name (May remove p tag) -->
+    <p>@staticTextTranslations.Dequeue()</p>
 </div>
 @{
-    Model.SeriesInformation!.Reverse();
+    
     List<string> seriesNames = new List<string>();
     double cost = 0;
 }
 @foreach(SeriesInfo seriesInfo in Model.SeriesInformation!) {
     <div class="customization-title" id="@seriesInfo.Name">
-        @await translator.TranslateText(seriesInfo.Name)
+        @seriesInfoTranslations.Dequeue()
     </div>
     <div class="customization-btn-container">
         @foreach(Product product in Model.Products!) {
             if (product.Series == seriesInfo.Name) {     
                 if (seriesNames.Contains(product.Series) || seriesInfo.Name != "Size") {
                     <button class="customization-btn product" id="@product.Id" series="@product.Series" multiselect="@seriesInfo.MultiSelectable" cost="@product.Price">
-                        <p>@await translator.TranslateText(product.Name)</p>
+                        <p>@productTranslations.Dequeue()</p>
                     </button>
                 } else {
                     <button class="customization-btn product active" id="@product.Id" series="@product.Series" multiselect="@seriesInfo.MultiSelectable" cost="@product.Price">
-                        <p>@await translator.TranslateText(product.Name)</p>
+                        <p>@productTranslations.Dequeue()</p>
                     </button>
                     seriesNames.Add(product.Series);
                     cost += product.Price;
@@ -46,10 +68,10 @@
         }
     </div>
 }
-<p class="Total-Price">@await translator.TranslateText("Total Price")
+<p class="Total-Price">@staticTextTranslations.Dequeue()
     @{
         string totalPrice = (Model.SelectedProduct!.Price + cost).ToString("C");
     }
     <span class="price" id="total-price" drink-price="@Model.SelectedProduct!.Price">@totalPrice</span>
 </p>
-<button class="add-to-cart-btn" id="@Model.SelectedProduct!.Id">@await translator.TranslateText("Add to Cart")</button>
+<button class="add-to-cart-btn" id="@Model.SelectedProduct!.Id">@staticTextTranslations.Dequeue()</button>

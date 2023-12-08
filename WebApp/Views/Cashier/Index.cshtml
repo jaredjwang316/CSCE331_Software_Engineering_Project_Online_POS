@@ -10,17 +10,19 @@
 @using WebApp.APIs.GoogleTranslate
 @{
     var translator = new GoogleTranslate();
+    var texts = new List<string> { "Menu", "Products", "Back", "Item added to cart", "View Cart", "Continue Shopping" };
+    var translatedTexts = await translator.Translate(texts);
 }
 
-<h2 class="contrast">@await translator.TranslateText("Menu")</h2>
+<h2 class="contrast">@translatedTexts.Dequeue()</h2>
             
 <!-- Category bar -->
 <div class="text-center contrast" style="display: flex; justify-content: space-around;">
-    <button endpoint="LoadProductsBySeries" class="category-btn active">@await translator.TranslateText("Products")</button>
+    <button endpoint="LoadProductsBySeries" class="category-btn active">@translatedTexts.Dequeue()</button>
 </div>
 
 <div class="content-container contrast">
-    <button class="back-btn">@await translator.TranslateText("Back")</button>
+    <button class="back-btn">@translatedTexts.Dequeue()</button>
     <div class="data-container"></div>
     <div class="customization-menu"></div>
 </div>
@@ -28,11 +30,11 @@
 <div class="cart-msg contrast" style="display: none;">
     <div class="cart-msg-container">
         <div class="cart-msg-text">
-            <p>@await translator.TranslateText("Item added to cart")</p>
+            <p>@translatedTexts.Dequeue()</p>
         </div>
         <div class="cart-msg-btns">
-            <button class="cart-msg-btn" action="View Cart">@await translator.TranslateText("View Cart")</button>
-            <button class="cart-msg-btn" action="Continue Shopping">@await translator.TranslateText("Continue Shopping")</button>
+            <button class="cart-msg-btn" action="View Cart">@translatedTexts.Dequeue()</button>
+            <button class="cart-msg-btn" action="Continue Shopping">@translatedTexts.Dequeue()</button>
         </div>
     </div>
 </div>

@@ -1,0 +1,32 @@
+@using WebApp.Data
+@using WebApp.Models.UnitOfWork
+@using WebApp.APIs.GoogleTranslate
+@model (List<Ingredient>, List<ProductIngredients>)
+@{
+    var translator = new GoogleTranslate();
+    var text = new List<string>() {
+        "Confirm",
+        "Cancel"
+    };
+    var ingredientNames = Model.Item1.Select(i => i.Name).ToList();
+
+    var translatedTextTask = translator.TranslateAsDict(text);
+    var ingredientNamesTask = translator.Translate(ingredientNames);
+
+    await Task.WhenAll(translatedTextTask, ingredientNamesTask);
+
+    var translatedText = translatedTextTask.Result;
+    var translatedIngredientNames = ingredientNamesTask.Result;
+}
+
+@if (Model.Item2 != null && Model.Item2.Count > 0) {
+    <form id="proding" style="display:none">
+        @foreach (var ingredient in Model.Item1) {
+            <input type="checkbox" class="ingredients" id="@ingredient.Name" value="@ingredient.Name"/>
+            <label for="@ingredient.Name">@translatedIngredientNames.Dequeue()</label><br>
+        }
+    </form>
+}
+
+<button id="confirm" class="save-button" style="display:none">@translatedText["Confirm"]</button>
+<button id="cancel" class="save-button" style="display:none">@translatedText["Cancel"]</button>

@@ -4,13 +4,22 @@
 @using WebApp.APIs.GoogleTranslate
 @{
     var translator = new GoogleTranslate();
+
+    var staticText = new List<string> {
+        "Need help? Click here to open the AI chat interface",
+        "Enter your message here.",
+        "Send message to AI",
+        "Clear your chat history",
+    };
+
+    var translatedText = await translator.Translate(staticText);
 }
 
 <div class="sidebar-image-robot contrast">
     <img class="toggle-AIMenu" src="~/img/robot-logo.png" alt="AI Menu"
         onclick="toggleSidebarAI()"
         onkeydown="if(event.keyCode == 13) toggleSidebarAI()"
-        title=@await translator.TranslateText("Need help? Click here to open the AI chat interface")
+        title=@translatedText.Dequeue()
         tabindex="0"
     />
 </div>
@@ -28,12 +37,12 @@
 
     @* Input field *@
     <div class="sidebar-input">
-        <input type="text" id="sidebar-input-text" class="sidebar-input-text" placeholder="@await translator.TranslateText("Enter your message here.")"
+        <input type="text" id="sidebar-input-text" class="sidebar-input-text" placeholder="@translatedText.Dequeue()"
             onkeydown="if(event.keyCode == 13) sendInput()"/>
-        <button class="sidebar-input-button" id="sidebar-input-button" onclick="sendInput()" onkeydown="if(event.keyCode == 13) sendInput()" title="Send message to AI">
+        <button class="sidebar-input-button" id="sidebar-input-button" onclick="sendInput()" onkeydown="if(event.keyCode == 13) sendInput()" title="@translatedText.Dequeue()">
             <img src="~/img/send.png" alt="Send" />
         </button>
-        <button class="sidebar-clear-button" onclick="clearHistory()" onkeydown="if(event.keyCode == 13) clearHistory()" title="Clear your chat history">
+        <button class="sidebar-clear-button" onclick="clearHistory()" onkeydown="if(event.keyCode == 13) clearHistory()" title="@translatedText.Dequeue()">
             <img src="~/img/clear-chat.png" alt="Clear" />
         </button>
     </div>

@@ -16,12 +16,26 @@
 @{
     @* Layout = "~/Views/Shared/_CartLayout.cshtml"; *@
     var translator = new GoogleTranslate();
+
+    var texts = new List<string> {
+        "Continue Shopping",
+        "Your cart is empty!",
+        "Looks like you haven't added anything to your cart yet.",
+        "Click the button below to begin shopping.",
+        "Order Now",
+        "Your order has been placed",
+        "Thank you for shopping with us!",
+        "Click the button below to begin a new order",
+        "New Order"
+    };
+
+    var translations = await translator.Translate(texts);
 }
 
 <link rel="stylesheet" href="~/css/cart.css" />
 
 <form method="get" asp-controller="Customer" asp-action="Index">
-    <button class="cartlayout-back contrast" hidden type="submit">@await translator.TranslateText("Continue Shopping")</button>
+    <button class="cartlayout-back contrast" hidden type="submit">@translations.Dequeue()</button>
 </form>
 <div class="cart-container contrast" hidden>
     <!-- Load product partial view -->
@@ -32,20 +46,20 @@
 </div>
 
 <div class="emptycart-message contrast" hidden>
-    <h1>@await translator.TranslateText("Your cart is empty!")</h1>
-    <p>@await translator.TranslateText("Looks like you haven't added anything to your cart yet.")</p>
-    <p>@await translator.TranslateText("Click the button below to begin shopping.")</p>
+    <h1>@translations.Dequeue()</h1>
+    <p>@translations.Dequeue()</p>
+    <p>@translations.Dequeue()</p>
     <form method="get" asp-controller="Customer" asp-action="Index">
-        <button class="cartlayout-back1" type="submit">@await translator.TranslateText("Order Now")</button>
+        <button class="cartlayout-back1" type="submit">@translations.Dequeue()</button>
     </form>
 </div>
 
 <div class="checkout-message contrast" hidden>
-    <h1>@await translator.TranslateText("Your order has been placed")</h1>
-    <p>@await translator.TranslateText("Thank you for shopping with us!")</p>
-    <p>@await translator.TranslateText("Click the button below to begin a new order")</p>
+    <h1>@translations.Dequeue()</h1>
+    <p>@translations.Dequeue()</p>
+    <p>@translations.Dequeue()</p>
     <form method="get" asp-controller="Customer" asp-action="Index">
-        <button class="cartlayout-back2" type="submit">@await translator.TranslateText("New Order")</button>
+        <button class="cartlayout-back2" type="submit">@translations.Dequeue()</button>
     </form>
 </div>
 

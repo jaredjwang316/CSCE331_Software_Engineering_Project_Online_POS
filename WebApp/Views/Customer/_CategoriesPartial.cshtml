@@ -12,11 +12,13 @@
 @using WebApp.APIs.GoogleTranslate
 @{
     var translator = new GoogleTranslate();
+    var seriesNames = Model.Select(s => s.Name);
+    var translations = await translator.Translate(seriesNames);
 }
 
 @foreach (var seriesInfo in Model) {
     <button  class="menu-item series-btn" id="@seriesInfo.Name" endpoint="LoadProductsBySeries">
         <img src="@seriesInfo.ImgUrl" />
-        <p>@await translator.TranslateText(seriesInfo.Name)</p>
+        <p>@translations.Dequeue()</p>
     </button>
 }

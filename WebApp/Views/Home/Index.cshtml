@@ -13,7 +13,14 @@
 @{
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
     var translator = new GoogleTranslate();
-    @* translator.CurrentLanguage = Context.Request.Cookies["CurrentLanguage"] ?? translator.CurrentLanguage; *@
+    var texts = new List<string> {
+        "Bringing Bubble Tea to the United States!",
+        "Menu",
+        "Order",
+        "Our Story"
+    };
+    
+    var translations = await translator.Translate(texts);
 }
 
 @{
@@ -32,10 +39,7 @@
 -->
 
 <div class="text-center contrast">
-    @{
-        string text = "Bringing Bubble Tea to the United States!";
-        <h1 class="display-4">@await translator.TranslateText(text)</h1>
-    } 
+    <h1 class="display-4">@translations.Dequeue()</h1>
 </div>
 <h2></h2>
 
@@ -45,7 +49,7 @@
             <figure class="elementor-image-box-img">
             <img src="https://gongchausa.com/wp-content/uploads/2021/12/25-w.png">
             </figure>
-            <h3>@await translator.TranslateText("Menu")</h3>
+            <h3>@translations.Dequeue()</h3>
         </a>
     </div>
     <div class="elementor-container center" tabindex="2">
@@ -53,7 +57,7 @@
             <figure class="elementor-image-box-img">
             <img src="https://gongchausa.com/wp-content/uploads/2021/12/Tea-17.png">
             </figure>
-            <h3>@await translator.TranslateText("Order")</h3>
+            <h3>@translations.Dequeue()</h3>
         </a>
     </div>
     <div class="elementor-container right" tabindex="3">
@@ -61,7 +65,7 @@
             <figure class="elementor-image-box-img">
             <img src="https://gongchausa.com/wp-content/uploads/2021/12/Tea-29-scaled.jpg">
             </figure>
-            <h3>@await translator.TranslateText("Our Story")</h3>
+            <h3>@translations.Dequeue()</h3>
         </a>
     </div>
 </section>

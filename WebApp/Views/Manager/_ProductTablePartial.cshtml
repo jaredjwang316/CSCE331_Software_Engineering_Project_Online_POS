@@ -1,0 +1,64 @@
+@using WebApp.Data
+@using WebApp.Models.UnitOfWork
+@using WebApp.APIs.GoogleTranslate
+@model List<Product>
+@{
+    var translator = new GoogleTranslate();
+    var text = new List<string>() {
+        "Product ID",
+        "Name",
+        "Price",
+        "Series",
+        "Image Url",
+        "Product Ingredients",
+        "Delete",
+        "Edit Product Ingredients",
+        "Save",
+        "Add",
+        "No products found."
+    };
+    @* name, price, series, and url as List<string> *@
+    var ProductText = Model.SelectMany(p => new List<string>() { p.Name, p.Price.ToString(), p.Series, p.ImgUrl }).ToList();
+
+    var translatedTextTask = translator.TranslateAsDict(text);
+    var translatedProductTask = translator.Translate(ProductText);
+
+    await Task.WhenAll(translatedTextTask, translatedProductTask);
+
+    var translatedText = translatedTextTask.Result;
+    var translatedProduct = translatedProductTask.Result;
+
+}
+
+@if (Model != null && Model.Count > 0) {
+    <table id="prod-table" class="table contrast" style="display:none">
+        <thead>
+            <tr>
+                <th>@translatedText["Product ID"]</th>
+                <th>@translatedText["Name"]</th>
+                <th>@translatedText["Price"]</th>
+                <th>@translatedText["Series"]</th>
+                <th>@translatedText["Image Url"]</th>
+                <th>@translatedText["Product Ingredients"]</th>
+                <th>@translatedText["Delete"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model) {
+                <tr>
+                    <td>@product.Id</td>
+                    <td contenteditable="true">@translatedProduct.Dequeue()</td>
+                    <td contenteditable="true">@translatedProduct.Dequeue()</td>
+                    <td contenteditable="true">@translatedProduct.Dequeue()</td>
+                    <td contenteditable="true">@translatedProduct.Dequeue()</td>
+                    <td><input type="button" value="@translatedText["Edit Product Ingredients"]" onclick="editProductIngredients(this)"/></td>
+                    <td><input type="button" value="@translatedText["Delete"]" onclick="deleteRowProd(this)"/></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else {
+    <p>@translatedText["No products found."]</p>
+}
+<button id="saveButtonProd" class="save-button" style="display:none">@translatedText["Save"]</button>
+<button id="addButtonProd" class="add-button" style="display:none">@translatedText["Add"]</button>

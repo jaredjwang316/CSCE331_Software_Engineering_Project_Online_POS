@@ -9,13 +9,35 @@
 @using WebApp.APIs.GoogleTranslate
 @{
     var translator = new GoogleTranslate();
+    var productNames = Model.Select(i => i.Product.Name);
+
+    var optionNames = Model.SelectMany(i => i.Options).Where(o => o.Series != "Size").Select(o => o.Name);
+    var sizes = Model.SelectMany(i => i.Options).Where(o => o.Series == "Size").Select(o => o.Name);
+    var staticText = new List<string> {
+        "Decrease quantity",
+        "Increase quantity",
+        "Remove item",
+        "Remove"
+    };
+    
+    var productNamesTask = translator.Translate(productNames);
+    var optionNamesTask = translator.Translate(optionNames);
+    var sizesTask = translator.Translate(sizes);
+    var staticTextTask = translator.TranslateAsDict(staticText);
+
+    await Task.WhenAll(productNamesTask, optionNamesTask, sizesTask, staticTextTask);
+
+    var productNamesTranslated = new Queue<string>(productNamesTask.Result);
+    var optionNamesTranslated = new Queue<string>(optionNamesTask.Result);
+    var sizesTranslated = new Queue<string>(sizesTask.Result);
+    var staticTextTranslated = staticTextTask.Result;
 }
 @model List<Item>
 
 <div class="products-container">
     @foreach (var item in Model.Select((value, index) => new { value, index})) {
         <div class="product">
-            @* <button class="remove-product-btn" item-index="@item.index" title="@await translator.TranslateText("Remove item")">X</button> *@
+            
             <div class="img-container">
                 <img src="@item.value.Product.ImgUrl"/>
             </div>
@@ -23,11 +45,11 @@
             <!--Product Info-->
             <div class="product-info-container">
                 <div class="product-name">
-                    <h3>@await translator.TranslateText(item.value.Product.Name)</h3>
+                    <h3>@productNamesTranslated.Dequeue()</h3>
                 </div>
                 <!--Product Options-->
                 <div class="product-options-container">
-                    <p class="product-option-size">@await translator.TranslateText(item.value.Options.FirstOrDefault(o => o.Series == "Size")?.Name!)</p>
+                    <p class="product-option-size">@sizesTranslated.Dequeue()</p>
                     <div class="product-option-customizations">
                         <p>
                             @{
@@ -54,24 +76,15 @@
             <div class="edit-product-container">
                 <div class="edit-center-container">
                     <div class="edit-product-count">
-                        <button class="edit-product-count-btn" item-index="@item.index" title="@await translator.TranslateText("Decrease quantity")">-</button>
+                        <button class="edit-product-count-btn" item-index="@item.index" title=@staticTextTranslated["Decrease quantity"]>-</button>
                         <p class="product-count">@item.value.Quantity</p>
-                        <button class="edit-product-count-btn" item-index="@item.index" title="@await translator.TranslateText("Increase quantity")">+</button>
+                        <button class="edit-product-count-btn" item-index="@item.index" title=@staticTextTranslated["Increase quantity"]>+</button>
                     </div>
-                    @* <form method="post" asp-controller="Cart" 
-                        asp-action="EditOptions" asp-route-index=@item.index>
-                        <button class="edit-product-options-btn"
-                            item-index="@item.index"
-                            title="@await translator.TranslateText("Edit item customizations")"
-                            type=submit>
-                        @await translator.TranslateText("Edit")
-                        </button>
-                    </form> *@
-                    <button class="remove-product-btn" item-index="@item.index" title=@await translator.TranslateText("Remove item" )>
-                        @await translator.TranslateText("Remove")
+
+                    <button class="remove-product-btn" item-index="@item.index" title=@staticTextTranslated["Remove item"]>
+                        @staticTextTranslated["Remove"]
                     </button>
-                    @* <button class="remove-product-btn" item-index="@item.index" title="@await translator.TranslateText("Remove item")">X</button> *@
-                    
+
                     <p class="product-cost">@item.value.Price().ToString("C")</p>
                     </div>
                 

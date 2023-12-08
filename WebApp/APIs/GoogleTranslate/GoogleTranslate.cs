@@ -54,6 +54,9 @@ public class GoogleTranslate {
     /// <param name="text">The text to be translated.</param>
     /// <returns>The translated text or the original text if translation fails.</returns>
     public async Task<string> TranslateText(string text) {
+        return await Translate(text);
+    }
+    public async Task<string> Translate(string text) {
         string source = "en";
         if (source == CurrentLanguage) return text;
 
@@ -61,34 +64,66 @@ public class GoogleTranslate {
         string url = $"{URL_BASE}?key={apiKey}&source={source}&target={CurrentLanguage}&q={encodedText}";
 
         using HttpClient client = new();
-        HttpResponseMessage response = await client.GetAsync(url);
-        if (!response.IsSuccessStatusCode)
-        {
-            return text;
+
+        for (int i = 0; i < 3; i++) {
+            HttpResponseMessage? response;
+            try {
+                response = await client.GetAsync(url);
+            } catch  {
+                // Retry
+                await Task.Delay(2000);
+                continue;
+            }
+
+            if (response is null || !response.IsSuccessStatusCode) {
+                break;
+            }
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            JsonDocument json;
+            try {
+                json = JsonDocument.Parse(responseBody);
+            }
+            catch {
+                break;
+            }
+
+            string? translatedText;
+            try {
+                translatedText = json.RootElement
+                    .GetProperty("data")
+                    .GetProperty("translations")[0]
+                    .GetProperty("translatedText")
+                    .GetString();
+            }
+            catch {
+                translatedText = null;
+            }
+
+            return translatedText ?? text;
         }
 
-        string responseBody = await response.Content.ReadAsStringAsync();
-        JsonDocument json;
-        try {
-            json = JsonDocument.Parse(responseBody);
-        }
-        catch {
-            return text;
-        }
+        return text;
+    }
 
-        string? translatedText;
-        try {
-            translatedText = json.RootElement
-                .GetProperty("data")
-                .GetProperty("translations")[0]
-                .GetProperty("translatedText")
-                .GetString();
-        }
-        catch {
-            translatedText = null;
-        }
+    /// <summary>
+    /// Translates a collection of texts concurrently.
+    /// </summary>
+    /// <param name="texts"></param>
+    /// <returns>
+    /// A queue of translated texts. The queue contains untranslated texts if translation fails.
+    /// </returns>
+    public async Task<Queue<string>> Translate(IEnumerable<string> texts) {
+        var translationTasks = texts.Select(Translate);
+        var translations = await Task.WhenAll(translationTasks);
+        return new Queue<string>(translations);
+    }
 
-        return translatedText ?? text;
+    public async Task<Dictionary<string, string>> TranslateAsDict(IEnumerable<string> texts) {
+        var translationTasks = texts.Select(Translate);
+        var translations = await Task.WhenAll(translationTasks);
+        return texts.Zip(translations, (text, translation) => new { text, translation })
+            .ToDictionary(x => x.text, x => x.translation);
     }
 
     /// <summary>

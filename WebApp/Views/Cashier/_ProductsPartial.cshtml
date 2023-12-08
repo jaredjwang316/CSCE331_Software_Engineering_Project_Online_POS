@@ -11,6 +11,9 @@
     string? email = User.FindFirst(ClaimTypes.Email)?.Value;
     User? user = unit.GetUser(email!);
     unit.CloseConnection();
+
+    var productNames = Model.Select(p => p.Name);
+    var translations = await translator.Translate(productNames);
 }
 
 @foreach (var product in Model) {
@@ -18,7 +21,7 @@
         onmouseover="showFavoriteButton(this)" onmouseout="hideFavoriteButton(this)"
     >
         <img src="@product.ImgUrl" />
-        <p>@await translator.TranslateText(product.Name)</p>
+        <p>@translations.Dequeue()</p>
         <p class="product-price">@product.Price.ToString("C")</p>
         
     </button>
