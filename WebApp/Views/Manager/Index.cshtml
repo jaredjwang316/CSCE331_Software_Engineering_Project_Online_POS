@@ -1,5 +1,13 @@
+@using WebApp.APIs.GoogleTranslate
+@using WebApp.APIs.AzureMaps
+@using WebApp.Models.AzureMaps.Weather
+@using WebApp.Data
+@using WebApp.Models.UnitOfWork
+@using System.Security.Claims
+
 @{
     ViewData["Title"] = "Manager Page";
+    var translator = new GoogleTranslate();
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +28,7 @@
         <main role="main" class="pb-3">
             @if (User.Identity!.IsAuthenticated) {
                 <div class="text-center">
-                    <h1 class="display-4">Welcome, @User.Identity.Name!.Split(" ")[0]!</h1>
+                    <h1 class="display-4">@await translator.TranslateText("Welcome, " + @User.Identity.Name!.Split(" ")[0]!)</h1>
                 </div>
             }
             @* Will never be unauthenticated *@
@@ -32,17 +40,16 @@
 
             <!-- Category bar -->
             <div class="text-center" style="display: flex; justify-content: space-around;">
-                <button id="ShowManager" class="category-btn active" data-to="item-container">Manager</button>
-                <button id="ShowProducts" class="category-btn" data-to="item-container">Products</button>
-                <button id="ShowInventory" class="category-btn" data-to="item-container">Inventory</button>
+                <button id="ShowManager" class="category-btn active" data-to="item-container">@await translator.TranslateText("Manager")</button>
+                <button id="ShowProducts" class="category-btn" data-to="item-container">@await translator.TranslateText("Products")</button>
+                <button id="ShowInventory" class="category-btn" data-to="item-container">@await translator.TranslateText("Inventory")</button>
             </div>
         </main>
     </div>
 </body>
 </html>
 
-@using WebApp.Data
-@using WebApp.Models.UnitOfWork
+
 @using WebApp
 @model (List<Product>, List<Inventory>, List<Ingredient>, List<ProductIngredients>)
 @if (Model.Item1 != null && Model.Item1.Count > 0) {
@@ -75,8 +82,8 @@
 } else {
     <p>No products found.</p>
 }
-<button id="saveButtonProd" class="save-button" style="display:none">Save</button>
-<button id="addButtonProd" class="add-button" style="display:none">Add</button>
+<button id="saveButtonProd" class="save-button" style="display:none">"Save"</button>
+<button id="addButtonProd" class="add-button" style="display:none">"Add"</button>
 
 @if (Model.Item2 != null && Model.Item2.Count > 0) {
     <table id="inv-table" class="table contrast" style="display:none">
@@ -101,15 +108,15 @@
                                 @ingredient.Name
                             }
                         }</td>
-                    <td contenteditable="true"> @inventory.Quantity</td>
-                    <td contenteditable="true"> @inventory.FillLevel</td>
+                    <td contenteditable="true">@inventory.Quantity</td>
+                    <td contenteditable="true">@inventory.FillLevel</td>
                     <td><input type="button" value="Delete" onclick="deleteRowInv(this)"/></td>
                 </tr>
             }
         </tbody>
     </table>
 } else {
-    <p>No products found.</p>
+    <p>No products found</p>
 }
 
 <button id="saveButtonInv" class="save-button" style="display:none">Save</button>
@@ -127,11 +134,11 @@
 <button id="confirm" class="save-button" style="display:none">Confirm</button>
 <button id="cancel" class="save-button" style="display:none">Cancel</button>
 
-<button id="salesReport" class="table-button" style="display:inline-block">Sales Report</button>
-<button id="excessReport" class="table-button" style="display:inline-block">Excess Report</button>
-<button id="restockReport" class="table-button" style="display:inline-block">Restock Report</button>
-<button id="salesTogether" class="table-button" style="display:inline-block">Sales Together</button>
-<button id="popularityAnalysis" class="table-button" style="display:inline-block">Menu Items Popularity Analysis</button>
+<button id="salesReport" class="table-button" style="display:inline-block">@await translator.TranslateText("Sales Report")</button>
+<button id="excessReport" class="table-button" style="display:inline-block">@await translator.TranslateText("Excess Report")</button>
+<button id="restockReport" class="table-button" style="display:inline-block">@await translator.TranslateText("Restock Report")</button>
+<button id="salesTogether" class="table-button" style="display:inline-block">@await translator.TranslateText("Sales Together")</button>
+<button id="popularityAnalysis" class="table-button" style="display:inline-block">@await translator.TranslateText("Menu Items Popularity Analysis")</button>
 
 <table id="salesReportTable" class="table contrast" style="display:none">
     <thead>
@@ -180,10 +187,10 @@
 </table>
 
 <br>
-<label for="starttime" id="slabel" style="display:inline-block"> Enter Start Time: </label><br>
+<label for="starttime" id="slabel" style="display:inline-block"> @await translator.TranslateText("Enter Start Time:") </label><br>
 <input type="date" id="starttime" value="2023-07-01" style="display:inline-block"><br>
 
-<label for="endtime" id = "elabel" style="display:inline-block"> Enter End Time: </label><br>
+<label for="endtime" id = "elabel" style="display:inline-block"> @await translator.TranslateText("Enter End Time:") </label><br>
 <input type="date" id="endtime" value="2023-12-31" style="display:inline-block"><br>
 
 
