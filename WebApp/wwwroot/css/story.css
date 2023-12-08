@@ -23,9 +23,8 @@ body.contrast-invert {
 
 /* Style for the parent container */
 .story-container {
-    background-color: aqua;
     display: flex; /* Use flexbox to arrange child elements */
-    width: 60%; /* Take up the entire width of the screen */
+    width: 80%; /* Take up the entire width of the screen */
     box-sizing: border-box; /* Include padding and border in the total width */
 }
 
@@ -33,6 +32,5 @@ body.contrast-invert {
 .story-column {
     width: 100%; /* Make each child div take up 50% of the parent width */
     box-sizing: border-box; /* Include padding and border in the total width */
-    border: 1px solid #ccc; /* Add a border for visibility */
     padding: 20px; /* Add padding for spacing inside the div */
 }

@@ -12,13 +12,14 @@
     position: fixed;
     height: 100%;
     right: 0;
-    margin-top: -16px;
+    top: 0;
     background-color: #f1f1f1;
     border: 2px solid #ccc;
     border-top: none;
     border-right: none;
-    z-index: 9999;
-    padding-top: 20px;
+    border-bottom: none;
+    z-index: 9997;
+    padding-top: 70px;
 }
 
 .sidebar-closed {
@@ -30,7 +31,7 @@
 }
 
 .sidebar-output {
-    height: 80%;
+    height: 88%;
     width: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -47,7 +48,7 @@
     bottom: 0;
     width: 100%;
     padding: 10px;
-    padding-bottom: 70px;
+    padding-bottom: 5px;
     background-color: #f1f1f1;
 }
 

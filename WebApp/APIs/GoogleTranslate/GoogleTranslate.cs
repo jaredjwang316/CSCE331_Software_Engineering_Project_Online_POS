@@ -48,14 +48,16 @@ public class GoogleTranslate {
             ?? GetPreferredLanguage();
     }
 
-    /// <summary>
-    /// Translates the specified text to the current language.
-    /// </summary>
-    /// <param name="text">The text to be translated.</param>
-    /// <returns>The translated text or the original text if translation fails.</returns>
+    [Obsolete("This method is deprecated. Use Translate()")]
     public async Task<string> TranslateText(string text) {
         return await Translate(text);
     }
+
+    /// <summary>
+    /// Translates the specified text to the current language.
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
     public async Task<string> Translate(string text) {
         string source = "en";
         if (source == CurrentLanguage) return text;
@@ -119,6 +121,13 @@ public class GoogleTranslate {
         return new Queue<string>(translations);
     }
 
+    /// <summary>
+    /// Translates a collection of texts concurrently and returns a dictionary of the original texts and their translations.
+    /// 
+    /// Useful for for when you want to retain the translated text and the original text.
+    /// </summary>
+    /// <param name="texts"></param>
+    /// <returns></returns>
     public async Task<Dictionary<string, string>> TranslateAsDict(IEnumerable<string> texts) {
         var translationTasks = texts.Select(Translate);
         var translations = await Task.WhenAll(translationTasks);

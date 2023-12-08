@@ -13,18 +13,29 @@
 @{
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
     var translator = new GoogleTranslate();
-    @* translator.CurrentLanguage = Context.Request.Cookies["CurrentLanguage"] ?? translator.CurrentLanguage; *@
+    
+    var text = new List<string>() {
+        "Our Story!",
+        "Founded in 2006 in Kaohsiung, Taiwan; Gong Cha, which translates to (tribute tea for the emperor) opened its doors to the bubble tea market.",
+        "Gong cha's success in Taiwan launched our stores all over the globe with customers loving our premium quality tea, products & services:",
+        "Fresh Tea brewed throughout the day",
+        "Pearls (bubbles) freshly prepared to perfection continuously through the day",
+        "Tea sourced from the finest tea estates in Taiwan",
+        "Strict quality controls for all ingredients",
+        "Gong cha is known across the world for its signature Milk Foam. Its creamy, sweet and savory flavor balance and whipped texture make it the perfect complement to our freshly brewed teas. Our delicious milk foam is hand-crafted for each customer and made from the freshest milk and highest quality, signature ingredients."
+    };
+
+    var textTranslated = await translator.Translate(text);
 }
 
 @{
     ViewData["Title"] = "Our Story";
 }
 
+<link rel="stylesheet" href="~/css/story.css" />
+
 <div class="text-center contrast">
-    @{
-        string text = "Our Story!";
-        <h1 class="display-4">@await translator.TranslateText(text)</h1>
-    } 
+    <h1 class="display-4">@textTranslated.Dequeue()</h1>
 </div>
 <h2></h2>
 
@@ -32,24 +43,15 @@
     <div class="story-container">
         <div class="story-column">
             <!-- Content for the first child div -->
-            @{
-                string text2 = "Founded in 2006 in Kaohsiung, Taiwan; Gong Cha, which translates to “tribute tea for the emperor” opened its doors to the bubble tea market.";
-                string text3 = "Gong cha’s success in Taiwan launched our stores all over the globe with customers loving our premium quality tea, products & services:";
-                string bul1 = "Fresh Tea brewed throughout the day";
-                string bul2 = "Pearls (bubbles) freshly prepared to perfection continuously through the day";
-                string bul3 = "Tea sourced from the finest tea estates in Taiwan";
-                string bul4 = "Strict quality controls for all ingredients";
-                string text4 = "Gong cha is known across the world for its signature Milk Foam. Its creamy, sweet and savory flavor balance and whipped texture make it the perfect complement to our freshly brewed teas. Our delicious milk foam is hand-crafted for each customer and made from the freshest milk and highest quality, signature ingredients.";
-                <p class="red-text">@await translator.TranslateText(text2)</p>
-                <p>@await translator.TranslateText(text3)</p>
-                <ul>
-                <li>@await translator.TranslateText(bul1)</li>
-                <li>@await translator.TranslateText(bul2)</li>
-                <li>@await translator.TranslateText(bul3)</li>
-                <li>@await translator.TranslateText(bul4)</li>
-                </ul>
-            <p>@await translator.TranslateText(text4)</p>
-            }
+            <p class="red-text">@textTranslated.Dequeue()</p>
+            <p>@textTranslated.Dequeue()</p>
+            <ul>
+                <li>@textTranslated.Dequeue()</li>
+                <li>@textTranslated.Dequeue()</li>
+                <li>@textTranslated.Dequeue()</li>
+                <li>@textTranslated.Dequeue()</li>
+            </ul>
+            <p>@textTranslated.Dequeue()</p>
         </div>
         
         <div class="story-column">

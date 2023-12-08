@@ -38,7 +38,7 @@ public class AIController : Controller
             return BadRequest(e.Message);
         }
 
-        string translatedResponse = await new GoogleTranslate().TranslateText(response);
+        string translatedResponse = await new GoogleTranslate().Translate(response);
         SetHistory(history + $"\nUser: {input}\nAssistant: {response}");
         return Ok(translatedResponse);
     }
@@ -76,7 +76,7 @@ public class AIController : Controller
             if (message.Contains("User:") || message.Contains("Assistant:")) {
                 string type = message.Split(":")[0];
                 string text = message.Split(":")[1];
-                text = translate.TranslateText(text).Result;
+                text = translate.Translate(text).Result;
 
                 if (type == "User") {
                     translatedHistory.Add($"User: {text}");
