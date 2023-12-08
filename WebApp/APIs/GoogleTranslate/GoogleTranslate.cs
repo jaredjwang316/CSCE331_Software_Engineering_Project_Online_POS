@@ -34,6 +34,7 @@ public class GoogleTranslate {
     public string CurrentLanguage = "en";
     
     private readonly IHttpContextAccessor httpContextAccessor;
+    private static readonly HttpClient client = new();
     private readonly string apiKey;
     private readonly string URL_BASE = "https://www.googleapis.com/language/translate/v2";
 
@@ -48,11 +49,6 @@ public class GoogleTranslate {
             ?? GetPreferredLanguage();
     }
 
-    [Obsolete("This method is deprecated. Use Translate()")]
-    public async Task<string> TranslateText(string text) {
-        return await Translate(text);
-    }
-
     /// <summary>
     /// Translates the specified text to the current language.
     /// </summary>
@@ -65,14 +61,13 @@ public class GoogleTranslate {
         string encodedText = HttpUtility.UrlEncode(text);
         string url = $"{URL_BASE}?key={apiKey}&source={source}&target={CurrentLanguage}&q={encodedText}";
 
-        using HttpClient client = new();
-
+        HttpResponseMessage? response;
         for (int i = 0; i < 3; i++) {
-            HttpResponseMessage? response;
             try {
                 response = await client.GetAsync(url);
-            } catch  {
+            } catch (Exception ex) {
                 // Retry
+                Console.WriteLine(ex.Message);
                 await Task.Delay(2000);
                 continue;
             }
@@ -151,35 +146,49 @@ public class GoogleTranslate {
     /// <returns>An array of key-value pairs representing supported languages and their codes.</returns>
     public KeyValuePair<string, string>[]? GetSupportedLanguages() {
         string url = $"{URL_BASE}/languages?target=en&key={apiKey}";
-        using HttpClient client = new();
-        HttpResponseMessage response = client.GetAsync(url).Result;
-        if (!response.IsSuccessStatusCode)
-        {
-            KeyValuePair<string, string>[]? empty = Array.Empty<KeyValuePair<string, string>>();
-            return empty;
-        }
 
-        string responseBody = response.Content.ReadAsStringAsync().Result;
-        JsonDocument json;
-        KeyValuePair<string, string>[]? languages;
-        try {
-            json = JsonDocument.Parse(responseBody);
+        HttpResponseMessage? response;
+        for (int i = 0; i < 3; ++i) {
 
-            languages = json.RootElement
-                .GetProperty("data")
-                .GetProperty("languages")
-                .EnumerateArray()
-                .Select(x => {
-                    string code = x.GetProperty("language").GetString()!.Split("-")[0];
-                    string name = x.GetProperty("name").GetString()!;
-                    return new KeyValuePair<string, string>(code, name);
-                })
-                .ToArray();
-        }
-        catch {
-            languages = null;
-        }
+            try {
+                response = client.GetAsync(url).Result;
+            } catch (Exception ex) {
+                // Retry
+                Console.WriteLine(ex.Message);
+                Task.Delay(2000);
+                continue;
+            }
 
-        return languages;
+            if (!response.IsSuccessStatusCode)
+            {
+                KeyValuePair<string, string>[]? empty = Array.Empty<KeyValuePair<string, string>>();
+                return empty;
+            }
+
+            string responseBody = response.Content.ReadAsStringAsync().Result;
+            JsonDocument json;
+            KeyValuePair<string, string>[]? languages;
+            try {
+                json = JsonDocument.Parse(responseBody);
+
+                languages = json.RootElement
+                    .GetProperty("data")
+                    .GetProperty("languages")
+                    .EnumerateArray()
+                    .Select(x => {
+                        string code = x.GetProperty("language").GetString()!.Split("-")[0];
+                        string name = x.GetProperty("name").GetString()!;
+                        return new KeyValuePair<string, string>(code, name);
+                    })
+                    .ToArray();
+            }
+            catch {
+                languages = null;
+            }
+
+            return languages;
+        }
+        
+        return null;
     }
 }
